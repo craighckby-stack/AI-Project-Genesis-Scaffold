@@ -1,20 +1,28 @@
 """
-Theoretical Foundations Engine
-==============================
-Provides core mathematical, game-theoretic, and sandboxed execution models
-for multi-agent consensus, cognitive friction minimization, and zero-leak execution.
+================================================================================
+THEORETICAL FOUNDATIONS ENGINE - DARLEK CANN v3.0
+================================================================================
+Role: Provides core mathematical, game-theoretic, and sandboxed execution models
+      for multi-agent consensus, cognitive friction minimization, and zero-leak execution.
 
-Role:
-- Serves as the foundational mathematical layer for the AI Project Genesis.
-- Implements Nash Equilibrium consensus algorithms and resource-guarded sandboxing.
+Connections:
+- 00_Foundational_Knowledge/encyclopedia_of_engineering/consensus.py (Consensus Engine)
+- 00_Foundational_Knowledge/encyclopedia_of_engineering/sandbox.py (Zero-Leak Sandbox)
+================================================================================
 """
 
 import math
 import typing
 import weakref
 import threading
+import time
+import logging
 from typing import List, Dict, Any, Tuple, Optional
 
+# Import siphoned telemetry bridge for high-fidelity observability
+from .telemetry_bridge import TheoreticalTelemetryBridge
+
+logger = logging.getLogger("TheoreticalFoundations")
 
 class AbortToken:
     """Thread-safe cancellation token for sandboxed executions."""
@@ -38,7 +46,8 @@ class ZeroLeakSandbox:
     Leverages WeakKeyDictionary to prevent memory fatigue and track execution contexts.
     """
     def __init__(self):
-        self._registries = weakref.WeakKeyDictionary() 
+        self._registries = weakref.WeakKeyDictionary()
+        self._telemetry = TheoreticalTelemetryBridge()
 
     def execute_in_sandbox(
         self, 
@@ -51,12 +60,10 @@ class ZeroLeakSandbox:
         try:
             self._registries[instance] = token
         except TypeError:
-            # Fallback for non-hashable or un-weakreferenceable objects
             pass
 
         result = None
         exception = None
-        execution_thread = None
 
         def worker():
             nonlocal result, exception
@@ -71,11 +78,11 @@ class ZeroLeakSandbox:
 
         if execution_thread.is_alive():
             token.abort()
-            raise TimeoutError(
-                f"[SANDBOX] Execution aborted due to memory/CPU timeout constraint of {timeout_seconds}s."
-            )
+            self._telemetry.log_event("SANDBOX_TIMEOUT", {"timeout": timeout_seconds})
+            raise TimeoutError(f"[SANDBOX] Execution aborted due to timeout constraint of {timeout_seconds}s.")
 
         if exception:
+            self._telemetry.log_event("SANDBOX_ERROR", {"error": str(exception)})
             raise exception
 
         return result
@@ -113,6 +120,8 @@ class AdaptiveOrchestraManager:
     Evaluates agent debate profiles using dynamic Nash Equilibrium models
     and minimizes cognitive friction across active evolution cycles.
     """
+    _telemetry = TheoreticalTelemetryBridge()
+
     @staticmethod
     def calculate_nash_equilibrium(
         votes: List[float], 
@@ -127,15 +136,12 @@ class AdaptiveOrchestraManager:
             return {"consensusIndex": 0.0, "friction": 0.0}
 
         weighted_sum = sum(v * (w / total_weight) for v, w in zip(votes, weights))
-        
-        # Compute deviation from weighted mean (Cognitive Friction)
         variance = sum(math.pow(v - weighted_sum, 2) * (w / total_weight) for v, w in zip(votes, weights))
         friction = math.sqrt(variance)
 
-        return {
-            "consensusIndex": round(weighted_sum, 6),
-            "friction": round(friction, 4)
-        }
+        result = {"consensusIndex": round(weighted_sum, 6), "friction": round(friction, 4)}
+        AdaptiveOrchestraManager._telemetry.log_event("NASH_EQUILIBRIUM_CALCULATED", result)
+        return result
 
     @staticmethod
     def auto_calibrate_weights(
@@ -145,12 +151,6 @@ class AdaptiveOrchestraManager:
         """Calibrates agent weights dynamically based on system cognitive friction."""
         calibrated_agents = []
         for agent in agents:
-            if friction > 0.4:
-                # High friction: damp extreme agent weights
-                adjustment = -0.05 * (1.0 if agent.entropy_bias >= 0 else -1.0)
-            else:
-                # Low friction: boost high-confidence performers
-                adjustment = 0.05 * (agent.confidence / 100.0)
-            
+            adjustment = -0.05 * (1.0 if agent.entropy_bias >= 0 else -1.0) if friction > 0.4 else 0.05 * (agent.confidence / 100.0)
             calibrated_agents.append(agent.copy_with_adjustment(adjustment))
         return calibrated_agents
