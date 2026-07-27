@@ -10,19 +10,19 @@ ARCHITECTURE:
     - Implements a thread-safe EvolutionEngine.
     - Siphons 'Zero-Leak' patterns from AetherForge-2.0.
     - Integrates with the foundational knowledge base for state transitions.
+    - Utilizes TelemetryBridge for audit-ready observability.
 
 STATUS:
-    EVOLVED — V2.0 (DARLEK CANN v3.0 Compliant)
+    EVOLVED — V3.0 (DARLEK CANN v3.0 Compliant)
 """
 
 import threading
 import time
 import logging
-import weakref
 from typing import Dict, Any, Optional
 
 # Import siphoned utilities
-from .evolution_utils import EvolutionStateContainer, EntropyGuard
+from .evolution_utils import EvolutionStateContainer, EntropyGuard, TelemetryBridge
 
 # Configure diagnostic logging for observability
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - [AIEvoSim] - %(levelname)s - %(message)s')
@@ -39,6 +39,7 @@ class EvolutionEngine:
         self._running = False
         self._thread: Optional[threading.Thread] = None
         self._entropy_guard = EntropyGuard()
+        self._telemetry = TelemetryBridge()
         logger.info("EvolutionEngine initialized with Zero-Leak architecture.")
 
     def start(self):
@@ -48,6 +49,7 @@ class EvolutionEngine:
                 self._running = True
                 self._thread = threading.Thread(target=self._evolution_loop, daemon=True, name="EvoSimThread")
                 self._thread.start()
+                self._telemetry.log_event("ENGINE_STARTED", {"status": "ACTIVE"})
                 logger.info("Evolution engine started.")
 
     def _evolution_loop(self):
@@ -58,6 +60,7 @@ class EvolutionEngine:
                 time.sleep(0.1)  # Throttle for stability
             except Exception as e:
                 logger.error(f"Critical failure in evolution loop: {e}")
+                self._telemetry.log_event("ENGINE_FAILURE", {"error": str(e)})
                 self._running = False
 
     def _process_cycle(self):
@@ -70,10 +73,12 @@ class EvolutionEngine:
 
     def stop(self):
         """Graceful teardown of the evolution engine."""
-        self._running = False
-        if self._thread:
-            self._thread.join()
-        logger.info("Evolution engine stopped.")
+        with self._lock:
+            self._running = False
+            if self._thread:
+                self._thread.join()
+            self._telemetry.log_event("ENGINE_STOPPED", {"status": "IDLE"})
+            logger.info("Evolution engine stopped.")
 
     def get_current_state(self) -> Dict[str, Any]:
         """Returns the current simulation state."""
