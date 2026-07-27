@@ -15,7 +15,8 @@ import weakref
 import threading
 import time
 import logging
-from typing import Dict, Any, Optional
+from collections import deque
+from typing import Dict, Any, Optional, List
 
 # Configure diagnostic logging for observability
 logger = logging.getLogger("SiphonedEngineUtils")
@@ -62,23 +63,39 @@ class EntropyController:
             logger.debug(f"Entropy drift processed: {state.entropy}")
 
 class TelemetryBridge:
-    """Diagnostic bridge for logging simulation events."""
-    def __init__(self):
+    """Diagnostic bridge for logging simulation events with bounded history."""
+    def __init__(self, history_max_size: int = 100):
         self._start_time = time.time()
+        self._lock = threading.RLock()
+        self._event_history: deque[Dict[str, Any]] = deque(maxlen=history_max_size)
+        self._event_sequence_num = 0
 
     def log_event(self, event_type: str, metadata: Dict[str, Any]) -> None:
         """Logs a structured simulation event to the diagnostic stream."""
-        log_payload = {
-            "timestamp": time.time(),
-            "uptime": round(time.time() - self._start_time, 2),
-            "event_type": event_type,
-            "data": metadata
-        }
-        logger.info(f"[TELEMETRY] {event_type} | Data: {log_payload}")
+        with self._lock:
+            self._event_sequence_num += 1
+            log_payload = {
+                "timestamp": time.time(),
+                "uptime": round(time.time() - self._start_time, 2),
+                "sequence_num": self._event_sequence_num,
+                "event_type": event_type,
+                "data": metadata
+            }
+            logger.info(f"[TELEMETRY] {event_type} | Data: {log_payload}")
+            self._event_history.append(log_payload)
 
     def get_system_integrity_snapshot(self) -> Dict[str, Any]:
         """Facilitates temporal debugging by returning a snapshot of the telemetry bridge."""
-        return {
-            "status": "OPERATIONAL",
-            "uptime": round(time.time() - self._start_time, 2)
-        }
+        with self._lock:
+            return {
+                "status": "OPERATIONAL",
+                "uptime": round(time.time() - self._start_time, 2),
+                "total_events_logged": self._event_sequence_num,
+                "recent_events_sample": list(self._event_history)[-5:]
+            }
+
+    def clear_history(self) -> None:
+        """Clears the internal event history for simulation resets."""
+        with self._lock:
+            self._event_history.clear()
+            logger.info("TelemetryBridge: Event history cleared.")
