@@ -1,6 +1,6 @@
 """
 ================================================================================
-FIRST LEARNING AGI - PRIMITIVE LEARNING ENGINE
+FIRST LEARNING AGI - PRIMITIVE LEARNING ENGINE (DARLEK CANN v3.0)
 ================================================================================
 Role: Core experiential learning engine for primitive agents. Manages agent 
       experiential memory, state-action-reward loops, and heuristic evolution.
@@ -66,6 +66,29 @@ class GrogLearningEngine:
             
             best = max(relevant, key=lambda x: x.reward)
             return best.action
+
+    def get_heuristics(self) -> Dict[str, float]:
+        """Returns the current heuristic weights for the agent."""
+        with self._lock:
+            return self.heuristics.copy()
+
+    def get_system_integrity_snapshot(self) -> Dict[str, Any]:
+        """Facilitates temporal debugging by returning a snapshot of the engine state."""
+        with self._lock:
+            return {
+                "agent_id": self.agent_id,
+                "memory_size": len(self.memory),
+                "telemetry_health": self._telemetry.get_system_integrity_snapshot(),
+                "status": "OPERATIONAL"
+            }
+
+    def clear_registry(self) -> None:
+        """Purges memory and telemetry history to support high-frequency simulation resets."""
+        with self._lock:
+            self.memory.clear()
+            self._telemetry.clear_history()
+            self._state.update({"memory_size": 0})
+            logger.info(f"GrogLearningEngine registry and history purged for agent {self.agent_id}.")
 
     def shutdown(self):
         """Zero-leak cleanup of agent learning state."""
