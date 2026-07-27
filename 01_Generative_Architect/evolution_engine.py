@@ -65,8 +65,17 @@ class EvolutionEngine:
             return {
                 "timestamp": time.time(),
                 "state": self._state.get_data(),
+                "telemetry": self._telemetry.get_system_integrity_snapshot(),
                 "status": "OPERATIONAL"
             }
+
+    def clear_registry(self) -> None:
+        """
+        Purges registry and telemetry history to support high-frequency simulation resets.
+        """
+        with self._lock:
+            self._telemetry.clear_history()
+            logger.info("EvolutionEngine registry and telemetry history purged.")
 
     def shutdown(self) -> None:
         """
