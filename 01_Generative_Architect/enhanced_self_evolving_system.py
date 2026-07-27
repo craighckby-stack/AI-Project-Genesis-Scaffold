@@ -130,6 +130,7 @@ class EvolutionEngine:
                 "entropy": state.get("entropy"),
                 "integrity": state.get("integrity"),
                 "active_agents": len(self._agents),
+                "telemetry_health": self._telemetry.get_system_integrity_snapshot(),
                 "status": "NOMINAL" if state.get("active") else "SHUTDOWN"
             }
 
@@ -143,6 +144,15 @@ class EvolutionEngine:
                 "timestamp": time.time(),
                 "state": self._state.get_data()
             }
+
+    def clear_registry(self) -> None:
+        """
+        Purges registry and telemetry history to support high-frequency simulation resets.
+        """
+        with self._lock:
+            self._agents.clear()
+            self._telemetry.clear_history()
+            logger.info("EvolutionEngine registry and telemetry history purged.")
 
     def shutdown(self) -> None:
         """
