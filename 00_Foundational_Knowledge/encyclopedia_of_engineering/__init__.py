@@ -13,6 +13,7 @@ Connections:
 """
 
 import threading
+import time
 from typing import Dict, Any, List, Optional
 
 # Import siphoned architectural components from delegated files
@@ -25,7 +26,7 @@ class EngineeringEncyclopedia:
     Manages domain knowledge, resolves conflicting specifications, and executes formulas safely.
     """
     def __init__(self):
-        self._lock = threading.Lock()
+        self._lock = threading.RLock()
         self._sandbox = ZeroLeakFormulaSandbox()
         self._resolver = EngineeringConsensusResolver()
         
@@ -119,6 +120,25 @@ class EngineeringEncyclopedia:
         Calibrates the reliability weights of engineering sources based on consensus friction.
         """
         return self._resolver.calibrate_weights(sources, friction)
+
+    def clear_registry(self) -> None:
+        """
+        Purges the domain registry to prevent memory leaks during simulation resets.
+        """
+        with self._lock:
+            self._domains.clear()
+
+    def get_system_integrity_snapshot(self) -> Dict[str, Any]:
+        """
+        Returns a diagnostic snapshot of the encyclopedia state.
+        """
+        with self._lock:
+            return {
+                "timestamp": time.time(),
+                "domain_count": len(self._domains),
+                "domains": list(self._domains.keys()),
+                "status": "OPERATIONAL"
+            }
 
 # Global instance for easy access across the application
 encyclopedia = EngineeringEncyclopedia()
