@@ -1,6 +1,6 @@
 """
 ================================================================================
-EVOLUTION TYPES - CORE SCHEMA DEFINITIONS
+EVOLUTION TYPES - CORE SCHEMA DEFINITIONS (DARLEK CANN v3.0)
 ================================================================================
 Role: Defines the shared conceptual vocabulary and data structures for the 
       Generative Architect evolution engine. Provides strictly typed schemas 
@@ -9,11 +9,12 @@ Role: Defines the shared conceptual vocabulary and data structures for the
 Connections:
 - 01_Generative_Architect/evolution_engine.py (Evolutionary Logic)
 - 01_Generative_Architect/ai_evo_sim.py (Simulation Core)
+- 01_Generative_Architect/evolution_utils.py (Telemetry Bridge)
 ================================================================================
 """
 
 from enum import Enum
-from typing import TypedDict, List, Dict, Any, Optional
+from typing import TypedDict, List, Dict, Any, Optional, Final
 
 # --- EVOLUTIONARY CLASSIFICATIONS ---
 
@@ -58,10 +59,17 @@ class MutationDelta(TypedDict):
     confidence: float
     timestamp: float
 
+class SystemIntegritySchema(TypedDict):
+    """Schema for system-wide integrity snapshots."""
+    timestamp: float
+    status: str
+    entropy_level: float
+    module_health: Dict[str, str]
+
 # --- SYSTEM CONSTANTS ---
 
-DEFAULT_STABILITY_THRESHOLD = 0.85
-MAX_EVOLUTION_CYCLES = 10000
+DEFAULT_STABILITY_THRESHOLD: Final[float] = 0.85
+MAX_EVOLUTION_CYCLES: Final[int] = 10000
 
 __all__ = [
     "EvolutionPhase",
@@ -69,6 +77,7 @@ __all__ = [
     "EvolutionState",
     "AgentProfile",
     "MutationDelta",
+    "SystemIntegritySchema",
     "DEFAULT_STABILITY_THRESHOLD",
     "MAX_EVOLUTION_CYCLES"
 ]
