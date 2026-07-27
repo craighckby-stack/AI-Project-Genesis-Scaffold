@@ -12,25 +12,26 @@ ARCHITECTURE:
     - Integrates with the foundational knowledge base for state transitions.
 
 STATUS:
-    EVOLVED — V1.0
+    EVOLVED — V2.0 (DARLEK CANN v3.0 Compliant)
 """
 
 import threading
 import time
 import logging
 import weakref
-from typing import List, Dict, Any, Optional
+from typing import Dict, Any, Optional
 
 # Import siphoned utilities
 from .evolution_utils import EvolutionStateContainer, EntropyGuard
 
-logging.basicConfig(level=logging.INFO)
+# Configure diagnostic logging for observability
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - [AIEvoSim] - %(levelname)s - %(message)s')
 logger = logging.getLogger("AIEvoSim")
 
 class EvolutionEngine:
     """
     Core engine for managing the evolutionary lifecycle of agents.
-    Uses a thread-safe state container to prevent memory leaks.
+    Uses a thread-safe state container to prevent memory leaks and ensure atomic updates.
     """
     def __init__(self, initial_state: Dict[str, Any]):
         self._state = EvolutionStateContainer(initial_state)
@@ -38,16 +39,19 @@ class EvolutionEngine:
         self._running = False
         self._thread: Optional[threading.Thread] = None
         self._entropy_guard = EntropyGuard()
+        logger.info("EvolutionEngine initialized with Zero-Leak architecture.")
 
     def start(self):
+        """Initializes the evolution loop in a background thread."""
         with self._lock:
             if not self._running:
                 self._running = True
                 self._thread = threading.Thread(target=self._evolution_loop, daemon=True, name="EvoSimThread")
                 self._thread.start()
-                logger.info("Evolution engine initialized and running.")
+                logger.info("Evolution engine started.")
 
     def _evolution_loop(self):
+        """Internal loop for processing evolutionary cycles."""
         while self._running:
             try:
                 self._process_cycle()
@@ -57,6 +61,7 @@ class EvolutionEngine:
                 self._running = False
 
     def _process_cycle(self):
+        """Executes a single evolutionary tick."""
         with self._lock:
             state = self._state.get_data()
             # Siphoned logic: Apply entropy to resources
@@ -64,9 +69,20 @@ class EvolutionEngine:
             self._state.update({'entropy': new_entropy, 'clock': state.get('clock', 0) + 1})
 
     def stop(self):
+        """Graceful teardown of the evolution engine."""
         self._running = False
         if self._thread:
             self._thread.join()
+        logger.info("Evolution engine stopped.")
 
     def get_current_state(self) -> Dict[str, Any]:
+        """Returns the current simulation state."""
         return self._state.get_data()
+
+    def get_heartbeat(self) -> Dict[str, Any]:
+        """Diagnostic heartbeat for system monitoring."""
+        return {
+            "status": "ACTIVE" if self._running else "IDLE",
+            "last_update": time.time(),
+            "state": self.get_current_state()
+        }
