@@ -15,7 +15,8 @@ Connections:
 
 import threading
 import logging
-from typing import Dict, Any, Optional
+import time
+from typing import Dict, Any, Optional, List
 
 # Import siphoned architectural utilities
 from ..aether_forge.siphoned_engine_utils import TelemetryBridge
@@ -61,8 +62,24 @@ class DesignPatternLibrary:
         with self._lock:
             return list(self._patterns.keys())
 
+    def get_system_integrity_snapshot(self) -> Dict[str, Any]:
+        """Facilitates temporal debugging by returning a snapshot of the library state."""
+        with self._lock:
+            return {
+                "timestamp": time.time(),
+                "pattern_count": len(self._patterns),
+                "telemetry_health": self._telemetry.get_system_integrity_snapshot()
+            }
+
+    def clear_registry(self) -> None:
+        """Purges registry and telemetry history to support high-frequency simulation resets."""
+        with self._lock:
+            self._patterns.clear()
+            self._telemetry.clear_history()
+            logger.info("DesignPatternLibrary registry and telemetry history purged.")
+
     def shutdown(self) -> None:
         """Zero-leak cleanup of the pattern registry."""
         with self._lock:
             self._patterns.clear()
-            logger.info("DesignPatternLibrary registry cleared.")
+            logger.info("DesignPatternLibrary shutdown complete.")
