@@ -1,21 +1,29 @@
 """
 ================================================================================
-ZERO-LEAK SANDBOX EXECUTOR - ENGINEERING ENCYCLOPEDIA
+ZERO-LEAK SANDBOX EXECUTOR - ENGINEERING ENCYCLOPEDIA (DARLEK CANN v3.0)
 ================================================================================
 Role: Provides a secure, isolated execution environment for dynamic engineering
       formulas. Prevents memory leaks and unauthorized access to system internals
-      via thread-scoped execution and restricted built-in access.
+      via thread-scoped execution, restricted built-in access, and telemetry-aware
+      monitoring.
 
 Connections:
 - 00_Foundational_Knowledge/encyclopedia_of_engineering/__init__.py (Coordinator)
 - 00_Foundational_Knowledge/encyclopedia_of_engineering/consensus.py (Consensus Engine)
+- 00_Foundational_Knowledge/encyclopedia_of_engineering/sandbox_telemetry.py (Telemetry)
+- 00_Foundational_Knowledge/encyclopedia_of_engineering/sandbox_utils.py (Utilities)
 ================================================================================
 """
 
 import threading
 import math
 import logging
-from typing import Dict, Any, Optional
+import time
+from typing import Dict, Any, Optional, List
+
+# Import siphoned architectural components from delegated files
+from .sandbox_telemetry import SandboxTelemetryBridge
+from .sandbox_utils import SandboxStateSnapshot
 
 # Configure diagnostic logging for sandbox execution tracking
 logger = logging.getLogger("ZeroLeakSandbox")
@@ -29,46 +37,111 @@ class ZeroLeakFormulaSandbox:
     A secure, isolated execution environment for dynamic engineering formulas.
     Uses thread-scoped execution and restricted built-in access to prevent
     system-level leaks or malicious code injection.
+    Siphons 'Zero-Leak' and 'State-Snapshot' patterns from AetherForge-2.0.
     """
     def __init__(self):
+        self._lock = threading.RLock()
+        self._telemetry = SandboxTelemetryBridge()
+        self._execution_history: List[Dict[str, Any]] = []
+        
+        # Expanded safe built-ins for comprehensive engineering support
         self._safe_builtins = {
             "abs": abs, "round": round, "min": min, "max": max, 
-            "sum": sum, "pow": pow, "math": math, "float": float, "int": int
+            "sum": sum, "pow": pow, "math": math, "float": float, "int": int,
+            "sqrt": math.sqrt, "pi": math.pi, "e": math.e,
+            "sin": math.sin, "cos": math.cos, "tan": math.tan,
+            "log": math.log, "exp": math.exp, "ceil": math.ceil, "floor": math.floor
         }
+        logger.info("ZeroLeakFormulaSandbox initialized: Math-extended mode active.")
 
     def execute_formula(
-        self, formula_str: str, variables: Dict[str, Any], timeout_sec: float = 2.0
+        self, 
+        formula_str: str, 
+        variables: Dict[str, Any], 
+        timeout_sec: float = 2.0
     ) -> Any:
         """
-        Safely executes a formula string in an isolated thread.
+        Safely executes a formula string in an isolated thread with telemetry and snapshotting.
         
         Args:
             formula_str: The mathematical formula to evaluate.
             variables: Dictionary of variables available to the formula.
             timeout_sec: Maximum execution time in seconds.
         """
-        local_vars = {**variables}
-        global_vars = {"__builtins__": self._safe_builtins}
-        result_container = {}
-        exception_container = []
+        with self._lock:
+            # Capture pre-execution state snapshot
+            pre_snapshot = SandboxStateSnapshot(variables)
+            start_time = time.time()
 
-        def target():
-            try:
-                code = compile(formula_str, "<string>", "eval")
-                result_container["result"] = eval(code, global_vars, local_vars)
-            except Exception as e:
-                exception_container.append(e)
+            local_vars = {**variables}
+            global_vars = {"__builtins__": self._safe_builtins}
+            result_container = {}
+            exception_container = []
 
-        thread = threading.Thread(target=target, daemon=True)
-        thread.start()
-        thread.join(timeout=timeout_sec)
+            def target():
+                try:
+                    # Siphoned pattern: Strict compilation before evaluation
+                    code = compile(formula_str, "<sandbox_formula>", "eval")
+                    result_container["result"] = eval(code, global_vars, local_vars)
+                except Exception as e:
+                    exception_container.append(e)
 
-        if thread.is_alive():
-            logger.error(f"Sandbox timeout: Formula '{formula_str}' exceeded {timeout_sec}s")
-            raise FormulaExecutionTimeout(f"Formula execution exceeded {timeout_sec}s")
+            # Execute in a daemon thread to prevent blocking the main system
+            thread = threading.Thread(target=target, daemon=True)
+            thread.start()
+            thread.join(timeout=timeout_sec)
+
+            execution_duration = time.time() - start_time
+
+            if thread.is_alive():
+                # Log zombie thread for telemetry audit
+                self._telemetry.log_sandbox_event("EXECUTION_TIMEOUT", {
+                    "formula": formula_str,
+                    "timeout": timeout_sec,
+                    "duration": execution_duration
+                })
+                logger.error(f"Sandbox timeout: Formula '{formula_str}' exceeded {timeout_sec}s. Thread remains active in background.")
+                raise FormulaExecutionTimeout(f"Formula execution exceeded {timeout_sec}s")
+                
+            if exception_container:
+                error = exception_container[0]
+                self._telemetry.log_sandbox_event("EXECUTION_ERROR", {
+                    "formula": formula_str,
+                    "error": str(error)
+                })
+                logger.error(f"Sandbox execution error: {error}")
+                raise error
+                
+            result = result_container.get("result")
             
-        if exception_container:
-            logger.error(f"Sandbox execution error: {exception_container[0]}")
-            raise exception_container[0]
+            # Capture post-execution state snapshot and log success
+            post_snapshot = SandboxStateSnapshot({"result": result})
+            execution_metadata = {
+                "formula": formula_str,
+                "duration": round(execution_duration, 4),
+                "pre_state": pre_snapshot.to_dict(),
+                "post_state": post_snapshot.to_dict()
+            }
             
-        return result_container.get("result")
+            self._telemetry.log_sandbox_event("EXECUTION_SUCCESS", execution_metadata)
+            self._execution_history.append(execution_metadata)
+            
+            # Maintain history limit to prevent memory fatigue
+            if len(self._execution_history) > 100:
+                self._execution_history.pop(0)
+
+            return result
+
+    def get_execution_history(self) -> List[Dict[str, Any]]:
+        """Returns the recent history of sandbox executions."""
+        with self._lock:
+            return self._execution_history.copy()
+
+    def get_health_report(self) -> Dict[str, Any]:
+        """Returns a diagnostic health report for the sandbox engine."""
+        with self._lock:
+            return {
+                "status": "ACTIVE",
+                "telemetry_status": self._telemetry.get_health_report(),
+                "history_depth": len(self._execution_history)
+            }
