@@ -20,6 +20,7 @@ from dataclasses import dataclass, field
 
 # Importing siphoned architectural utilities
 from .siphoned_engine_utils import SimulationState, AgentRegistry, EntropyController, TelemetryBridge
+from .simulation_registry import SimulationRegistry
 
 # Configure diagnostic logging
 logger = logging.getLogger("WorldSimulationEngine")
@@ -44,6 +45,7 @@ class WorldSimulationEngine:
         self.is_running = False
         self._thread: Optional[threading.Thread] = None
         self._telemetry = TelemetryBridge()
+        self._sim_registry = SimulationRegistry()
         logger.info("WorldSimulationEngine initialized with Zero-Leak architecture.")
 
     def start(self):
@@ -82,6 +84,15 @@ class WorldSimulationEngine:
         """Returns a thread-safe snapshot of the current world state."""
         with self._lock:
             return self.state.to_dict()
+
+    def get_system_integrity_snapshot(self) -> Dict[str, Any]:
+        """Facilitates temporal debugging by returning a snapshot of the engine registry."""
+        with self._lock:
+            return {
+                "timestamp": time.time(),
+                "status": "OPERATIONAL",
+                "registry": self._sim_registry.get_system_integrity_snapshot()
+            }
 
     def create_snapshot(self) -> Dict[str, Any]:
         """Facilitates temporal debugging and rollback capabilities."""
