@@ -31,7 +31,6 @@ class EngineeringConsensusResolver:
     def calibrate_weights(sources: List[Dict[str, Any]], friction: float) -> List[Dict[str, Any]]:
         """
         Dynamically adjusts the reliability weights of engineering sources based on consensus friction.
-        If friction is high, damp extreme outliers; if low, boost high-confidence sources.
         """
         calibrated = []
         for src in sources:
