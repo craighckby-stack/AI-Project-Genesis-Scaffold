@@ -4,7 +4,8 @@ EVOLUTION TYPES - CORE SCHEMA DEFINITIONS (DARLEK CANN v3.0)
 ================================================================================
 Role: Defines the shared conceptual vocabulary and data structures for the 
       Generative Architect evolution engine. Provides strictly typed schemas 
-      for simulation states, agent profiles, and evolutionary metrics.
+      for simulation states, agent profiles, evolutionary metrics, and 
+      diagnostic telemetry snapshots.
 
 Connections:
 - 01_Generative_Architect/evolution_engine.py (Evolutionary Logic)
@@ -59,6 +60,21 @@ class MutationDelta(TypedDict):
     confidence: float
     timestamp: float
 
+class TelemetrySchema(TypedDict):
+    """Standardized schema for diagnostic telemetry events."""
+    timestamp: float
+    uptime: float
+    sequence_num: int
+    event_type: str
+    data: Dict[str, Any]
+
+class SystemDiagnosticSnapshot(TypedDict):
+    """Schema for system-wide integrity and diagnostic snapshots."""
+    timestamp: float
+    status: str
+    health: Dict[str, Any]
+    recent_events_sample: List[TelemetrySchema]
+
 class SystemIntegritySchema(TypedDict):
     """Schema for system-wide integrity snapshots."""
     timestamp: float
@@ -77,6 +93,8 @@ __all__ = [
     "EvolutionState",
     "AgentProfile",
     "MutationDelta",
+    "TelemetrySchema",
+    "SystemDiagnosticSnapshot",
     "SystemIntegritySchema",
     "DEFAULT_STABILITY_THRESHOLD",
     "MAX_EVOLUTION_CYCLES"
