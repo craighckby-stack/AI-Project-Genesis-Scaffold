@@ -13,7 +13,7 @@ ARCHITECTURE:
     - Utilizes TelemetryBridge for audit-ready observability.
 
 STATUS:
-    EVOLVED — V3.0 (DARLEK CANN v3.0 Compliant)
+    EVOLVED — V3.1 (DARLEK CANN v3.0 Compliant)
 """
 
 import threading
@@ -91,3 +91,19 @@ class EvolutionEngine:
             "last_update": time.time(),
             "state": self.get_current_state()
         }
+
+    def get_system_integrity_snapshot(self) -> Dict[str, Any]:
+        """Provides immediate diagnostic visibility into the engine's operational state."""
+        with self._lock:
+            return {
+                "timestamp": time.time(),
+                "status": "OPERATIONAL",
+                "telemetry_health": self._telemetry.get_system_integrity_snapshot(),
+                "state_snapshot": self.get_current_state()
+            }
+
+    def clear_registry(self) -> None:
+        """Purges registry and telemetry history to support high-frequency simulation resets."""
+        with self._lock:
+            self._telemetry.clear_history()
+            logger.info("EvolutionEngine registry and history purged.")
