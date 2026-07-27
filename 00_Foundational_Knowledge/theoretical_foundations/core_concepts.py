@@ -1,6 +1,6 @@
 """
 ================================================================================
-THEORETICAL FOUNDATIONS - CORE CONCEPTS
+THEORETICAL FOUNDATIONS - CORE CONCEPTS (DARLEK CANN v3.0)
 ================================================================================
 Role: Defines the shared conceptual vocabulary, data structures, and architectural
       principles for the AGI ecosystem. Provides the foundational types and 
@@ -13,8 +13,16 @@ Connections:
 ================================================================================
 """
 
+import threading
+import logging
 from enum import Enum
 from typing import TypedDict, List, Dict, Any, Optional
+
+# Import siphoned telemetry bridge for high-fidelity observability
+from .telemetry_bridge import TheoreticalTelemetryBridge
+
+# Configure diagnostic logging
+logger = logging.getLogger("CoreConcepts")
 
 # --- COSMIC & EPOCH CLASSIFICATIONS ---
 
@@ -125,7 +133,24 @@ EPOCH_DATA = {
     EpochType.POST_HUMAN: {"label": "Post-Human", "threshold": 450}
 }
 
-# --- ARCHITECTURAL PRINCIPLES ---
+# --- ARCHITECTURAL REGISTRY ---
+
+class CoreConceptRegistry:
+    """Thread-safe registry for managing foundational constants and types."""
+    def __init__(self):
+        self._lock = threading.RLock()
+        self._telemetry = TheoreticalTelemetryBridge()
+        self._registry: Dict[str, Any] = {"epoch_data": EPOCH_DATA}
+
+    def get_concept(self, key: str) -> Any:
+        with self._lock:
+            return self._registry.get(key)
+
+    def log_access(self, key: str):
+        self._telemetry.log_event("CONCEPT_ACCESS", {"key": key})
+
+# Global instance for system-wide access
+registry = CoreConceptRegistry()
 
 PRINCIPLE_DYNAMIC_CONSENSUS = "Game-theoretic Nash Equilibrium resolution for multi-agent specifications."
 PRINCIPLE_ZERO_LEAK_SANDBOX = "Thread-scoped, isolated execution environment with restricted built-in access."
