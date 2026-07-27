@@ -30,6 +30,10 @@ class SandboxStateSnapshot:
         """Ensures values are serializable or representable for the snapshot."""
         if isinstance(value, (int, float, str, bool, type(None))):
             return value
+        if isinstance(value, (list, tuple)):
+            return [self._sanitize(i) for i in value]
+        if isinstance(value, dict):
+            return {str(k): self._sanitize(v) for k, v in value.items()}
         return str(value)
 
     def to_dict(self) -> Dict[str, Any]:
