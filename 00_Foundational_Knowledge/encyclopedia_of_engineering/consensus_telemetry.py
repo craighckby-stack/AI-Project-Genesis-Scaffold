@@ -1,6 +1,6 @@
 """
 ================================================================================
-CONSENSUS TELEMETRY BRIDGE - DIAGNOSTIC LAYER
+CONSENSUS TELEMETRY BRIDGE - DIAGNOSTIC LAYER (DARLEK CANN v3.0)
 ================================================================================
 Role: Provides high-fidelity diagnostic logging and event tracking for the 
       Engineering Consensus Resolver. Siphoned from the Audit repository.
@@ -16,12 +16,14 @@ import time
 import threading
 from typing import Dict, Any
 
+# Configure diagnostic logging
 logger = logging.getLogger("ConsensusTelemetry")
 
 class ConsensusTelemetryBridge:
     """
     Diagnostic bridge for logging consensus events.
     Ensures all multi-agent debates are observable and auditable.
+    Implements thread-safe logging and snapshotting.
     """
     def __init__(self):
         self._start_time = time.time()
