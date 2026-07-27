@@ -19,10 +19,12 @@ INTEGRATION:
 import logging
 import threading
 import weakref
+import time
 from typing import Dict, Any, Optional
 
 # Import siphoned diagnostic utilities
 from .kernel_diagnostics import KernelDiagnostics
+from ..aether_forge.siphoned_engine_utils import TelemetryBridge
 
 class KernelOrchestrator:
     """
@@ -45,13 +47,15 @@ class KernelOrchestrator:
         self.state_container = weakref.WeakValueDictionary()
         self.logger = logging.getLogger("AGI_KERNEL")
         self.diagnostics = KernelDiagnostics()
+        self.telemetry = TelemetryBridge()
         self._initialized = True
         self.logger.info("AGI Kernel initialized successfully.")
 
     def register_module(self, name: str, module: Any):
-        """Registers a sub-module into the kernel ecosystem."""
+        """Registers a sub-module into the kernel ecosystem with telemetry logging."""
         with self._lock:
             self.modules[name] = module
+            self.telemetry.log_event("MODULE_REGISTRATION", {"name": name})
             self.logger.info(f"Module {name} registered.")
 
     def get_heartbeat(self) -> Dict[str, Any]:
@@ -59,8 +63,18 @@ class KernelOrchestrator:
         return {
             "status": "ACTIVE",
             "modules": list(self.modules.keys()),
-            "diagnostics": self.diagnostics.get_report()
+            "diagnostics": self.diagnostics.get_report(),
+            "timestamp": time.time()
         }
+
+    def create_state_snapshot(self) -> Dict[str, Any]:
+        """Facilitates temporal debugging and rollback capabilities."""
+        with self._lock:
+            return {
+                "modules": list(self.modules.keys()),
+                "diagnostics": self.diagnostics.get_report(),
+                "timestamp": time.time()
+            }
 
 # Global kernel instance
 kernel = KernelOrchestrator()
