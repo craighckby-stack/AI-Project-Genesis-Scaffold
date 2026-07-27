@@ -154,3 +154,8 @@ class AdaptiveOrchestraManager:
             adjustment = -0.05 * (1.0 if agent.entropy_bias >= 0 else -1.0) if friction > 0.4 else 0.05 * (agent.confidence / 100.0)
             calibrated_agents.append(agent.copy_with_adjustment(adjustment))
         return calibrated_agents
+
+    @staticmethod
+    def clear_telemetry_history() -> None:
+        """Resets the telemetry history for high-frequency simulation cycles."""
+        AdaptiveOrchestraManager._telemetry.clear_history()
