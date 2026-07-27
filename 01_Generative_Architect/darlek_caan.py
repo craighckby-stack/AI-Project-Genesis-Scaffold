@@ -11,12 +11,16 @@ INTEGRATION:
     - Connects to 00_Foundational_Knowledge for consensus protocols.
     - Manages lifecycle of agents and world states via thread-safe containers.
     - Utilizes weak references to prevent memory leaks in high-frequency simulations.
+    - Delegates complex evolutionary logic to 01_Generative_Architect/evolution_engine.py.
 """
 
 import threading
 import weakref
 import logging
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, Optional
+
+# Import delegated evolutionary logic
+from .evolution_engine import EvolutionEngine as CoreEvolutionEngine
 
 # Configure logging for architectural evolution tracking
 logging.basicConfig(level=logging.INFO)
@@ -26,6 +30,7 @@ class EvolutionEngine:
     """
     Core engine for managing agent populations and world state entropy.
     Implements thread-safe state transitions and weak-reference memory management.
+    Delegates complex mutation logic to the CoreEvolutionEngine.
     """
     def __init__(self):
         self._lock = threading.RLock()
@@ -35,6 +40,7 @@ class EvolutionEngine:
             "entropy": 0.0,
             "integrity": 100.0
         }
+        self._core = CoreEvolutionEngine()
         logger.info("EvolutionEngine initialized: Zero-Leak mode active.")
 
     def evolve_epoch(self, new_epoch: str) -> None:
@@ -53,6 +59,10 @@ class EvolutionEngine:
     def get_state(self) -> Dict[str, Any]:
         with self._lock:
             return self._world_state.copy()
+
+    def trigger_mutation(self, delta: Dict[str, Any]) -> bool:
+        """Delegates mutation logic to the core engine."""
+        return self._core.mutate("global_system", delta)
 
 # Global singleton instance for system-wide access
 engine = EvolutionEngine()
