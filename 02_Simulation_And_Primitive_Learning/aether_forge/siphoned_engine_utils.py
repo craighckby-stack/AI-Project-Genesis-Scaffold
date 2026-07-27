@@ -1,6 +1,6 @@
 """
 ================================================================================
-SIPHONED ENGINE UTILITIES - CORE SIMULATION ENGINE
+SIPHONED ENGINE UTILITIES - CORE SIMULATION ENGINE (DARLEK CANN v3.0)
 ================================================================================
 Role: Provides thread-safe state management, entropy drift calculation, and 
       diagnostic telemetry hooks for the Aether Forge simulation suite.
@@ -63,6 +63,22 @@ class EntropyController:
 
 class TelemetryBridge:
     """Diagnostic bridge for logging simulation events."""
-    @staticmethod
-    def log_event(event_type: str, metadata: Dict[str, Any]) -> None:
-        logger.info(f"[TELEMETRY] {event_type} | Data: {metadata}")
+    def __init__(self):
+        self._start_time = time.time()
+
+    def log_event(self, event_type: str, metadata: Dict[str, Any]) -> None:
+        """Logs a structured simulation event to the diagnostic stream."""
+        log_payload = {
+            "timestamp": time.time(),
+            "uptime": round(time.time() - self._start_time, 2),
+            "event_type": event_type,
+            "data": metadata
+        }
+        logger.info(f"[TELEMETRY] {event_type} | Data: {log_payload}")
+
+    def get_system_integrity_snapshot(self) -> Dict[str, Any]:
+        """Facilitates temporal debugging by returning a snapshot of the telemetry bridge."""
+        return {
+            "status": "OPERATIONAL",
+            "uptime": round(time.time() - self._start_time, 2)
+        }
