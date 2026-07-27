@@ -58,6 +58,27 @@ class KernelOrchestrator:
             self.telemetry.log_event("MODULE_REGISTRATION", {"name": name})
             self.logger.info(f"Module {name} registered.")
 
+    def clear_registry(self):
+        """Clears all registered modules to support high-frequency simulation resets."""
+        with self._lock:
+            self.modules.clear()
+            self.logger.info("Kernel registry cleared.")
+
+    def get_system_integrity_snapshot(self) -> Dict[str, Any]:
+        """Provides immediate diagnostic visibility into the kernel's operational state."""
+        return {
+            "status": "OPERATIONAL",
+            "module_count": len(self.modules),
+            "diagnostics": self.diagnostics.get_report(),
+            "timestamp": time.time()
+        }
+
+    def shutdown(self):
+        """Ensures clean teardown of kernel resources."""
+        with self._lock:
+            self.clear_registry()
+            self.logger.info("AGI Kernel shutdown sequence complete.")
+
     def get_heartbeat(self) -> Dict[str, Any]:
         """Returns system-wide health and status metrics."""
         return {
