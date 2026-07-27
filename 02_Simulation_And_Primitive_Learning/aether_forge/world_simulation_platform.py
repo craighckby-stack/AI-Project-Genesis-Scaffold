@@ -18,7 +18,7 @@ import logging
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, field
 
-# Importing siphoned architectural utilities
+# Import siphoned architectural utilities
 from .siphoned_engine_utils import SimulationState, AgentRegistry, EntropyController, TelemetryBridge
 from .simulation_registry import SimulationRegistry
 
@@ -100,6 +100,20 @@ class WorldSimulationEngine:
             snapshot = self.get_world_snapshot()
             snapshot["timestamp"] = time.time()
             return snapshot
+
+    def clear_registry(self) -> None:
+        """Purges registry and telemetry history to support high-frequency simulation resets."""
+        with self._lock:
+            self._sim_registry.clear_registry()
+            self._telemetry.clear_history()
+            logger.info("WorldSimulationEngine registry and telemetry history purged.")
+
+    def shutdown(self) -> None:
+        """Zero-leak cleanup of engine resources."""
+        with self._lock:
+            self.stop()
+            self.clear_registry()
+            logger.info("WorldSimulationEngine shutdown sequence complete.")
 
 # Singleton instance for system-wide access
 world_engine = WorldSimulationEngine()
