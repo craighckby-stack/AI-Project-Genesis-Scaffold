@@ -37,6 +37,7 @@ _is_initialized = False
 __all__ = [
     "initialize_aether_forge",
     "get_system_integrity_snapshot",
+    "clear_registry",
     "registry",
     "__version__"
 ]
@@ -68,8 +69,18 @@ def get_system_integrity_snapshot() -> Dict[str, Any]:
         return {
             "version": __version__,
             "status": "OPERATIONAL" if _is_initialized else "PENDING",
-            "registry_modules": registry.get_all_module_names()
+            "registry_modules": registry.get_all_module_names(),
+            "telemetry_health": telemetry.get_system_integrity_snapshot()
         }
+
+def clear_registry() -> None:
+    """
+    Purges registry and telemetry history to support high-frequency simulation resets.
+    """
+    with _init_lock:
+        registry.shutdown()
+        telemetry.clear_history()
+        logger.info("Aether Forge registry and telemetry history purged.")
 
 # Execute initialization sequence
 initialize_aether_forge()
