@@ -1,6 +1,6 @@
 """
 ================================================================================
-CORE AGI ECOSYSTEM - INITIALIZATION MODULE
+CORE AGI ECOSYSTEM - INITIALIZATION MODULE (DARLEK CANN v3.0)
 ================================================================================
 Role: Primary entry point for the Core AGI Ecosystem. Orchestrates simulation 
       engines, persona evolution, and primitive learning modules. Enforces strict 
@@ -36,6 +36,9 @@ _is_initialized = False
 __all__ = [
     "initialize_ecosystem",
     "get_ecosystem_status",
+    "get_system_integrity_snapshot",
+    "clear_registry",
+    "shutdown",
     "registry",
     "__version__"
 ]
@@ -69,6 +72,36 @@ def get_ecosystem_status() -> Dict[str, Any]:
         "status": "OPERATIONAL" if _is_initialized else "PENDING",
         "components": ["EvolutionEngine", "PersonaOrchestrator", "SimulationPlatform"]
     }
+
+def get_system_integrity_snapshot() -> Dict[str, Any]:
+    """
+    Facilitates temporal debugging by returning a snapshot of the ecosystem.
+    """
+    with _init_lock:
+        return {
+            "version": __version__,
+            "status": "OPERATIONAL" if _is_initialized else "PENDING",
+            "registry_snapshot": registry.get_system_integrity_snapshot(),
+            "telemetry_health": telemetry.get_system_integrity_snapshot()
+        }
+
+def clear_registry() -> None:
+    """
+    Purges registry and telemetry history to support high-frequency simulation resets.
+    """
+    with _init_lock:
+        registry.clear_registry()
+        telemetry.clear_history()
+        logger.info("Core AGI Ecosystem registry and telemetry history purged.")
+
+def shutdown() -> None:
+    """
+    Zero-leak cleanup of ecosystem resources.
+    """
+    with _init_lock:
+        registry.shutdown()
+        telemetry.clear_history()
+        logger.info("Core AGI Ecosystem shutdown sequence complete.")
 
 # Execute self-check on import
 if __name__ == "__main__":
