@@ -60,5 +60,20 @@ class KnowledgeBaseCoordinator:
         with self._registry_lock:
             return list(self._knowledge_registry.keys())
 
+    def clear_registry(self) -> None:
+        """Purges the registry to prevent memory leaks during simulation resets."""
+        with self._registry_lock:
+            self._knowledge_registry.clear()
+            logger.info("Knowledge registry purged.")
+
+    def get_system_integrity_snapshot(self) -> Dict[str, Any]:
+        """Returns a diagnostic snapshot of the knowledge base state."""
+        with self._registry_lock:
+            return {
+                "registry_size": len(self._knowledge_registry),
+                "keys": list(self._knowledge_registry.keys()),
+                "status": "OPERATIONAL"
+            }
+
 # Global instance for system-wide access
 knowledge_base = KnowledgeBaseCoordinator()
