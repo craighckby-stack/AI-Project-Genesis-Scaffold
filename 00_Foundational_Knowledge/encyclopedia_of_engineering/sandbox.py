@@ -62,14 +62,8 @@ class ZeroLeakFormulaSandbox:
     ) -> Any:
         """
         Safely executes a formula string in an isolated thread with telemetry and snapshotting.
-        
-        Args:
-            formula_str: The mathematical formula to evaluate.
-            variables: Dictionary of variables available to the formula.
-            timeout_sec: Maximum execution time in seconds.
         """
         with self._lock:
-            # Capture pre-execution state snapshot
             pre_snapshot = SandboxStateSnapshot(variables)
             start_time = time.time()
 
@@ -80,13 +74,11 @@ class ZeroLeakFormulaSandbox:
 
             def target():
                 try:
-                    # Siphoned pattern: Strict compilation before evaluation
                     code = compile(formula_str, "<sandbox_formula>", "eval")
                     result_container["result"] = eval(code, global_vars, local_vars)
                 except Exception as e:
                     exception_container.append(e)
 
-            # Execute in a daemon thread to prevent blocking the main system
             thread = threading.Thread(target=target, daemon=True)
             thread.start()
             thread.join(timeout=timeout_sec)
@@ -94,27 +86,17 @@ class ZeroLeakFormulaSandbox:
             execution_duration = time.time() - start_time
 
             if thread.is_alive():
-                # Log zombie thread for telemetry audit
                 self._telemetry.log_sandbox_event("EXECUTION_TIMEOUT", {
-                    "formula": formula_str,
-                    "timeout": timeout_sec,
-                    "duration": execution_duration
+                    "formula": formula_str, "timeout": timeout_sec, "duration": execution_duration
                 })
-                logger.error(f"Sandbox timeout: Formula '{formula_str}' exceeded {timeout_sec}s. Thread remains active in background.")
                 raise FormulaExecutionTimeout(f"Formula execution exceeded {timeout_sec}s")
                 
             if exception_container:
                 error = exception_container[0]
-                self._telemetry.log_sandbox_event("EXECUTION_ERROR", {
-                    "formula": formula_str,
-                    "error": str(error)
-                })
-                logger.error(f"Sandbox execution error: {error}")
+                self._telemetry.log_sandbox_event("EXECUTION_ERROR", {"formula": formula_str, "error": str(error)})
                 raise error
                 
             result = result_container.get("result")
-            
-            # Capture post-execution state snapshot and log success
             post_snapshot = SandboxStateSnapshot({"result": result})
             execution_metadata = {
                 "formula": formula_str,
@@ -126,22 +108,27 @@ class ZeroLeakFormulaSandbox:
             self._telemetry.log_sandbox_event("EXECUTION_SUCCESS", execution_metadata)
             self._execution_history.append(execution_metadata)
             
-            # Maintain history limit to prevent memory fatigue
             if len(self._execution_history) > 100:
                 self._execution_history.pop(0)
 
             return result
 
-    def get_execution_history(self) -> List[Dict[str, Any]]:
-        """Returns the recent history of sandbox executions."""
+    def clear_registry(self) -> None:
+        """Purges execution history to prevent memory leaks."""
         with self._lock:
-            return self._execution_history.copy()
+            self._execution_history.clear()
+            logger.info("ZeroLeakFormulaSandbox: Registry cleared.")
 
-    def get_health_report(self) -> Dict[str, Any]:
-        """Returns a diagnostic health report for the sandbox engine."""
+    def get_system_integrity_snapshot(self) -> Dict[str, Any]:
+        """Returns a diagnostic snapshot of the sandbox state."""
         with self._lock:
             return {
-                "status": "ACTIVE",
-                "telemetry_status": self._telemetry.get_health_report(),
-                "history_depth": len(self._execution_history)
+                "timestamp": time.time(),
+                "history_depth": len(self._execution_history),
+                "telemetry": self._telemetry.get_system_integrity_snapshot(),
+                "status": "OPERATIONAL"
             }
+
+    def get_execution_history(self) -> List[Dict[str, Any]]:
+        with self._lock:
+            return self._execution_history.copy()
