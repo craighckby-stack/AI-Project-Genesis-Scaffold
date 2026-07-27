@@ -49,7 +49,6 @@ class PersonaOrchestrator:
         """
         with self._lock:
             try:
-                # Logic for applying persona drift (e.g., archetype shift, consciousness gain)
                 logger.info(f"Applying mutation to agent {agent_id}: {mutation_delta}")
                 
                 # Log mutation event via TelemetryBridge
@@ -80,6 +79,29 @@ class PersonaOrchestrator:
             current_count = self._state_container.get_data().get("active_personas", 0)
             self._state_container.update({"active_personas": current_count + 1})
             logger.info(f"Agent {agent_id} registered. Total: {current_count + 1}")
+
+    def get_system_integrity_snapshot(self) -> Dict[str, Any]:
+        """
+        Facilitates temporal debugging by returning a snapshot of the orchestrator state.
+        """
+        with self._lock:
+            return {
+                "timestamp": time.time(),
+                "status": "OPERATIONAL",
+                "telemetry_health": self._telemetry.get_system_integrity_snapshot(),
+                "active_personas": self._state_container.get_data().get("active_personas", 0)
+            }
+
+    def clear_registry(self) -> None:
+        """
+        Purges registry and telemetry history to support high-frequency simulation resets.
+        """
+        with self._lock:
+            self._persona_registry.clear()
+            self._evolution_history.clear()
+            self._telemetry.clear_history()
+            self._state_container.update({"active_personas": 0})
+            logger.info("PersonaOrchestrator registry and history purged.")
 
 # Singleton instance for global orchestration
 persona_orchestrator = PersonaOrchestrator()
