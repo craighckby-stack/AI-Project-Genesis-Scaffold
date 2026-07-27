@@ -4,6 +4,7 @@ SIMULATION REGISTRY - AETHER FORGE CORE
 ================================================================================
 Role: Thread-safe registry for managing simulation modules and lifecycle hooks.
       Ensures atomic registration and observability across the Aether Forge ecosystem.
+      Evolved to support high-frequency resets and diagnostic telemetry.
 
 Connections:
 - 02_Simulation_And_Primitive_Learning/aether_forge/__init__.py (Initialization)
@@ -50,14 +51,22 @@ class SimulationRegistry:
             return list(self._modules.keys())
 
     def get_system_integrity_snapshot(self) -> Dict[str, Any]:
-        """Facilitates temporal debugging by returning a snapshot of the registry."""
+        """Facilitates temporal debugging by returning a snapshot of the registry and telemetry."""
         with self._lock:
             return {
                 "timestamp": time.time(),
                 "module_count": len(self._modules),
                 "modules": list(self._modules.keys()),
+                "telemetry_health": self._telemetry.get_system_integrity_snapshot(),
                 "status": "OPERATIONAL"
             }
+
+    def clear_registry(self) -> None:
+        """Purges registry and telemetry history to support high-frequency simulation resets."""
+        with self._lock:
+            self._modules.clear()
+            self._telemetry.clear_history()
+            logger.info("SimulationRegistry registry and telemetry history purged.")
 
     def shutdown(self) -> None:
         """Zero-leak cleanup of the registry."""
