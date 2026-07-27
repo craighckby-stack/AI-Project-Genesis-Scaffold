@@ -15,7 +15,9 @@ Connections:
 
 import threading
 import logging
+import time
 from enum import Enum
+from collections import deque
 from typing import TypedDict, List, Dict, Any, Optional
 
 # Import siphoned telemetry bridge for high-fidelity observability
@@ -136,18 +138,41 @@ EPOCH_DATA = {
 # --- ARCHITECTURAL REGISTRY ---
 
 class CoreConceptRegistry:
-    """Thread-safe registry for managing foundational constants and types."""
-    def __init__(self):
+    """Thread-safe registry for managing foundational constants and types with Zero-Leak telemetry."""
+    def __init__(self, history_max_size: int = 100):
         self._lock = threading.RLock()
         self._telemetry = TheoreticalTelemetryBridge()
         self._registry: Dict[str, Any] = {"epoch_data": EPOCH_DATA}
+        self._event_history: deque[Dict[str, Any]] = deque(maxlen=history_max_size)
+        self._event_sequence_num = 0
 
     def get_concept(self, key: str) -> Any:
         with self._lock:
+            self.log_access(key)
             return self._registry.get(key)
 
     def log_access(self, key: str):
-        self._telemetry.log_event("CONCEPT_ACCESS", {"key": key})
+        with self._lock:
+            self._event_sequence_num += 1
+            event = {"timestamp": time.time(), "sequence": self._event_sequence_num, "key": key}
+            self._event_history.append(event)
+            self._telemetry.log_event("CONCEPT_ACCESS", event)
+
+    def clear_registry(self) -> None:
+        """Purges history to prevent memory leaks during simulation resets."""
+        with self._lock:
+            self._event_history.clear()
+            logger.info("CoreConceptRegistry history cleared.")
+
+    def get_system_integrity_snapshot(self) -> Dict[str, Any]:
+        """Facilitates temporal debugging by returning a snapshot of the registry state."""
+        with self._lock:
+            return {
+                "timestamp": time.time(),
+                "total_events": self._event_sequence_num,
+                "recent_events": list(self._event_history)[-5:],
+                "status": "OPERATIONAL"
+            }
 
 # Global instance for system-wide access
 registry = CoreConceptRegistry()
