@@ -1,0 +1,83 @@
+{
+  "name": "@claudios/terminal",
+  "version": "1.1.0",
+  "description": "A high-performance, bare-metal interactive terminal simulator and dashboard for the ClaudIOS ecosystem, featuring integrated Gemini API orchestration and secure frame-based execution.",
+  "author": "DARLEK CANN",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "npm@10.0.0",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "claudios-term": "./bin/cli.js"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "clean": "rm -rf dist",
+    "lint": "eslint 'src/**/*.{js,ts}'",
+    "test": "jest --config jest.config.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
+    "dev": "nodemon --watch src --exec node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darlek-cann/claudios-terminal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/darlek-cann/claudios-terminal/issues"
+  },
+  "homepage": "https://claudios.io/terminal",
+  "requestFramePermissions": [
+    "ALLOW_GEMINI_API_ACCESS",
+    "ALLOW_FILESYSTEM_READ",
+    "ALLOW_NETWORK_SOCKETS"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API",
+    "MAJOR_CAPABILITY_VIRTUAL_FILESYSTEM",
+    "MAJOR_CAPABILITY_KERNEL_HOOKS"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "keywords": [
+    "claudios",
+    "terminal",
+    "bare-metal",
+    "ai-os",
+    "gemini",
+    "shell",
+    "emulator"
+  ],
+  "dependencies": {
+    "commander": "^12.0.0",
+    "chalk": "^5.3.0",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.4.0",
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
