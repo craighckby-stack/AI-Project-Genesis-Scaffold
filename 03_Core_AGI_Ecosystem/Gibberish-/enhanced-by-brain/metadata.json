@@ -1,0 +1,5 @@
+{
+  "name": "Synthesis Hub",
+  "description": "A powerful document synthesis and rewrite orchestrator using Gemini AI. Ingest PDFs, DOCX, images, and text to generate high-level academic reports.",
+  "requestFramePermissions": []
+}
