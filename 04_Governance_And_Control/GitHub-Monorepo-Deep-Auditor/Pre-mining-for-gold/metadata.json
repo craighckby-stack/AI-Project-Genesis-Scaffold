@@ -1,0 +1,8 @@
+{
+  "name": "GitHub Deep Auditor",
+  "description": "Scans repositories, analyzes file structures, and generates architectural consolidation plans using Gemini 3.1 Pro.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
