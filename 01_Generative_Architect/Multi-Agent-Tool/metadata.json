@@ -1,0 +1,6 @@
+{
+  "name": "Prism",
+  "description": "An advanced Heterogeneous Agent Lattice and Synthesis Lab that orchestrates multi-disciplinary agent personas to reason about complex problems.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
