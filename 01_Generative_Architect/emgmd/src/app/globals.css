@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+@theme {
+  /* DARLEK-CAAN V3.0 DESIGN SYSTEM */
+  --color-void: #05070a;
+  --color-nebula: #090d16;
+  --color-data-blue: #3b82f6;
+  --color-quantum-green: #10b981;
+  --color-error-red: #ef4444;
+  --color-text-dim: #94a3b8;
+
+  --animate-quantum-pulse: quantum-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-scanline: scanline 8s linear infinite;
+
+  @keyframes quantum-pulse {
+    0%, 100% { opacity: 0.2; transform: scale(0.98); }
+    50% { opacity: 0.6; transform: scale(1); }
+  }
+
+  @keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-slate-800/50;
+  }
+  body {
+    @apply bg-void text-slate-200 font-mono selection:bg-data-blue/30;
+    background-image: radial-gradient(circle at 50% 50%, #1e293b 0.5px, transparent 0.5px);
+    background-size: 24px 24px;
+  }
+}
+
+@layer components {
+  .terminal-glass {
+    @apply bg-nebula/80 backdrop-blur-md border border-slate-700/50 shadow-2xl;
+  }
+  .data-node {
+    @apply relative p-4 border-l-2 border-data-blue bg-gradient-to-r from-data-blue/5 to-transparent;
+  }
+  .scanline-overlay {
+    @apply fixed inset-0 pointer-events-none bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[length:100%_4px] opacity-10;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

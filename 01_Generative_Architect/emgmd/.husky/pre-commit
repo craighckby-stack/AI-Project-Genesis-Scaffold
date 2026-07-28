@@ -1,0 +1,120 @@
+#!/usr/bin/env bash
+
+# DARLEK CANN v3.0 - PRE-COMMIT EVOLUTIONARY GATE
+# Ensures code integrity, type safety, and architectural compliance.
+
+set -e
+
+# 1. PRE-FLIGHT DIAGNOSTICS
+echo "[DARLEK-CANN] Initiating pre-commit architectural scan..."
+
+# 2. TYPE SAFETY & ARCHITECTURAL INTEGRITY
+# Siphoned from EMG-CORE/DARLEK-CAAN-v3 build patterns
+echo "[DARLEK-CANN] Validating TypeScript definitions..."
+npx tsc --noEmit --project tsconfig.json
+
+# 3. LINTING & CODE SMELL PRUNING
+# Enforcing strict lint-staged rules to prevent dead weight commits
+echo "[DARLEK-CANN] Executing lint-staged orchestration..."
+npx lint-staged
+
+# 4. EPISTEMIC DEBATE ENGINE CHECK (Optional integration)
+# If a test suite exists, run it here to ensure logic consistency
+if [ -f "package.json" ] && grep -q "jest" package.json; then
+  echo "[DARLEK-CANN] Running epistemic unit tests..."
+  npm run test -- --passWithNoTests
+fi
+
+echo "[DARLEK-CANN] Commit integrity verified. Proceeding with evolution."
+exit 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
