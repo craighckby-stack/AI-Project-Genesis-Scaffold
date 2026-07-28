@@ -1,0 +1,49 @@
+name: DARLEK CANN Coherence Gate
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Codebase
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-size: 20
+        cache: 'npm'
+
+    - name: Install Project Dependencies
+      run: npm ci
+
+    - name: Apply Database Schemas & Prisma Generate
+      run: npx prisma db push
+
+    - name: Validate Code Standards (ESLint)
+      run: npm run lint
+
+    - name: Verify React Compiler & Production Build
+      run: npm run build
+      env:
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        DATABASE_URL: "file:./dev.db"
+
+
+
+
+
+
+
+
+
+
+
+
+

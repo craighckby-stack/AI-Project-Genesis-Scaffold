@@ -1,0 +1,223 @@
+From f36fe7ef3366ecc6a9b6f253920a71d42aabd6a2 Mon Sep 17 00:00:00 2001
+From: Z User <z@container>
+Date: Sat, 11 Apr 2026 16:10:22 +0000
+Subject: [PATCH] =?UTF-8?q?feat:=20Add=20Anthropic=20as=203rd=20LLM=20prov?=
+ =?UTF-8?q?ider,=20reorder=20cascade=20to=20Grok=E2=86=92Cerebras=E2=86=92?=
+ =?UTF-8?q?Anthropic=E2=86=92Gemini?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+- Added tryAnthropic() function using Anthropic Messages API (claude-sonnet-4-20250514)
+- Reordered LLM cascade: Grok (1st) → Cerebras (2nd) → Anthropic (3rd) → Gemini (4th/fallback)
+- Added comprehensive error logging with [Mentor Cascade] prefix for each provider
+- Logs which provider succeeded and which failed with reasons
+- Updated GET endpoint cascade array to include 'anthropic'
+- Updated all UI references from 'Grok→Claude→Gemini' to 'Grok→Cerebras→Anthropic→Gemini'
+- Added failedCascade array to error response for debugging
+---
+ src/app/api/agi/mentor/route.ts | 91 ++++++++++++++++++++++++++++++---
+ src/app/page.tsx                |  8 +--
+ 2 files changed, 88 insertions(+), 11 deletions(-)
+
+diff --git a/src/app/api/agi/mentor/route.ts b/src/app/api/agi/mentor/route.ts
+index 818039bee..6cc1dddf1 100644
+--- a/src/app/api/agi/mentor/route.ts
++++ b/src/app/api/agi/mentor/route.ts
+@@ -150,7 +150,52 @@ async function tryCerebras(context: string): Promise<{ response: string | null;
+   }
+ }
+ 
+-// Node 3: Gemini (Google) — researcher mindset, large context
++// Node 3: Anthropic Claude — superior code analysis, careful reasoning
++async function tryAnthropic(context: string): Promise<{ response: string | null; provider: string; quotaHit: boolean }> {
++  const key = process.env.ANTHROPIC_API_KEY
++  if (!key) return { response: null, provider: 'anthropic', quotaHit: false }
++
++  try {
++    const res = await fetch('https://api.anthropic.com/v1/messages', {
++      method: 'POST',
++      headers: {
++        'Content-Type': 'application/json',
++        'x-api-key': key,
++        'anthropic-version': '2023-06-01',
++        'anthropic-dangerous-direct-browser-access': 'true',
++      },
++      body: JSON.stringify({
++        model: 'claude-sonnet-4-20250514',
++        max_tokens: 1024,
++        system: MENTOR_PROMPT,
++        messages: [{ role: 'user', content: context }],
++      }),
++      signal: AbortSignal.timeout(25000)
++    })
++
++    if (res.status === 429 || res.status === 503) {
++      console.warn('[Mentor Cascade] Anthropic rate limited (429/503), falling back...')
++      return { response: null, provider: 'anthropic', quotaHit: true }
++    }
++
++    if (!res.ok) {
++      console.warn(`[Mentor Cascade] Anthropic returned ${res.status}, falling back...`)
++      return { response: null, provider: 'anthropic', quotaHit: false }
++    }
++
++    const data = await res.json()
++    const text = data.content?.[0]?.text || null
++    if (text) {
++      console.log('[Mentor Cascade] Anthropic responded successfully')
++    }
++    return { response: text, provider: 'anthropic', quotaHit: false }
++  } catch (err) {
++    console.error('[Mentor Cascade] Anthropic error:', err instanceof Error ? err.message : err)
++    return { response: null, provider: 'anthropic', quotaHit: false }
++  }
++}
++
++// Node 4: Gemini (Google) — researcher mindset, large context
+ async function tryGemini(context: string): Promise<{ response: string | null; provider: string; quotaHit: boolean }> {
+   const key = process.env.GEMINI_API_KEY
+   if (!key) return { response: null, provider: 'gemini', quotaHit: false }
+@@ -245,10 +290,15 @@ ${question}
+ Provide comprehensive guidance. Include RECOMMENDED_REPOSITORIES section with specific repos and reasons.
+ `
+ 
+-    // Cascade: Grok → Cerebras → Gemini
++    // Cascade: Grok (1st) → Cerebras (2nd) → Anthropic (3rd) → Gemini (4th)
++    const cascadeOrder = ['Grok', 'Cerebras', 'Anthropic', 'Gemini']
++    const failedProviders: string[] = []
++
++    // 1st: Grok (xAI)
+     let result = await tryGrok(context)
+     if (result.response) {
+       incrementQuota()
++      console.log('[Mentor Cascade] Using Grok (1st priority)')
+       return NextResponse.json({
+         success: true,
+         response: result.response,
+@@ -257,10 +307,14 @@ Provide comprehensive guidance. Include RECOMMENDED_REPOSITORIES section with sp
+         quotaRemaining: QUOTA_LIMITS.hourlyLimit - quotaState.hourlyCalls
+       }, { headers: corsHeaders })
+     }
+-    
++    failedProviders.push(result.quotaHit ? 'Grok (rate-limited)' : 'Grok')
++    console.warn(`[Mentor Cascade] Grok failed${result.quotaHit ? ' (rate limited)' : ''}, trying next...`)
++
++    // 2nd: Cerebras
+     result = await tryCerebras(context)
+     if (result.response) {
+       incrementQuota()
++      console.log(`[Mentor Cascade] Using Cerebras (2nd priority). Failed: ${failedProviders.join(', ')}`)
+       return NextResponse.json({
+         success: true,
+         response: result.response,
+@@ -269,10 +323,30 @@ Provide comprehensive guidance. Include RECOMMENDED_REPOSITORIES section with sp
+         quotaRemaining: QUOTA_LIMITS.hourlyLimit - quotaState.hourlyCalls
+       }, { headers: corsHeaders })
+     }
+-    
++    failedProviders.push(result.quotaHit ? 'Cerebras (rate-limited)' : 'Cerebras')
++    console.warn(`[Mentor Cascade] Cerebras failed${result.quotaHit ? ' (rate limited)' : ''}, trying next...`)
++
++    // 3rd: Anthropic Claude
++    result = await tryAnthropic(context)
++    if (result.response) {
++      incrementQuota()
++      console.log(`[Mentor Cascade] Using Anthropic (3rd priority). Failed: ${failedProviders.join(', ')}`)
++      return NextResponse.json({
++        success: true,
++        response: result.response,
++        provider: result.provider,
++        suggestedRepositories: extractRepos(result.response),
++        quotaRemaining: QUOTA_LIMITS.hourlyLimit - quotaState.hourlyCalls
++      }, { headers: corsHeaders })
++    }
++    failedProviders.push(result.quotaHit ? 'Anthropic (rate-limited)' : 'Anthropic')
++    console.warn(`[Mentor Cascade] Anthropic failed${result.quotaHit ? ' (rate limited)' : ''}, trying next...`)
++
++    // 4th: Gemini (fallback)
+     result = await tryGemini(context)
+     if (result.response) {
+       incrementQuota()
++      console.log(`[Mentor Cascade] Using Gemini (4th/fallback). Failed: ${failedProviders.join(', ')}`)
+       return NextResponse.json({
+         success: true,
+         response: result.response,
+@@ -281,11 +355,14 @@ Provide comprehensive guidance. Include RECOMMENDED_REPOSITORIES section with sp
+         quotaRemaining: QUOTA_LIMITS.hourlyLimit - quotaState.hourlyCalls
+       }, { headers: corsHeaders })
+     }
+-    
++    failedProviders.push(result.quotaHit ? 'Gemini (rate-limited)' : 'Gemini')
++
++    console.error(`[Mentor Cascade] ALL providers failed: ${failedProviders.join(' → ')}`)
+     return NextResponse.json({
+       success: false,
+       error: 'All LLM providers failed',
+-      provider: 'none'
++      provider: 'none',
++      failedCascade: failedProviders
+     }, { headers: corsHeaders })
+     
+   } catch (error) {
+@@ -299,7 +376,7 @@ Provide comprehensive guidance. Include RECOMMENDED_REPOSITORIES section with sp
+ export async function GET() {
+   return NextResponse.json({
+     success: true,
+-    cascade: ['grok', 'cerebras', 'gemini'],
++    cascade: ['grok', 'cerebras', 'anthropic', 'gemini'],
+     quota: {
+       hourly: quotaState.hourlyCalls,
+       hourlyLimit: QUOTA_LIMITS.hourlyLimit,
+diff --git a/src/app/page.tsx b/src/app/page.tsx
+index 693e7e50a..b140e1614 100644
+--- a/src/app/page.tsx
++++ b/src/app/page.tsx
+@@ -64,7 +64,7 @@ function SplashScreen({ onComplete }: { onComplete: (keys: ApiKeys) => void }) {
+         <div className="text-center mb-8">
+           <div className="text-4xl font-bold text-cyan-400 tracking-[0.3em] mb-2">NEXUS_SEED-</div>
+           <div className="text-green-600 text-sm">Self-Bootstrapping AGI</div>
+-          <div className="text-gray-600 text-xs mt-1">v1.0 | Grok → Claude → Gemini cascade</div>
++          <div className="text-gray-600 text-xs mt-1">v1.0 | Grok → Cerebras → Anthropic → Gemini cascade</div>
+         </div>
+ 
+         {/* API Key Inputs */}
+@@ -392,7 +392,7 @@ export default function NexusSeedPage() {
+       log('🛡️ Constitutional governance: ACTIVE', 'system')
+       log('⚡ Retrieval-first query: ENABLED', 'system')
+       log('🛡️ GEDM gate: ARMED', 'system')
+-      log('🔗 Cascade: Grok → Claude → Gemini', 'system')
++      log('🔗 Cascade: Grok → Cerebras → Anthropic → Gemini', 'system')
+       fetch('/api/agi/dna').then(r => r.json()).then(d => { if (d.success) setDnaCount(d.stats?.total || 0) }).catch(() => {})
+       setTimeout(() => { setStatus('ACTIVE'); log('✅ NEXUS_SEED- READY', 'success') }, 600)
+     }, 100)
+@@ -421,7 +421,7 @@ export default function NexusSeedPage() {
+           <span className={cn('px-1.5 py-0.5 rounded text-[10px]', gedm.state === 'READY' ? 'bg-green-900 text-green-400' : gedm.state === 'VALIDATING' ? 'bg-yellow-900 text-yellow-400' : 'bg-red-900 text-red-400')}>
+             GEDM:{gedm.state}
+           </span>
+-          <span className="text-gray-600 text-[10px] hidden md:block">Grok→Claude→Gemini</span>
++          <span className="text-gray-600 text-[10px] hidden md:block">Grok→Cerebras→Anthropic→Gemini</span>
+         </div>
+         <div className="flex items-center gap-3 text-[10px]">
+           <span>G:{generation}</span><span>C:{cycle}</span>
+@@ -464,7 +464,7 @@ export default function NexusSeedPage() {
+               <div className="text-center text-green-700 py-8 px-4">
+                 <div className="text-lg font-bold mb-1 text-cyan-400">NEXUS_SEED-</div>
+                 <div className="text-green-600 mb-1 text-[11px]">Self-Bootstrapping Intelligence</div>
+-                <div className="text-[10px] text-gray-600 mb-4">v1.0 | Grok → Claude → Gemini cascade</div>
++                <div className="text-[10px] text-gray-600 mb-4">v1.0 | Grok → Cerebras → Anthropic → Gemini cascade</div>
+                 <div className="text-[10px] space-y-1 text-left inline-block">
+                   <div>💬 Ask anything</div><div>📚 /learn [topic]</div><div>📊 /report</div>
+                   <div>🧬 /evolve</div><div>🛡️ /constitution</div>
+-- 
+2.47.3
+
+
+
+
+
+
+
+
+
+

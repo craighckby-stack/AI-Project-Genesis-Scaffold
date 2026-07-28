@@ -1,0 +1,23 @@
+{
+  "code": 200,
+  "data": {
+    "description": "",
+    "external": {},
+    "html": "<html><head><meta name=\"color-scheme\" content=\"light dark\"><meta charset=\"utf-8\"></head><body><pre>{\n  \"message\": \"Invalid object requested. SHA must identify a commit or a tree.\",\n  \"documentation_url\": \"https://docs.github.com/rest/git/trees#get-a-tree\",\n  \"status\": \"422\"\n}\n</pre><div class=\"json-formatter-container\"></div></body></html>",
+    "metadata": {
+      "color-scheme": "light dark"
+    },
+    "title": "",
+    "url": "https://api.github.com/repos/craighckby-stack/Test-1-/git/trees/d0fd410639",
+    "usage": {
+      "tokens": 91
+    },
+    "warning": "Target URL returned error 422: Unprocessable Entity"
+  },
+  "meta": {
+    "usage": {
+      "tokens": 91
+    }
+  },
+  "status": 20000
+}

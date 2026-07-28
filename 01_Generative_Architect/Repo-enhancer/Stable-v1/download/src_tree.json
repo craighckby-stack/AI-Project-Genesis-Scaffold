@@ -1,0 +1,19 @@
+{
+  "code": 200,
+  "data": {
+    "description": "",
+    "html": "<html><head><meta name=\"color-scheme\" content=\"light dark\"></head><body><pre style=\"word-wrap: break-word; white-space: pre-wrap;\">{\n  \"sha\": \"77f8ced49b286ae55666c5ea9e0d71156babfeff\",\n  \"url\": \"https://api.github.com/repos/craighckby-stack/Test-1-/git/trees/77f8ced49b286ae55666c5ea9e0d71156babfeff\",\n  \"tree\": [\n    {\n      \"path\": \"S08_TEMM_Efficacy_Spec.md\",\n      \"mode\": \"100644\",\n      \"type\": \"blob\",\n      \"sha\": \"3bd10290d9e94bf5c57398e1cdaeb37776a487ae\",\n      \"size\": 2708,\n      \"url\": \"https://api.github.com/repos/craighckby-stack/Test-1-/git/blobs/3bd10290d9e94bf5c57398e1cdaeb37776a487ae\"\n    }\n  ],\n  \"truncated\": false\n}\n</pre></body></html>",
+    "publishedTime": "Sat, 04 Apr 2026 10:47:54 GMT",
+    "title": "",
+    "url": "https://api.github.com/repos/craighckby-stack/Test-1-/git/trees/77f8ced49b",
+    "usage": {
+      "tokens": 255
+    }
+  },
+  "meta": {
+    "usage": {
+      "tokens": 255
+    }
+  },
+  "status": 20000
+}

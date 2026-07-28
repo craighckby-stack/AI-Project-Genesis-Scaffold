@@ -1,0 +1,19 @@
+{
+  "code": 200,
+  "data": {
+    "description": "",
+    "html": "<html><head><meta name=\"color-scheme\" content=\"light dark\"></head><body><pre style=\"word-wrap: break-word; white-space: pre-wrap;\">{\n  \"sha\": \"beb4eab1ef649cb2bd6e33ba55ec8986b2e20c13\",\n  \"url\": \"https://api.github.com/repos/craighckby-stack/Test-1-/git/trees/beb4eab1ef649cb2bd6e33ba55ec8986b2e20c13\",\n  \"tree\": [\n    {\n      \"path\": \"FIA.md\",\n      \"mode\": \"100644\",\n      \"type\": \"blob\",\n      \"sha\": \"885e23b773fe873d884fbdbef2b504b1843f5e0d\",\n      \"size\": 3996,\n      \"url\": \"https://api.github.com/repos/craighckby-stack/Test-1-/git/blobs/885e23b773fe873d884fbdbef2b504b1843f5e0d\"\n    },\n    {\n      \"path\": \"FVM.md\",\n      \"mode\": \"100644\",\n      \"type\": \"blob\",\n      \"sha\": \"3d7eaec6cc4371a2c682d3cdb58236c2da967a66\",\n      \"size\": 1452,\n      \"url\": \"https://api.github.com/repos/craighckby-stack/Test-1-/git/blobs/3d7eaec6cc4371a2c682d3cdb58236c2da967a66\"\n    }\n  ],\n  \"truncated\": false\n}\n</pre></body></html>",
+    "publishedTime": "Sat, 04 Apr 2026 10:47:54 GMT",
+    "title": "",
+    "url": "https://api.github.com/repos/craighckby-stack/Test-1-/git/trees/beb4eab1ef",
+    "usage": {
+      "tokens": 368
+    }
+  },
+  "meta": {
+    "usage": {
+      "tokens": 368
+    }
+  },
+  "status": 20000
+}

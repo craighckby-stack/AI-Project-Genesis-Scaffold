@@ -1,0 +1,13 @@
+{
+  "code": 200,
+  "data": {
+    "description": "",
+    "html": "<html><head><meta name=\"color-scheme\" content=\"light dark\"></head><body><pre style=\"word-wrap: break-word; white-space: pre-wrap;\"># EMG-AGI CONSTITUTIONAL GOVERNANCE LAYER\n### craighckby-stack/Test-1\n#### Governing Document — Sits Above All Operational READMEs\n\n---\n\n> This document supersedes all operational documentation in conflict.\n> Any evolution, milestone, or self-modification conflicting herein fails compliance.\n\n---\n\n## PURPOSE\nDocuments immutable constraints. Operational docs describe *capability*; this document defines *necessity*. Capability without constraint is the failure mode studied.\n\n---\n\n## REPOSITORY OVERVIEW (Metadata)\n| Property | Value |\n|:---|:---|\n| Repo | `craighckby-stack/Test-1` |\n| Kernel | AGI-KERNEL v7.12.1 \"RECURSIVE EVOLUTION STABLE\" |\n| Scale | 2,300+ files |\n| Langs | JS, Python, TS, Rust, Go, Solidity |\n| Arch | Triple-layer (GH + FB Tools + FB Memory) |\n| Self-Mod | Every 50 cycles |\n| Milestones | ACTIVE |\n| Cerebras Loop | 🔴 Pending Implementation |\n| Governance | ✅ This document |\n\n---\n\n## CORE PHILOSOPHY\n**Definitive proof is structurally impossible. All outputs are analytical, probabilistic, and evidence-bound.**\n\nThe constitutional layer mandates human checkpoints, specifically at cycle 500 (projected 40+ tools), preventing unchecked scaling of incomplete instructions.\n\n---\n\n## CONSTRAINTS ADDED TO OPERATIONAL DOCS\n\n### 1. Analytical-Only Constraint\n**Constraint:** Human review is mandatory before deploying any milestone introducing capabilities novel to the original design specification. Autonomous deployment halts at this boundary.\n\n### 2. Regression Guard\n**Constraint:** The capabilities defined in the REGRESSION GUARD section are mandatory specifications. Any self-modification removing them fails compliance instantly.\n\n### 3. Cerebras Dialogue Loop Dependency\n**Constraint:** Until the analytical dialogue loop (EMG-CORE + Cerebras exchange surfaced to human) is live, the human operator is the sole analytical counterpart to EMG-CORE.\n\n---\n\n## CONSTITUTIONAL ARCHITECTURE (State Flow Reference)\n
+
+
+
+
+
+
+
+

@@ -1,0 +1,18 @@
+{
+  "code": 200,
+  "data": {
+    "description": "",
+    "html": "<html><head><meta name=\"color-scheme\" content=\"light dark\"></head><body><pre style=\"word-wrap: break-word; white-space: pre-wrap;\">/**\n * BRAIN-FIREBASE-RUNTIME DNA CONTAINER\n * This file acts as the local shell for the Brain's Soul.\n * It is synced with the Firebase Realtime Database.\n */\n\nexport const BRAIN_DNA = {\n    version: \"1.0.0\",\n    // This string is the compressed binary of all your code\n    compressed_chunks: \"\", \n    // Quick lookup index for the UI\n    index: [] as string[]\n};\n</pre></body></html>",
+    "title": "",
+    "url": "https://raw.githubusercontent.com/craighckby-stack/-/main/src/brain-firebase-runtime.ts",
+    "usage": {
+      "tokens": 136
+    }
+  },
+  "meta": {
+    "usage": {
+      "tokens": 136
+    }
+  },
+  "status": 20000
+}

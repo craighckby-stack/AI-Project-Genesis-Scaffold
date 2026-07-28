@@ -1,0 +1,27 @@
+{
+  "code": 200,
+  "data": {
+    "description": "",
+    "html": "<html><head><meta name=\"color-scheme\" content=\"light dark\"></head><body><pre style=\"word-wrap: break-word; white-space: pre-wrap;\">{\n  \"sha\": \"84ed3dfcbb11fd0b321d532e3a215d1ad4fa377d\",\n  \"url\": \"https://api.github.com/repos/craighckby-stack/Test-1-/git/trees/84ed3dfcbb11fd0b321d532e3a215d1ad4fa377d\",\n  \"tree\": [\n    {\n      \"path\": \"DynamicTuner.py\",\n      \"mode\": \"100644\",\n      \"type\": \"blob\",\n      \"sha\": \"f668fe2c9c2015d8ca72723670c6bd5d686bafca\",\n      \"size\": 2067,\n      \"url\": \"https://api.github.com/repos/craighckby-stack/Test-1-/git/blobs/f668fe2c9c2015d8ca72723670c6bd5d686bafca\"\n    }\n  ],\n  \"truncated\": false\n}\n</pre></body></html>",
+    "publishedTime": "Sat, 04 Apr 2026 10:47:54 GMT",
+    "title": "",
+    "url": "https://api.github.com/repos/craighckby-stack/Test-1-/git/trees/84ed3dfcbb",
+    "usage": {
+      "tokens": 254
+    }
+  },
+  "meta": {
+    "usage": {
+      "tokens": 254
+    }
+  },
+  "status": 20000
+}
+
+
+
+
+
+
+
+

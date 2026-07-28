@@ -1,0 +1,19 @@
+{
+  "code": 200,
+  "data": {
+    "description": "",
+    "html": "<html><head><meta name=\"color-scheme\" content=\"light dark\"></head><body><pre style=\"word-wrap: break-word; white-space: pre-wrap;\">{\n  \"sha\": \"d6c0812d019e5048d8ab9fd78fc5e726e218668d\",\n  \"url\": \"https://api.github.com/repos/craighckby-stack/-/git/trees/d6c0812d019e5048d8ab9fd78fc5e726e218668d\",\n  \"tree\": [\n    {\n      \"path\": \"atm_risk_levels.json\",\n      \"mode\": \"100644\",\n      \"type\": \"blob\",\n      \"sha\": \"abafd7734802be78207a0f4f17285357701cacc5\",\n      \"size\": 549,\n      \"url\": \"https://api.github.com/repos/craighckby-stack/-/git/blobs/abafd7734802be78207a0f4f17285357701cacc5\"\n    }\n  ],\n  \"truncated\": false\n}\n</pre></body></html>",
+    "publishedTime": "Sat, 11 Apr 2026 11:41:31 GMT",
+    "title": "",
+    "url": "https://api.github.com/repos/craighckby-stack/-/git/trees/d6c0812d019e5048d8ab9fd78fc5e726e218668d",
+    "usage": {
+      "tokens": 243
+    }
+  },
+  "meta": {
+    "usage": {
+      "tokens": 243
+    }
+  },
+  "status": 20000
+}
