@@ -1,3 +1,8 @@
+🌐 Live System Preview Links
+Shared App URL: https://ais-pre-w3ohwbrlkmimctvzipumce-483535245139.asia-southeast1.run.app
+
+
+
 # Deep Thinking Lab 🧠
 
 A high-performance reasoning console and evolutionary code optimizer powered by Gemini 3.1 Pro. 
