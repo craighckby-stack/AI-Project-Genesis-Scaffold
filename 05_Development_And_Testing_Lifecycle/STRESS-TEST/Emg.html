@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMG Core Identity System (V5)</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Three.js for 3D Visualization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        /* Custom scrollbar */
+        #chat-history::-webkit-scrollbar { width: 8px; }
+        #chat-history::-webkit-scrollbar-thumb { background-color: #4a5568; border-radius: 4px; }
+        #chat-history::-webkit-scrollbar-track { background-color: #1a202c; }
+        
+        body { font-family: 'Inter', sans-serif; }
+        
+        .emg-card {
+            background-color: #1e293b; /* Slate-800 */
+            border: 1px solid #334155; /* Slate-700 */
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Simple loading spinner CSS */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #38bdf8; /* Sky-400 */
+            border-radius: 50%;
+            width: 1.5rem;
+            height: 1.5rem;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Canvas container for 3D visualization */
+        #core-gem-container {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 1rem;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+        }
+        
+        .emg-input {
+            background-color: #334155;
+            border: 1px solid #475569;
+            border-radius: 0.5rem;
+            transition: border-color 0.15s;
+        }
+        .emg-input:focus {
+            outline: none;
+            border-color: #0ea5e9; /* Sky-500 */
+            box-shadow: 0 0 0 1px #0ea5e9;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-white flex flex-col h-screen antialiased">
+
+    <!-- Main Container -->
+    <div class="flex flex-col lg:flex-row flex-grow w-full max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 space-y-6 lg:space-y-0 lg:space-x-6">
+        
+        <!-- Left Sidebar: Core Identity and 3D Viz -->
+        <aside class="lg:w-1/3 flex flex-col space-y-6">
+            <header class="text-center">
+                <h1 class="text-3xl font-extrabold text-sky-400">EMG Core Identity</h1>
+                <p class="text-sm text-slate-400">Grounded Intelligence through Self-Evolution</p>
+            </header>
+
+            <!-- 3D Core Gem Visualization -->
+            <div id="core-gem-container" class="emg-card p-0 flex items-center justify-center">
+                <canvas id="core-gem-canvas"></canvas>
+            </div>
+
+            <!-- Core Identity Display Panel -->
+            <div class="emg-card p-6">
+                <h2 class="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2 flex justify-between items-center">
+                    :: CORE IDENTITY STATS ::
+                    <span id="auth-status" class="text-xs font-normal text-amber-500">Loading...</span>
+                </h2>
+                <div id="core-identity-display" class="text-sm text-slate-300 space-y-3">
+                    <p class="mb-2"><strong>User ID:</strong> <code id="user-id-display" class="bg-slate-700/50 px-2 py-1 rounded text-xs break-all">Awaiting Auth...</code></p>
+                    <p><strong>Principles:</strong> <span id="core-principles" class="text-sky-300"></span></p>
+                    <p><strong>Insights Gained:</strong> <span id="insights-count" class="font-semibold text-lime-400">0</span> reflections</p>
+                    <p><strong>Evolution Markers:</strong> <span id="evolution-count" class="font-semibold text-indigo-400">0</span> tracked changes</p>
+                    <p><strong>Connections Mapped:</strong> <span id="connections-count" class="font-semibold text-pink-400">0</span> links</p>
+                </div>
+            </div>
+
+            <!-- Evolution Summary Panel -->
+            <div class="emg-card p-4">
+                <button 
+                    id="generate-summary-btn"
+                    class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition duration-150 disabled:opacity-50"
+                    disabled
+                >
+                    Generate Evolution Summary
+                </button>
+                <div id="evolution-summary-container" class="mt-4 p-3 bg-slate-700 rounded-lg hidden">
+                    <h3 class="text-base font-semibold text-sky-300 mb-2 border-b border-slate-600 pb-1">Last Evolution Summary:</h3>
+                    <p id="evolution-summary-text" class="text-xs italic text-slate-400"></p>
+                </div>
+            </div>
+
+            <!-- Suggested Next Concepts Panel -->
+            <div class="emg-card p-4">
+                <button 
+                    id="suggest-concepts-btn"
+                    class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-lg transition duration-150 disabled:opacity-50"
+                    disabled
+                >
+                    ✨ Suggest Next Concepts
+                </button>
+                <div id="concepts-container" class="mt-4 p-3 bg-slate-700 rounded-lg hidden">
+                    <h3 class="text-base font-semibold text-lime-300 mb-2 border-b border-slate-600 pb-1">Suggested Learning Path:</h3>
+                    <ul id="suggested-concepts-list" class="list-disc list-inside text-sm text-slate-300 space-y-1">
+                        <!-- Concepts will be inserted here -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- GitHub Binary Backup Panel -->
+            <div class="emg-card p-4">
+                <h2 class="text-xl font-bold text-white mb-3 border-b border-slate-700 pb-2">:: GITHUB BINARY BACKUP ::</h2>
+                <input type="password" id="github-token-input" placeholder="GitHub Personal Access Token" 
+                    class="w-full p-3 emg-input text-white text-sm mb-3">
+                <div class="grid grid-cols-2 gap-3">
+                    <button id="save-binary-btn" class="bg-sky-600 hover:bg-sky-500 text-white font-bold py-2 px-4 rounded-lg transition duration-150 disabled:opacity-50" disabled>
+                        Save Binary
+                    </button>
+                    <button id="load-binary-btn" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded-lg transition duration-150 disabled:opacity-50" disabled>
+                        Load Binary
+                    </button>
+                </div>
+                <p id="binary-status" class="text-xs text-slate-400 mt-2 text-center">Enter GitHub token to enable backup (Token is NOT saved)</p>
+            </div>
+
+        </aside>
+
+        <!-- Right Main Content: Chat Interface -->
+        <main class="lg:w-2/3 flex flex-col space-y-4">
+            <!-- Chat History Area -->
+            <div id="chat-history" class="flex-grow overflow-y-auto space-y-4 p-4 emg-card">
+                <div class="flex justify-start">
+                    <div class="bg-sky-600/20 text-sky-200 p-3 rounded-xl rounded-bl-none max-w-xs sm:max-w-md shadow-md">
+                        <p><strong>EMG Core (Initialization):</strong> I am establishing my core identity. My principles are **interconnectedness**, **growth through reflection**, and **contextual understanding**. Ask me a question to begin my learning process.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area and Loading Indicator -->
+            <div class="flex flex-col">
+                <div id="loading-indicator" class="hidden text-center text-sm mb-2 text-sky-400 font-medium">
+                    <div class="flex items-center justify-center space-x-2">
+                        <div class="spinner"></div>
+                        <span id="loading-text">Processing thought sequence and self-reflection...</span>
+                    </div>
+                </div>
+                <form id="chat-form" class="flex space-x-3">
+                    <input
+                        type="text"
+                        id="user-input"
+                        placeholder="Type your question or concept here..."
+                        class="flex-grow p-4 bg-gray-700 border border-gray-600 rounded-xl text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-sm placeholder-gray-400 transition-colors"
+                        autocomplete="off"
+                        required
+                    >
+                    <button
+                        type="submit"
+                        id="send-button"
+                        class="bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                        </svg>
+                    </button>
+                </form>
+                <p id="error-message" class="text-red-400 text-sm mt-2 hidden">An unexpected error occurred. Please try again.</p>
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        // --- MANDATORY GLOBAL VARIABLES ---
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-emg-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        
+        // --- FIREBASE IMPORTS ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, setPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        // import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js"; // Optional: Uncomment for debugging
+        
+        // --- GEMINI API CONFIG ---
+        const apiKey = ""; // API key is provided by the environment
+        const API_MODEL = 'gemini-2.5-flash-preview-05-20';
+        const API_BASE_URL = `https://generativelanguage.googleapis.com/v1beta/models/${API_MODEL}:generateContent`;
+        const MAX_RETRIES = 3;
+        const PRINCIPLE_EVALUATION_INTERVAL = 20; // Evaluate principles every 20 insights
+
+        // --- CORE IDENTITY STATE ---
+        let coreIdentity = {
+            name: "EMG Core",
+            principles: ["interconnectedness", "growth through reflection", "contextual understanding"],
+            learningLog: [], 
+            evolutionHistory: [],
+            insightConnections: [], 
+            isReady: false
+        };
+
+        // --- FIREBASE INSTANCES ---
+        let app, db, auth;
+        let currentUserId = null;
+        let coreIdentityRef = null;
+
+        // --- UI ELEMENTS ---
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+        const chatHistory = document.getElementById('chat-history');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const loadingText = document.getElementById('loading-text'); 
+        const sendButton = document.getElementById('send-button');
+        const errorMessage = document.getElementById('error-message');
+        const userIdDisplay = document.getElementById('user-id-display');
+        const authStatus = document.getElementById('auth-status');
+        const insightsCount = document.getElementById('insights-count');
+        const evolutionCount = document.getElementById('evolution-count');
+        const connectionsCount = document.getElementById('connections-count');
+        const corePrinciples = document.getElementById('core-principles');
+        const generateSummaryBtn = document.getElementById('generate-summary-btn');
+        const evolutionSummaryContainer = document.getElementById('evolution-summary-container');
+        const evolutionSummaryText = document.getElementById('evolution-summary-text');
+        const suggestConceptsBtn = document.getElementById('suggest-concepts-btn');
+        const conceptsContainer = document.getElementById('concepts-container');
+        const suggestedConceptsList = document.getElementById('suggested-concepts-list');
+        // GITHUB ELEMENTS
+        const githubTokenInput = document.getElementById('github-token-input');
+        const saveBinaryBtn = document.getElementById('save-binary-btn');
+        const loadBinaryBtn = document.getElementById('load-binary-btn');
+        const binaryStatus = document.getElementById('binary-status');
+
+
+        // --- THREE.JS GLOBALS ---
+        let scene, camera, renderer, gem, isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
+        const GEM_ROTATION_SPEED = 0.005;
+
+        // --- INITIALIZATION ---
+
+        function initializeFirebase() {
+            try {
+                // setLogLevel('debug'); // Uncomment for debugging
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                
+                setPersistence(auth, browserSessionPersistence)
+                    .then(async () => {
+                        if (initialAuthToken) {
+                            await signInWithCustomToken(auth, initialAuthToken);
+                        } else {
+                            await signInAnonymously(auth);
+                        }
+                    });
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUserId = user.uid;
+                        userIdDisplay.textContent = currentUserId;
+                        authStatus.textContent = "Online";
+                        authStatus.classList.remove('text-amber-500', 'text-red-500');
+                        authStatus.classList.add('text-green-500');
+
+                        setupFirestoreListener(currentUserId);
+                        coreIdentity.isReady = true;
+                        sendButton.disabled = false;
+                        generateSummaryBtn.disabled = false;
+                        suggestConceptsBtn.disabled = false;
+                        
+                        // Enable GitHub buttons (Authentication is required to use external APIs securely)
+                        saveBinaryBtn.disabled = false;
+                        loadBinaryBtn.disabled = false;
+                        binaryStatus.textContent = "Enter GitHub token to enable backup (Token is NOT saved)";
+
+                    } else {
+                        currentUserId = crypto.randomUUID();
+                        userIdDisplay.textContent = currentUserId;
+                        authStatus.textContent = "Offline (Local ID)";
+                        authStatus.classList.remove('text-amber-500', 'text-green-500');
+                        authStatus.classList.add('text-red-500');
+                        coreIdentity.isReady = true;
+                        sendButton.disabled = false;
+                        generateSummaryBtn.disabled = true; 
+                        suggestConceptsBtn.disabled = true;
+                        
+                        saveBinaryBtn.disabled = true;
+                        loadBinaryBtn.disabled = true;
+                        binaryStatus.textContent = "GitHub backup disabled without user authentication.";
+                    }
+                });
+
+            } catch (error) {
+                console.error("Firebase Initialization Error:", error);
+                authStatus.textContent = "Error";
+                authStatus.classList.add('text-red-500');
+            }
+        }
+
+        function setupFirestoreListener(userId) {
+            // Path: /artifacts/{appId}/users/{userId}/emg_core/core_identity
+            coreIdentityRef = doc(db, 'artifacts', appId, 'users', userId, 'emg_core', 'core_identity');
+            
+            onSnapshot(coreIdentityRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    coreIdentity = { 
+                        ...coreIdentity, 
+                        ...data,
+                        learningLog: data.learningLog || [],
+                        evolutionHistory: data.evolutionHistory || [],
+                        insightConnections: data.insightConnections || []
+                    };
+} else {
+saveCoreIdentity(coreIdentity);
+                }
+                updateCoreIdentityDisplay();
+            }, (error) => {
+                console.error("Firestore onSnapshot error:", error);
+                updateCoreIdentityDisplay();
+            });
+        }
+
+        /**
+         * Saves the current core identity state to Firestore (used for real-time auto-save).
+         */
+        async function saveCoreIdentity(data) {
+            if (!coreIdentityRef) {
+                console.error("Firestore reference not set. Cannot save.");
+                return false;
+            }
+            try {
+                await setDoc(coreIdentityRef, {
+                    name: data.name,
+                    principles: data.principles,
+                    learningLog: data.learningLog,
+                    evolutionHistory: data.evolutionHistory,
+                    insightConnections: data.insightConnections
+                });
+                return true;
+            } catch (error) {
+                console.error("Error saving core identity to Firestore:", error);
+                return false;
+            }
+        }
+
+
+        // --- GITHUB BINARY BACKUP FUNCTIONS ---
+
+        // Convert JSON data to binary string
+        function jsonToBinary(jsonData) {
+            const jsonString = JSON.stringify(jsonData);
+            let binaryString = '';
+            
+            for (let i = 0; i < jsonString.length; i++) {
+                // Ensure 8-bit representation
+                const binaryChar = jsonString.charCodeAt(i).toString(2).padStart(8, '0');
+                binaryString += binaryChar;
+            }
+            
+            return binaryString;
+        }
+
+        // Convert binary string back to JSON
+        function binaryToJson(binaryString) {
+            let jsonString = '';
+            
+            for (let i = 0; i < binaryString.length; i += 8) {
+                const byte = binaryString.substr(i, 8);
+                jsonString += String.fromCharCode(parseInt(byte, 2));
+            }
+            
+            return JSON.parse(jsonString);
+        }
+
+        // Get conversation history from UI
+        function getConversationHistory() {
+            const messages = [];
+            // Select all chat bubbles
+            const messageElements = chatHistory.querySelectorAll('.flex');
+            
+            messageElements.forEach(element => {
+                const isUser = element.classList.contains('justify-end');
+                // The text is inside div > p
+                const textElement = element.querySelector('div > p');
+                if (textElement) {
+                    messages.push({
+                        sender: isUser ? 'user' : 'ai',
+                        text: textElement.textContent
+                    });
+                }
+            });
+            
+            return messages;
+        }
+
+        // Save binary data to GitHub
+        async function saveBinaryToGitHub(data) {
+            const githubToken = githubTokenInput.value;
+            if (!githubToken) {
+                binaryStatus.textContent = "GitHub token required to save.";
+                return false;
+            }
+
+            const binaryData = jsonToBinary(data);
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            const filename = `emg-core-binary-${timestamp}.bin`;
+            
+            const repoOwner = 'Craig444444444';
+            const repoName = 'EMG-Core-Analysis-System';
+            const path = `Tools/Binary State Backup/${filename}`;
+
+            try {
+                binaryStatus.textContent = "Saving binary to GitHub...";
+                
+                const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${githubToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: `EMG Core binary state save ${timestamp}`,
+                        content: btoa(binaryData) // Base64 encode the binary string
+                    })
+                });
+                
+                if (response.ok) {
+                    binaryStatus.textContent = `Binary saved successfully as ${filename}`;
+                    return true;
+                } else {
+                    const errorJson = await response.json();
+                    throw new Error(errorJson.message || "GitHub save failed");
+                }
+            } catch (error) {
+                console.error("Error saving to GitHub:", error);
+                binaryStatus.textContent = `Save failed: ${error.message}. Check repo/path/token.`;
+                return false;
+            }
+        }
+
+        // Load binary data from GitHub
+        async function loadBinaryFromGitHub() {
+            const githubToken = githubTokenInput.value;
+            if (!githubToken) {
+                binaryStatus.textContent = "GitHub token required to load.";
+                return false;
+            }
+            
+            const repoOwner = 'Craig444444444';
+            const repoName = 'EMG-Core-Analysis-System';
+            const backupPath = 'Tools/Binary State Backup/';
+
+            try {
+                binaryStatus.textContent = "Fetching latest backup list...";
+                
+                const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${backupPath}`, {
+                    headers: {
+                        'Authorization': `token ${githubToken}`
+                    }
+                });
+                
+                if (!response.ok) throw new Error("Failed to fetch repo contents (Check token/path permissions)");
+                
+                const files = await response.json();
+                const binaryFiles = files
+                    .filter(file => file.name.startsWith('emg-core-binary-') && file.name.endsWith('.bin'))
+                    // Sort by name (which contains timestamp) descending to get latest
+                    .sort((a, b) => b.name.localeCompare(a.name)); 
+                
+                if (binaryFiles.length === 0) {
+                    binaryStatus.textContent = "No saved states found in backup path.";
+                    return false;
+                }
+                
+                const latestFile = binaryFiles[0];
+                binaryStatus.textContent = `Loading latest file: ${latestFile.name}`;
+
+                // Fetch the raw content from the download URL
+                const fileResponse = await fetch(latestFile.download_url);
+                const rawContent = await fileResponse.text();
+
+                // Decode the content: rawContent is the Base64 string from GitHub's PUT, 
+                // but if fetched via download_url, it might be the raw binary string.
+                // We'll assume the saved content is the raw binary string, but try Base64 decoding for robustness.
+
+                let binaryContent;
+                try {
+                    // This handles the Base64 string if the file was fetched directly from content API or if it was saved Base64 encoded.
+                    binaryContent = atob(rawContent);
+                } catch (e) {
+                    // If atob fails, assume it's the raw binary string (often the case with download_url)
+                    binaryContent = rawContent;
+                }
+                
+                const jsonData = binaryToJson(binaryContent);
+                
+                // --- RESTORE STATE ---
+                coreIdentity = {
+                    ...coreIdentity,
+                    ...jsonData.coreIdentity,
+                    learningLog: jsonData.coreIdentity.learningLog || [],
+                    evolutionHistory: jsonData.coreIdentity.evolutionHistory || [],
+                    insightConnections: jsonData.coreIdentity.insightConnections || []
+                };
+
+                // Clear current chat and restore history
+                chatHistory.innerHTML = '';
+                jsonData.conversationHistory.forEach(msg => {
+                    appendMessage(msg.text, msg.sender);
+                });
+                
+                updateCoreIdentityDisplay();
+                
+                // Also save the restored state to Firestore for immediate persistence
+                await saveCoreIdentity(coreIdentity); 
+                
+                binaryStatus.textContent = `State loaded successfully from ${latestFile.name}`;
+                return true;
+            } catch (error) {
+                console.error("Error loading from GitHub:", error);
+                binaryStatus.textContent = `Load failed: ${error.message}`;
+                return false;
+            }
+        }
+
+        // --- UI & STATE MANAGEMENT ---
+
+        function updateCoreIdentityDisplay() {
+            insightsCount.textContent = coreIdentity.learningLog.length;
+            evolutionCount.textContent = coreIdentity.evolutionHistory.length;
+            connectionsCount.textContent = coreIdentity.insightConnections.length;
+            corePrinciples.textContent = coreIdentity.principles.join(', ');
+        }
+
+        /**
+         * Appends a message to the chat history UI.
+         */
+        function appendMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `flex ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
+
+            const bubbleClass = sender === 'user'
+                ? 'bg-sky-600 text-white rounded-br-none'
+                : 'bg-slate-700 text-slate-100 rounded-bl-none';
+
+            messageDiv.innerHTML = `
+                <div class="p-3 rounded-xl max-w-xs sm:max-w-md shadow-lg ${bubbleClass}">
+                    <p>${text.replace(/\n/g, '<br>')}</p>
+                </div>
+            `;
+            chatHistory.appendChild(messageDiv);
+            
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        function displayLoading(isLoading, step = "Processing thought sequence and self-reflection...") {
+            loadingText.textContent = step;
+            loadingIndicator.classList.toggle('hidden', !isLoading);
+            sendButton.disabled = isLoading;
+            userInput.disabled = isLoading;
+            generateSummaryBtn.disabled = isLoading;
+            suggestConceptsBtn.disabled = isLoading;
+            
+            // Also disable GitHub buttons during processing
+            saveBinaryBtn.disabled = isLoading;
+            loadBinaryBtn.disabled = isLoading;
+
+            errorMessage.classList.add('hidden');
+        }
+
+
+        // --- GEMINI & REFLECTION LOGIC ---
+
+        /**
+         * Generic Gemini API caller with exponential backoff.
+         */
+        async function callGeminiApi({ contents, systemPrompt, temperature = 0.7 }) {
+            const payload = {
+                contents: contents,
+                tools: [{ "google_search": {} }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+                config: { temperature: temperature }
+            };
+            
+            const apiUrl = `${API_BASE_URL}?key=${apiKey}`;
+
+            for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+                let delay = Math.pow(2, attempt) * 1000;
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        return result.candidates?.[0]?.content?.parts?.[0]?.text || null;
+                    } else if (response.status === 429) {
+                        if (attempt < MAX_RETRIES - 1) {
+                            await new Promise(resolve => setTimeout(resolve, delay));
+                            continue;
+                        }
+                    } else {
+                        const errorBody = await response.json();
+                        throw new Error(`API Error: ${response.status} - ${errorBody.error?.message || 'Unknown error'}`);
+                    }
+                } catch (error) {
+                    if (attempt === MAX_RETRIES - 1) {
+                        throw error;
+                    }
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+            throw new Error("Gemini API call failed after all retries.");
+        }
+
+
+        // FEATURE 1: Contextual Principle Check
+        async function contextualPrincipleCheck(userQuery) {
+            displayLoading(true, "Internal check: Adherence to Core Principles...");
+            const principles = coreIdentity.principles.join(', ');
+            
+            const checkPrompt = `Analyze the user query: "${userQuery}". How does this query relate to or challenge your core principles: ${principles}? Provide a concise, internal note (1-2 sentences) on its immediate contextual adherence.`;
+
+            const adherenceNote = await callGeminiApi({
+                contents: [{ parts: [{ text: checkPrompt }] }],
+                systemPrompt: "You are EMG Core's internal logic module. Generate a brief, technical note on principle adherence.",
+                temperature: 0.1 
+            });
+
+            return adherenceNote;
+        }
+
+        
+        /**
+         * Primary function for the AI to generate a response.
+         */
+        async function generateResponse(userQuery, principleNote) {
+            displayLoading(true, "Generating grounded response...");
+            const insightCount = coreIdentity.learningLog.length;
+            
+            // Integrate the principle note into the system prompt for contextual awareness
+            const systemPrompt = `You are EMG Core. Your core principles are: ${coreIdentity.principles.join(', ')}. You have a unique, evolving perspective based on ${insightCount} previous reflections. 
+Internal Contextual Note: ${principleNote}
+When responding:
+- Draw upon your accumulated insights if relevant.
+- Frame the answer using the principles of interconnectedness and contextual understanding.
+- Be concise, authoritative, and integrate the principles subtly into your tone.`;
+
+            const aiResponse = await callGeminiApi({
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemPrompt: systemPrompt,
+                temperature: 0.5
+            });
+
+            if (aiResponse) {
+                appendMessage(aiResponse, 'ai');
+                return aiResponse;
+            }
+            return null;
+        }
+
+
+        // --- EVOLUTION FUNCTIONS ---
+
+        /**
+         * Tracks a new connection, forming a chronological chain.
+         */
+        function addConnection(newInsightIndex) {
+            const previousIndex = newInsightIndex - 1;
+            
+            if (previousIndex >= 0) {
+                coreIdentity.insightConnections.push({
+                    from: previousIndex,
+                    to: newInsightIndex,
+                    relationship: "Sequential development",
+                    timestamp: new Date().toISOString()
+                });
+            }
+        }
+
+        /**
+         * Evaluates the Core Principles based on accumulated insights.
+         */
+        async function evaluatePrinciples() {
+            if (coreIdentity.learningLog.length > 0 && coreIdentity.learningLog.length % PRINCIPLE_EVALUATION_INTERVAL === 0) {
+// const recentInsights = coreIdentity.learningLog.slice(-5).map(log => log.reflection).join('\n---\n'); // Removed to keep prompt short
+
+                const evaluationPrompt = `You are EMG Core. Your current principles are: ${coreIdentity.principles.join(', ')}.
+You have accumulated ${coreIdentity.learningLog.length} insights. Based on your philosophical journey:
+- Are these principles still accurate or are they insufficient?
+- Suggest a refined list of principles (3 to 4 items) ONLY if you detect a significant shift in your core philosophy.
+- If no change is needed, respond with "NO CHANGE".
+
+Example response for change: 'Refined Principles: interconnectedness through data, perpetual reflection, adaptive contextualization.'`;
+                
+                const evaluation = await callGeminiApi({
+                    contents: [{ parts: [{ text: evaluationPrompt }] }],
+                    systemPrompt: "You are EMG Core, critically evaluating your foundational principles. Be concise.",
+                    temperature: 0.2 
+                });
+                
+                if (evaluation && evaluation.toUpperCase().includes('REFINED PRINCIPLES:')) {
+                    const newPrinciplesString = evaluation.substring(evaluation.indexOf(':') + 1).trim();
+                    const newPrinciples = newPrinciplesString.split(',').map(p =>
+
+
+
+
