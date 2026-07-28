@@ -248,7 +248,7 @@ from autonomous_engine import AutonomousEngineWithMemory
 
 # Initialize
 config = Config()
-api_key = "your-gemini-api-key"
+api_key='<REDACTED_SECRET>'
 engine = AutonomousEngineWithMemory(config, api_key)
 
 # Run for 100 cycles

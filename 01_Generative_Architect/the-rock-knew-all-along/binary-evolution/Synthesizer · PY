@@ -6,7 +6,7 @@ from docx import Document
 from fpdf import FPDF
 
 # ── CONFIG ───────────────────────────────────────────────────
-API_KEY = "YOUR_ANTHROPIC_API_KEY_HERE"  # console.anthropic.com
+API_KEY='<REDACTED_SECRET>'  # console.anthropic.com
 MODEL   = "claude-sonnet-4-20250514"
 client  = anthropic.Anthropic(api_key=API_KEY)
 

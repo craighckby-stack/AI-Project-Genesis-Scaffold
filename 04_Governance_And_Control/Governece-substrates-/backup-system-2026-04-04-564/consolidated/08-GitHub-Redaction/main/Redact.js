@@ -216,7 +216,7 @@ export default main;
 
 // example usage:
 main({
-  token: 'your-github-token',
+  token='<REDACTED_SECRET>',
   owner: 'your-github-username',
   repo: 'your-repo-name',
   redactions: ['term1', 'term2'],

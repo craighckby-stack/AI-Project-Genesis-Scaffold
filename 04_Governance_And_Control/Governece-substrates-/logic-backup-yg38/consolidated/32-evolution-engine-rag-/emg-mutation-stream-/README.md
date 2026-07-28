@@ -126,10 +126,10 @@ Vector DB service runs on: `Port 3003`
 DATABASE_URL="file:./db/dev.db"
 
 # GitHub (optional - for features)
-GITHUB_TOKEN="your_github_token_here"
+GITHUB_TOKEN='<REDACTED_SECRET>'
 
 # OpenAI (optional - for embeddings)
-OPENAI_API_KEY="your_openai_key_here"
+OPENAI_API_KEY='<REDACTED_SECRET>'
 ```
 
 ---

@@ -122,7 +122,7 @@ if __name__ == "__main__":
         return "pipeline.py"
 
 
-def run_mission(recipient: str = "craighckby@gmail.com"):
+def run_mission(recipient: str = "<REDACTED_EMAIL>"):
     """
     Main function to execute the file generation mission and send the report.
     Outputs artifacts to a temporary directory.

@@ -195,7 +195,7 @@ if __name__ == "__main__":
     
     print("\n--- 1. Strategic Planning and Email Building ---")
     sped = SPED()
-    email = InventionEmailBuilder("craighckby@gmail.com")
+    email = InventionEmailBuilder("<REDACTED_EMAIL>")
     email.message['Subject'] = "Secure AI Innovation Framework v2.1 (Confidential)"
     
     # Note: Use self.set_sender for better encapsulation

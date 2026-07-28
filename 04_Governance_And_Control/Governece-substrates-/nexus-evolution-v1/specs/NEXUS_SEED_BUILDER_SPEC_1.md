@@ -1231,10 +1231,10 @@ model CodeExecution {
 ```bash
 # Create .env.local in project root
 DATABASE_URL="file:./dev.db"
-GITHUB_TOKEN="ghp_your_token_here"
-CEREBRAS_API_KEY="csk-your-key-here"
-GROK_API_KEY="xai-your-key-here"
-GEMINI_API_KEY="AIza-your-key-here"
+GITHUB_TOKEN='<REDACTED_SECRET>'
+CEREBRAS_API_KEY='<REDACTED_SECRET>'
+GROK_API_KEY='<REDACTED_SECRET>'
+GEMINI_API_KEY='<REDACTED_SECRET>'
 ```
 
 ### Step 2 — Place files

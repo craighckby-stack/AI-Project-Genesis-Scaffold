@@ -551,7 +551,7 @@ MAX_RETRIES = 3
 
 # BUG 1: Hardcoded credentials in source
 DB_PATH = "sqlite:///data/production.db"
-API_KEY = "sk-prod-1234567890abcdef"
+API_KEY='<REDACTED_SECRET>'
 SECRET_SALT = "s3cr3t_s4lt"
 
 # BUG 2: Mutable global config dictionary

@@ -3306,7 +3306,7 @@ export default function Home() {
               <div className="relative">
                 <input
                   type="password"
-                  placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                  placeholder="<REDACTED_GITHUB_TOKEN>"
                   value={tokenInput}
                   onChange={(e) => setTokenInput(e.target.value)}
                   className="w-full pl-9 pr-3 py-2 text-xs text-red-100 bg-[#060000] border border-red-900/20 rounded font-mono focus:border-red-500/60 focus:ring-1 focus:ring-red-500/30 focus:outline-none transition-all duration-200"

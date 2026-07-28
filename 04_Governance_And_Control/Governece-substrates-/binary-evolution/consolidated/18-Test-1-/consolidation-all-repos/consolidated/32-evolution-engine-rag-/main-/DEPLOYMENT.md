@@ -86,8 +86,8 @@ Set environment variables (if applicable):
 DATABASE_URL="file:./db/dev.db"
 
 # Optional Services
-GITHUB_TOKEN="your_github_token_here"
-OPENAI_API_KEY="your_openai_key_here"
+GITHUB_TOKEN='<REDACTED_SECRET>'
+OPENAI_API_KEY='<REDACTED_SECRET>'
 ```
 
 #### Setup and Execution

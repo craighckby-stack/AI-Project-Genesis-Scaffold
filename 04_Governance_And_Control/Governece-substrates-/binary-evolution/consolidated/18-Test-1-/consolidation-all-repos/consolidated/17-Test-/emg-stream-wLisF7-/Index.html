@@ -388,7 +388,7 @@
         const CONFIG = {
             FB: JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}'),
             APP_ID: typeof __app_id !== 'undefined' ? __app_id : 'dk-evolution-v11',
-            GEMINI_KEY: typeof __gemini_api_key !== 'undefined' ? __gemini_api_key : 'PLACEHOLDER_GEMINI_KEY', 
+            GEMINI_KEY: typeof __gemini_api_key !== 'undefined' ? __gemini_api_key='<REDACTED_SECRET>', 
             GEMINI_ENDPOINT: "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
             MAX_FILES_INGEST: 5,
             BRANCH_NAME: 'dk-enhancer'

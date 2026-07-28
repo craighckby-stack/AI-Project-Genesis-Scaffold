@@ -2,7 +2,7 @@
   "$schema": "https://firebase.google.com/v1/rest/config",
   "projectId": "gen-lang-client-0828250115",
   "firebaseConfig": {
-    "apiKey": "AIzaSyBTPwg3j0DImBmFU2a5kiUZPj5vPE8ycE0",
+    "apiKey": "<REDACTED_GOOGLE_API_KEY>",
     "databaseURL": "https://ai-studio-d4c48f23-13c3-49c8-aabb-e38166ab1d70.firebaseio.com",
     "storageBucket": "gen-lang-client-0828250115.appspot.com",
     "messagingSenderId": "898613522185",

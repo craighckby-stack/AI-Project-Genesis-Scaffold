@@ -393,7 +393,7 @@ def initialize_system():
     """Simulates the application startup sequence."""
     if not app_state.state['isAcknowledged']:
         context.dispatch({'type': ActionType.ACKNOWLEDGE})
-        context.gh_token = "mock_gh_token_123"
+        context.gh_token='<REDACTED_SECRET>'
         context.gemini_key = "mock_gemini_key_456"
         
         if not app_state.state['isAcknowledged']:

@@ -8,7 +8,7 @@ from fpdf import FPDF
 
 # ── CONFIG ───────────────────────────────────────────────────
 # Free API key from: aistudio.google.com
-API_KEY = "YOUR_GEMINI_API_KEY_HERE"
+API_KEY='<REDACTED_SECRET>'
 MODEL   = "gemini-2.0-flash"  # free tier, fast, generous limits
 
 genai.configure(api_key=API_KEY)

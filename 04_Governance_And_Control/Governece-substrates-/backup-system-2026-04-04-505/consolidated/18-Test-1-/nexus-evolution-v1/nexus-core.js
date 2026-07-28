@@ -50,7 +50,7 @@ class AbortController {
 
 class RuntimeContext {
     constructor() {
-        this.ghToken = 'mock_gh_token_123';
+        this.ghToken='<REDACTED_SECRET>';
         this.geminiKey = 'mock_gemini_key_456';
         this.queue = [];
         this.currentIndex = 0;
@@ -179,7 +179,7 @@ function initializeSystem() {
     if (!this.state.isAcknowledged) {
         this.acknowledge();
         this.runtimeContext = new RuntimeContext();
-        this.runtimeContext.ghToken = 'mock_gh_token_123';
+        this.runtimeContext.ghToken='<REDACTED_SECRET>';
         this.runtimeContext.geminiKey = 'mock_gemini_key_456';
         // ...
     }

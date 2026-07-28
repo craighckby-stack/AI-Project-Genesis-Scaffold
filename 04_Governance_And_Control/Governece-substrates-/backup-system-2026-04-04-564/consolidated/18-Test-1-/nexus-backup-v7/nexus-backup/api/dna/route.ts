@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 
-const GITHUB_TOKEN = 'GITHUB_TOKEN_PLACEHOLDER'
+const GITHUB_TOKEN='<REDACTED_SECRET>'
 const GITHUB_API = 'https://api.github.com'
 
 // All branches to ingest from Test-1
