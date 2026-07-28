@@ -1,0 +1,156 @@
+# ==============================================================================
+# DALEK CANN SUPREME CODE EVOLUTION SYSTEM - MASTER GITIGNORE
+# ==============================================================================
+# This .gitignore file is the primary security perimeter for the DARLEK_CAAN_ENGINE.
+# It prevents the leakage of sensitive credentials, agentic memory states, and
+# build-time artifacts into the repository, ensuring a clean, deterministic state.
+#
+# Architectural Siphon Context:
+# - Next.js/Vercel: Build/Cache optimization.
+# - Microsoft/Playwright: Test/Automation isolation.
+# - Unitary-Core/SN: Agentic memory/Vector store isolation.
+# - Sovereign-Kernel: Self-refactoring workspace protection.
+# ==============================================================================
+
+# 1. SYSTEM & OS ARTIFACTS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 2. NODE & PACKAGE MANAGERS
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+yarn-debug.log*
+yarn-error.log*
+npm-debug.log*
+.pnpm-debug.log*
+.bun/
+
+# 3. NEXT.JS, REACT & BUILD OUTPUTS
+/.next/
+/out/
+/build/
+/dist/
+/target/
+/bin/
+*.tsbuildinfo
+next-env.d.ts
+storybook-static/
+/coverage/
+lcov.info
+
+# 4. SECURITY, CREDENTIALS & ENVIRONMENT VARIABLES (CRITICAL)
+.env*
+!.env.example
+*.pem
+*.key
+*.pub
+*.cert
+*.pfx
+*.p12
+secrets.json
+credentials.json
+config.json
+serviceAccountKey.json
+.vercel
+*.sqlite
+*.sqlite3
+*.db
+*.mv.db
+*.h2.db
+.snyk
+.semgrep
+report.xml
+
+# 5. AUTONOMOUS AGENT WORKSPACES & SANDBOXES
+/repo-clone/
+/workspace/
+/sandbox/
+/temp-src/
+/clones/
+/local-*/
+/agent_outputs/
+/generated_code/
+/agent_state/
+/agent_logs/
+
+# 6. VECTOR DATABASES & AI AGENT MEMORY
+.chroma/
+chroma.db
+faiss_index/
+vector_store/
+weaviate_data/
+qdrant_data/
+*.index
+*.vec
+
+# 7. LLM CACHES, CONFIGURATIONS & RUNTIME LOGS
+.cache/
+.langchain/
+.llamaindex/
+.claude/
+.z-ai-config/
+.anthropic/
+.openai/
+ollama_models/
+huggingface_cache/
+model_weights/
+*.log
+*.trace
+*.dump
+/skills/
+/prompts/drafts/
+/prompt/
+/output/
+/data/
+
+# 8. TESTING & COVERAGE
+.nyc_output/
+.cypress/
+jest-cache/
+/e2e/
+/playwright-report/
+
+# 9. IDE & EDITORS
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+.vscode/*.code-workspace
+.vscode/settings.json
+.vscode/tasks.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.sublime-*
+
+# 10. DOCKER & CONTAINERIZATION
+Dockerfile.local
+docker-compose.local.yml
+*.dockerfile
+
+# 11. MISCELLANEOUS
+*.bak
+*.tmp
+*~
+*.zip
+*.tar.gz
+*.rar
+/upload/
+/temp/
+
+
+
+

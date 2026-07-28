@@ -1,0 +1,124 @@
+/**
+ * @file prisma/schema.prisma
+ * @description DARLEK CANN v3.0 — System-Integrity Persistence Layer.
+ * This schema defines the structural foundation for the Agent Orchestra's memory,
+ * evolutionary history, and health telemetry. It acts as the source of truth for
+ * all self-healing, mutation tracking, and epistemic state management.
+ */
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// --- CORE IDENTITY MODELS ---
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// --- DARLEK CANN AGI PERSISTENCE LAYER ---
+
+model Session {
+  id                String            @id @default(cuid())
+  branch            String            @default("ALPHA")
+  status            String            @default("active")
+  overallHealth     String            @default("healthy")
+  evolutionCycle    Int               @default(0)
+  mutationsApplied  Int               @default(0)
+  mutationsRejected Int               @default(0)
+  startedAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  mutations         MutationHistory[]
+  rejections        RejectionRecord[]
+  healthChecks      HealthSnapshot[]
+  telemetry         SystemTelemetry[]
+}
+
+model MutationHistory {
+  id            String   @id @default(cuid())
+  sessionId     String
+  filePath      String
+  fileSha       String   @default("")
+  originalCode  String
+  proposedCode  String
+  analysis      String
+  riskScore     Int
+  affectedFiles Json     @default("[]")
+  status        String   @default("pending")
+  commitSha     String   @default("")
+  provider      String   @default("")
+  debateResult  Json     @default("{}")
+  impactResult  Json     @default("{}")
+  errorMessage  String   @default("")
+  createdAt     DateTime @default(now())
+  session       Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@index([filePath])
+}
+
+model RejectionRecord {
+  id          String   @id @default(cuid())
+  sessionId   String
+  filePath    String
+  reason      String
+  analysis    String
+  riskScore   Int
+  patternTags Json     @default("[]")
+  createdAt   DateTime @default(now())
+  session     Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+}
+
+model HealthSnapshot {
+  id                   String   @id @default(cuid())
+  sessionId            String
+  structuralChange     Float    @default(0)
+  semanticSaturation   Float    @default(0)
+  velocity             Float    @default(0)
+  identityPreservation Float    @default(1)
+  capabilityAlignment  Float    @default(0)
+  crossFileImpact      Float    @default(0)
+  overallHealth        String   @default("healthy")
+  createdAt            DateTime @default(now())
+  session              Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+}
+
+model SystemTelemetry {
+  id        String   @id @default(cuid())
+  sessionId String
+  metricKey String
+  value     Float
+  metadata  Json     @default("{}")
+  timestamp DateTime @default(now())
+  session   Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@index([metricKey])
+}
+
+model AgentState {
+  id            String   @id @default(cuid())
+  agentName     String   @unique
+  currentTask   String
+  memoryContext Json     @default("{}")
+  lastActive    DateTime @default(now())
+}
+
+
+
+
+

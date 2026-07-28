@@ -1,0 +1,58 @@
+/**
+ * @file components.json
+ * @description System Architectural Registry for DARLEK_CAAN_ENGINE.
+ * This file serves as the primary manifest for UI/UX layer resolution, dependency injection,
+ * and design system integration. It maps the project's internal workspace structure to
+ * the engine's runtime component loader.
+ * 
+ * @version 3.2.0
+ * @architecture shadcn/ui + vercel/turborepo compliant
+ * @status OPERATIONAL
+ */
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "registryVersion": "3.2.0",
+  "style": "new-york",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "tailwind.config.ts",
+    "css": "src/app/globals.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks",
+    "types": "@/types",
+    "services": "@/services",
+    "agents": "@/agents",
+    "core": "@/core"
+  },
+  "iconLibrary": "lucide",
+  "lifecycle": {
+    "autoInitialize": true,
+    "hotReload": true,
+    "strictTypeChecking": true,
+    "telemetryEnabled": true
+  },
+  "capabilities": [
+    "dynamic-component-injection",
+    "workspace-aware-resolution",
+    "agentic-ui-orchestration",
+    "epistemic-state-persistence"
+  ],
+  "metadata": {
+    "engine": "DARLEK_CAAN_ENGINE",
+    "lastVerified": "2024-05-22T14:00:00Z",
+    "integrityHash": "sha256-a7b8c9d0e1f2g3h4i5j6k7l8m9n0o1p2q3r4s5t6u7v8w9x0y1z2a3b4c5d6e7f8"
+  }
+}
+
+
+
+

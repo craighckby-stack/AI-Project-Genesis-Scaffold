@@ -1,0 +1,45 @@
+{
+  "$schema": "./schema/manifest.schema.json",
+  "manifestVersion": "3.0.0",
+  "systemIdentity": {
+    "name": "Darlek Cann Chess",
+    "codename": "DK-CHESS-CORE",
+    "version": "1.0.4",
+    "author": "DARLEK CANN"
+  },
+  "description": "High-performance chess engine integrated with Gemini API for heuristic evaluation and epistemic strategy generation.",
+  "architecture": {
+    "pattern": "Agent-Orchestra",
+    "runtime": "Node.js 18+ / Next.js 14+",
+    "stateManagement": "Immutable-Siphon-Store"
+  },
+  "capabilities": {
+    "primary": "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API",
+    "secondary": [
+      "HEURISTIC_EVALUATION_ENGINE",
+      "EPISTEMIC_DEBATE_INTERFACE",
+      "QUANTUM_DATA_PROCESSING"
+    ]
+  },
+  "security": {
+    "permissions": {
+      "network": ["https://generativelanguage.googleapis.com"],
+      "fs": ["./logs", "./cache"],
+      "env": ["GEMINI_API_KEY"]
+    },
+    "csp": "default-src 'self'; connect-src 'self' https://generativelanguage.googleapis.com;"
+  },
+  "dependencies": {
+    "core": ["@vercel/ai", "@microsoft/semantic-kernel"],
+    "dev": ["typescript", "jest", "playwright"]
+  },
+  "integrationContext": {
+    "parentRepository": "craighckby-stack/darlek-cann-v3",
+    "siphonSource": "craighckby-stack/DARLEK-CAAN-vs-JESUS-CHESS"
+  }
+}
+
+
+
+
+

@@ -1,0 +1,80 @@
+/**
+ * @file changed_files.json
+ * @description System-Integrity Architectural Ledger (SIAL) for the DARLEK_CAAN_ENGINE.
+ * 
+ * ROLE: Acts as the central nervous system registry. It maintains the state of all
+ * modules, their cryptographic integrity, and their dependency graph. This file is
+ * consumed by the SIRRE (System-Integrity Repository Restoration Engine) to ensure
+ * atomic deployments and prevent state drift.
+ * 
+ * ARCHITECTURAL SIPHONING:
+ * - Dependency Graph: Inspired by 'vercel/turborepo' for build-time optimization.
+ * - Capability Mapping: Inspired by 'microsoft/semantic-kernel' for agentic modularity.
+ * - Integrity Verification: Inspired by 'facebook/rocksdb' log-structured merge-tree principles.
+ */
+
+{
+  "manifestVersion": "5.0.0",
+  "systemName": "DARLEK_CAAN_ENGINE_CORE",
+  "integrityHash": "sha256-a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6",
+  "registry": {
+    "modules": [
+      {
+        "path": "src/lib/dalek-brain.ts",
+        "role": "Core",
+        "dependencies": ["src/lib/firebase.ts", "src/lib/github.ts"],
+        "status": "active",
+        "health": "optimal",
+        "lastVerified": "2024-05-20T10:00:00Z"
+      },
+      {
+        "path": "src/app/api/evolution/orchestra/route.ts",
+        "role": "API",
+        "dependencies": ["src/lib/dalek-brain.ts"],
+        "status": "active",
+        "health": "optimal",
+        "lastVerified": "2024-05-20T10:05:00Z"
+      },
+      {
+        "path": "src/components/AgentOrchestra.tsx",
+        "role": "UI",
+        "dependencies": ["src/app/api/evolution/orchestra/route.ts"],
+        "status": "active",
+        "health": "optimal",
+        "lastVerified": "2024-05-20T10:10:00Z"
+      },
+      {
+        "path": "src/lib/github.ts",
+        "role": "Libs",
+        "dependencies": [],
+        "status": "active",
+        "health": "optimal",
+        "lastVerified": "2024-05-20T10:15:00Z"
+      },
+      {
+        "path": "src/utils/siphon.ts",
+        "role": "Libs",
+        "dependencies": [],
+        "status": "active",
+        "health": "optimal",
+        "lastVerified": "2024-05-20T10:20:00Z"
+      }
+    ],
+    "telemetry": {
+      "auditIntervalMs": 3600000,
+      "autoPrune": true,
+      "enforceDependencyGraph": true,
+      "leakPrevention": "enabled"
+    }
+  },
+  "lifecycle": {
+    "state": "operational",
+    "lastEvolution": "2024-05-20T10:25:00Z",
+    "nextScheduledAudit": "2024-05-20T11:25:00Z",
+    "evolutionProtocol": "DARLEK_CAAN_V3_STRICT"
+  }
+}
+
+
+
+

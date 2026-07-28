@@ -1,0 +1,54 @@
+/**
+ * @file missing_files.json
+ * @description System Integrity Manifest & Orphaned Component Registry.
+ * This file tracks missing, pending, or required files within the Darlek Cann ecosystem.
+ * It acts as a bridge between the 'Agent Orchestra' and the global repository context.
+ * 
+ * @architecture
+ * - Registry: Tracks file paths, expected hashes, and dependency requirements.
+ * - Validation: Used by 'System Integrity Auditor' to reconcile state.
+ * - Integration: Linked to 'Siphon Acquisition Engine' for automated recovery.
+ */
+
+{
+  "manifestVersion": "3.0.0",
+  "lastAudit": "2024-05-20T12:00:00Z",
+  "registry": [
+    {
+      "path": "src/core/evolution-engine.ts",
+      "status": "MISSING",
+      "priority": "CRITICAL",
+      "dependency": ["src/core/types.ts", "src/lib/diagnostic-registry.ts"],
+      "purpose": "Core logic for self-modifying agent evolution."
+    },
+    {
+      "path": "src/lib/siphon-protocol.ts",
+      "status": "MISSING",
+      "priority": "HIGH",
+      "dependency": ["src/lib/github-client.ts"],
+      "purpose": "Protocol for cross-repository data siphoning."
+    },
+    {
+      "path": "src/middleware/auth-guard.ts",
+      "status": "MISSING",
+      "priority": "CRITICAL",
+      "dependency": ["src/middleware/SecurityMiddleware.ts"],
+      "purpose": "Zero-trust authentication for agentic operations."
+    }
+  ],
+  "recoveryConfig": {
+    "autoFetch": true,
+    "retryLimit": 3,
+    "siphonSource": "github.com/craighckby-stack/darlek-cann-v3"
+  },
+  "securityPolicy": {
+    "enforceChecksum": true,
+    "allowExternalSiphon": false,
+    "restrictedPaths": ["/etc", "/var", "/root"]
+  }
+}
+
+
+
+
+
