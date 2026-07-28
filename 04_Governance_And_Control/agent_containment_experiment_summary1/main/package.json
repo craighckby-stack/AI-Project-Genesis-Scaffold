@@ -1,0 +1,79 @@
+/**
+ * @file package.json
+ * @description DARLEK CANN v3.0 System-Orchestration Manifest.
+ * This file serves as the definitive dependency graph and build-lifecycle controller.
+ * It integrates Vercel/Turborepo build-optimization, Playwright testing, and
+ * strict AI-agentic development standards.
+ * 
+ * @architecture Orchestration Layer
+ * @version 3.0.0
+ */
+{
+  "name": "darlek-cann-v3",
+  "version": "3.0.0",
+  "description": "DARLEK CANN v3.0 — Code Evolution Engine: System-Orchestration Manifest",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+    "check-types": "tsc --noEmit",
+    "audit": "npm audit",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "analyze": "ANALYZE=true next build",
+    "clean": "rimraf .next .turbo out",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "next": "15.1.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "framer-motion": "^11.11.11",
+    "lucide-react": "^0.468.0",
+    "recharts": "^2.15.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.5",
+    "ai": "^4.0.0",
+    "@ai-sdk/openai": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
+    "postcss": "^8.4.49",
+    "tailwindcss": "4.0.0-alpha.31",
+    "eslint": "^9.17.0",
+    "eslint-config-next": "15.1.0",
+    "prettier": "^3.4.2",
+    "@playwright/test": "^1.49.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.11",
+    "@next/bundle-analyzer": "^15.1.0",
+    "concurrently": "^9.1.0",
+    "rimraf": "^6.0.1",
+    "cross-env": "^7.0.3"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "es5"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{md,json}": [
+      "prettier --write"
+    ]
+  }
+}

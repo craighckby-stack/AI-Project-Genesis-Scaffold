@@ -1,0 +1,76 @@
+/**
+ * @file globals.css
+ * @description System-Architectural Foundation Layer for DARLEK CANN.
+ * This file defines the core design tokens, fluid typography, and global reset styles.
+ * It acts as the single source of truth for the UI theme, siphoning patterns from
+ * Vercel's design system and Google's Material Design.
+ * 
+ * @integration Connects to src/app/layout.tsx for theme provider context.
+ */
+
+@import "tailwindcss";
+@import "tailwindcss/preflight";
+
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Cascadia Code', 'Fira Code', monospace;
+
+  --animate-fade-in: fade-in 0.3s ease-in-out;
+  --animate-slide-up: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slide-up {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+}
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #0a0a0a;
+    --accent: #0070f3;
+    --border: #eaeaea;
+  }
+
+  .dark {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --accent: #3291ff;
+    --border: #333333;
+  }
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-[var(--background)] text-[var(--foreground)] font-sans antialiased transition-colors duration-300;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+  }
+
+  h1, h2, h3 {
+    @apply font-bold tracking-tight;
+  }
+
+  code {
+    @apply font-mono text-sm bg-[var(--border)] px-1 py-0.5 rounded;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-xl;
+  }
+  
+  .darlek-gradient {
+    @apply bg-gradient-to-br from-blue-600 to-purple-700;
+  }
+}

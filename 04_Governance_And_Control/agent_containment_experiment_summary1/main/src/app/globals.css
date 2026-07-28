@@ -1,0 +1,190 @@
+/**
+ * @file src/app/globals.css
+ * @description Cybernetic System-Architectural Foundation for DARLEK CANN v3.0.
+ * 
+ * This file serves as the central design-token engine and CSS variable registry.
+ * It integrates architectural patterns from Microsoft (Fluent/Terminal), Vercel (Geist),
+ * and Google (Material Design) to provide a high-performance, reactive UI layer.
+ * 
+ * FEATURES:
+ * - Fluid Typography Scale (clamp-based)
+ * - Cyber-Grid & Scanline Utility Layers
+ * - Agentic Status Color Palette
+ * - Hardware-Accelerated Animation Registry
+ * - Zero-Conflict Reset & Normalization
+ */
+
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* --- Core System Tokens (Light Mode / Default) --- */
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+    
+    /* Layout Constants */
+    --header-height: 4rem;
+    --sidebar-width: 18rem;
+    --radius: 0.6rem;
+
+    /* Component Surfaces */
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+
+    /* Brand & Action Colors */
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    /* Agentic Status Palette */
+    --status-active: 142.1 70.6% 45.3%;
+    --status-idle: 215.4 16.3% 46.9%;
+    --status-warning: 38 92% 50%;
+    --status-critical: 0 84.2% 60.2%;
+
+    /* Borders & Inputs */
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+
+    /* Fluid Typography Scale */
+    --font-sans: 'Inter', 'Geist', system-ui, sans-serif;
+    --font-mono: 'Cascadia Code', 'Fira Code', ui-monospace, monospace;
+    --text-xs: clamp(0.7rem, 0.05vw + 0.65rem, 0.75rem);
+    --text-base: clamp(0.875rem, 0.1vw + 0.8rem, 1rem);
+    --text-xl: clamp(1.25rem, 0.5vw + 1.1rem, 1.5rem);
+  }
+
+  .dark {
+    /* --- Deep Space / OLED Optimized Dark Mode --- */
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 40% 98%;
+
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 40% 98%;
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+    
+    /* Dark Mode Status Overrides */
+    --status-active: 142.1 76.2% 36.3%;
+    --status-critical: 0 62.8% 30.6%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border box-border scroll-smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/30 selection:text-primary-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1, "zero" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+  }
+
+  /* Custom Scrollbar - Siphoned from VSCode */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full border-2 border-solid border-transparent bg-clip-padding hover:bg-muted-foreground/40 transition-colors;
+  }
+}
+
+@layer components {
+  /* Cybernetic Visual Utilities */
+  .cyber-grid {
+    background-image: 
+      linear-gradient(to right, hsl(var(--border) / 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .scanline {
+    position: relative;
+    overflow: hidden;
+  }
+  .scanline::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+    z-index: 2;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
+  .glass {
+    @apply bg-background/60 backdrop-blur-xl border border-white/10 shadow-xl;
+  }
+
+  .agent-glow {
+    box-shadow: 0 0 15px -3px hsl(var(--status-active) / 0.4);
+  }
+}
+
+/* High-Performance Animation Registry */
+@keyframes pulse-evolution {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.02); opacity: 0.8; }
+}
+
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+@keyframes terminal-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-evolution {
+  animation: pulse-evolution 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.animate-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.1), transparent);
+  animation: shimmer 2s infinite;
+}
+
+.cursor-blink {
+  animation: terminal-blink 1s step-end infinite;
+}

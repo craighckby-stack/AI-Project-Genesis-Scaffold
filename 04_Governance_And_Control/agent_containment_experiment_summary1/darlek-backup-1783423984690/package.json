@@ -1,0 +1,43 @@
+{
+  "name": "agent-containment-experiment-summary1",
+  "version": "1.0.0",
+  "description": "DARLEK CANN v3.0 — Code Evolution Engine: System-Orchestration Manifest",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+    "type-check": "tsc --noEmit",
+    "test": "playwright test",
+    "analyze": "ANALYZE=true next build"
+  },
+  "dependencies": {
+    "next": "15.1.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "framer-motion": "^11.11.11",
+    "lucide-react": "^0.468.0",
+    "recharts": "^2.15.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.5",
+    "ai": "^4.0.0",
+    "@ai-sdk/openai": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "@types/node": "^22.10.1",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
+    "postcss": "^8.4.49",
+    "tailwindcss": "4.0.0-alpha.31",
+    "eslint": "^9.16.0",
+    "eslint-config-next": "15.1.0",
+    "prettier": "^3.4.2",
+    "@playwright/test": "^1.49.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

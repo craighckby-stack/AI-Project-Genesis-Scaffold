@@ -1,0 +1,42 @@
+{
+  "/**": "DARLEK CANN v3.0 | CENTRAL DEPENDENCY MANIFEST",
+  "description": "Orchestrates build, test, and deployment cycles for the Agent Containment Experiment. Siphoned patterns from Vercel/Turborepo and Microsoft/Playwright for enterprise-grade stability.",
+  "name": "agent-containment-experiment-summary1",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
+    "test:e2e": "playwright test",
+    "clean": "rm -rf .next .turbo node_modules/.cache"
+  },
+  "dependencies": {
+    "next": "15.1.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "framer-motion": "^11.11.11",
+    "lucide-react": "^0.468.0",
+    "recharts": "^2.15.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.5",
+    "ai": "^4.0.0",
+    "@ai-sdk/openai": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
+    "postcss": "^8.4.49",
+    "tailwindcss": "4.0.0-alpha.31",
+    "prettier": "^3.4.2",
+    "@playwright/test": "^1.49.1"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

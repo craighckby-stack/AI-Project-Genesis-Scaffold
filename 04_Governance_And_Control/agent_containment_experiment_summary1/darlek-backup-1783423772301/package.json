@@ -1,0 +1,52 @@
+/**
+ * @file package.json
+ * @description System-Orchestration Manifest for the DARLEK CANN ecosystem.
+ * This file defines the dependency graph, build pipelines, and CI/CD orchestration.
+ * It is configured for high-performance Next.js 15+ environments with strict
+ * type-safety and agentic-ready integration hooks.
+ * 
+ * @architecture DARLEK-CANN-v3.0
+ * @dependencies React 19, Next.js 15, Tailwind CSS 4, Vercel AI SDK
+ */
+{
+  "name": "agent-containment-experiment-summary1",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DARLEK CANN: Multi-Agent Objective-Divergence Containment System",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
+    "type-check": "tsc --noEmit",
+    "test": "playwright test",
+    "analyze": "ANALYZE=true next build"
+  },
+  "dependencies": {
+    "next": "15.1.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "framer-motion": "^11.11.11",
+    "lucide-react": "^0.468.0",
+    "recharts": "^2.15.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.5",
+    "ai": "^4.0.0",
+    "@ai-sdk/openai": "^1.0.0",
+    "swr": "^2.3.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
+    "postcss": "^8.4.49",
+    "tailwindcss": "4.0.0-alpha.31",
+    "prettier": "^3.4.2",
+    "@playwright/test": "^1.49.1"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
