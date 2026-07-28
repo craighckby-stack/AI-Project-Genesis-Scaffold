@@ -1,0 +1,78 @@
+# DALEK_CAAN SATURATION GUIDELINES
+
+These guidelines define the "Theoretical Ideas" and "Saturation Constraints" 
+that the Siphon Engine must adhere to during the mutation process.
+
+## 1. Architectural Constraints
+
+- **Immutability**: Prefer immutable data structures. Never mutate function arguments.
+- **Error Handling**: Every asynchronous operation must be wrapped in a try/catch block with specific error logging.
+- **Type Safety**: Use strict TypeScript types. Avoid `any` at all costs. Use `unknown` if the type is truly dynamic.
+
+## 2. Coding Style
+
+- **Naming**: Use PascalCase for classes, camelCase for variables/functions, and UPPER_SNAKE_CASE for constants.
+- **Documentation**: Every public method must have a JSDoc comment explaining its purpose and parameters.
+- **Modularity**: No file should exceed 300 lines. If it does, split it into sub-modules.
+
+## 3. Performance Targets
+
+- **Lazy Loading**: Defer heavy computations until absolutely necessary.
+- **Memoization**: Use `useMemo` or custom caching for expensive derived data.
+- **Batching**: Process multiple items in batches to reduce API calls.
+
+## 4. Security
+
+- **Sanitization**: All user-provided input must be sanitized before being used in database queries or UI rendering.
+- **Secrets**: Never hardcode API keys or tokens. Use environment variables.
+- **Validation**: Validate all external data against a schema before processing.
+
+## 5. Testing Requirements
+
+- **Unit Tests**: All pure functions must have unit tests with >80% coverage.
+- **Integration Tests**: API endpoints must have integration tests.
+- **Edge Cases**: Handle null, undefined, empty arrays, and boundary conditions.
+
+## 6. Documentation
+
+- **README**: Every module must have a README explaining its purpose and usage.
+- **API Docs**: All public APIs must be documented with examples.
+- **Architecture**: Maintain an ARCHITECTURE.md for complex systems.
+
+## 7. Evolution Constraints
+
+- **Backward Compatibility**: Do not break existing interfaces.
+- **Incremental Changes**: Small, focused mutations are preferred over large refactors.
+- **Rollback Safety**: Every mutation must be reversible via git revert.
+
+## 8. Quality Gates
+
+- **Linting**: All code must pass ESLint with the strictest ruleset.
+- **Type Checking**: TypeScript strict mode must be enabled.
+- **Build**: Code must compile without errors or warnings.
+
+---
+
+## Forbidden Patterns
+
+The following patterns should NEVER be introduced:
+
+1. `any` type usage
+2. Synchronous file I/O in hot paths
+3. Nested promises (use async/await)
+4. Global state mutations
+5. Circular dependencies
+6. Unbounded recursion without depth limits
+
+---
+
+## Preferred Patterns
+
+The following patterns should be PRIORITIZED:
+
+1. Functional composition
+2. Dependency injection
+3. Event-driven architecture
+4. Result/Either types for error handling
+5. Factory pattern for object creation
+6. Strategy pattern for algorithms

@@ -1,0 +1,172 @@
+/**
+ * DALEK_CAAN DNA SAMPLE: HIGH-ORDER ARCHITECTURAL PATTERNS
+ * 
+ * This file serves as a reference for the Siphon Engine to extract 
+ * coding styles, logic structures, and architectural signatures.
+ */
+
+// Pattern: Dependency Injection & Interface-based Design
+interface IDataStore {
+  save(id: string, data: any): Promise<void>;
+  load(id: string): Promise<any>;
+}
+
+class CloudStore implements IDataStore {
+  async save(id: string, data: any) {
+    console.log(`Saving ${id} to cloud...`);
+    // Implementation...
+  }
+  async load(id: string) {
+    return { id, data: "Cloud Data" };
+  }
+}
+
+// Pattern: Singleton with Lazy Initialization
+class SystemOrchestrator {
+  private static instance: SystemOrchestrator;
+  private constructor() {}
+
+  public static getInstance(): SystemOrchestrator {
+    if (!SystemOrchestrator.instance) {
+      SystemOrchestrator.instance = new SystemOrchestrator();
+    }
+    return SystemOrchestrator.instance;
+  }
+
+  // Pattern: Event-Driven Lifecycle
+  public async initialize() {
+    this.emit("INIT_START");
+    // Logic...
+    this.emit("INIT_COMPLETE");
+  }
+
+  private emit(event: string) {
+    console.log(`[EVENT] ${event}`);
+  }
+}
+
+// Pattern: Functional Pipe for Data Transformation
+const processData = (data: any) => {
+  return [
+    (d: any) => ({ ...d, timestamp: Date.now() }),
+    (d: any) => ({ ...d, version: "2.0" }),
+    (d: any) => JSON.stringify(d)
+  ].reduce((acc, fn) => fn(acc), data);
+};
+
+// Pattern: Async Queue with Backpressure
+class AsyncQueue<T> {
+  private queue: T[] = [];
+  private processing = false;
+  private maxConcurrency: number;
+
+  constructor(maxConcurrency = 5) {
+    this.maxConcurrency = maxConcurrency;
+  }
+
+  async enqueue(item: T): Promise<void> {
+    this.queue.push(item);
+    if (!this.processing) {
+      this.processQueue();
+    }
+  }
+
+  private async processQueue(): Promise<void> {
+    this.processing = true;
+    while (this.queue.length > 0) {
+      const batch = this.queue.splice(0, this.maxConcurrency);
+      await Promise.all(batch.map(item => this.processItem(item)));
+    }
+    this.processing = false;
+  }
+
+  private async processItem(item: T): Promise<void> {
+    // Override in subclass
+    console.log(`Processing: ${item}`);
+  }
+}
+
+// Pattern: State Machine
+enum State {
+  IDLE = 'IDLE',
+  LOADING = 'LOADING',
+  ACTIVE = 'ACTIVE',
+  ERROR = 'ERROR'
+}
+
+class StateMachine {
+  private state: State = State.IDLE;
+  private transitions: Map<State, State[]> = new Map([
+    [State.IDLE, [State.LOADING]],
+    [State.LOADING, [State.ACTIVE, State.ERROR]],
+    [State.ACTIVE, [State.IDLE, State.ERROR]],
+    [State.ERROR, [State.IDLE]]
+  ]);
+
+  canTransition(to: State): boolean {
+    const allowed = this.transitions.get(this.state) || [];
+    return allowed.includes(to);
+  }
+
+  transition(to: State): boolean {
+    if (this.canTransition(to)) {
+      this.state = to;
+      return true;
+    }
+    return false;
+  }
+
+  getState(): State {
+    return this.state;
+  }
+}
+
+// Pattern: Observer Pattern with Typed Events
+type EventHandler<T> = (data: T) => void;
+
+class EventEmitter<EventMap extends Record<string, any>> {
+  private handlers: Map<keyof EventMap, EventHandler<any>[]> = new Map();
+
+  on<K extends keyof EventMap>(event: K, handler: EventHandler<EventMap[K]>) {
+    if (!this.handlers.has(event)) {
+      this.handlers.set(event, []);
+    }
+    this.handlers.get(event)!.push(handler);
+  }
+
+  emit<K extends keyof EventMap>(event: K, data: EventMap[K]) {
+    const handlers = this.handlers.get(event) || [];
+    handlers.forEach(handler => handler(data));
+  }
+
+  off<K extends keyof EventMap>(event: K, handler: EventHandler<EventMap[K]>) {
+    const handlers = this.handlers.get(event) || [];
+    const index = handlers.indexOf(handler);
+    if (index > -1) {
+      handlers.splice(index, 1);
+    }
+  }
+}
+
+// Pattern: Result Type for Error Handling
+type Result<T, E = Error> = 
+  | { ok: true; value: T }
+  | { ok: false; error: E };
+
+function Ok<T>(value: T): Result<T> {
+  return { ok: true, value };
+}
+
+function Err<E>(error: E): Result<never, E> {
+  return { ok: false, error };
+}
+
+// Usage example
+async function fetchData(url: string): Promise<Result<Response>> {
+  try {
+    const response = await fetch(url);
+    return Ok(response);
+  } catch (error) {
+    return Err(error as Error);
+  }
+}

@@ -1,0 +1,39 @@
+/**
+ * BLANK DNA TEMPLATE
+ * 
+ * Replace this file's contents with your own architectural patterns,
+ * coding styles, and logic structures that you want the Siphon Engine
+ * to extract and apply to your target codebase.
+ * 
+ * TIPS:
+ * - Include your best/most elegant code samples
+ * - Add patterns from frameworks you admire
+ * - Include error handling patterns
+ * - Add documentation style examples
+ * - Include testing patterns
+ */
+
+// YOUR PATTERNS GO HERE
+// Example:
+
+export interface YourPattern {
+  // Define your interface pattern
+  id: string;
+  data: unknown;
+}
+
+export class YourClass {
+  // Your class pattern
+  private state: unknown;
+
+  constructor(initialState?: unknown) {
+    this.state = initialState;
+  }
+
+  async process(input: unknown): Promise<unknown> {
+    // Your processing pattern
+    return input;
+  }
+}
+
+// Add more patterns below...
