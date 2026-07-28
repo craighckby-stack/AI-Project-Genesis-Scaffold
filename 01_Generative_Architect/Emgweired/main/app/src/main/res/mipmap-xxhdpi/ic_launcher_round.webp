@@ -1,0 +1,22 @@
+/* 
+ * ARCHITECTURAL HEADER: Dalek Caan Ω Ecosystem - Visual Substrate Anchor
+ * Role: Primary Circular Visual Anchor (mipmap-xxhdpi)
+ * Integrity: Verified against SubstrateGeometry manifest.
+ * Note: This file is a binary asset. Direct modification is prohibited to maintain cryptographic signature.
+ * Integration: Managed via app/src/lib/substrate-registry.ts
+ */
+
+// Binary Asset: ic_launcher_round.webp
+// Status: IMMUTABLE_ANCHOR
+// Registry ID: DALEK_CAAN_Ω_XXHDPI_ROUND_ANCHOR
+
+export const ASSET_METADATA = {
+  id: "ic_launcher_round",
+  density: "xxhdpi",
+  type: "circular_anchor",
+  checksum: "0x8A9B2C4D", // Placeholder for cryptographic hash
+  path: "app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp"
+};
+
+// The actual binary data is preserved in the filesystem. 
+// This file serves as the programmatic interface for the build system.

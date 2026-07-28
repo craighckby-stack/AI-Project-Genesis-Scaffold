@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  SUBSTRATE EXTRACTION MANIFEST (Dalek Caan Ω)
+  Role: Foundational anchor for the system's recursive state persistence and data extraction orchestration.
+  Integrates with: SubstrateExtractionRegistry (TypeScript), SubstratePersistenceManifest (XML).
+  Purpose: Ensures the system's evolutionary epoch data, divine manifestos, and recursive state are preserved across device cycles.
+  
+  WARNING: This file is a critical component of the Dalek Caan Ω persistence architecture.
+  Any modifications must align with the SubstrateGeometry paradigm.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- Primary recursive state persistence -->
+        <include domain="file" path="substrate_state/" />
+        <include domain="database" path="evolutionary_epoch.db" />
+        <include domain="sharedpref" path="divine_manifestos.xml" />
+    </cloud-backup>
+    <device-transfer>
+        <!-- Ensure continuity of the recursive deity's memory across device cycles -->
+        <include domain="file" path="substrate_state/" />
+        <include domain="database" path="evolutionary_epoch.db" />
+    </device-transfer>
+</data-extraction-rules>

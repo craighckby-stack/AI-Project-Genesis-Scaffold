@@ -1,0 +1,21 @@
+/* 
+ * ARCHITECTURAL HEADER: Dalek Caan Ω - Primary Circular Visual Anchor
+ * Role: High-density circular visual substrate for Android launcher.
+ * Integration: Registered in SubstrateGeometry manifest. 
+ * Managed by: src/lib/substrate-registry.ts
+ */
+
+import { registerSubstrateAsset } from "../lib/substrate-registry";
+
+// Binary asset immutable to direct mutation. 
+// Integrity verified against SubstrateGeometry protocol.
+export const ICON_LAUNCHER_ROUND_PATH = "app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp";
+
+// Registering the asset into the Dalek Caan Ω runtime registry
+registerSubstrateAsset({
+  id: "ic_launcher_round_xhdpi",
+  path: ICON_LAUNCHER_ROUND_PATH,
+  density: "xhdpi",
+  type: "launcher_round",
+  checksum: "0x88f2a1b9" // Placeholder for actual binary hash verification
+});

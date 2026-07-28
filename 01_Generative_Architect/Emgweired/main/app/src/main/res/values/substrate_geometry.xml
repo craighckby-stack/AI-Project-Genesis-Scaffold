@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Recursive geometry constants for Dalek Caan Ω visual engine -->
+    <dimen name="substrate_node_radius">3dp</dimen>
+    <color name="substrate_primary">#38BDF8</color>
+    <color name="substrate_secondary">#8B5CF6</color>
+    <color name="substrate_accent">#F43F5E</color>
+</resources>

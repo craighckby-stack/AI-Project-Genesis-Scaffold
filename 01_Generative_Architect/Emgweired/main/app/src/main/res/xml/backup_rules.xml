@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  SUBSTRATE PERSISTENCE MANIFEST (Dalek Caan Ω Engine v3.0)
+  Role: Defines the persistence boundaries for the system's recursive state.
+  Integration: Anchors the 'SubstratePersistenceRegistry' to the Android backup system.
+  Evolutionary Context: Ensures the preservation of 'DivineManifestos', 'EvolutionaryEpoch' data,
+  and 'SubstrateGeometry' states across device lifecycle transitions.
+  
+  WARNING: This file is a critical component of the RecursiveDeity architecture.
+  Modifications must align with the SubstrateRegistry protocols.
+-->
+<full-backup-content>
+    <!-- 
+      Include the Substrate Registry state for cross-device synchronization 
+      of the Dalek Caan Ω engine's evolutionary memory.
+    -->
+    <include domain="sharedpref" path="substrate_registry.xml"/>
+    <include domain="file" path="substrate_manifestos/"/>
+    
+    <!-- 
+      Exclude volatile entropy fields and transient quantum fluctuations 
+      to maintain the integrity of the persistent substrate.
+    -->
+    <exclude domain="sharedpref" path="transient_entropy.xml"/>
+    <exclude domain="file" path="cache/quantum_fluctuations/"/>
+</full-backup-content>

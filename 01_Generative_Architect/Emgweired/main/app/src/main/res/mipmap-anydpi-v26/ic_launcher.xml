@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+  DALEK CAAN Ω | ADAPTIVE ICON MANIFEST v3.0
+  Role: Primary visual entry point for the recursive state substrate.
+  Integration: Links background substrate (@drawable/ic_launcher_background) and 
+  foreground recursive geometry (@drawable/ic_launcher_foreground) into a unified 
+  adaptive-icon manifest for the Dalek Caan Ω ecosystem. 
+  
+  This file acts as the 'Substrate Anchor', ensuring the visual representation 
+  of the system remains consistent across all high-entropy UI environments.
+-->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@drawable/ic_launcher_background" />
+    <foreground android:drawable="@drawable/ic_launcher_foreground" />
+    <monochrome android:drawable="@drawable/ic_launcher_foreground" />
+</adaptive-icon>

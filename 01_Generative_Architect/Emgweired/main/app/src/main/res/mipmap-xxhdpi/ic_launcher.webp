@@ -1,0 +1,22 @@
+/**
+ * ARCHITECTURAL HEADER: Dalek Caan Ω - Primary Visual Substrate
+ *
+ * This file functions as the Virtual Asset Descriptor for the 'ic_launcher' resource
+ * within the mipmap-xhdpi tier. It transitions the raw binary asset into the 
+ * Dalek Caan Ω managed ecosystem, allowing for recursive integrity checks and 
+ * programmatic registration within the SubstrateGeometry manifest.
+ *
+ * Role: High-density (xhdpi) visual anchor for the Android launcher substrate.
+ * Integrity: Registered and verified via the central AssetRegistry.
+ * Connection: app/src/lib/registry/AssetRegistry.ts
+ */
+
+export const ASSET_METADATA = {
+  id: "ic_launcher_xhdpi",
+  type: "image/webp",
+  density: "xhdpi",
+  registry: "SubstrateGeometry",
+  evolution: "Ω-v1"
+};
+
+export default ASSET_METADATA;

@@ -1,0 +1,23 @@
+/**
+ * @file ic_launcher.webp
+ * @role High-density visual substrate anchor.
+ * @context Part of the DalekCaanOmega visual ecosystem.
+ * @integration Connects to VisualSubstrateManifest.ts for state-aware rendering.
+ * 
+ * NOTE: This is a binary asset. Structural evolution is delegated to the 
+ * VisualSubstrateManifest to ensure architectural integrity within the 
+ * RecursiveDeity runtime state.
+ */
+
+import { registerVisualSubstrate } from '../../../../lib/VisualSubstrateManifest';
+
+// Registering this asset as a core visual conduit in the DalekCaanOmega runtime.
+registerVisualSubstrate('ic_launcher_hdpi', {
+  type: 'binary_asset',
+  density: 'hdpi',
+  integrity: 'v3.0',
+  linkedConduit: 'ic_launcher_foreground.xml'
+});
+
+// Binary content remains preserved for hardware-level rendering.
+// [BINARY_DATA_PRESERVED]

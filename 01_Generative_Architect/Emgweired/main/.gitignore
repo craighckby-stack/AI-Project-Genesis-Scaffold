@@ -1,0 +1,83 @@
+# ==============================================================================
+# ARCHITECTURAL HEADER: DALEK CAAN OMEGA EVOLUTION ENGINE - REPOSITORY HYGIENE
+# ==============================================================================
+# This .gitignore file establishes the boundary for the Zero-Leak Sandbox and
+# repository hygiene across the multi-stack ecosystem (Node.js, Android/Kotlin,
+# Firebase, and AI/ML pipelines). 
+#
+# Roles & Connections:
+# - Prevents leak of sensitive credentials (e.g., .env, local.properties, keystores).
+# - Excludes heavy build artifacts from Next.js, Gradle, and Turborepo.
+# - Filters out transient AI/ML model checkpoints and local datasets.
+# - Ensures IDE-specific configurations do not pollute the shared repository.
+# - Integrates with 'SubstrateExclusionRegistry' for recursive entropy management.
+# ==============================================================================
+
+# Node.js & Web Build Artifacts
+node_modules/
+.next/
+out/
+dist/
+build/
+coverage/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.tsbuildinfo
+*.tgz
+
+# Monorepo & Build Caching
+.turbo/
+
+# Environment & Security (Zero-Leak Sandbox)
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+!/.env.example
+
+# System & IDE Metadata
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Android, Kotlin & Native Compilation
+*.iml
+.gradle/
+.kotlin/
+/local.properties
+local.properties
+/build/
+captures/
+.externalNativeBuild/
+.cxx/
+debug.keystore
+*.apk
+*.aab
+
+# AI / Machine Learning Assets & Data
+data/
+models/
+checkpoints/
+*.pt
+*.onnx
+*.h5
+*.pkl
+*.bin
+__pycache__/
+*.ipynb_checkpoints/
+
+# Firebase Services
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
+
+# Dalek Caan Ω Substrate Registry Extensions
+# Managed by SubstrateExclusionRegistry
+.substrate-entropy-barrier
+.recursive-deity-cache

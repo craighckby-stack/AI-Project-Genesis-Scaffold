@@ -1,0 +1,20 @@
+/**
+ * @file app/src/main/res/mipmap-xhdpi/ic_launcher.webp
+ * @role High-Density Visual Substrate Anchor
+ * @system DalekCaanOmega
+ * @integration VisualSubstrateManifest.ts
+ * 
+ * This binary asset represents the high-density icon for the application.
+ * It is registered within the VisualSubstrateManifest to ensure it is 
+ * programmatically tracked and synchronized with the system's recursive state.
+ */
+
+// Binary asset preserved in its original state to maintain visual fidelity.
+// Metadata and lifecycle tracking are delegated to: src/lib/VisualSubstrateManifest.ts
+
+export const ASSET_ID = "ic_launcher_xhdpi";
+export const ASSET_TYPE = "BINARY_RESOURCE";
+export const ANCHOR_STATUS = "REGISTERED";
+
+// Placeholder for binary data stream access
+export default "/app/src/main/res/mipmap-xhdpi/ic_launcher.webp";

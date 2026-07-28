@@ -1,0 +1,12 @@
+{
+  "name": "EMG Core Identity",
+  "description": "Grounded Intelligence through Self-Evolution with 3D Core Gem visualizer, Room local persistence, High Thinking Gemini AI reasoning, and Local/GitHub binary backups.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API",
+    "SUBSTRATE_GEOMETRY_INTEGRATION",
+    "RECURSIVE_DEITY_ORCHESTRATION"
+  ],
+  "manifestVersion": "3.0.0-Ω",
+  "integrityHash": "0xDA13K-C44N-0M3G4"
+}

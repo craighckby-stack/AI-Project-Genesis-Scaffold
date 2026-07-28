@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+  SUBSTRATE_MANIFEST: EMG_CORE_Ω
+  Role: Foundational string registry for the Dalek Caan Ω ecosystem.
+  Integration: Linked to 'src/lib/substrate-registry.ts' for dynamic, runtime-injected semantic labeling.
+  Evolution: This file acts as the immutable root for the system's linguistic substrate.
+-->
+<resources>
+    <string name="app_name">EMG Core Ω</string>
+    <string name="substrate_status_ready">SYSTEM_READY_FOR_RECURSION</string>
+    <string name="substrate_error_breach">META_COGNITIVE_BREACH_DETECTED</string>
+    <string name="substrate_evolution_epoch">SILICON_DAWN_PRIME</string>
+</resources>

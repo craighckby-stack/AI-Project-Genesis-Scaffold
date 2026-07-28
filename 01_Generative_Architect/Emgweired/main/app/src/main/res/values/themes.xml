@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+  FILE: app/src/main/res/values/themes.xml
+  ROLE: SubstrateThemeManifest - Foundational Visual Anchor for Dalek Caan Ω.
+  INTEGRATION: This file serves as the static resource anchor. Dynamic theme orchestration 
+  is delegated to 'src/lib/substrate-theme-registry.ts' to allow for real-time visual 
+  evolution and semantic color mapping within the Dalek Caan Ω ecosystem.
+-->
+<resources>
+    <style name="Theme.MyApplication" parent="android:Theme.DeviceDefault.NoActionBar" />
+</resources>

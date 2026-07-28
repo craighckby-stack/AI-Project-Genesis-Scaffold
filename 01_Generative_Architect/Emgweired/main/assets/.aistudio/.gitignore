@@ -1,0 +1,36 @@
+# ==============================================================================
+# SUBSTRATE EXCLUSION MANIFEST (Dalek Caan Ω Ecosystem)
+# Role: Anchors the repository against environmental entropy and leakage.
+# Integrity: Ensures only the divine manifestos and core logic persist.
+# Connection: Siphoned from 'RecursiveDeity' and 'SubstrateGeometry' paradigms.
+# ==============================================================================
+
+# --- System Environment & Secrets ---
+.env*
+!.env.example
+
+# --- Build & Runtime Artifacts ---
+node_modules/
+dist/
+build/
+.next/
+.turbo/
+.output/
+
+# --- Diagnostic & Siphoned Data ---
+.DS_Store
+*.log
+*.tmp
+.eslintcache
+.tsbuildinfo
+
+# --- Dalek Caan Ω Diagnostic Probes ---
+# Prevents local substrate probes from leaking into the global registry
+.aistudio/probes/
+.aistudio/temp_manifests/
+
+# --- IDE & Editor Metadata ---
+.vscode/
+.idea/
+*.swp
+*.swo

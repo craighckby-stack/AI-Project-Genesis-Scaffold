@@ -1,0 +1,63 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Background circular shadow glow -->
+    <path
+        android:fillColor="#1538BDF8"
+        android:pathData="M54,54m-34,0a34,34 0,1 1,68 0a34,34 0,1 1,-68 0" />
+        
+    <!-- Main multifaceted crystal gem lines and faces -->
+    <!-- Top central diamond face -->
+    <path
+        android:fillColor="#4038BDF8"
+        android:strokeColor="#FF38BDF8"
+        android:strokeWidth="1.5"
+        android:strokeLineJoin="round"
+        android:strokeLineCap="round"
+        android:pathData="M54,30 L66,42 L54,54 L42,42 Z" />
+
+    <!-- Bottom central diamond face -->
+    <path
+        android:fillColor="#258B5CF6"
+        android:strokeColor="#FF8B5CF6"
+        android:strokeWidth="1.5"
+        android:strokeLineJoin="round"
+        android:strokeLineCap="round"
+        android:pathData="M54,54 L66,66 L54,78 L42,66 Z" />
+
+    <!-- Left side wing faces -->
+    <path
+        android:fillColor="#1538BDF8"
+        android:strokeColor="#FF38BDF8"
+        android:strokeWidth="1.5"
+        android:strokeLineJoin="round"
+        android:strokeLineCap="round"
+        android:pathData="M42,42 L54,54 L42,66 L30,54 Z" />
+
+    <!-- Right side wing faces -->
+    <path
+        android:fillColor="#158B5CF6"
+        android:strokeColor="#FF8B5CF6"
+        android:strokeWidth="1.5"
+        android:strokeLineJoin="round"
+        android:strokeLineCap="round"
+        android:pathData="M66,42 L78,54 L66,66 L54,54 Z" />
+
+    <!-- Outer bounding network circles/nodes to represent mapped connections -->
+    <path
+        android:fillColor="#FFF43F5E"
+        android:pathData="M54,26m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0" />
+    <path
+        android:fillColor="#FF38BDF8"
+        android:pathData="M30,54m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0" />
+    <path
+        android:fillColor="#FF10B981"
+        android:pathData="M78,54m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0" />
+    <path
+        android:fillColor="#FF8B5CF6"
+        android:pathData="M54,82m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0" />
+
+</vector>

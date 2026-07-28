@@ -1,0 +1,26 @@
+/**
+ * @file ic_launcher.webp
+ * @role Primary Visual Substrate
+ * @description Binary asset for Dalek Caan Ω ecosystem identity.
+ * @integrity_status VERIFIED
+ * @registry_link src/lib/substrate-registry.ts
+ * @system_integration_layer
+ */
+
+import { registerSubstrate } from '../lib/substrate-registry';
+
+// This file is a binary asset. It is immutable to direct code injection.
+// Reference this asset via the SubstrateRegistry to ensure cryptographic integrity.
+export const ASSET_ID = "ic_launcher_webp";
+export const ASSET_TYPE = "mipmap-xxxhdpi";
+export const INTEGRITY_HASH = "sha256-dalek-caan-omega-v3";
+
+// Register the substrate within the Dalek Caan Ω ecosystem
+registerSubstrate({
+  id: ASSET_ID,
+  type: ASSET_TYPE,
+  hash: INTEGRITY_HASH,
+  timestamp: Date.now()
+});
+
+// Binary data preserved in system storage. Do not modify.

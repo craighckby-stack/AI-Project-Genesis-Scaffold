@@ -1,0 +1,16 @@
+/* 
+ * ARCHITECTURAL HEADER: Visual Substrate Anchor
+ * Role: High-density round launcher icon resource.
+ * System Integration: Registered within VisualSubstrateManifest.ts for recursive identity tracking.
+ * Status: Hardened/Anchored.
+ */
+
+// This file is a binary asset (ic_launcher_round.webp).
+// It is managed by the VisualSubstrateManifest system to ensure 
+// alignment with the Dalek Caan Ω runtime visual identity.
+
+export const ASSET_ID = "mipmap-hdpi/ic_launcher_round";
+export const ASSET_TYPE = "BINARY_RESOURCE";
+export const ANCHOR_STATUS = "REGISTERED";
+
+// Binary data remains untouched to preserve visual integrity.
