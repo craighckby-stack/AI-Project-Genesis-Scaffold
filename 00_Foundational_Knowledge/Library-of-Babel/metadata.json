@@ -1,0 +1,6 @@
+{
+  "name": "Encyclopedia of Engineering",
+  "description": "A capability-centric technical reference manual organizing software engineering knowledge into searchable concepts and implementations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
