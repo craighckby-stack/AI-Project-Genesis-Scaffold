@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Security Auditor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .log-container::-webkit-scrollbar { width: 8px; }
+        .log-container::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        .log-container::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .log-container::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        @keyframes pulse-red {
+            0%, 100% { background-color: #fee2e2; }
+            50% { background-color: #fecaca; }
+        }
+        .finding-alert { animation: pulse-red 2s infinite; }
+        .mode-active { border-color: #4f46e5; background-color: #eef2ff; color: #4f46e5; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans min-h-screen p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200">
+        
+        <div class="bg-indigo-900 text-white p-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                        GitHub Security Auditor
+                    </h1>
+                    <p class="text-indigo-300 mt-1 text-sm">Deep-scan any account for exposed secrets across all branches.</p>
+                </div>
+                <div class="text-right">
+                    <div id="rateLimitInfo" class="text-xs text-indigo-200 font-mono">Rate Limit: --/--</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-6 space-y-6">
+            <!-- Mode & Auth -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <div class="lg:col-span-3 space-y-2">
+                    <label class="block text-xs font-bold text-gray-500 uppercase">1. Select Mode</label>
+                    <div class="flex rounded-lg border border-gray-300 overflow-hidden text-sm">
+                        <button id="modeOwner" onclick="setMode('owner')" class="flex-1 py-2 font-medium mode-active transition-all">My Repos</button>
+                        <button id="modePublic" onclick="setMode('public')" class="flex-1 py-2 font-medium text-gray-500 hover:bg-gray-50 transition-all">Public User</button>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-9 space-y-2">
+                    <div class="flex justify-between items-center">
+                        <label id="inputLabel" class="block text-xs font-bold text-gray-500 uppercase">2. GitHub Personal Access Token</label>
+                        <span id="tokenHint" class="text-[10px] text-indigo-500 italic">Required for private repos & deep scanning</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <input type="password" id="mainInput" placeholder="ghp_xxxxxxxxxxxx" 
+                            class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-sm font-mono">
+                        <button id="fetchBtn" onclick="fetchRepos()" 
+                            class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 text-sm">
+                            Load Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex flex-wrap gap-2 items-center justify-between border-t border-b py-4">
+                <div class="flex gap-2">
+                    <button id="scanBtn" onclick="performMultiBranchScan()" disabled
+                        class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg font-medium text-sm transition-colors disabled:opacity-50 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                        Scan Branches
+                    </button>
+                    <button id="makePublicBtn" onclick="prepareUpdate('public')" disabled
+                        class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-medium text-sm transition-colors disabled:opacity-50 update-ctrl">
+                        Make Public
+                    </button>
+                    <button id="makePrivateBtn" onclick="prepareUpdate('private')" disabled
+                        class="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-lg font-medium text-sm transition-colors disabled:opacity-50 update-ctrl">
+                        Make Private
+                    </button>
+                </div>
+                <div class="text-sm font-medium">
+                    <span id="selectedCount" class="text-indigo-600">0</span> items
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm overflow-x-auto">
+                <table class="w-full text-left border-collapse min-w-[700px]">
+                    <thead class="bg-gray-50 text-[10px] uppercase text-gray-500 font-bold tracking-widest">
+                        <tr>
+                            <th class="p-4 w-10 text-center"><input type="checkbox" id="selectAll" onclick="toggleAll(this.checked)"></th>
+                            <th class="p-4">Repository Name</th>
+                            <th class="p-4 w-32">Visibility</th>
+                            <th class="p-4 w-40 text-right">Stars / Forks</th>
+                            <th class="p-4">Audit Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="repoList" class="divide-y divide-gray-100 text-sm">
+                        <tr>
+                            <td colspan="5" class="p-16 text-center text-gray-400 italic">Select mode and enter credentials to begin...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Footer Tools -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2">
+                    <div class="flex justify-between items-center mb-2">
+                        <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Audit Log</h2>
+                        <div class="flex gap-4">
+                            <button onclick="copyLogToClipboard()" class="text-indigo-500 hover:text-indigo-700 text-xs font-semibold flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                                Copy Log
+                            </button>
+                            <button onclick="clearLog()" class="text-red-400 hover:text-red-600 text-xs font-semibold flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                                Clear Log
+                            </button>
+                        </div>
+                    </div>
+                    <div id="logArea" class="log-container bg-gray-900 text-gray-300 font-mono text-[10px] p-4 rounded-lg h-56 overflow-y-auto space-y-1 shadow-inner border border-gray-800">
+                        <div class="text-gray-600 italic">// Auditor Ready. Scan items to generate logs.</div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Security Findings</h2>
+                    <div id="inspector" class="bg-gray-50 border border-gray-200 rounded-lg h-56 p-4 overflow-y-auto text-xs text-gray-600 shadow-inner">
+                        Click a "VIEW FINDINGS" button in the table to inspect branch and file details.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div id="confirmModal" class="hidden fixed inset-0 bg-gray-900/80 backdrop-blur-md flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden border border-gray-100">
+            <div class="p-8">
+                <div id="modalIcon" class="mb-4"></div>
+                <h3 id="modalTitle" class="text-xl font-bold mb-2 text-gray-900"></h3>
+                <p id="modalText" class="text-sm text-gray-600 mb-6"></p>
+                <div id="modalAlert" class="hidden mb-6 p-4 rounded-xl border-2 text-xs"></div>
+                <div class="flex gap-3">
+                    <button onclick="closeModal()" class="flex-1 py-3 bg-gray-100 text-gray-700 rounded-xl font-bold transition-all">Cancel</button>
+                    <button id="confirmBtn" onclick="executeBulkUpdate()" class="flex-1 py-3 text-white rounded-xl font-bold shadow-lg transition-all"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-4 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-full text-xs opacity-0 transition-opacity pointer-events-none z-[100]">
+        Log copied to clipboard!
+    </div>
+
+    <script>
+        let allRepos = [];
+        let isProcessing = false;
+        let currentMode = 'owner';
+        const logEntries = [];
+        let pendingAction = '';
+
+        const PATTERNS = [
+            { name: 'GitHub PAT', reg: /gh[p|o|u|s|r]_[a-zA-Z0-9]{36}/ },
+            { name: 'AWS Key', reg: /(AKIA|ASYA)[0-9A-Z]{16}/ },
+            { name: 'Stripe Secret', reg: /sk_live_[0-9a-zA-Z]{24}/ },
+            { name: 'Google API', reg: /AIza[0-9A-Za-z\\-_]{35}/ },
+            { name: 'Private Key', reg: /-----BEGIN (RSA|OPENSSH|PRIVATE) KEY-----/ },
+            { name: 'Generic Secret', reg: /(SECRET|PASSWORD|AUTH_TOKEN|API_KEY)\s*[:=]\s*['"][^'"]{8,}['"]/i }
+        ];
+
+        // Robust Fetch Wrapper with Exponential Backoff
+        async function fetchWithRetry(url, options = {}, retries = 5) {
+            let delay = 1000;
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    
+                    if (response.status === 401) {
+                        throw new Error("401: Unauthorized. Please check your GitHub Token.");
+                    }
+                    if (response.status === 403) {
+                        const rateLimitReset = response.headers.get('x-ratelimit-reset');
+                        if (rateLimitReset) {
+                            const resetDate = new Date(rateLimitReset * 1000);
+                            throw new Error(`403: Rate Limit Exceeded. Reset at ${resetDate.toLocaleTimeString()}`);
+                        }
+                        throw new Error("403: Forbidden (Likely Rate Limit)");
+                    }
+                    if (response.status === 404) {
+                        throw new Error("404: Resource not found.");
+                    }
+                    if (!response.ok) {
+                        throw new Error(`HTTP Error: ${response.status}`);
+                    }
+                    return response;
+                } catch (err) {
+                    // Don't retry auth errors or not found
+                    if (err.message.includes('401') || err.message.includes('404')) throw err;
+                    
+                    if (i === retries - 1) throw err;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2; // Exponential backoff
+                }
+            }
+        }
+
+        function setMode(mode) {
+            currentMode = mode;
+            const isPublic = mode === 'public';
+            document.getElementById('modeOwner').className = `flex-1 py-2 font-medium transition-all ${!isPublic ? 'mode-active' : 'text-gray-500 hover:bg-gray-50'}`;
+            document.getElementById('modePublic').className = `flex-1 py-2 font-medium transition-all ${isPublic ? 'mode-active' : 'text-gray-500 hover:bg-gray-50'}`;
+            document.getElementById('inputLabel').innerText = isPublic ? "2. Target GitHub Username / Org" : "2. GitHub Personal Access Token";
+            document.getElementById('mainInput').placeholder = isPublic ? "e.g. google" : "ghp_xxxxxxxxxxxx";
+            document.getElementById('mainInput').type = isPublic ? "text" : "password";
+            document.querySelectorAll('.update-ctrl').forEach(btn => btn.style.display = isPublic ? 'none' : 'inline-flex');
+            allRepos = [];
+            renderRepos();
+        }
+
+        function log(msg, type='info') {
+            const colors = { error: 'text-red-400', success: 'text-emerald-400', warning: 'text-amber-400', info: 'text-indigo-300' };
+            const timestamp = new Date().toLocaleTimeString();
+            logEntries.push(`[${timestamp}] ${msg}`);
+            const div = document.createElement('div');
+            div.className = colors[type];
+            div.innerHTML = `<span class="text-gray-600">[${timestamp}]</span> ${msg}`;
+            logArea.appendChild(div);
+            logArea.scrollTop = logArea.scrollHeight;
+        }
+
+        async function fetchRepos() {
+            const val = mainInput.value.trim();
+            if(!val) return log(`${currentMode === 'owner' ? 'Token' : 'Username'} required`, 'error');
+            
+            toggleUI(true);
+            allRepos = [];
+            repoList.innerHTML = '<tr><td colspan="5" class="p-16 text-center animate-pulse text-indigo-500 font-medium">Fetching repositories...</td></tr>';
+
+            try {
+                let page = 1;
+                const headers = {};
+                if (currentMode === 'owner') headers['Authorization'] = `Bearer ${val}`;
+
+                const url = currentMode === 'owner' 
+                    ? `https://api.github.com/user/repos?visibility=all&per_page=100&page=`
+                    : `https://api.github.com/users/${val}/repos?per_page=100&page=`;
+
+                while(true) {
+                    const res = await fetchWithRetry(url + page, { headers });
+                    const data = await res.json();
+                    if(data.length === 0) break;
+                    allRepos = allRepos.concat(data.filter(r => !r.fork));
+                    page++;
+                    if (page > 3) break; 
+                }
+                renderRepos();
+                log(`Loaded ${allRepos.length} repos.`, 'success');
+                if (currentMode === 'owner') updateRateLimit(val);
+            } catch(e) {
+                log(e.message, 'error');
+                repoList.innerHTML = `<tr><td colspan="5" class="p-16 text-center text-red-500 font-bold">${e.message}</td></tr>`;
+            } finally {
+                toggleUI(false);
+            }
+        }
+
+        function renderRepos() {
+            if (allRepos.length === 0) {
+                repoList.innerHTML = '<tr><td colspan="5" class="p-16 text-center text-gray-400 italic">No data.</td></tr>';
+                return;
+            }
+            repoList.innerHTML = allRepos.map(r => `
+                <tr>
+                    <td class="p-4 text-center"><input type="checkbox" class="repo-cb" data-id="${r.id}" onchange="updateSelection()" checked></td>
+                    <td class="p-4"><div class="font-bold">${r.name}</div><div class="text-[10px] text-gray-400">${r.default_branch}</div></td>
+                    <td class="p-4">${r.private ? 'PRIVATE' : 'PUBLIC'}</td>
+                    <td class="p-4 text-right">${r.stargazers_count} ★</td>
+                    <td class="p-4 text-xs" id="audit-${r.id}">Pending</td>
+                </tr>
+            `).join('');
+            updateSelection();
+        }
+
+        async function performMultiBranchScan() {
+            const token = mainInput.value.trim();
+            const selectedIds = Array.from(document.querySelectorAll('.repo-cb:checked')).map(cb => cb.dataset.id);
+            toggleUI(true);
+            log(`Starting branch scan...`, 'warning');
+
+            for(const id of selectedIds) {
+                const repo = allRepos.find(r => r.id == id);
+                const cell = document.getElementById(`audit-${id}`);
+                repo.findings = [];
+                try {
+                    const headers = (currentMode === 'owner' || token) ? { 'Authorization': `Bearer ${token}` } : {};
+                    const bRes = await fetchWithRetry(`https://api.github.com/repos/${repo.owner.login}/${repo.name}/branches`, { headers });
+                    const branches = await bRes.json();
+                    
+                    cell.innerHTML = "Scanning...";
+                    for(const b of branches) {
+                        const tRes = await fetchWithRetry(`https://api.github.com/repos/${repo.owner.login}/${repo.name}/git/trees/${b.commit.sha}?recursive=1`, { headers });
+                        const tData = await tRes.json();
+                        if(!tData.tree) continue;
+                        const files = tData.tree.filter(f => f.type === 'blob' && f.size < 300000).slice(0, 15);
+                        for(const f of files) {
+                            const cRes = await fetchWithRetry(f.url, { headers: { ...headers, 'Accept': 'application/vnd.github.v3.raw' } });
+                            const text = await cRes.text();
+                            for(const p of PATTERNS) {
+                                if(p.reg.test(text)) repo.findings.push({ branch: b.name, file: f.path, type: p.name });
+                            }
+                        }
+                    }
+                    if(repo.findings.length > 0) {
+                        cell.innerHTML = `<button onclick="inspectFindings('${repo.id}')" class="bg-red-500 text-white px-2 py-1 rounded text-[10px] finding-alert">VIEW (${repo.findings.length})</button>`;
+                    } else {
+                        cell.innerHTML = '<span class="text-emerald-500 font-bold">CLEAN</span>';
+                    }
+                } catch(e) {
+                    cell.innerHTML = "Error";
+                    log(`Error scanning ${repo.name}: ${e.message}`, 'error');
+                }
+            }
+            toggleUI(false);
+        }
+
+        window.inspectFindings = function(id) {
+            const repo = allRepos.find(r => r.id == id);
+            if(!repo) return;
+            document.getElementById('inspector').innerHTML = `
+                <div class="font-bold text-red-600 mb-2 border-b pb-1">${repo.name}</div>
+                ${repo.findings.map(f => `<div class="p-2 mb-2 bg-white border border-red-100 rounded text-[10px]">
+                    <div class="font-bold">${f.type}</div>
+                    <div class="text-gray-500">Branch: ${f.branch}</div>
+                    <div class="italic text-gray-400 break-all">${f.file}</div>
+                </div>`).join('')}
+            `;
+        };
+
+        async function updateRateLimit(token) {
+            try {
+                const res = await fetch('https://api.github.com/rate_limit', { headers: { 'Authorization': `Bearer ${token}` }});
+                const data = await res.json();
+                rateLimitInfo.innerText = `Rate Limit: ${data.resources.core.remaining}/${data.resources.core.limit}`;
+            } catch (e) {}
+        }
+
+        function toggleUI(d) {
+            isProcessing = d;
+            document.querySelectorAll('button').forEach(b => b.disabled = d);
+            document.querySelectorAll('input').forEach(i => i.disabled = d);
+        }
+
+        function updateSelection() {
+            selectedCount.innerText = document.querySelectorAll('.repo-cb:checked').length;
+            scanBtn.disabled = selectedCount.innerText == "0" || isProcessing;
+        }
+
+        function toggleAll(v) { document.querySelectorAll('.repo-cb').forEach(c => c.checked = v); updateSelection(); }
+        function closeModal() { confirmModal.classList.add('hidden'); }
+        function clearLog() { logArea.innerHTML = ''; logEntries.length = 0; }
+        function copyLogToClipboard() { 
+            const el = document.createElement('textarea'); el.value = logEntries.join('\n'); 
+            document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el); 
+            showToast('Copied!');
+        }
+        function showToast(m) { toast.innerText = m; toast.style.opacity = 1; setTimeout(()=>toast.style.opacity=0, 2000); }
+
+        const mainInput = document.getElementById('mainInput');
+        const repoList = document.getElementById('repoList');
+        const logArea = document.getElementById('logArea');
+        const rateLimitInfo = document.getElementById('rateLimitInfo');
+        const selectedCount = document.getElementById('selectedCount');
+        const scanBtn = document.getElementById('scanBtn');
+        const toast = document.getElementById('toast');
+    </script>
+</body>
+</html>
