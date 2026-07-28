@@ -1,0 +1,64 @@
+# DARLEK CANN v3.0 - AI STUDIO ENVIRONMENT CONFIGURATION
+# ARCHITECTURAL INTEGRATION: .aistudio/.gitignore
+# PURPOSE: Secure isolation of ephemeral agent states, local LLM caches, and diagnostic telemetry.
+
+# --- LOCAL ENVIRONMENT & SECRETS ---
+.env*
+!.env.example
+.secrets/
+*.key
+*.pem
+*.vault
+
+# --- AGENT ORCHESTRATION & STATE (Siphoned from sovereign-kernel/SN-OMEGA) ---
+/state/
+/memory/
+/logs/
+/temp/
+/checkpoints/
+/weights/
+/agent-swarms/*.json
+
+# --- AI STUDIO BUILD ARTIFACTS ---
+/dist/
+/build/
+/out/
+/.next/
+/.cache/
+/.turbo/
+
+# --- DIAGNOSTIC & TELEMETRY (Quantum/Performance Data) ---
+*.log
+*.prof
+*.trace
+*.heapdump
+/coverage/
+/telemetry-data/
+
+# --- DEPENDENCY & OS NOISE ---
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+
+# --- DARLEK CANN EVOLUTIONARY ARTIFACTS ---
+# Prevents accidental commit of self-refactoring cycles
+/evolution-logs/
+/refactor-diffs/
+/mutation-history/
+
+# --- IDE & EDITOR CONFIGURATION ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+
+# --- UNITARY-CORE / HUXLEY-SINGULARITY-LOOP DATA ---
+/quantum-buffers/
+/feedback-loops/
+/consciousness-snapshots/
+
+
+
+

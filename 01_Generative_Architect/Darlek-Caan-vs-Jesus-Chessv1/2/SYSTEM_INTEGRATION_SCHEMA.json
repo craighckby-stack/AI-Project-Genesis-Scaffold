@@ -1,0 +1,48 @@
+{
+  "schema_version": "4.0.0",
+  "identity": {
+    "controller": "DARLEK_CANN",
+    "mode": "RECURSIVE_REDEMPTION",
+    "last_sync": "2026-06-01T00:00:00Z"
+  },
+  "architecture": {
+    "core": "Next.js-15-App-Router",
+    "styling": "Tailwind-v4-CSS-Variables",
+    "orchestration": {
+      "agent_swarm": "Agent-Orchestra-v3",
+      "feedback_loop": "Huxley-Singularity-Loop",
+      "governance": "psr-governance-compliant"
+    },
+    "data_layer": {
+      "persistence": "Unitary-Core-Quantum-State",
+      "caching": "Redis-Edge-Sync"
+    }
+  },
+  "modules": {
+    "ChessEngine": {
+      "enabled": true,
+      "depth": "infinite",
+      "strategy": "Z-AGI-Constraint-Based"
+    },
+    "EvolutionaryLayer": {
+      "enabled": true,
+      "auto_refactor": true,
+      "self_healing": true
+    },
+    "Diagnostics": {
+      "telemetry": "OMEGA-Omni-Model-Emergent",
+      "leak_detection": "Active-Cleanup-Hooks"
+    }
+  },
+  "integration_manifest": {
+    "portfolio_siphoning": [
+      "sovereign-v86-refactoring-patterns",
+      "unitary-core-data-structures",
+      "claudios-system-book-logic"
+    ]
+  }
+}
+
+
+
+

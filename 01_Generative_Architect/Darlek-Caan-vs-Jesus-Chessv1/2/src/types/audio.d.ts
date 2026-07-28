@@ -1,0 +1,1 @@
+export interface AudioConfig { pitch: number; rate: number; type: 'dalek' | 'jesus'; }

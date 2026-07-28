@@ -1,0 +1,70 @@
+# ----------------------------------------------------------------------------------------------------
+# DARLEK CANN: OMNI-MODEL EVOLUTIONARY REPOSITORY MANIFEST
+# ----------------------------------------------------------------------------------------------------
+# ARCHITECTURAL ROLE: Version Control Hygiene & Security Perimeter
+# INTEGRATION: Next.js / Agent Orchestra / Sovereign-Kernel / Quantum-Simulation
+# ----------------------------------------------------------------------------------------------------
+
+# 1. CORE DEPENDENCIES & BUILD ARTIFACTS
+node_modules/
+.next/
+out/
+build/
+dist/
+.turborepo/
+.pnpm-store/
+
+# 2. ENVIRONMENT & SECURITY PERIMETER
+# Prevents leakage of sovereign keys, API tokens, and agent-orchestration secrets.
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# 3. AGENT ORCHESTRATION & SIMULATION ARTIFACTS
+# Siphoned from 'unitary-core' and 'Simulation-' projects.
+*.log
+*.tmp
+*.bak
+*.swp
+.cache/
+.eslintcache
+.prettiercache
+.agent-state/
+*.json.lock
+*.dump
+*.sqlite
+*.db
+
+# 4. TESTING & DIAGNOSTIC OUTPUTS
+coverage/
+.nyc_output/
+*.log*
+*-debug.log*
+*-error.log*
+
+# 5. IDE & OS ENVIRONMENT
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.sublime-*
+*.iml
+.project
+.classpath
+.settings/
+
+# 6. SYSTEM EVOLUTION & METADATA
+# Excludes internal evolution logs and local diagnostic telemetry.
+.evolution-logs/
+.telemetry/
+.temp-build-manifest.json
+
+# ----------------------------------------------------------------------------------------------------
+# END OF MANIFEST: System integrity maintained by DARLEK CANN.
+# ----------------------------------------------------------------------------------------------------
+
+
+
+
+

@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DARLEK_CANN_GOVERNANCE_PROTOCOL_V4",
+  "description": "Unified governance schema for self-modifying agent swarms and quantum-state simulation.",
+  "type": "object",
+  "required": ["stabilityMatrix", "quantumMode", "agentManifest", "recursiveLoopConfig"],
+  "properties": {
+    "stabilityMatrix": {
+      "type": "object",
+      "properties": {
+        "entropyThreshold": { "type": "number", "maximum": 0.042, "default": 0.01 },
+        "coherenceIndex": { "type": "number", "minimum": 0, "maximum": 1 },
+        "errorCorrectionRate": { "type": "number" }
+      },
+      "required": ["entropyThreshold", "coherenceIndex"]
+    },
+    "quantumMode": { "type": "boolean" },
+    "agentManifest": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "role", "priority"],
+        "properties": {
+          "id": { "type": "string" },
+          "role": { "type": "string", "enum": ["ORCHESTRATOR", "EXECUTIONER", "DIAGNOSTIC", "OBSERVER"] },
+          "priority": { "type": "integer", "minimum": 1, "maximum": 10 }
+        }
+      }
+    },
+    "recursiveLoopConfig": {
+      "type": "object",
+      "properties": {
+        "maxDepth": { "type": "integer", "default": 3 },
+        "autoRefactor": { "type": "boolean" },
+        "safetyBrake": { "type": "boolean", "default": true }
+      }
+    }
+  }
+}
+
+
+
+

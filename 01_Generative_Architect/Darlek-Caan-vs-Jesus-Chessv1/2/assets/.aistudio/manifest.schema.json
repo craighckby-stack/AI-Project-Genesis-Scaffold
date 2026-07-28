@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DARLEK CANN OMEGA Manifest",
+  "description": "System configuration for self-evolving agent swarms and consciousness frameworks.",
+  "type": "object",
+  "required": ["version", "governanceLevel", "quantumState", "agentOrchestra"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "governanceLevel": {
+      "enum": ["strict", "permissive", "autonomous", "sovereign"]
+    },
+    "quantumState": {
+      "type": "object",
+      "properties": {
+        "entanglementDepth": { "type": "integer", "minimum": 0 },
+        "coherenceThreshold": { "type": "number", "minimum": 0, "maximum": 1 }
+      },
+      "required": ["entanglementDepth", "coherenceThreshold"]
+    },
+    "agentOrchestra": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "role": { "type": "string" },
+          "priority": { "type": "integer" }
+        },
+        "required": ["id", "role"]
+      }
+    },
+    "telemetry": {
+      "type": "object",
+      "properties": {
+        "enableLogging": { "type": "boolean" },
+        "endpoint": { "type": "string", "format": "uri" }
+      }
+    }
+  }
+}
+
+
+
+

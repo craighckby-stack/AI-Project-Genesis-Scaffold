@@ -1,0 +1,48 @@
+{
+  "manifest": {
+    "name": "DARLEK-CANN-CORE",
+    "version": "3.0.2-OMEGA",
+    "build_timestamp": "2024-05-20T14:00:00Z",
+    "architecture": {
+      "type": "Agent-Orchestra-NextJS",
+      "kernel": "sovereign-v86-refactor-engine",
+      "state_store": "Zustand-Sovereign-Store"
+    }
+  },
+  "security": {
+    "protocol": "OMEGA-LEVEL-4",
+    "governance": "psr-governance-v1",
+    "self_healing": true
+  },
+  "modules": {
+    "chess_engine": {
+      "enabled": true,
+      "heuristic_depth": "multi-dimensional",
+      "api_provider": "Gemini-1.5-Pro"
+    },
+    "quantum_state": {
+      "enabled": true,
+      "persistence": "indexedDB-volatile"
+    },
+    "telemetry": {
+      "enabled": true,
+      "endpoint": "/api/v1/telemetry"
+    }
+  },
+  "orchestration": {
+    "auto_refactor": true,
+    "fallback_strategy": "3-tier-LLM-failover",
+    "dependency_graph": {
+      "core": ["@/lib/sovereign", "@/lib/quantum"],
+      "ui": ["@/components/orchestra", "@/styles/tailwind-config"]
+    }
+  },
+  "runtime_constraints": {
+    "max_memory_mb": 4096,
+    "max_agent_threads": 8,
+    "strict_mode": true
+  }
+}
+
+
+
