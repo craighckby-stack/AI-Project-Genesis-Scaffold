@@ -1,0 +1,6 @@
+{
+  "name": "Encyclopedia of Engineering",
+  "description": "Extracting meaning from syntax: A visual encyclopedia for software engineering knowledge",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
