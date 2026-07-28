@@ -1,0 +1,25 @@
+{
+  "discoveredFiles": [
+    "/assets/c80611c4/css/bootstrap.min.css",
+    "/assets/ff2ff0b/css/select2.min.css",
+    "/assets/c19c6973/css/select2-addl.min.css",
+    "/assets/c19c6973/css/select2-default.min.css",
+    "/assets/fb16b45a/css/kv-widgets.min.css",
+    "/assets/d65ff796/dist/bootstrap-tagsinput.css",
+    "/themes/pastebin/css/vendors.bundle.css",
+    "/themes/pastebin/css/app.bundle.css",
+    "/themes/pastebin/img/guest.webp",
+    "/themes/pastebin/img/hello.webp",
+    "/assets/9ce1885/jquery.min.js",
+    "/assets/f04f76b8/yii.js",
+    "/assets/ff2ff0b/js/select2.full.min.js",
+    "/assets/c19c6973/js/select2-krajee.min.js",
+    "/assets/fb16b45a/js/kv-widgets.min.js",
+    "/assets/f04f76b8/yii.activeForm.js",
+    "/assets/d65ff796/dist/bootstrap-tagsinput.js",
+    "/themes/pastebin/js/vendors.bundle.js",
+    "/themes/pastebin/js/app.bundle.js"
+  ],
+  "siphonEntropy": 0.406,
+  "timestamp": 1780067347815
+}

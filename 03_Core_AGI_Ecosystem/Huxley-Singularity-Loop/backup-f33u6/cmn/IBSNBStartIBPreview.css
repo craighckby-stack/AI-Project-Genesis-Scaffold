@@ -1,0 +1,1362 @@
+@font-face {
+		font-family: segoeuiregular;
+		src: url(SegoeUIRegular.eot);
+	}
+	@font-face {
+		font-family: segoeuiitalic;
+		src: url(segoeuii.eot);
+	}
+	@font-face {
+		font-family: segoeuisemibold;
+		src: url(seguisb.eot);
+	}
+@font-face {
+        font-family: segoeuiregular;
+        src: url(segoeui.ttf);
+    }
+    @font-face {
+        font-family:segoeuiitalic;
+        src: url(segoeuii.ttf);
+    }
+    @font-face {
+        font-family:segoeuisemibold;
+        src: url(Segoesemibold.ttf);
+    } 
+@media only screen  and (max-width: 319px) {
+	/* sam */
+	#DICGCimg {
+		position: absolute;
+    right: 41%;
+    top: -30%;
+    width: 7%;
+	}
+	.DBU_PDF{
+    position: absolute;
+    right: 52.9%;
+    width: 18%;
+    font-family: segoeuisemibold;
+    TOP: -19%;
+    font-size: 1.3vw;
+    animation: animate  
+                1.5s linear infinite; 
+    
+}
+   .new_jpg{
+   POSITION: absolute;
+    RIGHT: 54.5%;
+    TOP: -18%;
+    width: 2.8%;
+   }
+        @keyframes animate { 
+            0% { 
+                opacity: 0; 
+            } 
+  
+            50% { 
+                opacity: 0.7; 
+            } 
+  
+            100% { 
+                opacity: 0; 
+            } 
+}
+	.dicgcmessage {
+		position: absolute;
+		width: 41%;
+    left: 35%;
+    bottom: 101%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: x-small;
+    font-family: segoeuiitalic;
+    color: white;
+}
+	/* sam */
+	.preview_container{
+	display: none;
+	}
+	.potra_message{
+	display: block;
+	}
+	.message{
+	display: block;
+	    color: red;
+    text-align: center;
+	}
+	.preview{
+	display: flex;
+	}
+	  .rllogo{
+        height: 15vh;
+        float: left;
+        display: flex;
+        flex-shrink: 1;
+    }
+    .rlogo
+    {
+        margin: 20px 32px 10px 32px;
+        cursor: pointer;
+        width: 80%;
+    }
+}
+@media only screen  and (min-width: 320px)  and (max-width: 479px) {
+	/* sam */
+	#DICGCimg {
+		position: absolute;
+    right: 41%;
+    top: -30%;
+    width: 7%;
+}
+    .DBU_PDF{
+    position: absolute;
+    right: 52.9%;
+    width: 18%;
+    font-family: segoeuisemibold;
+    TOP: -19%;
+    font-size: 1.3vw;
+    animation: animate  
+                1.5s linear infinite; 
+    
+}
+   .new_jpg{
+   POSITION: absolute;
+    RIGHT: 54.5%;
+    TOP: -18%;
+    width: 2.8%;
+   }
+        @keyframes animate { 
+            0% { 
+                opacity: 0; 
+            } 
+  
+            50% { 
+                opacity: 0.7; 
+            } 
+  
+            100% { 
+                opacity: 0; 
+            } 
+}
+	.dicgcmessage {
+    position: absolute;
+    width: 41%;
+    left: 35%;
+    bottom: 101%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: x-small;
+    font-family: segoeuiitalic;
+    color: white;
+}
+/* sam */
+	/* Styling based on ED Comments */
+    .log_netbanklogo
+    {
+        float: none;
+        text-align: right;
+        font-family: segoeuisemibold;
+        color: #f4af35;
+        font-size: 10px;
+        margin: 7vh 0vw 0vh 0vw;
+    }
+@font-face {
+		font-family: segoeuiregular;
+		src: url(SegoeUIRegular.eot);
+	}
+	@font-face {
+		font-family: segoeuiitalic;
+		src: url(segoeuii.eot);
+	}
+	@font-face {
+		font-family: segoeuisemibold;
+		src: url(seguisb.eot);
+	}
+@font-face {
+        font-family: segoeuiregular;
+        src: url(segoeui.ttf);
+    }
+    @font-face {
+        font-family:segoeuiitalic;
+        src: url(segoeuii.ttf);
+    }
+    @font-face {
+        font-family:segoeuisemibold;
+        src: url(Segoesemibold.ttf);
+    } 
+          html{
+              overflow-y:auto;
+              overflow-x:hidden;
+              display: flex;
+    }
+    /* Styling the header section */
+    .header{
+        background-color:#0b419a;
+        width: 89.4%;
+        height: 17vh;
+        top: 0vh;
+        left: 5.02vw;
+        position: absolute;
+        display: flex;
+        float: left;
+    }
+    .logo{
+        height: 15vh;
+        float: left;
+        display: flex;
+        /* flex-shrink: 1; */
+    }
+    .blogo
+    {
+        margin: 20px 0px 10px 0px;
+        cursor: pointer;
+        width: 83%;
+    }
+    body
+        {
+        background-color: #9198a3;
+    }
+        /* Styling the login section */
+        .quicklink
+        {
+        color: aliceblue;
+        width: 24vw;
+        height: 3vh;
+        float: right;
+        margin: 18px 0px 0px 0px;
+        }
+        .log_about
+        {
+            float: none;
+            font-size: 10px;
+            text-align: right;
+            font-family: segoeuisemibold;
+            color: #ffffff;
+            margin: 6vh 6vw 0vh 0vw;
+        }
+         .log_careers
+        {
+            width: 4vw;
+            float:left;
+        }
+         .log_find
+        {
+            width: 9vw;
+            float:left;
+        }
+         .login_site
+        {
+             margin: 3px 0px 0px 1px;
+             float: left;
+             width: 3vw;
+             display: flex;
+             flex-shrink: 1;
+        }
+        .login_site img
+        {
+             margin:auto;
+             float: left;
+        }
+        .login_bar
+    {
+        background-color: #ffffff;
+        width: 89.4vw;
+        height: 40px;
+        position: absolute;
+        top: 122px;
+        left: 5.02vw;
+        border-bottom: 1px solid #d9d9d9;
+        float: left;
+    }
+        .login_container
+        {
+            float:left;
+            margin: 0px 0px 0px 0px;
+            top: 17vh;
+            position: absolute;
+            left: 5.02vw;
+            height: 51vh;
+            display: flex;
+            width: 89.4%;
+            flex-shrink: 1;
+        }
+        .login_content
+        {
+            float:left;
+            height: 50.6vh;
+            display: flex;
+            width: 100%;
+        }
+        .arrow_cont
+        {
+            width: 55%;
+            height: 40px;
+            margin: 170px 0px 0px 1.5vw;
+            position: absolute;
+        }
+        .login_cont
+        {
+            width: 20vw;
+            height: 4vh;
+            margin: 20vh 0px 0px 60vw;
+            position: absolute;
+            background-color: #0B419A;
+            border-radius: 26px;
+        }
+        
+         
+         .login_cont:hover
+        {
+           width: 20vw;
+           height: 4vh;
+           color: darkblue;
+           font-size: 22px;
+           margin: 20vh 0px 0px 60vw;
+           position: absolute;
+           background-color: darkcyan;
+           border-radius: 54px;
+        }
+        .login_text
+        {
+            height: auto;
+            color: white;
+            font-size: 1vw;
+            margin: 5px 0px 0px 21px;
+            font-family: segoeuiitalic;
+            cursor:pointer;
+        }
+        .login_cont1
+        {
+            width: 20vw;
+            height: 4vh;
+            margin: 25vh 0px 0px 60vw;
+            position: absolute;
+            background-color: #ced1da;
+            border-radius: 26px;
+        }
+         
+         .login_cont1:hover
+        {
+            width: 20vw;
+            height: 4vh;
+            color: darkblue;
+            font-size: 22px;
+            margin: 25vh 0px 0px 60vw;
+            position: absolute;
+            background-color: white;
+            border-radius: 54px;
+        }
+        .login_text1
+        {
+            height: auto;
+            color: #4e08f7;
+            font-size: 1vw;
+            margin: 5px 0px 0px 15px;
+            font-family: segoeuiitalic;
+            cursor:pointer;
+        }
+        .login_security
+        {
+         float:left;
+         background-color: white;
+         width: 89.4%;
+         display: flex;
+         margin: 0px 0px 0px 0%;
+         top: 67.6vh;
+         position: absolute;
+         left: 5.02vw;
+         height: 24vh;
+        }
+        .login_security1
+        {
+         float:left;
+         background-color: white;
+         width: 89.4%;
+         display: flex;
+         margin: 0px 0px 0px 0%;
+         top: 67.6vh;
+         position: absolute;
+         left: 5.02vw;
+         height: 29vh;
+        }
+        .login_norms
+        {
+         float:left;
+         margin: 0px 0px 0px 0px;
+         background-color: #0b419a;
+         width: 89.4%;
+         height: 8.5vh;
+         position: absolute;
+         left: 5.02vw;
+         top: 99.6vh;
+        }
+        .login_brow
+        {
+         float:left;
+         margin: 2px 0px 0px 2px;
+         width: 9.4vw;
+         position: relative;
+        }
+        .login_siteview
+        {
+         float:left;
+         background-color: #f0f0f0;
+         display: flex;
+         margin: 0px 0px 0px 0%;
+         width: 89.4%;
+         top: 96.6vh;
+         position: absolute;
+         left: 5.02vw;
+         height: 6vh;
+        }
+        .login_site_cont
+        {
+         float:left;
+         margin: 0px 0px 0px 0px;
+         background-color: #f0f0f0;
+         width: 89.4%;
+         height: 3.8vh;
+         left: 5.02vw;
+         position: absolute;
+         top: 96.48vh;
+        }
+        .login_view
+        {
+         float:left;
+         font-family: segoeuiitalic;
+         margin: 0vh 0vw 0vh 1vw;
+         position: relative;
+         font-size: 10px;
+         width: 53vw;
+        }
+        .login_disview
+        {
+         float:left;
+         font-family: segoeuisemibold;
+         color: #ff0606;
+         height: 6vh;
+         margin: 0vh 0vw 0vh 0vw;
+         position: relative;
+         width: 83vw;
+         top: 0%;
+         left: 2vw;
+         font-size: 8PX;
+        }
+        .login_bro_view
+        {
+         float:left;
+         font-family: segoeuiitalic;
+         color: #1b4ede;
+         height: AUTO;
+         top: 1vw;
+         font-size: 8PX;
+         margin: 0vh 0vw 0vh 0vw;
+         position: relative;
+         width: 3vw;
+        }
+        .left_arrow
+        {
+            float: left;
+            position: absolute;
+            cursor: pointer;
+        }
+        .right_arrow
+        {
+          margin: 0px 0px 0px 49vw;
+          position:absolute;
+          cursor: pointer;
+        }
+        .norton_head{
+            color: #0b41fa;
+            font-family: segoeuisemibold;
+            font-size: 8px;
+        }
+        .norton_head2{
+            color: #39a76a;
+            margin: 0px 0px 0px 18vw;
+            font-family: segoeuisemibold;
+            font-size: 11px;
+        }
+        .norton_head3{
+            color: #f70017;
+            font-family: segoeuisemibold;
+            font-size: 11px;
+            margin: 0px 0px 0px 15vw;
+        }
+         .norton_sectip{
+           color: #0089ff;
+           font-family: segoeuisemibold;
+           font-size: 2.5vw;
+           margin: 15vh 0vw 0vh 31vw;
+           height: 4vh;
+        }
+        .norton_head1 a{
+            font-family: segoeuiitalic;
+            font-size: 7px;
+            color: bisque;
+            text-decoration:none;
+        }
+        .norton_head1 a:hover{
+            font-family: segoeuiitalic;
+            font-size: 10px;
+            color: #e01a91;
+        }
+        .norton_body a{
+            color: #cc2e2e;
+            font-family: segoeuiitalic;
+            font-size: 6px;
+            text-decoration: none;
+        }
+        .norton_body1{
+            color: #cc2e2e;
+            font-family: segoeuiitalic;
+            font-size: 8px;
+            text-decoration: none;
+        }
+         .norton_body2{
+            color: #cc2e2e;
+            font-family: segoeuiitalic;
+            font-size: 8px;
+            text-decoration: none;
+        }
+         .norton_body3{
+            color: #cc2e2e;
+            font-family: segoeuiitalic;
+            font-size: 8px;
+            text-decoration: none;
+        }
+         .norton_body4{
+            color: #cc2e2e;
+            font-family: segoeuiitalic;
+            font-size: 8px;
+            text-decoration: none;
+        }
+         .norton_body a:hover{
+            color: #e01a91;
+            font-family: segoeuiitalic;
+            font-size: 7px;
+        }
+       .norton_sec1 {
+    float: left;
+    margin: 16px 0px 0px 0px;
+    width: 14vw;
+    height: 15vh;
+    position: absolute;
+    left: 1vw;
+    top: 3vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+        .norton_sec2
+        {
+            float:left;
+            margin: 0px 0px 0px 0px;
+            width: 27vw;
+            position: absolute;
+            height: 12vh;
+            left: 26vw;
+            top: 2vh;
+            overflow-x: hidden;
+			overflow-y: scroll;
+            /* border-right: 4px dotted #717171; */
+        }
+        .norton_sec3
+        {
+            float:left;
+            margin: 0px 0px 0px 0px;
+            width: 30vw;
+            position: absolute;
+            top: 2vh;
+            left: 56vw;
+            height: 13vh;
+            overflow-x: hidden;
+			overflow-y: scroll;
+        }
+         .norton_sectip2
+        {
+            float:left;
+            margin: 0px 0px 0px 0vw;
+            width: 39vw;
+            position: absolute;
+            height: auto;
+            left: 2vw;
+            top: 18.3vh;
+        }
+        .norton_sectip3
+        {
+            float:left;
+            margin: 0px 0px 0px 0px;
+            width: 37vw;
+            position: absolute;
+            top: 18.5vh;
+            left: 44vw;
+            height: auto;
+        }
+        .norton_sec4
+        {
+            float:left;
+            margin: 0vh 0px 0px 1vw;
+            width: 35%;
+        }
+        .norton_sec5
+        {
+            float:left;
+            margin: 0vh 0px 0px 5vw;
+            width: 22%;
+        }
+        .norton_sec6
+        {
+            float:left;
+            margin: 0vh 0px 0px 9vw;
+            width: 21%;
+        }
+        .sp_contact
+        {
+        width: 42%;
+        }
+        .no_about
+        {
+        float: none;
+        font-size: 10px;
+        text-align: right;
+        font-family: segoeuisemibold;
+        color: #ffffff;
+        margin: 0vh 3vw 0vh 0vw;
+        }
+        .dss_complaint {
+	    position: absolute;
+        width: 9%;
+        left: 74%;
+        top: 32%;
+        background-color: white;
+        }
+_:-ms-fullscreen, :root .login_cont { -ms-transform: translate(-395%, -3%); }
+_:-ms-fullscreen, :root .login_cont:hover { -ms-transform: translate(-395%, -3%); }
+_:-ms-fullscreen, :root .login_cont1 { -ms-transform: translate(-395%, -3%); }
+_:-ms-fullscreen, :root .login_cont1:hover { -ms-transform: translate(-395%, -3%); }
+_:-ms-fullscreen, :root .arrow_cont { -ms-transform: translate(-172%, 7%); }
+_:-ms-lang(x), .login_cont { -ms-transform: translate(0%, -3%)\9; }
+_:-ms-lang(x), .login_cont1 { -ms-transform: translate(0%, -3%)\9; }
+_:-ms-lang(x), .arrow_cont { -ms-transform: translate(0%, 7%)\9; }
+_:-ms-lang(x), .login_cont:hover { -ms-transform: translate(0%, 3%)\9; }
+_:-ms-lang(x), .login_cont1:hover { -ms-transform: translate(0%, 3%)\9; }
+.preview_container{
+	display: block;
+	}
+	.potra_message{
+	display: none;
+	}
+	.message{
+	display: none;
+	}
+	.preview{
+	display: block;
+	}
+	 .rllogo{
+	display: none;    }
+    .rlogo
+    {
+	display: none;    }
+	
+	@supports (overflow:-webkit-marquee) and (justify-content:inherit) 
+{
+
+      
+        
+           .login_cont
+        {
+            width: 20vw;
+            height: 4vh;
+            margin: 20vh 0px 0px -25vw;
+            position: absolute;
+            background-color: #0B419A;
+            border-radius: 26px;
+        }
+        
+         
+         .login_cont:hover
+        {
+           width: 20vw;
+           height: 4vh;
+           color: darkblue;
+           font-size: 22px;
+           margin: 20vh 0px 0px -25vw;
+           position: absolute;
+           background-color: darkcyan;
+           border-radius: 54px;
+        }
+        .login_text
+        {
+            height: auto;
+            color: white;
+            font-size: 1vw;
+            margin: 10px 0px 0px 21px;
+            font-family: segoeuiitalic;
+            cursor:pointer;
+        }
+        .login_cont1
+        {
+            width: 20vw;
+            height: 4vh;
+            margin: 25vh 0px 0px -25vw;
+            position: absolute;
+            background-color: #ced1da;
+            border-radius: 26px;
+        }
+         
+         .login_cont1:hover
+        {
+            width: 20vw;
+            height: 4vh;
+            color: darkblue;
+            font-size: 22px;
+            margin: 25vh 0px 0px -25vw;
+            position: absolute;
+            background-color: white;
+            border-radius: 54px;
+        }
+        .login_text1
+        {
+            height: auto;
+            color: #4e08f7;
+            font-size: 1vw;
+            margin: 10px 0px 0px 15px;
+            font-family: segoeuiitalic;
+            cursor:pointer;
+        }
+        
+        .log_netbanklogo
+    {
+        float: none;
+        text-align: center;
+        font-family: segoeuisemibold;
+        color: #f4af35;
+        font-size: 4px;
+        margin: 7vh 0vw 0vh 0vw;
+    }
+        
+        
+        
+}
+}
+@media only screen and (min-width: 480px) {
+	/* sam */
+	#DICGCimg {
+		position: absolute;
+    right: 41%;
+    top: -30%;
+    width: 7%;
+}
+   .DBU_PDF{
+    position: absolute;
+    right: 52.9%;
+    width: 18%;
+    font-family: segoeuisemibold;
+    TOP: -19%;
+    font-size: 1.3vw;
+    animation: animate  
+                1.5s linear infinite; 
+    
+}
+   .new_jpg{
+   POSITION: absolute;
+    RIGHT: 54.5%;
+    TOP: -18%;
+    width: 2.8%;
+   }
+        @keyframes animate { 
+            0% { 
+                opacity: 0; 
+            } 
+  
+            50% { 
+                opacity: 0.7; 
+            } 
+  
+            100% { 
+                opacity: 0; 
+            } 
+}
+   
+	.dicgcmessage {
+    position: absolute;
+    width: 41%;
+    left: 35%;
+    bottom: 101%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: x-small;
+    font-family: segoeuiitalic;
+    color: white;
+	}
+	/* sam */
+	/* Styling based on ED Comments */
+    .log_netbanklogo
+    {
+    float: right;
+    text-align: left;
+    font-size: 1.5vw;
+    font-family: segoeuisemibold;
+    color: #f4af35;
+    margin: 6vh 0vw 0vh 15vw;
+    }
+@font-face {
+		font-family: segoeuiregular;
+		src: url(SegoeUIRegular.eot);
+	}
+	@font-face {
+		font-family: segoeuiitalic;
+		src: url(segoeuii.eot);
+	}
+	@font-face {
+		font-family: segoeuisemibold;
+		src: url(seguisb.eot);
+	}
+@font-face {
+        font-family: segoeuiregular;
+        src: url(segoeui.ttf);
+    }
+    @font-face {
+        font-family:segoeuiitalic;
+        src: url(segoeuii.ttf);
+    }
+    @font-face {
+        font-family:segoeuisemibold;
+        src: url(Segoesemibold.ttf);
+    } 
+     
+          
+    /* Styling the header section */
+    html{
+              overflow-y:auto;
+              overflow-x:hidden;
+              display: flex;
+    }
+    .header{
+        background-color:#0b419a;
+        width: 89.4%;
+        height: 17vh;
+        top: 0vh;
+        left: 5.05vw;
+        position: absolute;
+        display: flex;
+        float: left;
+    }
+    .logo{
+        height: 15vh;
+        float: left;
+        display: flex;
+        flex-shrink: 1;
+    }
+    .blogo
+    {
+        margin: 20px 32px 10px 32px;
+        cursor: pointer;
+        width: 80%;
+    }
+    body
+        {
+        background-color: #9198a3;
+    }
+        /* Styling the login section */
+        .quicklink
+        {
+        color: aliceblue;
+        width: 24vw;
+        height: 3vh;
+        float: right;
+        margin: 18px 0px 0px 0px;
+        }
+        .log_about
+        {
+            float: none;
+            text-align: right;
+            font-family: segoeuisemibold;
+            color: #ffffff;
+            margin: 6vh 0vw 0vh 0vw;
+        }
+         .log_careers
+        {
+            width: 4vw;
+            float:left;
+        }
+         .log_find
+        {
+            width: 9vw;
+            float:left;
+        }
+         .login_site
+        {
+             margin: 3px 9px 0px 1px;
+             float: left;
+             width: 3vw;
+             display: flex;
+             flex-shrink: 1;
+        }
+        .login_site img
+        {
+             margin:auto;
+             float: left;
+        }
+        .login_bar
+    {
+        background-color: #ffffff;
+        width: 89.4vw;
+        height: 40px;
+        position: absolute;
+        top: 122px;
+        left: 5.02vw;
+        border-bottom: 1px solid #d9d9d9;
+        float: left;
+    }
+        .login_container
+        {
+            float:left;
+            margin: 0px 0px 0px 0px;
+            top: 17vh;
+            position: absolute;
+            left: 5.02vw;
+            height: 51vh;
+            display: flex;
+            width: 89.4%;
+            flex-shrink: 1;
+        }
+        .login_content
+        {
+            float:left;
+            height: 50.6vh;
+            display: flex;
+            width: 100%;
+        }
+        .arrow_cont
+        {
+            width: 55%;
+            height: 40px;
+            margin: 170px 0px 0px 1.5vw;
+            position: absolute;
+        }
+       
+        .login_cont
+        {
+            width: 21vw;
+            height: 6vh;
+            margin: 19vh 0px 0px 64vw;
+            position: absolute;
+            background-color: #0B419A;
+            border-radius: 26px;
+        }
+         
+         .login_cont:hover
+        {
+           width: 21vw;
+           height: 6vh;
+           color: darkblue;
+           font-size: 25px;
+           margin: 19vh 0px 0px 64vw;
+           position: absolute;
+           background-color: darkcyan;
+           border-radius: 54px;
+        }
+        .login_text
+        {
+            height: auto;
+            color: white;
+            font-size: 1.5vw;
+            margin: 0.6vh 0px 0px 2vw;
+            font-family: segoeuiitalic;
+            cursor:pointer;
+        }
+         .login_cont1
+        {
+            width: 21vw;
+            height: 6vh;
+            margin: 28vh 0px 0px 64vw;
+            position: absolute;
+            background-color: #ced1da;
+            border-radius: 26px;
+        }
+         
+         .login_cont1:hover
+        {
+           width: 21vw;
+           height: 6vh;
+            color: darkblue;
+            font-size: 25px;
+            margin: 28vh 0px 0px 64vw;
+            position: absolute;
+            background-color: white;
+            border-radius: 54px;
+        }
+        .login_text1
+        {
+            height: auto;
+            color: #4e08f7;
+            font-size: 1.5vw;
+            margin: 0.6vh 0px 0px 0.7vw;
+            font-family: segoeuiitalic;
+            cursor:pointer;
+        }
+        .login_security
+        {
+         float:left;
+         background-color: white;
+         width: 15.4%;
+         display: flex;
+         margin: 0px 0px 0px 0%;
+         top: 2.6vh;
+         position: absolute;
+         left: 5.02vw;
+         height: 24vh;
+        }
+        .login_security1
+        {
+         float:left;
+         background-color: #FFF;
+         width: 89.4%;
+         display: flex;
+         margin: 0px 0px 0px 0%;
+         top: 67.6vh;
+         position: absolute;
+         left: 5.02vw;
+         height: 22vh;
+        }
+        .login_norms
+        {
+         float:left;
+         margin: 0px 0px 0px 0px;
+         background-color: #0b419a;
+         width: 89.4%;
+         height: 6.3vh;
+         position: absolute;
+         left: 5vw;
+         top: 93.6vh;
+        }
+        .login_brow
+        {
+         float:left;
+         margin: 2px 0px 0px 2px;
+         width: 14.4vw;
+         position: relative;
+        }
+        .login_siteview
+        {
+         float:left;
+         background-color: #ffffff;
+         display: flex;
+         margin: 0px 0px 0px 0%;
+         width: 89.4%;
+         top: 89.5vh;
+         position: absolute;
+         left: 5.02vw;
+         height: 7vh;
+        }
+        .login_site_cont
+        {
+         float:left;
+         margin: 0px 0px 0px 0px;
+         background-color: #e8e8e8;
+         width: 89.4%;
+         height: 5vh;
+         left: 5.02vw;
+         position: absolute;
+         top: 89.5vh;
+        }
+        .login_view
+        {
+         float:left;
+         font-family: segoeuiitalic;
+         margin: 2vh 0vw 0vh 3vw;
+         position: relative;
+         font-size: 1vw;
+         width: 36vw;
+        }
+        .login_disview
+        {
+         float:left;
+         font-family: segoeuisemibold;
+         color: #ff0606;
+         height: 6vh;
+         margin: 1vh 0vw 0vh 0vw;
+         position: relative;
+         width: 86vw;
+         top: 0%;
+         left: 2vw;
+         font-size: 1vw;
+        }
+        .login_bro_view
+        {
+         float:left;
+         font-family: segoeuiitalic;
+         color: #1b4ede;
+         height: 5vh;
+         top: 1vw;
+         margin: 0vh 0vw 0vh 0vw;
+         position: relative;
+         width: 3vw;
+        }
+        .left_arrow
+        {
+            float: left;
+            position: absolute;
+            cursor: pointer;
+        }
+        .right_arrow
+        {
+          margin: 0px 0px 0px 49vw;
+          position:absolute;
+          cursor: pointer;
+        }
+        .norton_head{
+            color: #0badfa;
+            font-family: segoeuisemibold;
+            font-size: 1.1vw;
+        }
+        .norton_head2{
+            color: #39a76a;
+            font-family: segoeuisemibold;
+            font-size: 1.2vw;
+        }
+        .norton_head3{
+            color: #f70017;
+            font-family: segoeuisemibold;
+            font-size: 1.2vw;
+        }
+        .norton_sectip{
+           color: #0089ff;
+           font-family: segoeuisemibold;
+           font-size: 1.3vw;
+           margin: 1vh 0vw 0vh 56vw;
+           height: 4vh;
+        }
+        .norton_head1 a{
+            font-family: segoeuiitalic;
+            font-size: 1vw;
+            color: bisque;
+            text-decoration:none;
+        }
+        .norton_head1 a:hover{
+            font-family: segoeuiitalic;
+            font-size: 1vw;
+            color: #e01a91;
+        }
+        .norton_body a{
+            color: #cc2e2e;
+            font-family: segoeuiitalic;
+            font-size: 1.1vw;
+            text-decoration: none;
+        }
+        .norton_body1{
+            color: #000000;
+            font-family: segoeuiitalic;
+            font-size: 1vw;
+            text-decoration: none;
+        }
+         .norton_body2{
+            color: #000000;
+            font-family: segoeuiitalic;
+            font-size: 1vw;
+            text-decoration: none;
+        }
+         .norton_body3{
+            color: #000000;
+            font-family: segoeuiitalic;
+            font-size: 1vw;
+            text-decoration: none;
+        }
+         .norton_body4{
+            color: #000000;
+            font-family: segoeuiitalic;
+            font-size: 1vw;
+            text-decoration: none;
+        }
+         .norton_body a:hover{
+            color: #e01a91;
+            font-family: segoeuiitalic;
+            font-size: 1.15vw;
+        }
+        .norton_sec1 {
+    float: left;
+    margin: 16px 0px 0px 0px;
+    width: 14vw;
+    height: 15vh;
+    position: absolute;
+    left: 1vw;
+    top: 3vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+        .norton_sec2
+        {
+            float:left;
+            margin: 15px 0px 0px 0px;
+            width: 14vw;
+            position: absolute;
+            height: 15vh;
+            left: 16vw;
+            top: 3vh;
+            overflow-x: hidden;
+			overflow-y: scroll;
+           /*  border-right: 4px dotted #717171; */
+        }
+        .norton_sec3
+        {
+            float:left;
+            margin: 15px 0px 0px 0px;
+            width: 16vw;
+            position: absolute;
+            top: 3vh;
+            left: 31vw;
+            height: 15vh;
+			overflow-x: hidden;
+			overflow-y: scroll;     
+	   }
+        .norton_sectip2
+        {
+            float:left;
+            margin: 0px 0px 0px 0px;
+            width: 20vw;
+            position: absolute;
+            height: 19.2vh;
+            left: 48vw;
+            top: 4.5vh;
+        }
+        .norton_sectip3
+        {
+            float:left;
+            margin: 0px 0px 0px 0px;
+            width: 21vw;
+            position: absolute;
+            top: 4.5vh;
+            left: 68vw;
+            height: 19.2vh;
+        }
+        .norton_sec4
+        {
+            float:left;
+            margin: 1vh 0px 0px 3vw;
+            width: 17%;
+        }
+        .norton_sec5
+        {
+            float:left;
+            margin: 1vh 72px 0px 3vw;
+            width: 9%;
+        }
+        .norton_sec6
+        {
+            float:left;
+            margin: 1vh 0px 0px 4vw;
+            width: 9%;
+        }
+        .sp_contact
+        {
+        width: 45%;
+        }
+        
+        .no_about
+        {
+        float: none;
+        text-align: right;
+        font-family: segoeuisemibold;
+        color: #ffffff;
+        margin: 0vh 0vw 0vh 0vw;
+        }
+        .dss_complaint {
+	    position: absolute;
+        width: 9%;
+        left: 74%;
+        top: 32%;
+        background-color: white;
+        }
+_:-ms-fullscreen, :root .login_cont { -ms-transform: translate(-426%, -3%); }
+_:-ms-fullscreen, :root .login_cont:hover { -ms-transform: translate(-426%, -3%); }
+_:-ms-fullscreen, :root .login_cont1 { -ms-transform: translate(-426%, -3%); }
+_:-ms-fullscreen, :root .login_cont1:hover { -ms-transform: translate(-426%, -3%); }
+_:-ms-fullscreen, :root .arrow_cont { -ms-transform: translate(-172%, 7%); }
+_:-ms-lang(x), .login_cont { -ms-transform: translate(0%, -3%)\9; }
+_:-ms-lang(x), .login_cont1 { -ms-transform: translate(0%, -3%)\9; }
+_:-ms-lang(x), .arrow_cont { -ms-transform: translate(0%, 7%)\9; }
+_:-ms-lang(x), .login_cont:hover { -ms-transform: translate(0%, 3%)\9; }
+_:-ms-lang(x), .login_cont1:hover { -ms-transform: translate(0%, 3%)\9; }
+.preview_container{
+	display: block;
+	}
+	.potra_message{
+	display: none;
+	}
+	.message{
+	display: none;
+	}
+	.preview{
+	display: block;
+	}
+	 .rllogo{
+	display: none;    }
+    .rlogo
+    {
+	display: none;    }
+	
+	@supports (overflow:-webkit-marquee) and (justify-content:inherit) 
+{
+
+  .login_cont {
+      	width: 21vw;
+            height: 6vh;
+            margin: 19vh 0px 0px -25vw;
+            position: absolute;
+            background-color: #0B419A;
+            border-radius: 26px;
+  }
+ .login_cont:hover
+        {
+           width: 21vw;
+           height: 6vh;
+            color: darkblue;
+            font-size: 25px;
+            margin: 19vh 0px 0px -25vw;
+            position: absolute;
+            background-color: darkcyan;
+            border-radius: 54px;
+        }
+        .login_cont1
+        {
+            width: 21vw;
+            height: 6vh;
+            margin: 28vh 0px 0px -25vw;
+            position: absolute;
+            background-color: #ced1da;
+            border-radius: 26px;
+        }
+          .login_cont1:hover
+        {
+           width: 21vw;
+           height: 6vh;
+            color: darkblue;
+            font-size: 25px;
+            margin: 28vh 0px 0px -25vw;
+            position: absolute;
+            background-color: white;
+            border-radius: 54px;
+        }	
+         .login_text
+        {
+            height: auto;
+            color: white;
+            font-size: 0.9vw;
+            margin: 1.4vh 0px 0px 2vw;
+            font-family: segoeuiitalic;
+            cursor:pointer;
+        }
+ .login_text1
+        {
+            height: auto;
+            color: #4e08f7;
+            font-size: 0.9vw;
+            margin: 1.4vh 0px 0px 0.7vw;
+            font-family: segoeuiitalic;
+            cursor:pointer;
+        }
+}
+}
