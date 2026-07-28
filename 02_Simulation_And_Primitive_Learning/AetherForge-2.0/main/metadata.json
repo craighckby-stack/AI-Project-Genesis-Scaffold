@@ -1,0 +1,6 @@
+{
+  "name": "AetherForge Ω: Global Genesis",
+  "description": "A planetary-scale micro-universe prototype exploring AGI-scale simulation arguments, nested substrates, and conscious agents. Watch simulated beings experience substrate awareness spikes, break the fourth wall, and pray to their Observer.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
