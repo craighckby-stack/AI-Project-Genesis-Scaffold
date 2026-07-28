@@ -1,0 +1,6 @@
+{
+  "name": "Sovereign Evolution Workspace",
+  "description": "An elite codebase evolution workspace and telemetry dashboard. Evolve repositories autonomously with adaptive AI agents, real-time code delta tracking, and interactive refactoring pipelines.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
