@@ -1,0 +1,1216 @@
+{
+  "summary": {
+    "totalExperiments": 23,
+    "generations": 20,
+    "deaths": 7,
+    "wins": 16,
+    "currentIQ": 25,
+    "exportTime": "2025-11-25T07:46:49.494Z"
+  },
+  "experiments": [
+    {
+      "generation": 20,
+      "action": "Grog try bool",
+      "result": "Grog die: RecursionError: Maximum recursion depth exceeded",
+      "lesson": "Grog learn: bool bad idea",
+      "success": false,
+      "parameters": {
+        "dataType": "bool",
+        "complexity": 0.9819275556602672,
+        "recursionDepth": 93000,
+        "learningRate": 71.62844894157396,
+        "mutationRate": 0.10594959131803444,
+        "exploration": 0.23172582749102985
+      },
+      "error": "RecursionError: Maximum recursion depth exceeded",
+      "taskPerformance": 0,
+      "convergenceMetric": 1,
+      "behavioralDescriptor": [
+        0.9819275556602672,
+        93000,
+        71.62844894157396,
+        0.10594959131803444,
+        0.5365504110752644,
+        0.4729605303445049,
+        0.007372095746446667,
+        1.927964378116499
+      ],
+      "sourceIntegrityHash": "5da8c536",
+      "consciousness": "SIMPLE_ERROR",
+      "timestamp": 1764056798083
+    },
+    {
+      "generation": 19,
+      "action": "Grog try bool",
+      "result": "Grog die: MemoryError: Too much data allocation",
+      "lesson": "Grog learn: bool bad idea",
+      "success": false,
+      "parameters": {
+        "dataType": "bool",
+        "complexity": 300,
+        "recursionDepth": 0.066,
+        "useBoundedCollections": true
+      },
+      "error": "MemoryError: Too much data allocation",
+      "taskPerformance": 0,
+      "convergenceMetric": 1,
+      "behavioralDescriptor": [
+        300,
+        0.066,
+        0.5273790854960819,
+        0.46376133606557,
+        0.001855558858480066,
+        1.9477049212742517
+      ],
+      "sourceIntegrityHash": "4ce4808c",
+      "consciousness": "SIMPLE_ERROR",
+      "timestamp": 1764056796641
+    },
+    {
+      "generation": 18,
+      "action": "Grog try string",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "string",
+        "complexity": 0.41499507143263453,
+        "recursionDepth": 0.063,
+        "useBoundedCollections": true
+      },
+      "error": null,
+      "taskPerformance": 0.47799507143263453,
+      "convergenceMetric": 0.5220049285673655,
+      "behavioralDescriptor": [
+        0.41499507143263453,
+        0.063,
+        0.4189625934533215,
+        0.3752877426935997,
+        0.00868205757140628,
+        1.6772337911971515
+      ],
+      "sourceIntegrityHash": "2d05008e",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764056795199
+    },
+    {
+      "generation": 17,
+      "action": "Grog try number",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "number",
+        "complexity": 0.3020513203600095,
+        "recursionDepth": 0.042,
+        "useBoundedCollections": true
+      },
+      "error": null,
+      "taskPerformance": 0.3440513203600095,
+      "convergenceMetric": 0.6559486796399905,
+      "behavioralDescriptor": [
+        0.3020513203600095,
+        0.042,
+        0.593848895518759,
+        0.47819421384755184,
+        0.017548215139851508,
+        1.9680250100710828
+      ],
+      "sourceIntegrityHash": "36c4383b",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764056793761
+    },
+    {
+      "generation": 16,
+      "action": "Grog try number",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "number",
+        "complexity": 0.25505211691137214,
+        "recursionDepth": 94000,
+        "useBoundedCollections": true
+      },
+      "error": null,
+      "taskPerformance": 0,
+      "convergenceMetric": 93999.25505211692,
+      "behavioralDescriptor": [
+        0.25505211691137214,
+        94000,
+        0.5915877976320506,
+        0.46886406695122007,
+        0.0007381697201978742,
+        1.9128104822180045
+      ],
+      "sourceIntegrityHash": "f24e913",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764056792239
+    },
+    {
+      "generation": 15,
+      "action": "Grog try string",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "string",
+        "complexity": 0.0003,
+        "recursionDepth": 0.098,
+        "useBoundedCollections": true
+      },
+      "error": null,
+      "taskPerformance": 0.09830000000000005,
+      "convergenceMetric": 0.9017,
+      "behavioralDescriptor": [
+        0.0003,
+        0.098,
+        0.5021114960837855,
+        0.42043259883088385,
+        0.0013192488793876535,
+        2.028077146311117
+      ],
+      "sourceIntegrityHash": "2cfdd43",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764056790723
+    },
+    {
+      "generation": 14,
+      "action": "Grog try string",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "string",
+        "complexity": 0.42398829280436673,
+        "recursionDepth": 0.073,
+        "learningRate": 0.05203787544086328,
+        "mutationRate": 0.6467159730445371,
+        "exploration": 0.5359085560884788
+      },
+      "error": null,
+      "taskPerformance": 0.26834930262175405,
+      "convergenceMetric": 0.731650697378246,
+      "behavioralDescriptor": [
+        0.42398829280436673,
+        0.073,
+        0.05203787544086328,
+        0.6467159730445371,
+        0.532187400010616,
+        0.4472372270442932,
+        0.00046260070489399763,
+        1.935452279034272
+      ],
+      "sourceIntegrityHash": "22f3d5c4",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764056789290
+    },
+    {
+      "generation": 13,
+      "action": "Grog try bool",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "bool",
+        "complexity": 0.15749133618561154,
+        "recursionDepth": 0.037,
+        "useBoundedCollections": true
+      },
+      "error": null,
+      "taskPerformance": 0.19449133618561154,
+      "convergenceMetric": 0.8055086638143885,
+      "behavioralDescriptor": [
+        0.15749133618561154,
+        0.037,
+        0.573611249849377,
+        0.44627345763848847,
+        0.0022394962199301003,
+        1.8771320246871737
+      ],
+      "sourceIntegrityHash": "6f37667",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764056787758
+    },
+    {
+      "generation": 12,
+      "action": "Grog try number",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "number",
+        "complexity": 0.38710262724904027,
+        "recursionDepth": 7000,
+        "useBoundedCollections": true
+      },
+      "error": null,
+      "taskPerformance": 0,
+      "convergenceMetric": 6999.387102627249,
+      "behavioralDescriptor": [
+        0.38710262724904027,
+        7000,
+        0.5739903471707571,
+        0.49858923529556465,
+        0.0002937122918841087,
+        1.935765595690757
+      ],
+      "sourceIntegrityHash": "4dfe123a",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764056786256
+    },
+    {
+      "generation": 11,
+      "action": "Grog try number",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "number",
+        "complexity": 0.20683492956863989,
+        "recursionDepth": 0.039,
+        "useBoundedCollections": true
+      },
+      "error": null,
+      "taskPerformance": 0.24583492956863995,
+      "convergenceMetric": 0.75416507043136,
+      "behavioralDescriptor": [
+        0.20683492956863989,
+        0.039,
+        0.62668784543337,
+        0.433187291601385,
+        0.007585480345397763,
+        1.6687379618880058
+      ],
+      "sourceIntegrityHash": "6a7674f9",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764056784828
+    },
+    {
+      "generation": 10,
+      "action": "Grog try object",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "object",
+        "complexity": 0.7531750638366466,
+        "recursionDepth": 2.7546007735439493
+      },
+      "error": null,
+      "taskPerformance": 0,
+      "convergenceMetric": 2.5077758373805956,
+      "behavioralDescriptor": [
+        0.7531750638366466,
+        2.7546007735439493,
+        0.46844796590973403,
+        0.42393710330189094,
+        0.008120395478950335,
+        1.8302867126558646
+      ],
+      "sourceIntegrityHash": "260679e8",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764056467640
+    },
+    {
+      "generation": 9,
+      "action": "Grog try number",
+      "result": "Grog die: MemoryError: Too much data allocation",
+      "lesson": "Grog learn: number bad idea",
+      "success": false,
+      "parameters": {
+        "dataType": "number",
+        "complexity": 0.8603314182720856,
+        "recursionDepth": 17000
+      },
+      "error": "MemoryError: Too much data allocation",
+      "taskPerformance": 0,
+      "convergenceMetric": 1,
+      "behavioralDescriptor": [
+        0.8603314182720856,
+        17000,
+        0.5506476724754629,
+        0.4675257315962941,
+        0.005341939916348101,
+        1.981582902178897
+      ],
+      "sourceIntegrityHash": "53c87067",
+      "consciousness": "SIMPLE_ERROR",
+      "timestamp": 1764056466203
+    },
+    {
+      "generation": 8,
+      "action": "Grog try object",
+      "result": "Grog die: MemoryError: Too much data allocation",
+      "lesson": "Grog learn: object bad idea",
+      "success": false,
+      "parameters": {
+        "dataType": "object",
+        "complexity": 0.8028652369582191,
+        "recursionDepth": 93000
+      },
+      "error": "MemoryError: Too much data allocation",
+      "taskPerformance": 0,
+      "convergenceMetric": 1,
+      "behavioralDescriptor": [
+        0.8028652369582191,
+        93000,
+        0.5152106350991424,
+        0.4484499647673442,
+        0.0013566498882860484,
+        1.9814575068300169
+      ],
+      "sourceIntegrityHash": "405903d4",
+      "consciousness": "SIMPLE_ERROR",
+      "timestamp": 1764056464760
+    },
+    {
+      "generation": 7,
+      "action": "Grog try number",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "number",
+        "complexity": 0.00011992245787563082,
+        "recursionDepth": 19.456911398588502,
+        "learningRate": 43.742280560051185,
+        "mutationRate": 0.06864938514252164,
+        "exploration": 0.35829668909640167
+      },
+      "error": null,
+      "taskPerformance": 0,
+      "convergenceMetric": 62.626257955336484,
+      "behavioralDescriptor": [
+        0.00011992245787563082,
+        19.456911398588502,
+        43.742280560051185,
+        0.06864938514252164,
+        0.5385980339938317,
+        0.4463434144875132,
+        0.013529973384053439,
+        1.9673140685507104
+      ],
+      "sourceIntegrityHash": "641b9650",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764056463320
+    },
+    {
+      "generation": 6,
+      "action": "Grog try bool",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "bool",
+        "complexity": 0.29255973523838363,
+        "recursionDepth": 24.426258696598463
+      },
+      "error": null,
+      "taskPerformance": 0,
+      "convergenceMetric": 23.718818431836848,
+      "behavioralDescriptor": [
+        0.29255973523838363,
+        24.426258696598463,
+        0.565828450386723,
+        0.487336876553398,
+        0.00004786919305054711,
+        2.015335895003644
+      ],
+      "sourceIntegrityHash": "4758ced1",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764056461888
+    },
+    {
+      "generation": 5,
+      "action": "Grog try number",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "number",
+        "complexity": 0.0001573832328577347,
+        "recursionDepth": 42.0651920736078,
+        "learningRate": 79.69504148853369,
+        "mutationRate": 0.5129985921895386,
+        "exploration": 0.1221086671976524
+      },
+      "error": null,
+      "taskPerformance": 0,
+      "convergenceMetric": 121.39549820476154,
+      "behavioralDescriptor": [
+        0.0001573832328577347,
+        42.0651920736078,
+        79.69504148853369,
+        0.5129985921895386,
+        0.5349182315590262,
+        0.46588066866470723,
+        0.004350155457157511,
+        1.769028826861949
+      ],
+      "sourceIntegrityHash": "66e61346",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764056460446
+    },
+    {
+      "generation": 4,
+      "action": "Grog try object",
+      "result": "Grog die: RecursionError: Maximum recursion depth exceeded",
+      "lesson": "Grog learn: object bad idea",
+      "success": false,
+      "parameters": {
+        "dataType": "object",
+        "complexity": 0.22750654497131453,
+        "recursionDepth": 97000
+      },
+      "error": "RecursionError: Maximum recursion depth exceeded",
+      "taskPerformance": 0,
+      "convergenceMetric": 1,
+      "behavioralDescriptor": [
+        0.22750654497131453,
+        97000,
+        0.506653068770977,
+        0.43992296517001456,
+        0.003804576642326564,
+        1.9801375034477062
+      ],
+      "sourceIntegrityHash": "76367d33",
+      "consciousness": "SIMPLE_ERROR",
+      "timestamp": 1764056459024
+    },
+    {
+      "generation": 3,
+      "action": "Grog try object",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "object",
+        "complexity": 0.8545548272346246,
+        "recursionDepth": 0.097
+      },
+      "error": null,
+      "taskPerformance": 0.9515548272346246,
+      "convergenceMetric": 0.04844517276537541,
+      "behavioralDescriptor": [
+        0.8545548272346246,
+        0.097,
+        0.5844146762027764,
+        0.4918407117551127,
+        0.014214909126213251,
+        2.008345572117158
+      ],
+      "sourceIntegrityHash": "3de881b",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764056457651
+    },
+    {
+      "generation": 2,
+      "action": "Grog try string",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "string",
+        "complexity": 0.2650653231511228,
+        "recursionDepth": 1.077394141884191
+      },
+      "error": null,
+      "taskPerformance": 0.6575405349646861,
+      "convergenceMetric": 0.3424594650353139,
+      "behavioralDescriptor": [
+        0.2650653231511228,
+        1.077394141884191,
+        0.548682417460825,
+        0.44142692792151844,
+        0.0001657622855482967,
+        1.957298987650597
+      ],
+      "sourceIntegrityHash": "6fc922c5",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764056456201
+    },
+    {
+      "generation": 1,
+      "action": "Grog try object",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "object",
+        "complexity": 0.13731530735220457,
+        "recursionDepth": 0,
+        "learningRate": 0.05227188119797509,
+        "mutationRate": 0.3668102318579283,
+        "exploration": 0.11224089851653023
+      },
+      "error": null,
+      "taskPerformance": 0.6686383189246381,
+      "convergenceMetric": 0.3313616810753619,
+      "behavioralDescriptor": [
+        0.13731530735220457,
+        0,
+        0.05227188119797509,
+        0.3668102318579283,
+        0.46544462500019046,
+        0.38332956811363006,
+        0.007202306125678979,
+        1.7196371288173788
+      ],
+      "sourceIntegrityHash": "5aff491b",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764056454778
+    },
+    {
+      "generation": 1,
+      "action": "Grog try fire",
+      "result": "Grog die: Fire hot! Grog burn!",
+      "lesson": "Grog learn: fire bad idea",
+      "success": false,
+      "error": "Fire hot! Grog burn!",
+      "timestamp": 1764056437987
+    },
+    {
+      "generation": 2,
+      "action": "Grog try berry",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: berry good!",
+      "success": true,
+      "timestamp": 1764056439987
+    },
+    {
+      "generation": 3,
+      "action": "Grog try rock",
+      "result": "Grog die: Rock hard! Grog head hurt!",
+      "lesson": "Grog learn: rock not food",
+      "success": false,
+      "error": "Rock hard! Grog head hurt!",
+      "timestamp": 1764056441987
+    }
+  ]
+}
+{
+  "summary": {
+    "totalExperiments": 50,
+    "generations": 10,
+    "deaths": 188,
+    "wins": 698,
+    "currentIQ": 1208,
+    "exportTime": "2025-11-26T01:04:26.266Z"
+  },
+  "experiments": [
+    {
+      "generation": 10,
+      "action": "Grog try bool",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "bool",
+        "complexity": 0.1535131208700501,
+        "recursionDepth": 60.613143100888614,
+        "useBoundedCollections": true
+      },
+      "error": null,
+      "taskPerformance": 0,
+      "convergenceMetric": 59.766656221758666,
+      "behavioralDescriptor": [
+        0.1535131208700501,
+        60.613143100888614,
+        0.5497752834999273,
+        0.4299758794840106,
+        0.001275802120328211,
+        1.7244531268124315
+      ],
+      "sourceIntegrityHash": "1165b3ae",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764119064325
+    },
+    {
+      "generation": 9,
+      "action": "Grog try object",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "object",
+        "complexity": 0.3512390797233974,
+        "recursionDepth": 68.27898143798227,
+        "useBoundedCollections": true
+      },
+      "error": null,
+      "taskPerformance": 0,
+      "convergenceMetric": 67.63022051770567,
+      "behavioralDescriptor": [
+        0.3512390797233974,
+        68.27898143798227,
+        0.4986065834108694,
+        0.42835538923742855,
+        0.0020913283924208353,
+        1.7034581859719662
+      ],
+      "sourceIntegrityHash": "7e23914d",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764119062313
+    },
+    {
+      "generation": 8,
+      "action": "Grog try object",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "object",
+        "complexity": 0.23552535050250833,
+        "recursionDepth": 124.17150473538047,
+        "useBoundedCollections": true
+      },
+      "error": null,
+      "taskPerformance": 0,
+      "convergenceMetric": 123.40703008588298,
+      "behavioralDescriptor": [
+        0.23552535050250833,
+        124.17150473538047,
+        0.4934267973279185,
+        0.42285753701567064,
+        0.0026057725126930648,
+        1.7549451527764908
+      ],
+      "sourceIntegrityHash": "452e7541",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764119060311
+    },
+    {
+      "generation": 7,
+      "action": "Grog try object",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "object",
+        "complexity": 0.27917216875963563,
+        "recursionDepth": 27000,
+        "learningRate": 0.09372104770712072,
+        "mutationRate": 0.4130106701580329,
+        "exploration": 171.73541396974414
+      },
+      "error": null,
+      "taskPerformance": 0,
+      "convergenceMetric": 27171.52131785637,
+      "behavioralDescriptor": [
+        0.27917216875963563,
+        27000,
+        0.09372104770712072,
+        0.4130106701580329,
+        0.6020893661812785,
+        0.46161461275469656,
+        0.004356692924561079,
+        1.8016389053349084
+      ],
+      "sourceIntegrityHash": "4d06b424",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764119058383
+    },
+    {
+      "generation": 6,
+      "action": "Grog try string",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "string",
+        "complexity": 0.3355165345120888,
+        "recursionDepth": 0.018,
+        "useBoundedCollections": true
+      },
+      "error": null,
+      "taskPerformance": 0.35351653451208875,
+      "convergenceMetric": 0.6464834654879112,
+      "behavioralDescriptor": [
+        0.3355165345120888,
+        0.018,
+        0.6294939575119258,
+        0.48841573349097556,
+        0.009810779022151018,
+        1.9717598907950098
+      ],
+      "sourceIntegrityHash": "65842930",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764119056289
+    },
+    {
+      "generation": 5,
+      "action": "Grog try bool",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "bool",
+        "complexity": 0.2710366198149499,
+        "recursionDepth": 0.001,
+        "useBoundedCollections": true
+      },
+      "error": null,
+      "taskPerformance": 0.27203661981495,
+      "convergenceMetric": 0.72796338018505,
+      "behavioralDescriptor": [
+        0.2710366198149499,
+        0.001,
+        0.5940678224179687,
+        0.49171886265041875,
+        0.0038465857528170357,
+        1.9479695800050514
+      ],
+      "sourceIntegrityHash": "5900a8c6",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764119054375
+    },
+    {
+      "generation": 4,
+      "action": "Grog try bool",
+      "result": "Grog die: Object of type bool is not JSON serializable",
+      "lesson": "Grog learn: bool bad idea",
+      "success": false,
+      "parameters": {
+        "dataType": "bool",
+        "complexity": 0.22470017964445568,
+        "recursionDepth": 70000,
+        "useBoundedCollections": true
+      },
+      "error": "Object of type bool is not JSON serializable",
+      "taskPerformance": 0,
+      "convergenceMetric": 1,
+      "behavioralDescriptor": [
+        0.22470017964445568,
+        70000,
+        0.5861082163195614,
+        0.43723897272467493,
+        0.010634218152755628,
+        1.8559068209889558
+      ],
+      "sourceIntegrityHash": "5acdd86a",
+      "consciousness": "SIMPLE_ERROR",
+      "timestamp": 1764119052365
+    },
+    {
+      "generation": 3,
+      "action": "Grog try object",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "object",
+        "complexity": 0.1678062822763016,
+        "recursionDepth": 56.426087561501,
+        "useBoundedCollections": true
+      },
+      "error": null,
+      "taskPerformance": 0,
+      "convergenceMetric": 55.5938938437773,
+      "behavioralDescriptor": [
+        0.1678062822763016,
+        56.426087561501,
+        0.5955997451189982,
+        0.4943489693278068,
+        0.0011845319876540436,
+        1.957168150720726
+      ],
+      "sourceIntegrityHash": "575481d9",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764119050374
+    },
+    {
+      "generation": 2,
+      "action": "Grog try object",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "object",
+        "complexity": 0.030642551129324333,
+        "recursionDepth": 0.005,
+        "learningRate": 0.04177603623772002,
+        "mutationRate": 0.08684069450993785,
+        "exploration": 0.38304590971047653
+      },
+      "error": null,
+      "taskPerformance": 0.5473051915874587,
+      "convergenceMetric": 0.4526948084125413,
+      "behavioralDescriptor": [
+        0.030642551129324333,
+        0.005,
+        0.04177603623772002,
+        0.08684069450993785,
+        0.5389383631978935,
+        0.41921836502721227,
+        0.021549221343108483,
+        1.7267699834847574
+      ],
+      "sourceIntegrityHash": "7ad31474",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764119048925
+    },
+    {
+      "generation": 1,
+      "action": "Grog try number",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "number",
+        "complexity": 0.16914941173969347,
+        "recursionDepth": 0.025,
+        "useBoundedCollections": true
+      },
+      "error": null,
+      "taskPerformance": 0.19414941173969347,
+      "convergenceMetric": 0.8058505882603065,
+      "behavioralDescriptor": [
+        0.16914941173969347,
+        0.025,
+        0.6284097499435006,
+        0.4786363349304091,
+        0.0026278403511732665,
+        1.8736472895964014
+      ],
+      "sourceIntegrityHash": "40dea391",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764119046287
+    },
+    {
+      "generation": 34,
+      "action": "Grog try object",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "object",
+        "complexity": 0.8220236354133793,
+        "recursionDepth": 115.53770784673743,
+        "learningRate": 0.020145601713864054,
+        "mutationRate": 0.19652010572386622,
+        "exploration": 0.7866502764827382
+      },
+      "error": null,
+      "taskPerformance": 0,
+      "convergenceMetric": 116.36304746607127,
+      "behavioralDescriptor": [
+        0.8220236354133793,
+        115.53770784673743,
+        0.020145601713864054,
+        0.19652010572386622,
+        0.5945265783220517,
+        0.5249301290497447,
+        0.006220269241601135,
+        1.9693888746605204
+      ],
+      "sourceIntegrityHash": "22d043dc",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764092985665
+    },
+    {
+      "generation": 33,
+      "action": "Grog try object",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "object",
+        "complexity": 0.0007624902248751843,
+        "recursionDepth": 0.035
+      },
+      "error": null,
+      "taskPerformance": 0.03576249022487521,
+      "convergenceMetric": 0.9642375097751248,
+      "behavioralDescriptor": [
+        0.0007624902248751843,
+        0.035,
+        0.54252786967858,
+        0.432995643469421,
+        0.0019338430152006372,
+        1.669060388148084
+      ],
+      "sourceIntegrityHash": "50f09fc",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764092983614
+    },
+    {
+      "generation": 32,
+      "action": "Grog try number",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "number",
+        "complexity": 0.2022219334460284,
+        "recursionDepth": 0.022
+      },
+      "error": null,
+      "taskPerformance": 0.22422193344602837,
+      "convergenceMetric": 0.7757780665539716,
+      "behavioralDescriptor": [
+        0.2022219334460284,
+        0.022,
+        0.575908841470584,
+        0.46993081210209353,
+        0.0024741218311915628,
+        1.9955587677518123
+      ],
+      "sourceIntegrityHash": "71a6a3b4",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764092981661
+    },
+    {
+      "generation": 31,
+      "action": "Grog try number",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "number",
+        "complexity": 0.8255774624368073,
+        "recursionDepth": 43.4041452944084,
+        "learningRate": 0.07523804159146402,
+        "mutationRate": 0.16064838005256377,
+        "exploration": 0.8286118825347089
+      },
+      "error": null,
+      "taskPerformance": 0,
+      "convergenceMetric": 44.29422106102394,
+      "behavioralDescriptor": [
+        0.8255774624368073,
+        43.4041452944084,
+        0.07523804159146402,
+        0.16064838005256377,
+        0.5096610324236552,
+        0.41848170729998957,
+        0.015519054894688014,
+        1.5664301351268601
+      ],
+      "sourceIntegrityHash": "1d23bc1a",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764092979746
+    },
+    {
+      "generation": 30,
+      "action": "Grog try string",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "string",
+        "complexity": 0.3857048588732698,
+        "recursionDepth": 0.087
+      },
+      "error": null,
+      "taskPerformance": 0.47270485887326974,
+      "convergenceMetric": 0.5272951411267303,
+      "behavioralDescriptor": [
+        0.3857048588732698,
+        0.087,
+        0.6566174179974235,
+        0.508080312021866,
+        0.021106702489434505,
+        1.878827664743558
+      ],
+      "sourceIntegrityHash": "7f19a848",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764092977662
+    },
+    {
+      "generation": 29,
+      "action": "Grog try bool",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "bool",
+        "complexity": 0.6232282225271957,
+        "recursionDepth": 74.21851928452585
+      },
+      "error": null,
+      "taskPerformance": 0,
+      "convergenceMetric": 73.84174750705304,
+      "behavioralDescriptor": [
+        0.6232282225271957,
+        74.21851928452585,
+        0.5526394432599735,
+        0.4776655996897206,
+        0.0027623881415765736,
+        1.825787442560234
+      ],
+      "sourceIntegrityHash": "4615c6d",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764092975666
+    },
+    {
+      "generation": 28,
+      "action": "Grog try object",
+      "result": "Grog die: MemoryError: Too much data allocation",
+      "lesson": "Grog learn: object bad idea",
+      "success": false,
+      "parameters": {
+        "dataType": "object",
+        "complexity": 0.8210517363493252,
+        "recursionDepth": 14.079358453045613
+      },
+      "error": "MemoryError: Too much data allocation",
+      "taskPerformance": 0,
+      "convergenceMetric": 1,
+      "behavioralDescriptor": [
+        0.8210517363493252,
+        14.079358453045613,
+        0.6385134028011286,
+        0.5003851551025713,
+        0.010419479025401236,
+        2.033690159558006
+      ],
+      "sourceIntegrityHash": "14ed566c",
+      "consciousness": "SIMPLE_ERROR",
+      "timestamp": 1764092973400
+    },
+    {
+      "generation": 27,
+      "action": "Grog try number",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "number",
+        "complexity": 0.4616482606695313,
+        "recursionDepth": 53.82974881759972
+      },
+      "error": null,
+      "taskPerformance": 0,
+      "convergenceMetric": 53.291397078269256,
+      "behavioralDescriptor": [
+        0.4616482606695313,
+        53.82974881759972,
+        0.5350679110019843,
+        0.4406558652231729,
+        0.0027782524147869792,
+        1.740581336105656
+      ],
+      "sourceIntegrityHash": "1900d8a4",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764092323020
+    },
+    {
+      "generation": 26,
+      "action": "Grog try number",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "number",
+        "complexity": 0.3438411637319118,
+        "recursionDepth": 0.062,
+        "learningRate": 0.08760687011131132,
+        "mutationRate": 0.3280453336488001,
+        "exploration": 0.0008192688776881747
+      },
+      "error": null,
+      "taskPerformance": 0.8223126363697114,
+      "convergenceMetric": 0.1776873636302886,
+      "behavioralDescriptor": [
+        0.3438411637319118,
+        0.062,
+        0.08760687011131132,
+        0.3280453336488001,
+        0.6012136916002229,
+        0.45746175609945516,
+        0.007660268268003518,
+        2.0279407533926372
+      ],
+      "sourceIntegrityHash": "2b666469",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764092320997
+    },
+    {
+      "generation": 25,
+      "action": "Grog try string",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "string",
+        "complexity": 0.7899739338553955,
+        "recursionDepth": 4000
+      },
+      "error": null,
+      "taskPerformance": 0,
+      "convergenceMetric": 3999.7899739338554,
+      "behavioralDescriptor": [
+        0.7899739338553955,
+        4000,
+        0.5131450236501558,
+        0.4375715779187921,
+        0.0008307131202000378,
+        1.9890793588058762
+      ],
+      "sourceIntegrityHash": "1124acdf",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764092319080
+    },
+    {
+      "generation": 24,
+      "action": "Grog try number",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "number",
+        "complexity": 0.2038713367118924,
+        "recursionDepth": 0
+      },
+      "error": null,
+      "taskPerformance": 0.2038713367118924,
+      "convergenceMetric": 0.7961286632881076,
+      "behavioralDescriptor": [
+        0.2038713367118924,
+        0,
+        0.5040320844053279,
+        0.4058443976120319,
+        0.01869788184273431,
+        1.8242545107182297
+      ],
+      "sourceIntegrityHash": "55c79905",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764092317075
+    },
+    {
+      "generation": 23,
+      "action": "Grog try number",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "number",
+        "complexity": 0.0008348981567856843,
+        "recursionDepth": 0.053
+      },
+      "error": null,
+      "taskPerformance": 0.05383489815678566,
+      "convergenceMetric": 0.9461651018432143,
+      "behavioralDescriptor": [
+        0.0008348981567856843,
+        0.053,
+        0.5636360209472496,
+        0.4697536300312226,
+        0.003451814758737291,
+        1.7209008404664872
+      ],
+      "sourceIntegrityHash": "1705f6f3",
+      "consciousness": "OPERATIONAL",
+      "timestamp": 1764092315074
+    },
+    {
+      "generation": 22,
+      "action": "Grog try object",
+      "result": "SUCCESS! Grog live!",
+      "lesson": "Grog learn: this work!",
+      "success": true,
+      "parameters": {
+        "dataType": "object",
+        "complexity": 0.7641913622019709,
+   
