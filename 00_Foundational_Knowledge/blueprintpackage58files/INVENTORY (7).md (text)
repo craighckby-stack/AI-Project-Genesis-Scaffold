@@ -1,0 +1,105 @@
+# Deep Repository Inventory & Stack Matrix
+
+**Total Repositories Analyzed**: 90
+**Generated**: 2026-07-11T10:52:30.540Z
+
+## Quick Stats
+
+- **Multi-System Repos**: 8
+- **Total Branches**: 599
+- **Avg Branches/Repo**: 6.7
+
+## Repository Matrix
+
+| Repository | Category | Detected Stack | Multi-System | Branches | Last Updated |
+|------------|----------|----------------|--------------|----------|---------------|
+| [AetherForge-2.0](https://github.com/craighckby-stack/AetherForge-2.0) | **AETHER-FORGE** | `Vite / React + HTML Frontend` | ❌ | `main` (2) | 03/07/2026 |
+| [Balanced_Auditor_v5.2](https://github.com/craighckby-stack/Balanced_Auditor_v5.2) | **BOOKS/DOCS** | `Unknown` | ❌ | `main` (10) | 07/06/2026 |
+| [claud-ios](https://github.com/craighckby-stack/claud-ios) | **BOOKS/DOCS** | `Vite / React + HTML Frontend` | ❌ | `main` (1) | 17/06/2026 |
+| [encyclopedia-of-engineering](https://github.com/craighckby-stack/encyclopedia-of-engineering) | **BOOKS/DOCS** | `Configuration / Scripts` | ❌ | `main` (1) | 09/07/2026 |
+| [theoretical-foundation](https://github.com/craighckby-stack/theoretical-foundation) | **BOOKS/DOCS** | `Unknown` | ❌ | `Main` (2) | 10/07/2026 |
+| [ai_evo_sim](https://github.com/craighckby-stack/ai_evo_sim) | **DARLEK-CAAN** | `Full Stack (Decoupled)` | ✅ (Frontend Dir, Backend Dir) | `main` (1) | 30/06/2026 |
+| [claudios_system_book](https://github.com/craighckby-stack/claudios_system_book) | **DARLEK-CAAN** | `Node.js` | ❌ | `main` (1) | 15/06/2026 |
+| [craighckby-stack](https://github.com/craighckby-stack/craighckby-stack) | **DARLEK-CAAN** | `Configuration / Scripts` | ❌ | `main` (3) | 11/07/2026 |
+| [Dalek-Grog](https://github.com/craighckby-stack/Dalek-Grog) | **DARLEK-CAAN** | `Unknown` | ❌ | `main` (12) | 07/06/2026 |
+| [DARLEK-CAAN-vs-JESUS-CHESS](https://github.com/craighckby-stack/DARLEK-CAAN-vs-JESUS-CHESS) | **DARLEK-CAAN** | `Vite / React + HTML Frontend` | ❌ | `main` (3) | 03/07/2026 |
+| [Dk](https://github.com/craighckby-stack/Dk) | **DARLEK-CAAN** | `Unknown` | ❌ | `main` (1) | 19/06/2026 |
+| [EMG-CORE](https://github.com/craighckby-stack/EMG-CORE) | **DARLEK-CAAN** | `Vite / React + HTML Frontend` | ❌ | `main` (4) | 28/06/2026 |
+| [emgmd](https://github.com/craighckby-stack/emgmd) | **DARLEK-CAAN** | `Node.js` | ❌ | `main` (1) | 29/06/2026 |
+| [nbody_gravitational_simulator](https://github.com/craighckby-stack/nbody_gravitational_simulator) | **DARLEK-CAAN** | `Node.js` | ❌ | `main` (1) | 21/06/2026 |
+| [Random.ai.html](https://github.com/craighckby-stack/Random.ai.html) | **DARLEK-CAAN** | `Unknown` | ❌ | `main` (4) | 07/06/2026 |
+| [v2](https://github.com/craighckby-stack/v2) | **DARLEK-CAAN** | `Node.js` | ❌ | `main` (1) | 19/06/2026 |
+| [GROG-The-First-Learning-AGI](https://github.com/craighckby-stack/GROG-The-First-Learning-AGI) | **GROG** | `Unknown` | ❌ | `main` (12) | 27/06/2026 |
+| [AGI-KERNEL-](https://github.com/craighckby-stack/AGI-KERNEL-) | **HUXLEY** | `Unknown` | ❌ | `main` (5) | 07/06/2026 |
+| [ai-scaffold-](https://github.com/craighckby-stack/ai-scaffold-) | **HUXLEY** | `Unknown` | ❌ | `main` (5) | 07/06/2026 |
+| [darlik-khan-v2](https://github.com/craighckby-stack/darlik-khan-v2) | **HUXLEY** | `Unknown` | ❌ | `main` (9) | 07/06/2026 |
+| [DNA-Based-Regulator-Core](https://github.com/craighckby-stack/DNA-Based-Regulator-Core) | **HUXLEY** | `Unknown` | ❌ | `main` (7) | 07/06/2026 |
+| [echo-chamber-v7](https://github.com/craighckby-stack/echo-chamber-v7) | **HUXLEY** | `Unknown` | ❌ | `main` (15) | 07/06/2026 |
+| [emg-v85-memory-core](https://github.com/craighckby-stack/emg-v85-memory-core) | **HUXLEY** | `Unknown` | ❌ | `main` (7) | 07/06/2026 |
+| [EULER-ENGINE](https://github.com/craighckby-stack/EULER-ENGINE) | **HUXLEY** | `Unknown` | ❌ | `main` (9) | 07/06/2026 |
+| [evolution-engine-rag](https://github.com/craighckby-stack/evolution-engine-rag) | **HUXLEY** | `Unknown` | ❌ | `main` (6) | 07/06/2026 |
+| [Gibberish-](https://github.com/craighckby-stack/Gibberish-) | **HUXLEY** | `Unknown` | ❌ | `main` (8) | 07/06/2026 |
+| [Huxley-A-Reasoning-Framework-for-Ethical-AI](https://github.com/craighckby-stack/Huxley-A-Reasoning-Framework-for-Ethical-AI) | **HUXLEY** | `Unknown` | ❌ | `main` (8) | 07/06/2026 |
+| [Huxley-Singularity-Loop-Main](https://github.com/craighckby-stack/Huxley-Singularity-Loop-Main) | **HUXLEY** | `Vite / React + HTML Frontend` | ❌ | `main` (22) | 23/06/2026 |
+| [Nicotine-replacement-therapy-idea](https://github.com/craighckby-stack/Nicotine-replacement-therapy-idea) | **HUXLEY** | `Unknown` | ❌ | `main` (7) | 07/06/2026 |
+| [Safer-Growing-Intelligence-DAF-](https://github.com/craighckby-stack/Safer-Growing-Intelligence-DAF-) | **HUXLEY** | `Unknown` | ❌ | `main` (25) | 07/06/2026 |
+| [SN](https://github.com/craighckby-stack/SN) | **HUXLEY** | `Unknown` | ❌ | `main` (5) | 07/06/2026 |
+| [sovereign-repo-enhancer](https://github.com/craighckby-stack/sovereign-repo-enhancer) | **HUXLEY** | `Unknown` | ❌ | `main` (8) | 07/06/2026 |
+| [T](https://github.com/craighckby-stack/T) | **HUXLEY** | `Unknown` | ❌ | `main` (9) | 07/06/2026 |
+| [The-Dopaminergic-Brake](https://github.com/craighckby-stack/The-Dopaminergic-Brake) | **HUXLEY** | `Unknown` | ❌ | `main` (9) | 07/06/2026 |
+| [unitary-core](https://github.com/craighckby-stack/unitary-core) | **HUXLEY** | `Unknown` | ❌ | `main` (17) | 07/06/2026 |
+| [z](https://github.com/craighckby-stack/z) | **HUXLEY** | `Unknown` | ❌ | `master` (9) | 07/06/2026 |
+| [ZEN](https://github.com/craighckby-stack/ZEN) | **HUXLEY** | `Unknown` | ❌ | `main` (13) | 07/06/2026 |
+| [SOVEREIGN-](https://github.com/craighckby-stack/SOVEREIGN-) | **SOVEREIGN** | `Vite / React + HTML Frontend` | ❌ | `main` (2) | 08/07/2026 |
+| [1](https://github.com/craighckby-stack/1) | **TEST/ARCHIVE** | `Vite / React + HTML Frontend` | ❌ | `main` (1) | 08/07/2026 |
+| [2](https://github.com/craighckby-stack/2) | **TEST/ARCHIVE** | `Vite / React + HTML Frontend` | ❌ | `main` (2) | 08/07/2026 |
+| [AetherForge-2](https://github.com/craighckby-stack/AetherForge-2) | **TEST/ARCHIVE** | `Vite / React + HTML Frontend` | ❌ | `main` (1) | 07/07/2026 |
+| [agent_containment_experiment_summary1](https://github.com/craighckby-stack/agent_containment_experiment_summary1) | **TEST/ARCHIVE** | `Node.js` | ❌ | `main` (25) | 07/07/2026 |
+| [ai-scaffold](https://github.com/craighckby-stack/ai-scaffold) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (16) | 07/06/2026 |
+| [alphacode](https://github.com/craighckby-stack/alphacode) | **TEST/ARCHIVE** | `Full Stack (Decoupled)` | ✅ (Frontend Dir, Backend Dir) | `main` (1) | 08/07/2026 |
+| [build_epistemic_debate_engine](https://github.com/craighckby-stack/build_epistemic_debate_engine) | **TEST/ARCHIVE** | `Node.js` | ❌ | `main` (2) | 21/06/2026 |
+| [Chunk-3](https://github.com/craighckby-stack/Chunk-3) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (6) | 07/06/2026 |
+| [Chunk-4](https://github.com/craighckby-stack/Chunk-4) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (4) | 07/06/2026 |
+| [Chunk-5](https://github.com/craighckby-stack/Chunk-5) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (5) | 29/06/2026 |
+| [chunk-7899](https://github.com/craighckby-stack/chunk-7899) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (10) | 07/06/2026 |
+| [dalek-caan-siphon](https://github.com/craighckby-stack/dalek-caan-siphon) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (3) | 07/06/2026 |
+| [dalek-cann-agi](https://github.com/craighckby-stack/dalek-cann-agi) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (8) | 07/06/2026 |
+| [dalek-grog-enhancer](https://github.com/craighckby-stack/dalek-grog-enhancer) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (11) | 07/06/2026 |
+| [DARLEK-CAAN-](https://github.com/craighckby-stack/DARLEK-CAAN-) | **TEST/ARCHIVE** | `Vite / React + HTML Frontend` | ❌ | `main` (1) | 08/07/2026 |
+| [DARLEK-CAAN-2](https://github.com/craighckby-stack/DARLEK-CAAN-2) | **TEST/ARCHIVE** | `Vite / React + HTML Frontend` | ❌ | `Main` (2) | 26/06/2026 |
+| [darlek-caan-build-instructions](https://github.com/craighckby-stack/darlek-caan-build-instructions) | **TEST/ARCHIVE** | `Node.js` | ❌ | `main` (1) | 22/06/2026 |
+| [Darlek-Caan-system-Deployment-](https://github.com/craighckby-stack/Darlek-Caan-system-Deployment-) | **TEST/ARCHIVE** | `Vite / React + HTML Frontend` | ❌ | `main` (2) | 25/06/2026 |
+| [Darlek-Caan-vs-Jesus-Chessv1](https://github.com/craighckby-stack/Darlek-Caan-vs-Jesus-Chessv1) | **TEST/ARCHIVE** | `Full Stack (Decoupled)` | ✅ (Frontend Dir, Backend Dir) | `main` (3) | 25/06/2026 |
+| [Darlek-Cann-Chess-](https://github.com/craighckby-stack/Darlek-Cann-Chess-) | **TEST/ARCHIVE** | `Multi-Service Monorepo` | ✅ (Nested Nodes (2x package.json)) | `main` (1) | 14/06/2026 |
+| [darlek-cann-v3](https://github.com/craighckby-stack/darlek-cann-v3) | **TEST/ARCHIVE** | `Full Stack (Decoupled)` | ✅ (Frontend Dir, Backend Dir) | `main` (1) | 14/06/2026 |
+| [DARLEK_CAAN_ENGINE](https://github.com/craighckby-stack/DARLEK_CAAN_ENGINE) | **TEST/ARCHIVE** | `Full Stack (Decoupled)` | ✅ (Frontend Dir, Backend Dir) | `main` (1) | 27/06/2026 |
+| [ECHO-CHAMBER-v6.0](https://github.com/craighckby-stack/ECHO-CHAMBER-v6.0) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (7) | 07/06/2026 |
+| [Free-Rag](https://github.com/craighckby-stack/Free-Rag) | **TEST/ARCHIVE** | `Vite / React + HTML Frontend` | ❌ | `main` (1) | 09/07/2026 |
+| [Git-priv-public-tool](https://github.com/craighckby-stack/Git-priv-public-tool) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (1) | 07/06/2026 |
+| [GitHub-Redaction](https://github.com/craighckby-stack/GitHub-Redaction) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (7) | 07/06/2026 |
+| [GROG](https://github.com/craighckby-stack/GROG) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (9) | 07/06/2026 |
+| [Huxley-Singularity-Loop](https://github.com/craighckby-stack/Huxley-Singularity-Loop) | **TEST/ARCHIVE** | `Configuration / Scripts` | ❌ | `main` (30) | 07/06/2026 |
+| [legitimate-proof-of-concept-of-I.J.-Good-s-1965-prediction](https://github.com/craighckby-stack/legitimate-proof-of-concept-of-I.J.-Good-s-1965-prediction) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (12) | 07/06/2026 |
+| [Library-of-Babel](https://github.com/craighckby-stack/Library-of-Babel) | **TEST/ARCHIVE** | `Vite / React + HTML Frontend` | ❌ | `main` (1) | 08/07/2026 |
+| [MS-DOS](https://github.com/craighckby-stack/MS-DOS) | **TEST/ARCHIVE** | `Full Stack (Decoupled)` | ✅ (Frontend Dir, Backend Dir) | `main` (1) | 28/06/2026 |
+| [my-evolved-project](https://github.com/craighckby-stack/my-evolved-project) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (7) | 27/06/2026 |
+| [PDF-Github](https://github.com/craighckby-stack/PDF-Github) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (11) | 07/06/2026 |
+| [psr-governance](https://github.com/craighckby-stack/psr-governance) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (7) | 07/06/2026 |
+| [Repo-enhancer](https://github.com/craighckby-stack/Repo-enhancer) | **TEST/ARCHIVE** | `Full Stack (Decoupled)` | ✅ (Frontend Dir, Backend Dir) | `main` (4) | 07/07/2026 |
+| [sovereign-final](https://github.com/craighckby-stack/sovereign-final) | **TEST/ARCHIVE** | `Node.js` | ❌ | `main` (1) | 27/06/2026 |
+| [sovereign-kernel](https://github.com/craighckby-stack/sovereign-kernel) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (17) | 07/06/2026 |
+| [sovereign-v86](https://github.com/craighckby-stack/sovereign-v86) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (14) | 07/06/2026 |
+| [spectest](https://github.com/craighckby-stack/spectest) | **TEST/ARCHIVE** | `Node.js` | ❌ | `main` (2) | 26/06/2026 |
+| [Synthesis-Hub](https://github.com/craighckby-stack/Synthesis-Hub) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (1) | 08/07/2026 |
+| [Test](https://github.com/craighckby-stack/Test) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (12) | 07/06/2026 |
+| [Test-1222](https://github.com/craighckby-stack/Test-1222) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (13) | 07/06/2026 |
+| [Test1](https://github.com/craighckby-stack/Test1) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (16) | 07/06/2026 |
+| [Test2](https://github.com/craighckby-stack/Test2) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (12) | 07/06/2026 |
+| [Testtt](https://github.com/craighckby-stack/Testtt) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (7) | 07/06/2026 |
+| [the-rock-knew-all-along](https://github.com/craighckby-stack/the-rock-knew-all-along) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (9) | 07/06/2026 |
+| [thought](https://github.com/craighckby-stack/thought) | **TEST/ARCHIVE** | `Node.js` | ❌ | `main` (1) | 30/06/2026 |
+| [yyy](https://github.com/craighckby-stack/yyy) | **TEST/ARCHIVE** | `Unknown` | ❌ | `main` (1) | 14/06/2026 |
+| [GitHub-Monorepo-Deep-Auditor](https://github.com/craighckby-stack/GitHub-Monorepo-Deep-Auditor) | **UNCATEGORIZED / OTHER** | `Vite / React + HTML Frontend` | ❌ | `main` (5) | 11/07/2026 |
+| [Governece-substrates-](https://github.com/craighckby-stack/Governece-substrates-) | **UNCATEGORIZED / OTHER** | `Unknown` | ❌ | `main` (16) | 07/06/2026 |
+| [Hux](https://github.com/craighckby-stack/Hux) | **UNCATEGORIZED / OTHER** | `Vite / React + HTML Frontend` | ❌ | `main` (1) | 07/06/2026 |
+| [Need-a-new-pc-](https://github.com/craighckby-stack/Need-a-new-pc-) | **UNCATEGORIZED / OTHER** | `Vite / React + HTML Frontend` | ❌ | `main` (1) | 29/05/2026 |

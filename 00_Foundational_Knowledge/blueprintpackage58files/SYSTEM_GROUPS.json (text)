@@ -1,0 +1,132 @@
+{
+  "EMG": [
+    {
+      "name": "EMG-KERNEL-v0.2-.git",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "EMG-CORE.git",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "EMG-Core-Analysis-System.git",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "EMG-Core-Hierarchical-Indeterminacy.git",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    }
+  ],
+  "UNCATEGORIZED / OTHER": [
+    {
+      "name": "Emergent-Schema-Network-ESN-Monitoring-Dashboard.git",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Walta.git",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "The-Academic-Development-Pipeline.git",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "random.git",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "web-dev-playground.git",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Autonomous-Knowledge-System.git",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Open-Repo-Generator-V2.git",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Autonomous-Knowledge-System.wiki.git",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "AGI-Project-Compiler.git",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Quantum-Truth-Analysis-System.git",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "HCM-Emergence-Validation-Framework.git",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Brain-.git",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "ephemeral-mind-gem.git",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Interactive-Learning-System.git",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    }
+  ]
+}

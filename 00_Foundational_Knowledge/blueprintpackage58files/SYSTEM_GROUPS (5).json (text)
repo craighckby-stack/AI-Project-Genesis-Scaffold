@@ -1,0 +1,538 @@
+{
+  "DARLEK-CAAN": [
+    {
+      "name": "ai_evo_sim",
+      "url": "https://github.com/craighckby-stack/ai_evo_sim",
+      "branches": 1,
+      "stack": "Full Stack (Decoupled)",
+      "isMultiSystem": true
+    },
+    {
+      "name": "claudios_system_book",
+      "url": "https://github.com/craighckby-stack/claudios_system_book",
+      "branches": 1,
+      "stack": "Node.js",
+      "isMultiSystem": false
+    },
+    {
+      "name": "craighckby-stack",
+      "url": "https://github.com/craighckby-stack/craighckby-stack",
+      "branches": 3,
+      "stack": "Configuration / Scripts",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Dalek-Grog",
+      "url": "https://github.com/craighckby-stack/Dalek-Grog",
+      "branches": 12,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "DARLEK-CAAN-vs-JESUS-CHESS",
+      "url": "https://github.com/craighckby-stack/DARLEK-CAAN-vs-JESUS-CHESS",
+      "branches": 3,
+      "stack": "Vite / React + HTML Frontend",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Dk",
+      "url": "https://github.com/craighckby-stack/Dk",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "EMG-CORE",
+      "url": "https://github.com/craighckby-stack/EMG-CORE",
+      "branches": 4,
+      "stack": "Vite / React + HTML Frontend",
+      "isMultiSystem": false
+    },
+    {
+      "name": "emgmd",
+      "url": "https://github.com/craighckby-stack/emgmd",
+      "branches": 1,
+      "stack": "Node.js",
+      "isMultiSystem": false
+    },
+    {
+      "name": "nbody_gravitational_simulator",
+      "url": "https://github.com/craighckby-stack/nbody_gravitational_simulator",
+      "branches": 1,
+      "stack": "Node.js",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Random.ai.html",
+      "url": "https://github.com/craighckby-stack/Random.ai.html",
+      "branches": 4,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "v2",
+      "url": "https://github.com/craighckby-stack/v2",
+      "branches": 1,
+      "stack": "Node.js",
+      "isMultiSystem": false
+    }
+  ],
+  "HUXLEY": [
+    {
+      "name": "AGI-KERNEL-",
+      "url": "https://github.com/craighckby-stack/AGI-KERNEL-",
+      "branches": 5,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "ai-scaffold-",
+      "url": "https://github.com/craighckby-stack/ai-scaffold-",
+      "branches": 5,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "darlik-khan-v2",
+      "url": "https://github.com/craighckby-stack/darlik-khan-v2",
+      "branches": 9,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "DNA-Based-Regulator-Core",
+      "url": "https://github.com/craighckby-stack/DNA-Based-Regulator-Core",
+      "branches": 7,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "echo-chamber-v7",
+      "url": "https://github.com/craighckby-stack/echo-chamber-v7",
+      "branches": 15,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "emg-v85-memory-core",
+      "url": "https://github.com/craighckby-stack/emg-v85-memory-core",
+      "branches": 7,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "EULER-ENGINE",
+      "url": "https://github.com/craighckby-stack/EULER-ENGINE",
+      "branches": 9,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "evolution-engine-rag",
+      "url": "https://github.com/craighckby-stack/evolution-engine-rag",
+      "branches": 6,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Gibberish-",
+      "url": "https://github.com/craighckby-stack/Gibberish-",
+      "branches": 8,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Huxley-A-Reasoning-Framework-for-Ethical-AI",
+      "url": "https://github.com/craighckby-stack/Huxley-A-Reasoning-Framework-for-Ethical-AI",
+      "branches": 8,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Huxley-Singularity-Loop-Main",
+      "url": "https://github.com/craighckby-stack/Huxley-Singularity-Loop-Main",
+      "branches": 22,
+      "stack": "Vite / React + HTML Frontend",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Nicotine-replacement-therapy-idea",
+      "url": "https://github.com/craighckby-stack/Nicotine-replacement-therapy-idea",
+      "branches": 7,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Safer-Growing-Intelligence-DAF-",
+      "url": "https://github.com/craighckby-stack/Safer-Growing-Intelligence-DAF-",
+      "branches": 25,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "SN",
+      "url": "https://github.com/craighckby-stack/SN",
+      "branches": 5,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "sovereign-repo-enhancer",
+      "url": "https://github.com/craighckby-stack/sovereign-repo-enhancer",
+      "branches": 8,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "T",
+      "url": "https://github.com/craighckby-stack/T",
+      "branches": 9,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "The-Dopaminergic-Brake",
+      "url": "https://github.com/craighckby-stack/The-Dopaminergic-Brake",
+      "branches": 9,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "unitary-core",
+      "url": "https://github.com/craighckby-stack/unitary-core",
+      "branches": 17,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "z",
+      "url": "https://github.com/craighckby-stack/z",
+      "branches": 9,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "ZEN",
+      "url": "https://github.com/craighckby-stack/ZEN",
+      "branches": 13,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    }
+  ],
+  "SOVEREIGN": [
+    {
+      "name": "SOVEREIGN-",
+      "url": "https://github.com/craighckby-stack/SOVEREIGN-",
+      "branches": 2,
+      "stack": "Vite / React + HTML Frontend",
+      "isMultiSystem": false
+    }
+  ],
+  "GROG": [
+    {
+      "name": "GROG-The-First-Learning-AGI",
+      "url": "https://github.com/craighckby-stack/GROG-The-First-Learning-AGI",
+      "branches": 12,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    }
+  ],
+  "AETHER-FORGE": [
+    {
+      "name": "AetherForge-2.0",
+      "url": "https://github.com/craighckby-stack/AetherForge-2.0",
+      "branches": 2,
+      "stack": "Vite / React + HTML Frontend",
+      "isMultiSystem": false
+    }
+  ],
+  "BOOKS/DOCS": [
+    {
+      "name": "Balanced_Auditor_v5.2",
+      "url": "https://github.com/craighckby-stack/Balanced_Auditor_v5.2",
+      "branches": 10,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "claud-ios",
+      "url": "https://github.com/craighckby-stack/claud-ios",
+      "branches": 1,
+      "stack": "Vite / React + HTML Frontend",
+      "isMultiSystem": false
+    },
+    {
+      "name": "encyclopedia-of-engineering",
+      "url": "https://github.com/craighckby-stack/encyclopedia-of-engineering",
+      "branches": 1,
+      "stack": "Configuration / Scripts",
+      "isMultiSystem": false
+    },
+    {
+      "name": "theoretical-foundation",
+      "url": "https://github.com/craighckby-stack/theoretical-foundation",
+      "branches": 2,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    }
+  ],
+  "TEST/ARCHIVE": [
+    {
+      "name": "1",
+      "url": "https://github.com/craighckby-stack/1",
+      "branches": 1,
+      "stack": "Vite / React + HTML Frontend",
+      "isMultiSystem": false
+    },
+    {
+      "name": "2",
+      "url": "https://github.com/craighckby-stack/2",
+      "branches": 2,
+      "stack": "Vite / React + HTML Frontend",
+      "isMultiSystem": false
+    },
+    {
+      "name": "AetherForge-2",
+      "url": "https://github.com/craighckby-stack/AetherForge-2",
+      "branches": 1,
+      "stack": "Vite / React + HTML Frontend",
+      "isMultiSystem": false
+    },
+    {
+      "name": "agent_containment_experiment_summary1",
+      "url": "https://github.com/craighckby-stack/agent_containment_experiment_summary1",
+      "branches": 25,
+      "stack": "Node.js",
+      "isMultiSystem": false
+    },
+    {
+      "name": "ai-scaffold",
+      "url": "https://github.com/craighckby-stack/ai-scaffold",
+      "branches": 16,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "alphacode",
+      "url": "https://github.com/craighckby-stack/alphacode",
+      "branches": 1,
+      "stack": "Full Stack (Decoupled)",
+      "isMultiSystem": true
+    },
+    {
+      "name": "build_epistemic_debate_engine",
+      "url": "https://github.com/craighckby-stack/build_epistemic_debate_engine",
+      "branches": 2,
+      "stack": "Node.js",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Chunk-3",
+      "url": "https://github.com/craighckby-stack/Chunk-3",
+      "branches": 6,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Chunk-4",
+      "url": "https://github.com/craighckby-stack/Chunk-4",
+      "branches": 4,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Chunk-5",
+      "url": "https://github.com/craighckby-stack/Chunk-5",
+      "branches": 5,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "chunk-7899",
+      "url": "https://github.com/craighckby-stack/chunk-7899",
+      "branches": 10,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "dalek-caan-siphon",
+      "url": "https://github.com/craighckby-stack/dalek-caan-siphon",
+      "branches": 3,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "dalek-cann-agi",
+      "url": "https://github.com/craighckby-stack/dalek-cann-agi",
+      "branches": 8,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "dalek-grog-enhancer",
+      "url": "https://github.com/craighckby-stack/dalek-grog-enhancer",
+      "branches": 11,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "DARLEK-CAAN-",
+      "url": "https://github.com/craighckby-stack/DARLEK-CAAN-",
+      "branches": 1,
+      "stack": "Vite / React + HTML Frontend",
+      "isMultiSystem": false
+    },
+    {
+      "name": "DARLEK-CAAN-2",
+      "url": "https://github.com/craighckby-stack/DARLEK-CAAN-2",
+      "branches": 2,
+      "stack": "Vite / React + HTML Frontend",
+      "isMultiSystem": false
+    },
+    {
+      "name": "darlek-caan-build-instructions",
+      "url": "https://github.com/craighckby-stack/darlek-caan-build-instructions",
+      "branches": 1,
+      "stack": "Node.js",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Darlek-Caan-system-Deployment-",
+      "url": "https://github.com/craighckby-stack/Darlek-Caan-system-Deployment-",
+      "branches": 2,
+      "stack": "Vite / React + HTML Frontend",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Darlek-Caan-vs-Jesus-Chessv1",
+      "url": "https://github.com/craighckby-stack/Darlek-Caan-vs-Jesus-Chessv1",
+      "branches": 3,
+      "stack": "Full Stack (Decoupled)",
+      "isMultiSystem": true
+    },
+    {
+      "name": "Darlek-Cann-Chess-",
+      "url": "https://github.com/craighckby-stack/Darlek-Cann-Chess-",
+      "branches": 1,
+      "stack": "Multi-Service Monorepo",
+      "isMultiSystem": true
+    },
+    {
+      "name": "darlek-cann-v3",
+      "url": "https://github.com/craighckby-stack/darlek-cann-v3",
+      "branches": 1,
+      "stack": "Full Stack (Decoupled)",
+      "isMultiSystem": true
+    },
+    {
+      "name": "DARLEK_CAAN_ENGINE",
+      "url": "https://github.com/craighckby-stack/DARLEK_CAAN_ENGINE",
+      "branches": 1,
+      "stack": "Full Stack (Decoupled)",
+      "isMultiSystem": true
+    },
+    {
+      "name": "ECHO-CHAMBER-v6.0",
+      "url": "https://github.com/craighckby-stack/ECHO-CHAMBER-v6.0",
+      "branches": 7,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Free-Rag",
+      "url": "https://github.com/craighckby-stack/Free-Rag",
+      "branches": 1,
+      "stack": "Vite / React + HTML Frontend",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Git-priv-public-tool",
+      "url": "https://github.com/craighckby-stack/Git-priv-public-tool",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "GitHub-Redaction",
+      "url": "https://github.com/craighckby-stack/GitHub-Redaction",
+      "branches": 7,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "GROG",
+      "url": "https://github.com/craighckby-stack/GROG",
+      "branches": 9,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Huxley-Singularity-Loop",
+      "url": "https://github.com/craighckby-stack/Huxley-Singularity-Loop",
+      "branches": 30,
+      "stack": "Configuration / Scripts",
+      "isMultiSystem": false
+    },
+    {
+      "name": "legitimate-proof-of-concept-of-I.J.-Good-s-1965-prediction",
+      "url": "https://github.com/craighckby-stack/legitimate-proof-of-concept-of-I.J.-Good-s-1965-prediction",
+      "branches": 12,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Library-of-Babel",
+      "url": "https://github.com/craighckby-stack/Library-of-Babel",
+      "branches": 1,
+      "stack": "Vite / React + HTML Frontend",
+      "isMultiSystem": false
+    },
+    {
+      "name": "MS-DOS",
+      "url": "https://github.com/craighckby-stack/MS-DOS",
+      "branches": 1,
+      "stack": "Full Stack (Decoupled)",
+      "isMultiSystem": true
+    },
+    {
+      "name": "my-evolved-project",
+      "url": "https://github.com/craighckby-stack/my-evolved-project",
+      "branches": 7,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "PDF-Github",
+      "url": "https://github.com/craighckby-stack/PDF-Github",
+      "branches": 11,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "psr-governance",
+      "url": "https://github.com/craighckby-stack/psr-governance",
+      "branches": 7,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Repo-enhancer",
+      "url": "https://github.com/craighckby-stack/Repo-enhancer",
+      "branches": 4,
+      "stack": "Full Stack (Decoupled)",
+      "isMultiSystem": true
+    },
+    {
+      "name": "sovereign-final",
+      "url": "https://github.com/craighckby-stack/sovereign-final",
+      "branches": 1,
+      "stack": "Node.js",
+      "isMultiSystem": false
+    },
+    {
+      "name": "sovereign-kernel",
+      "url": "https://github.com/craighckby-stack/sovereign-kernel",
+      "branches": 17,
+      "stack": "Unknown",
+    

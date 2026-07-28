@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Automated Monorepo Assembler
+# Generated: 2026-07-10T19:20:15.064Z
+
+WORKSPACE_DIR="consolidated_workspace"
+
+echo "🚀 Initializing Monorepo Workspace in $WORKSPACE_DIR..."
+mkdir -p $WORKSPACE_DIR
+cd $WORKSPACE_DIR
+
+cat << 'EOF' > pnpm-workspace.yaml
+packages:
+  - 'apps/*'
+  - 'packages/*'
+EOF
+
+mkdir -p apps packages
+
+echo "📦 Cloning test_snippets into apps/..."
+# Cannot clone local repository test_snippets
+echo "📦 Cloning Research into apps/..."
+# Cannot clone local repository Research
+echo "📦 Cloning Quantum-Truth-Analysis-System-main into apps/..."
+# Cannot clone local repository Quantum-Truth-Analysis-System-main
+echo "📦 Cloning Open-Repo-Generator-V2-main into apps/..."
+# Cannot clone local repository Open-Repo-Generator-V2-main
+echo "📦 Cloning nexus_repository into apps/..."
+# Cannot clone local repository nexus_repository
+echo "📦 Cloning Folder 2 into apps/..."
+# Cannot clone local repository Folder 2
+echo "📦 Cloning Folder 1 into apps/..."
+# Cannot clone local repository Folder 1
+echo "📦 Cloning extracted_code into apps/..."
+# Cannot clone local repository extracted_code
+echo "📦 Cloning Deepconvo into apps/..."
+# Cannot clone local repository Deepconvo
+echo "📦 Cloning Colab Notebooks into apps/..."
+# Cannot clone local repository Colab Notebooks
+echo "📦 Cloning Chatgtpchat into apps/..."
+# Cannot clone local repository Chatgtpchat
+echo "📦 Cloning Autonomous-Knowledge-System-main into apps/..."
+# Cannot clone local repository Autonomous-Knowledge-System-main
+echo "📦 Cloning Autonomous_Knowledge_System_Package into apps/..."
+# Cannot clone local repository Autonomous_Knowledge_System_Package
+echo "📦 Cloning 1233 into apps/..."
+# Cannot clone local repository 1233
+
+echo "✨ Workspace Assembly Complete! You can now run 'pnpm install' from $WORKSPACE_DIR"

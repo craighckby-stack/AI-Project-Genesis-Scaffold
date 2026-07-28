@@ -1,0 +1,364 @@
+# Cross-Repo Deduplication Report
+
+Generated: 2026-07-10T18:40:24.644Z
+
+**Total Shared File Signatures**: 238
+**Total Redundant Files (Potential Savings)**: 445
+
+## Exact Matches Across Repositories
+
+### Signature: `5a86d2a8aeff...`
+Found in 14 locations across 13 repos:
+- **2**: `.gitignore`
+- **claud-ios**: `.gitignore`
+- **DARLEK-CAAN-**: `.gitignore`
+- **Darlek-Caan-system-Deployment-**: `.gitignore`
+- **DARLEK-CAAN-vs-JESUS-CHESS**: `.gitignore`
+- **Darlek-Cann-Chess-**: `.gitignore`
+- **Darlek-Cann-Chess-**: `dest-repo/.gitignore`
+- **Free-Rag**: `.gitignore`
+- **GitHub-Monorepo-Deep-Auditor**: `.gitignore`
+- **Hux**: `.gitignore`
+- **Huxley-Singularity-Loop-Main**: `.gitignore`
+- **Library-of-Babel**: `.gitignore`
+- **Need-a-new-pc-**: `.gitignore`
+- **SOVEREIGN-**: `.gitignore`
+
+### Signature: `500d58b201bf...`
+Found in 13 locations across 7 repos:
+- **ai_evo_sim**: `src/components/ui/input.tsx`
+- **ai_evo_sim**: `src/types/manifest.d.ts`
+- **ai_evo_sim**: `src/utils/refactor-engine.ts`
+- **Dk**: `V2.html`
+- **Dk**: `V5`
+- **Dk**: `evolution_log.md`
+- **Dk**: `hooks/useOrchestrator.ts`
+- **Dk**: `src/governance/dopaminergic-brake.ts`
+- **EMG-CORE**: `src/lib/core/Brain.ts`
+- **emgmd**: `package.json`
+- **GROG-The-First-Learning-AGI**: `Dying-Simulator.md`
+- **MS-DOS**: `src/types/evolution.ts`
+- **thought**: `src/app/layout.tsx`
+
+### Signature: `080dac371e6d...`
+Found in 12 locations across 12 repos:
+- **2**: `src/main.tsx`
+- **DARLEK-CAAN-**: `src/main.tsx`
+- **Darlek-Caan-system-Deployment-**: `src/main.tsx`
+- **DARLEK-CAAN-vs-JESUS-CHESS**: `src/main.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/main.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/main.tsx`
+- **Free-Rag**: `src/main.tsx`
+- **GitHub-Monorepo-Deep-Auditor**: `src/main.tsx`
+- **Hux**: `src/main.tsx`
+- **Huxley-Singularity-Loop-Main**: `src/main.tsx`
+- **Library-of-Babel**: `src/main.tsx`
+- **Need-a-new-pc-**: `src/main.tsx`
+
+### Signature: `d88f175b0882...`
+Found in 12 locations across 11 repos:
+- **2**: `tsconfig.json`
+- **AetherForge-2**: `worlds/world-alpha-831-1780617394259/tsconfig.json`
+- **AetherForge-2**: `worlds/world-archon-947-1780617659472/tsconfig.json`
+- **AetherForge-2.0**: `tsconfig.json`
+- **DARLEK-CAAN-**: `tsconfig.json`
+- **Darlek-Caan-system-Deployment-**: `tsconfig.json`
+- **DARLEK-CAAN-vs-JESUS-CHESS**: `tsconfig.json`
+- **Free-Rag**: `tsconfig.json`
+- **GitHub-Monorepo-Deep-Auditor**: `tsconfig.json`
+- **Hux**: `tsconfig.json`
+- **Library-of-Babel**: `tsconfig.json`
+- **Need-a-new-pc-**: `tsconfig.json`
+
+### Signature: `fc23e76fd18e...`
+Found in 10 locations across 10 repos:
+- **AetherForge-2**: `worlds/world-archon-947-1780617659472/vite.config.ts`
+- **DARLEK-CAAN-**: `vite.config.ts`
+- **Darlek-Caan-system-Deployment-**: `vite.config.ts`
+- **DARLEK-CAAN-vs-JESUS-CHESS**: `vite.config.ts`
+- **DARLEK_CAAN_ENGINE**: `vite.config.ts`
+- **Free-Rag**: `vite.config.ts`
+- **GitHub-Monorepo-Deep-Auditor**: `vite.config.ts`
+- **Library-of-Babel**: `vite.config.ts`
+- **Need-a-new-pc-**: `vite.config.ts`
+- **SOVEREIGN-**: `vite.config.ts`
+
+### Signature: `7a550fe79a56...`
+Found in 10 locations across 9 repos:
+- **claud-ios**: `.env.example`
+- **DARLEK-CAAN-2**: `.env.example`
+- **Darlek-Caan-system-Deployment-**: `.env.example`
+- **DARLEK-CAAN-vs-JESUS-CHESS**: `.env.example`
+- **Darlek-Cann-Chess-**: `.env.example`
+- **Darlek-Cann-Chess-**: `dest-repo/.env.example`
+- **GitHub-Monorepo-Deep-Auditor**: `.env.example`
+- **Hux**: `.env.example`
+- **Need-a-new-pc-**: `.env.example`
+- **SOVEREIGN-**: `.env.example`
+
+### Signature: `72e8ffc0db8a...`
+Found in 8 locations across 7 repos:
+- **claud-ios**: `assets/.aistudio/.gitignore`
+- **DARLEK-CAAN-**: `assets/.aistudio/.gitignore`
+- **Darlek-Caan-system-Deployment-**: `assets/.aistudio/.gitignore`
+- **Darlek-Cann-Chess-**: `assets/.aistudio/.gitignore`
+- **Darlek-Cann-Chess-**: `dest-repo/assets/.aistudio/.gitignore`
+- **Free-Rag**: `assets/.aistudio/.gitignore`
+- **GitHub-Monorepo-Deep-Auditor**: `assets/.aistudio/.gitignore`
+- **Library-of-Babel**: `assets/.aistudio/.gitignore`
+
+### Signature: `21dfe6908a2d...`
+Found in 8 locations across 8 repos:
+- **DARLEK-CAAN-**: `index.html`
+- **Darlek-Caan-system-Deployment-**: `index.html`
+- **Free-Rag**: `index.html`
+- **GitHub-Monorepo-Deep-Auditor**: `index.html`
+- **Hux**: `index.html`
+- **Huxley-Singularity-Loop-Main**: `index.html`
+- **Library-of-Babel**: `index.html`
+- **Need-a-new-pc-**: `index.html`
+
+### Signature: `2e7166da64fd...`
+Found in 6 locations across 6 repos:
+- **ai_evo_sim**: `src/components/DebateChamber.tsx`
+- **alphacode**: `src/components/DebateChamber.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/DebateChamber.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/DebateChamber.tsx`
+- **MS-DOS**: `src/components/DebateChamber.tsx`
+- **Repo-enhancer**: `src/components/DebateChamber.tsx`
+
+### Signature: `a0bed8721db2...`
+Found in 6 locations across 6 repos:
+- **ai_evo_sim**: `src/components/MutationDiffView.tsx`
+- **alphacode**: `src/components/MutationDiffView.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/MutationDiffView.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/MutationDiffView.tsx`
+- **MS-DOS**: `src/components/MutationDiffView.tsx`
+- **Repo-enhancer**: `src/components/MutationDiffView.tsx`
+
+### Signature: `984b3060416d...`
+Found in 5 locations across 5 repos:
+- **2**: `src/brain-firebase-runtime.ts`
+- **alphacode**: `src/brain-firebase-runtime.ts`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/brain-firebase-runtime.ts`
+- **DARLEK_CAAN_ENGINE**: `src/brain-firebase-runtime.ts`
+- **Repo-enhancer**: `src/brain-firebase-runtime.ts`
+
+### Signature: `4f84b2964bea...`
+Found in 5 locations across 5 repos:
+- **alphacode**: `.env.example`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `.env.example`
+- **darlek-cann-v3**: `.env.example`
+- **DARLEK_CAAN_ENGINE**: `.env.example`
+- **Repo-enhancer**: `.env.example`
+
+### Signature: `71e428b4ca61...`
+Found in 5 locations across 5 repos:
+- **alphacode**: `src/components/ui/avatar.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/avatar.tsx`
+- **darlek-cann-v3**: `src/components/ui/avatar.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/avatar.tsx`
+- **Repo-enhancer**: `src/components/ui/avatar.tsx`
+
+### Signature: `830b5013b339...`
+Found in 4 locations across 4 repos:
+- **ai_evo_sim**: `src/lib/llm-provider.ts`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/lib/llm-provider.ts`
+- **DARLEK_CAAN_ENGINE**: `src/lib/llm-provider.ts`
+- **MS-DOS**: `src/lib/llm-provider.ts`
+
+### Signature: `1dc002b0a82e...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/app/api/github/scan/route.ts`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/app/api/github/scan/route.ts`
+- **DARLEK_CAAN_ENGINE**: `src/app/api/github/scan/route.ts`
+- **Repo-enhancer**: `src/app/api/github/scan/route.ts`
+
+### Signature: `e0563e9f11b7...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/app/api/github/write-file/route.ts`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/app/api/github/write-file/route.ts`
+- **DARLEK_CAAN_ENGINE**: `src/app/api/github/write-file/route.ts`
+- **Repo-enhancer**: `src/app/api/github/write-file/route.ts`
+
+### Signature: `0277710b3e8c...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/app/api/route.ts`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/app/api/route.ts`
+- **DARLEK_CAAN_ENGINE**: `src/app/api/route.ts`
+- **Repo-enhancer**: `src/app/api/route.ts`
+
+### Signature: `088ba2ecbefe...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/AgentOrchestra.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/AgentOrchestra.tsx`
+- **darlek-cann-v3**: `src/components/AgentOrchestra.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/AgentOrchestra.tsx`
+
+### Signature: `c552af56cd16...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ChatMessage.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ChatMessage.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ChatMessage.tsx`
+- **Repo-enhancer**: `src/components/ChatMessage.tsx`
+
+### Signature: `6f0f55cff485...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/SaturationMetrics.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/SaturationMetrics.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/SaturationMetrics.tsx`
+- **Repo-enhancer**: `src/components/SaturationMetrics.tsx`
+
+### Signature: `4a8cca46b9c1...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/accordion.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/accordion.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/accordion.tsx`
+- **Repo-enhancer**: `src/components/ui/accordion.tsx`
+
+### Signature: `14213546e5ac...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/alert.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/alert.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/alert.tsx`
+- **Repo-enhancer**: `src/components/ui/alert.tsx`
+
+### Signature: `eb88f3212208...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/breadcrumb.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/breadcrumb.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/breadcrumb.tsx`
+- **Repo-enhancer**: `src/components/ui/breadcrumb.tsx`
+
+### Signature: `4d7c46afb52b...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/calendar.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/calendar.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/calendar.tsx`
+- **Repo-enhancer**: `src/components/ui/calendar.tsx`
+
+### Signature: `fa0e4b59fa85...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/checkbox.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/checkbox.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/checkbox.tsx`
+- **Repo-enhancer**: `src/components/ui/checkbox.tsx`
+
+### Signature: `8cb4ca7a583d...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/command.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/command.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/command.tsx`
+- **Repo-enhancer**: `src/components/ui/command.tsx`
+
+### Signature: `d9ccec91d22f...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/dialog.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/dialog.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/dialog.tsx`
+- **Repo-enhancer**: `src/components/ui/dialog.tsx`
+
+### Signature: `ec51e9cc9f82...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/dropdown-menu.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/dropdown-menu.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/dropdown-menu.tsx`
+- **Repo-enhancer**: `src/components/ui/dropdown-menu.tsx`
+
+### Signature: `e7541864c7de...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/hover-card.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/hover-card.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/hover-card.tsx`
+- **Repo-enhancer**: `src/components/ui/hover-card.tsx`
+
+### Signature: `03295ca6ac61...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/input.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/input.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/input.tsx`
+- **Repo-enhancer**: `src/components/ui/input.tsx`
+
+### Signature: `8480f0aac115...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/menubar.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/menubar.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/menubar.tsx`
+- **Repo-enhancer**: `src/components/ui/menubar.tsx`
+
+### Signature: `0d185410e7bb...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/pagination.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/pagination.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/pagination.tsx`
+- **Repo-enhancer**: `src/components/ui/pagination.tsx`
+
+### Signature: `e7a416c37510...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/progress.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/progress.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/progress.tsx`
+- **Repo-enhancer**: `src/components/ui/progress.tsx`
+
+### Signature: `12bbd0b8b04e...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/resizable.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/resizable.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/resizable.tsx`
+- **Repo-enhancer**: `src/components/ui/resizable.tsx`
+
+### Signature: `dcbbc0ca0c78...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/select.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/select.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/select.tsx`
+- **Repo-enhancer**: `src/components/ui/select.tsx`
+
+### Signature: `84649ad0ffd8...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/sheet.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/sheet.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/sheet.tsx`
+- **Repo-enhancer**: `src/components/ui/sheet.tsx`
+
+### Signature: `1ee5a457ea2b...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/sidebar.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/sidebar.tsx`
+- **darlek-cann-v3**: `src/components/ui/sidebar.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/sidebar.tsx`
+
+### Signature: `32ea0ef7fb4d...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/skeleton.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/skeleton.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/skeleton.tsx`
+- **Repo-enhancer**: `src/components/ui/skeleton.tsx`
+
+### Signature: `957524edbd23...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/sonner.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/sonner.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/sonner.tsx`
+- **Repo-enhancer**: `src/components/ui/sonner.tsx`
+
+### Signature: `51b74dd52570...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/table.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/table.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/table.tsx`
+- **Repo-enhancer**: `src/components/ui/table.tsx`
+
+### Signature: `7f21b5e78a4c...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/textarea.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/textarea.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/textarea.tsx`
+- **Repo-enhancer**: `src/components/ui/textarea.tsx`
+
+### Signature: `3f3c87896202...`
+Found in 4 locations across 4 repos:
+- **alphacode**: `src/components/ui/toaster.tsx`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `src/components/ui/toaster.tsx`
+- **DARLEK_CAAN_ENGINE**: `src/components/ui/toaster.tsx`
+- **Repo-enhancer**: `src/components/ui/toas

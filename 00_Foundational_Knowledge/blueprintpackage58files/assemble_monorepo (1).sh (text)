@@ -1,0 +1,201 @@
+#!/bin/bash
+
+# Automated Monorepo Assembler
+# Generated: 2026-07-10T18:41:36.779Z
+
+WORKSPACE_DIR="consolidated_workspace"
+
+echo "🚀 Initializing Monorepo Workspace in $WORKSPACE_DIR..."
+mkdir -p $WORKSPACE_DIR
+cd $WORKSPACE_DIR
+
+cat << 'EOF' > pnpm-workspace.yaml
+packages:
+  - 'apps/*'
+  - 'packages/*'
+EOF
+
+mkdir -p apps packages
+
+echo "📦 Cloning 1 into apps/..."
+git clone https://github.com/craighckby-stack/1.git apps/1
+echo "📦 Cloning 2 into apps/..."
+git clone https://github.com/craighckby-stack/2.git apps/2
+echo "📦 Cloning AetherForge-2 into apps/..."
+git clone https://github.com/craighckby-stack/AetherForge-2.git apps/AetherForge-2
+echo "📦 Cloning AetherForge-2.0 into apps/..."
+git clone https://github.com/craighckby-stack/AetherForge-2.0.git apps/AetherForge-2.0
+echo "📦 Cloning agent_containment_experiment_summary1 into apps/..."
+git clone https://github.com/craighckby-stack/agent_containment_experiment_summary1.git apps/agent_containment_experiment_summary1
+echo "📦 Cloning AGI-KERNEL- into apps/..."
+git clone https://github.com/craighckby-stack/AGI-KERNEL-.git apps/AGI-KERNEL-
+echo "📦 Cloning ai-scaffold into apps/..."
+git clone https://github.com/craighckby-stack/ai-scaffold.git apps/ai-scaffold
+echo "📦 Cloning ai-scaffold- into apps/..."
+git clone https://github.com/craighckby-stack/ai-scaffold-.git apps/ai-scaffold-
+echo "📦 Cloning ai_evo_sim into apps/..."
+git clone https://github.com/craighckby-stack/ai_evo_sim.git apps/ai_evo_sim
+echo "📦 Cloning alphacode into apps/..."
+git clone https://github.com/craighckby-stack/alphacode.git apps/alphacode
+echo "📦 Cloning Balanced_Auditor_v5.2 into apps/..."
+git clone https://github.com/craighckby-stack/Balanced_Auditor_v5.2.git apps/Balanced_Auditor_v5.2
+echo "📦 Cloning build_epistemic_debate_engine into apps/..."
+git clone https://github.com/craighckby-stack/build_epistemic_debate_engine.git apps/build_epistemic_debate_engine
+echo "📦 Cloning Chunk-3 into apps/..."
+git clone https://github.com/craighckby-stack/Chunk-3.git apps/Chunk-3
+echo "📦 Cloning Chunk-4 into apps/..."
+git clone https://github.com/craighckby-stack/Chunk-4.git apps/Chunk-4
+echo "📦 Cloning Chunk-5 into apps/..."
+git clone https://github.com/craighckby-stack/Chunk-5.git apps/Chunk-5
+echo "📦 Cloning chunk-7899 into apps/..."
+git clone https://github.com/craighckby-stack/chunk-7899.git apps/chunk-7899
+echo "📦 Cloning claud-ios into apps/..."
+git clone https://github.com/craighckby-stack/claud-ios.git apps/claud-ios
+echo "📦 Cloning claudios_system_book into apps/..."
+git clone https://github.com/craighckby-stack/claudios_system_book.git apps/claudios_system_book
+echo "📦 Cloning craighckby-stack into apps/..."
+git clone https://github.com/craighckby-stack/craighckby-stack.git apps/craighckby-stack
+echo "📦 Cloning dalek-caan-siphon into apps/..."
+git clone https://github.com/craighckby-stack/dalek-caan-siphon.git apps/dalek-caan-siphon
+echo "📦 Cloning dalek-cann-agi into apps/..."
+git clone https://github.com/craighckby-stack/dalek-cann-agi.git apps/dalek-cann-agi
+echo "📦 Cloning Dalek-Grog into apps/..."
+git clone https://github.com/craighckby-stack/Dalek-Grog.git apps/Dalek-Grog
+echo "📦 Cloning dalek-grog-enhancer into apps/..."
+git clone https://github.com/craighckby-stack/dalek-grog-enhancer.git apps/dalek-grog-enhancer
+echo "📦 Cloning DARLEK-CAAN- into apps/..."
+git clone https://github.com/craighckby-stack/DARLEK-CAAN-.git apps/DARLEK-CAAN-
+echo "📦 Cloning DARLEK-CAAN-2 into apps/..."
+git clone https://github.com/craighckby-stack/DARLEK-CAAN-2.git apps/DARLEK-CAAN-2
+echo "📦 Cloning darlek-caan-build-instructions into apps/..."
+git clone https://github.com/craighckby-stack/darlek-caan-build-instructions.git apps/darlek-caan-build-instructions
+echo "📦 Cloning Darlek-Caan-system-Deployment- into apps/..."
+git clone https://github.com/craighckby-stack/Darlek-Caan-system-Deployment-.git apps/Darlek-Caan-system-Deployment-
+echo "📦 Cloning DARLEK-CAAN-vs-JESUS-CHESS into apps/..."
+git clone https://github.com/craighckby-stack/DARLEK-CAAN-vs-JESUS-CHESS.git apps/DARLEK-CAAN-vs-JESUS-CHESS
+echo "📦 Cloning Darlek-Caan-vs-Jesus-Chessv1 into apps/..."
+git clone https://github.com/craighckby-stack/Darlek-Caan-vs-Jesus-Chessv1.git apps/Darlek-Caan-vs-Jesus-Chessv1
+echo "📦 Cloning Darlek-Cann-Chess- into apps/..."
+git clone https://github.com/craighckby-stack/Darlek-Cann-Chess-.git apps/Darlek-Cann-Chess-
+echo "📦 Cloning darlek-cann-v3 into apps/..."
+git clone https://github.com/craighckby-stack/darlek-cann-v3.git apps/darlek-cann-v3
+echo "📦 Cloning DARLEK_CAAN_ENGINE into apps/..."
+git clone https://github.com/craighckby-stack/DARLEK_CAAN_ENGINE.git apps/DARLEK_CAAN_ENGINE
+echo "📦 Cloning darlik-khan-v2 into apps/..."
+git clone https://github.com/craighckby-stack/darlik-khan-v2.git apps/darlik-khan-v2
+echo "📦 Cloning Dk into apps/..."
+git clone https://github.com/craighckby-stack/Dk.git apps/Dk
+echo "📦 Cloning DNA-Based-Regulator-Core into apps/..."
+git clone https://github.com/craighckby-stack/DNA-Based-Regulator-Core.git apps/DNA-Based-Regulator-Core
+echo "📦 Cloning ECHO-CHAMBER-v6.0 into apps/..."
+git clone https://github.com/craighckby-stack/ECHO-CHAMBER-v6.0.git apps/ECHO-CHAMBER-v6.0
+echo "📦 Cloning echo-chamber-v7 into apps/..."
+git clone https://github.com/craighckby-stack/echo-chamber-v7.git apps/echo-chamber-v7
+echo "📦 Cloning EMG-CORE into apps/..."
+git clone https://github.com/craighckby-stack/EMG-CORE.git apps/EMG-CORE
+echo "📦 Cloning emg-v85-memory-core into apps/..."
+git clone https://github.com/craighckby-stack/emg-v85-memory-core.git apps/emg-v85-memory-core
+echo "📦 Cloning emgmd into apps/..."
+git clone https://github.com/craighckby-stack/emgmd.git apps/emgmd
+echo "📦 Cloning encyclopedia-of-engineering into apps/..."
+git clone https://github.com/craighckby-stack/encyclopedia-of-engineering.git apps/encyclopedia-of-engineering
+echo "📦 Cloning EULER-ENGINE into apps/..."
+git clone https://github.com/craighckby-stack/EULER-ENGINE.git apps/EULER-ENGINE
+echo "📦 Cloning evolution-engine-rag into apps/..."
+git clone https://github.com/craighckby-stack/evolution-engine-rag.git apps/evolution-engine-rag
+echo "📦 Cloning Free-Rag into apps/..."
+git clone https://github.com/craighckby-stack/Free-Rag.git apps/Free-Rag
+echo "📦 Cloning Gibberish- into apps/..."
+git clone https://github.com/craighckby-stack/Gibberish-.git apps/Gibberish-
+echo "📦 Cloning Git-priv-public-tool into apps/..."
+git clone https://github.com/craighckby-stack/Git-priv-public-tool.git apps/Git-priv-public-tool
+echo "📦 Cloning GitHub-Monorepo-Deep-Auditor into apps/..."
+git clone https://github.com/craighckby-stack/GitHub-Monorepo-Deep-Auditor.git apps/GitHub-Monorepo-Deep-Auditor
+echo "📦 Cloning GitHub-Redaction into apps/..."
+git clone https://github.com/craighckby-stack/GitHub-Redaction.git apps/GitHub-Redaction
+echo "📦 Cloning Governece-substrates- into apps/..."
+git clone https://github.com/craighckby-stack/Governece-substrates-.git apps/Governece-substrates-
+echo "📦 Cloning GROG into apps/..."
+git clone https://github.com/craighckby-stack/GROG.git apps/GROG
+echo "📦 Cloning GROG-The-First-Learning-AGI into apps/..."
+git clone https://github.com/craighckby-stack/GROG-The-First-Learning-AGI.git apps/GROG-The-First-Learning-AGI
+echo "📦 Cloning Hux into apps/..."
+git clone https://github.com/craighckby-stack/Hux.git apps/Hux
+echo "📦 Cloning Huxley-A-Reasoning-Framework-for-Ethical-AI into apps/..."
+git clone https://github.com/craighckby-stack/Huxley-A-Reasoning-Framework-for-Ethical-AI.git apps/Huxley-A-Reasoning-Framework-for-Ethical-AI
+echo "📦 Cloning Huxley-Singularity-Loop into apps/..."
+git clone https://github.com/craighckby-stack/Huxley-Singularity-Loop.git apps/Huxley-Singularity-Loop
+echo "📦 Cloning Huxley-Singularity-Loop-Main into apps/..."
+git clone https://github.com/craighckby-stack/Huxley-Singularity-Loop-Main.git apps/Huxley-Singularity-Loop-Main
+echo "📦 Cloning legitimate-proof-of-concept-of-I.J.-Good-s-1965-prediction into apps/..."
+git clone https://github.com/craighckby-stack/legitimate-proof-of-concept-of-I.J.-Good-s-1965-prediction.git apps/legitimate-proof-of-concept-of-I.J.-Good-s-1965-prediction
+echo "📦 Cloning Library-of-Babel into apps/..."
+git clone https://github.com/craighckby-stack/Library-of-Babel.git apps/Library-of-Babel
+echo "📦 Cloning MS-DOS into apps/..."
+git clone https://github.com/craighckby-stack/MS-DOS.git apps/MS-DOS
+echo "📦 Cloning my-evolved-project into apps/..."
+git clone https://github.com/craighckby-stack/my-evolved-project.git apps/my-evolved-project
+echo "📦 Cloning nbody_gravitational_simulator into apps/..."
+git clone https://github.com/craighckby-stack/nbody_gravitational_simulator.git apps/nbody_gravitational_simulator
+echo "📦 Cloning Need-a-new-pc- into apps/..."
+git clone https://github.com/craighckby-stack/Need-a-new-pc-.git apps/Need-a-new-pc-
+echo "📦 Cloning Nicotine-replacement-therapy-idea into apps/..."
+git clone https://github.com/craighckby-stack/Nicotine-replacement-therapy-idea.git apps/Nicotine-replacement-therapy-idea
+echo "📦 Cloning PDF-Github into apps/..."
+git clone https://github.com/craighckby-stack/PDF-Github.git apps/PDF-Github
+echo "📦 Cloning psr-governance into apps/..."
+git clone https://github.com/craighckby-stack/psr-governance.git apps/psr-governance
+echo "📦 Cloning Random.ai.html into apps/..."
+git clone https://github.com/craighckby-stack/Random.ai.html.git apps/Random.ai.html
+echo "📦 Cloning Repo-enhancer into apps/..."
+git clone https://github.com/craighckby-stack/Repo-enhancer.git apps/Repo-enhancer
+echo "📦 Cloning Safer-Growing-Intelligence-DAF- into apps/..."
+git clone https://github.com/craighckby-stack/Safer-Growing-Intelligence-DAF-.git apps/Safer-Growing-Intelligence-DAF-
+echo "📦 Cloning SN into apps/..."
+git clone https://github.com/craighckby-stack/SN.git apps/SN
+echo "📦 Cloning SOVEREIGN- into apps/..."
+git clone https://github.com/craighckby-stack/SOVEREIGN-.git apps/SOVEREIGN-
+echo "📦 Cloning sovereign-final into apps/..."
+git clone https://github.com/craighckby-stack/sovereign-final.git apps/sovereign-final
+echo "📦 Cloning sovereign-kernel into apps/..."
+git clone https://github.com/craighckby-stack/sovereign-kernel.git apps/sovereign-kernel
+echo "📦 Cloning sovereign-repo-enhancer into apps/..."
+git clone https://github.com/craighckby-stack/sovereign-repo-enhancer.git apps/sovereign-repo-enhancer
+echo "📦 Cloning sovereign-v86 into apps/..."
+git clone https://github.com/craighckby-stack/sovereign-v86.git apps/sovereign-v86
+echo "📦 Cloning spectest into apps/..."
+git clone https://github.com/craighckby-stack/spectest.git apps/spectest
+echo "📦 Cloning Synthesis-Hub into apps/..."
+git clone https://github.com/craighckby-stack/Synthesis-Hub.git apps/Synthesis-Hub
+echo "📦 Cloning T into apps/..."
+git clone https://github.com/craighckby-stack/T.git apps/T
+echo "📦 Cloning Test into apps/..."
+git clone https://github.com/craighckby-stack/Test.git apps/Test
+echo "📦 Cloning Test-1222 into apps/..."
+git clone https://github.com/craighckby-stack/Test-1222.git apps/Test-1222
+echo "📦 Cloning Test1 into apps/..."
+git clone https://github.com/craighckby-stack/Test1.git apps/Test1
+echo "📦 Cloning Test2 into apps/..."
+git clone https://github.com/craighckby-stack/Test2.git apps/Test2
+echo "📦 Cloning Testtt into apps/..."
+git clone https://github.com/craighckby-stack/Testtt.git apps/Testtt
+echo "📦 Cloning The-Dopaminergic-Brake into apps/..."
+git clone https://github.com/craighckby-stack/The-Dopaminergic-Brake.git apps/The-Dopaminergic-Brake
+echo "📦 Cloning the-rock-knew-all-along into apps/..."
+git clone https://github.com/craighckby-stack/the-rock-knew-all-along.git apps/the-rock-knew-all-along
+echo "📦 Cloning theoretical-foundation into apps/..."
+git clone https://github.com/craighckby-stack/theoretical-foundation.git apps/theoretical-foundation
+echo "📦 Cloning thought into apps/..."
+git clone https://github.com/craighckby-stack/thought.git apps/thought
+echo "📦 Cloning unitary-core into apps/..."
+git clone https://github.com/craighckby-stack/unitary-core.git apps/unitary-core
+echo "📦 Cloning v2 into apps/..."
+git clone https://github.com/craighckby-stack/v2.git apps/v2
+echo "📦 Cloning yyy into apps/..."
+git clone https://github.com/craighckby-stack/yyy.git apps/yyy
+echo "📦 Cloning z into apps/..."
+git clone https://github.com/craighckby-stack/z.git apps/z
+echo "📦 Cloning ZEN into apps/..."
+git clone https://github.com/craighckby-stack/ZEN.git apps/ZEN
+
+echo "✨ Workspace Assembly Complete! You can now run 'pnpm install' from $WORKSPACE_DIR"

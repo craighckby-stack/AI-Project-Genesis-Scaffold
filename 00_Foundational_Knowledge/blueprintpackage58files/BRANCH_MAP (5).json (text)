@@ -1,0 +1,688 @@
+{
+  "1": [
+    "main"
+  ],
+  "2": [
+    "4",
+    "main"
+  ],
+  "AetherForge-2": [
+    "main"
+  ],
+  "AetherForge-2.0": [
+    "Old",
+    "main"
+  ],
+  "agent_containment_experiment_summary1": [
+    "darlek-backup-1783423205418",
+    "darlek-backup-1783423247312",
+    "darlek-backup-1783423377393",
+    "darlek-backup-1783423413387",
+    "darlek-backup-1783423445253",
+    "darlek-backup-1783423473289",
+    "darlek-backup-1783423500847",
+    "darlek-backup-1783423528265",
+    "darlek-backup-1783423558997",
+    "darlek-backup-1783423592099",
+    "darlek-backup-1783423623318",
+    "darlek-backup-1783423645853",
+    "darlek-backup-1783423680391",
+    "darlek-backup-1783423711405",
+    "darlek-backup-1783423738241",
+    "darlek-backup-1783423772301",
+    "darlek-backup-1783423818855",
+    "darlek-backup-1783423857401",
+    "darlek-backup-1783423920977",
+    "darlek-backup-1783423952342",
+    "darlek-backup-1783423984690",
+    "darlek-backup-1783424030623",
+    "darlek-backup-1783424064592",
+    "darlek-backup-1783424118822",
+    "main"
+  ],
+  "AGI-KERNEL-": [
+    "enhanced-by-brain",
+    "logic-backup-i31i",
+    "logic-backup-osim",
+    "main",
+    "system/fallback"
+  ],
+  "ai-scaffold": [
+    "core/atomic-mutation-engine",
+    "core/concurrency-manager",
+    "dependabot/github_actions/actions/checkout-6",
+    "dependabot/github_actions/actions/setup-node-6",
+    "engine/github-api-bridge",
+    "engine/substrate-aware-scheduler",
+    "enhanced-by-brain",
+    "ev-1767877973143-3es",
+    "gh-pages",
+    "logic-backup-9lcj",
+    "logic-backup-hw8o",
+    "logic-backup-xbxu",
+    "logic-backup-zie3",
+    "main",
+    "persistence/cross-substrate-ledger",
+    "tooling/async-integrity-gate"
+  ],
+  "ai-scaffold-": [
+    "enhanced-by-brain",
+    "logic-backup-1jkq",
+    "logic-backup-tx49",
+    "main",
+    "system/fallback"
+  ],
+  "ai_evo_sim": [
+    "main"
+  ],
+  "alphacode": [
+    "main"
+  ],
+  "Balanced_Auditor_v5.2": [
+    "1",
+    "backup-6obqk",
+    "backup-c1nkp",
+    "backup-wfvbw",
+    "logic-backup-2y1o",
+    "logic-backup-f67l",
+    "main",
+    "siphon/tree-flattening",
+    "sync/idempotent-commits",
+    "telemetry/enriched-errors"
+  ],
+  "build_epistemic_debate_engine": [
+    "1",
+    "main"
+  ],
+  "Chunk-3": [
+    "B1",
+    "binary-evolution",
+    "enhanced-by-brain",
+    "logic-backup-3ao0",
+    "logic-backup-he76",
+    "main"
+  ],
+  "Chunk-4": [
+    "enhanced-by-brain",
+    "logic-backup-ew4a",
+    "logic-backup-trum",
+    "main"
+  ],
+  "Chunk-5": [
+    "enhanced-by-brain",
+    "logic-backup-64vl",
+    "logic-backup-m1ah",
+    "logic-backup-w693",
+    "main"
+  ],
+  "chunk-7899": [
+    "backup-62fqb",
+    "binary-evolution",
+    "enhanced-by-brain",
+    "logic-backup-34ea",
+    "logic-backup-cmxg",
+    "logic-backup-snkf",
+    "logic-backup-wonq",
+    "logic-backup-xjc1",
+    "main",
+    "system/fallback"
+  ],
+  "claud-ios": [
+    "main"
+  ],
+  "claudios_system_book": [
+    "main"
+  ],
+  "craighckby-stack": [
+    "1",
+    "Pre-Mining-for-gold",
+    "main"
+  ],
+  "dalek-caan-siphon": [
+    "enhanced-by-brain",
+    "logic-backup-dxh5",
+    "main"
+  ],
+  "dalek-cann-agi": [
+    "engine/deterministic-complexity",
+    "enhanced-by-brain",
+    "logic/agent-deliberation",
+    "logic-backup-fka2",
+    "logic-backup-idu0",
+    "logic-backup-p75m",
+    "main",
+    "security/coherence-gate"
+  ],
+  "Dalek-Grog": [
+    "Bck2",
+    "Bck3",
+    "Bckup",
+    "Bckup4",
+    "Bckup7",
+    "core/nexus-scheduler",
+    "enhanced-by-brain",
+    "evolution/saturation-engine",
+    "governance/api-mitigation",
+    "logic-backup-dolm",
+    "logic-backup-jx86",
+    "main"
+  ],
+  "dalek-grog-enhancer": [
+    "backup-5tnem",
+    "enhanced-by-brain",
+    "feature/context-priming",
+    "logic/evolution-lifecycle",
+    "logic-backup-7gs1",
+    "logic-backup-mrvd",
+    "logic-backup-rbkp",
+    "logic-backup-xojv",
+    "main",
+    "system/fallback",
+    "upgrade/multi-provider-proxy"
+  ],
+  "DARLEK-CAAN-": [
+    "main"
+  ],
+  "DARLEK-CAAN-2": [
+    "Main",
+    "Orgional"
+  ],
+  "darlek-caan-build-instructions": [
+    "main"
+  ],
+  "Darlek-Caan-system-Deployment-": [
+    "1",
+    "main"
+  ],
+  "DARLEK-CAAN-vs-JESUS-CHESS": [
+    "1",
+    "2",
+    "main"
+  ],
+  "Darlek-Caan-vs-Jesus-Chessv1": [
+    "1",
+    "2",
+    "main"
+  ],
+  "Darlek-Cann-Chess-": [
+    "main"
+  ],
+  "darlek-cann-v3": [
+    "main"
+  ],
+  "DARLEK_CAAN_ENGINE": [
+    "main"
+  ],
+  "darlik-khan-v2": [
+    "engine/evolution-service",
+    "engine/placeholder-registry",
+    "enhanced-by-brain",
+    "logic-backup-lsn6",
+    "logic-backup-pgxj",
+    "main",
+    "master",
+    "src/system/placeholders.ts",
+    "system/evolution-enhancer"
+  ],
+  "Dk": [
+    "main"
+  ],
+  "DNA-Based-Regulator-Core": [
+    "core/dna-thinking-regulator",
+    "engine/lambda-swarm-processor",
+    "enhanced-by-brain",
+    "kernel/self-reconciliation",
+    "logic-backup-bu7z",
+    "logic-backup-xmx3",
+    "main"
+  ],
+  "ECHO-CHAMBER-v6.0": [
+    "core/memory-engine",
+    "engine/agent-matrix",
+    "enhanced-by-brain",
+    "infra/standalone-deploy",
+    "logic-backup-sv9f",
+    "logic-backup-txpx",
+    "main"
+  ],
+  "echo-chamber-v7": [
+    "ai-cycle-1-1765709492399",
+    "ai-cycle-2-1765709517140",
+    "ai-cycle-3-1765709541093",
+    "ai-cycle-4-1765709566091",
+    "ai-cycle-5-1765709590422",
+    "ai-cycle-6-1765709615136",
+    "ai-cycle-7-1765709655731",
+    "ai-cycle-8-1765709683145",
+    "engine/persona-matrix",
+    "enhanced-by-brain",
+    "intelligence/meta-learning",
+    "logic-backup-2jao",
+    "logic-backup-djwm",
+    "main",
+    "ops/standalone-runtime"
+  ],
+  "EMG-CORE": [
+    "4",
+    "5",
+    "V1",
+    "main"
+  ],
+  "emg-v85-memory-core": [
+    "audit/anomaly-filter",
+    "engine/spatial-norm",
+    "engine/xml-surgery",
+    "enhanced-by-brain",
+    "logic-backup-erv4",
+    "logic-backup-k17h",
+    "main"
+  ],
+  "emgmd": [
+    "main"
+  ],
+  "encyclopedia-of-engineering": [
+    "main"
+  ],
+  "EULER-ENGINE": [
+    "core/fsm-lifecycle",
+    "engine/adaptive-orchestrator",
+    "enhanced-by-brain",
+    "identity/dna-bootloader",
+    "logic-backup-fjax",
+    "logic-backup-yrjm",
+    "logic-backup-zuok",
+    "main",
+    "system/fallback"
+  ],
+  "evolution-engine-rag": [
+    "emg-mutation-stream",
+    "enhanced-by-brain",
+    "logic-backup-cw0s",
+    "logic-backup-jbeg",
+    "main",
+    "system/fallback"
+  ],
+  "Free-Rag": [
+    "main"
+  ],
+  "Gibberish-": [
+    "core/death-registry",
+    "engine/kernel-orchestrator",
+    "enhanced-by-brain",
+    "logic-backup-9ce5",
+    "logic-backup-47j6",
+    "logic-backup-pukb",
+    "main",
+    "schema/claim-integrity"
+  ],
+  "Git-priv-public-tool": [
+    "main"
+  ],
+  "GitHub-Monorepo-Deep-Auditor": [
+    "Pre-mining-for-gold",
+    "Repository-Auditor-v0.1",
+    "huxley-audit-manifests-1783709019027",
+    "huxley-audit-manifests-1783725417446",
+    "main"
+  ],
+  "GitHub-Redaction": [
+    "engine/api-abstraction",
+    "engine/redaction-regex",
+    "enhanced-by-brain",
+    "logic/file-guard",
+    "logic-backup-misr",
+    "logic-backup-q90h",
+    "main"
+  ],
+  "Governece-substrates-": [
+    "Nexus-Database",
+    "Orgional",
+    "Original",
+    "System",
+    "backup-system-2026-04-03-795",
+    "backup-system-2026-04-04-505",
+    "backup-system-2026-04-04-564",
+    "backup-system-2026-04-04-953",
+    "binary-evolution",
+    "enhanced-by-brain",
+    "logic-backup-yg38",
+    "main",
+    "master",
+    "nexus-backup-v7",
+    "nexus-evolution-v1",
+    "sovereign-v90-optimizations"
+  ],
+  "GROG": [
+    "Bck1",
+    "core/siphon-engine",
+    "engine/neural-queue",
+    "enhanced-by-brain",
+    "logic/consensus-gate",
+    "logic-backup-ed2e",
+    "logic-backup-jg06",
+    "logic-backup-jt96",
+    "main"
+  ],
+  "GROG-The-First-Learning-AGI": [
+    "backup-0thit",
+    "backup-80qtb",
+    "backup-0594n",
+    "core/differentiated-consciousness",
+    "dk-enhancer",
+    "engine/global-governance",
+    "enhanced-by-brain",
+    "logic/mcm-engine",
+    "logic-backup-938r",
+    "logic-backup-f3kf",
+    "logic-backup-jk0n",
+    "main"
+  ],
+  "Hux": [
+    "main"
+  ],
+  "Huxley-A-Reasoning-Framework-for-Ethical-AI": [
+    "audit/ers-evaluator",
+    "emg-mutation-stream",
+    "engine/tri-loop-pipeline",
+    "enhanced-by-brain",
+    "logic/ccrr-calculator",
+    "logic-backup-8vfl",
+    "logic-backup-cj0n",
+    "main"
+  ],
+  "Huxley-Singularity-Loop": [
+    "1",
+    "Blk",
+    "Block",
+    "Bruh",
+    "Dk",
+    "Encyl",
+    "architecture/generational-loop",
+    "backup-2mukv",
+    "backup-3c98q",
+    "backup-3p7ed",
+    "backup-3rt53",
+    "backup-3s9w7",
+    "backup-5a988",
+    "backup-5gmjw",
+    "backup-5jk97",
+    "backup-5lbfu",
+    "backup-5w7ho",
+    "backup-8m9oo",
+    "backup-8vnwy",
+    "backup-8z438",
+    "backup-9a4vo",
+    "backup-40erx",
+    "backup-052ml",
+    "backup-63mqk",
+    "backup-ah8xe",
+    "backup-aue48",
+    "backup-b3jq2",
+    "backup-cytgy",
+    "backup-dlsy9",
+    "backup-e6z40"
+  ],
+  "Huxley-Singularity-Loop-Main": [
+    "ai/schema-synthesis",
+    "backup-d64q2",
+    "backup-qcgnu",
+    "core/destructive-sync",
+    "core/utf8-integrity",
+    "destructive/distill-core",
+    "engine/distillation-orchestrator",
+    "engine/schema-enforcer",
+    "engine/state-orchestrator",
+    "io/integrity-codec",
+    "lib/utf8-integrity",
+    "logic-backup-2gbs",
+    "logic-backup-2gsr",
+    "logic-backup-2wja",
+    "logic-backup-j70m",
+    "logic-backup-jj8s",
+    "logic-backup-mbfx",
+    "logic-backup-q2kl",
+    "logic-backup-ued4",
+    "main",
+    "resilience/fallback-mesh",
+    "system/fallback"
+  ],
+  "legitimate-proof-of-concept-of-I.J.-Good-s-1965-prediction": [
+    "ai-cycle-1-1765644114095",
+    "ai-cycle-1-1765683012269",
+    "ai-cycle-1-1765683191724",
+    "ai-cycle-1-1765685717873",
+    "ai-cycle-1-1765685896902",
+    "enhanced-by-brain",
+    "logic/syntax-stabilizer",
+    "logic-backup-h4eo",
+    "logic-backup-ovaw",
+    "main",
+    "safety/resilience-injector",
+    "vault/persistent-memory"
+  ],
+  "Library-of-Babel": [
+    "main"
+  ],
+  "MS-DOS": [
+    "main"
+  ],
+  "my-evolved-project": [
+    "engine/nihilist-brain",
+    "infrastructure/llm-failover",
+    "logic/coherence-debate",
+    "logic-backup-0ncn",
+    "logic-backup-dvq6",
+    "logic-backup-kjfx",
+    "main"
+  ],
+  "nbody_gravitational_simulator": [
+    "main"
+  ],
+  "Need-a-new-pc-": [
+    "main"
+  ],
+  "Nicotine-replacement-therapy-idea": [
+    "engine/efficacy-targets",
+    "enhanced-by-brain",
+    "legal/attribution-header",
+    "logic-backup-c3j7",
+    "logic-backup-yp1x",
+    "main",
+    "model/taper-algorithm"
+  ],
+  "PDF-Github": [
+    "dna/essence-merger",
+    "engine/adaptive-volatility",
+    "engine/coherence-controller",
+    "engine/coherence-feedback",
+    "engine/dwt-optimizer",
+    "enhanced-by-brain",
+    "logic-backup-15fn",
+    "logic-backup-bq2u",
+    "logic-backup-j1hv",
+    "main",
+    "security/axiomatic-sentinel"
+  ],
+  "psr-governance": [
+    "core/budget-enforcement",
+    "docs/governance-logic",
+    "engine/adaptive-core",
+    "enhanced-by-brain",
+    "logic-backup-k5sv",
+    "logic-backup-x6cb",
+    "main"
+  ],
+  "Random.ai.html": [
+    "dk-enhancer",
+    "enhanced-by-brain",
+    "logic-backup-iueo",
+    "main"
+  ],
+  "Repo-enhancer": [
+    "1",
+    "Last-orgional",
+    "Stable-v1",
+    "main"
+  ],
+  "Safer-Growing-Intelligence-DAF-": [
+    "ai-cycle-1-1765702563620",
+    "ai-cycle-1-1765703479216",
+    "ai-cycle-1-1765703587491",
+    "ai-cycle-1-1765703844925",
+    "ai-cycle-1-1765704280053",
+    "ai-cycle-1-1765722630979",
+    "ai-cycle-1-1765723831883",
+    "ai-cycle-1-1765725002195",
+    "ai-cycle-2-1765702586598",
+    "ai-cycle-2-1765725552055",
+    "darlek-khan-ai-enhancement-system",
+    "enhanced-by-brain",
+    "enhanced-dashboard-system",
+    "logic-backup-6cri",
+    "logic-backup-wyp9",
+    "main",
+    "master",
+    "sovereign-v88-optimizations",
+    "sovereign-v89-extreme-optimizations",
+    "sovereign-v90-optimizations",
+    "sovereign-v92-optimizations",
+    "sovereign-v93-optimization-core",
+    "sovereign-v94-core",
+    "sovereign-v97-stable",
+    "system/fallback"
+  ],
+  "SN": [
+    "enhanced-by-brain",
+    "logic-backup-9xev",
+    "logic-backup-c5by",
+    "main",
+    "system/fallback"
+  ],
+  "SOVEREIGN-": [
+    "V1",
+    "main"
+  ],
+  "sovereign-final": [
+    "main"
+  ],
+  "sovereign-kernel": [
+    "backup-7t9lp",
+    "backup-8iw19",
+    "backup-cnayr",
+    "backup-kligt",
+    "backup-srqop",
+    "backup-vkoas",
+    "core/neural-hotswap",
+    "engine/provider-rotation",
+    "enhanced-by-brain",
+    "kernel/self-mutation",
+    "logic-backup-0pew",
+    "logic-backup-599k",
+    "logic-backup-c2ri",
+    "logic-backup-f0xc",
+    "logic-backup-l7y4",
+    "main",
+    "system/fallback"
+  ],
+  "sovereign-repo-enhancer": [
+    "engine/js-syntax-gate",
+    "engine/python-syntax-gate",
+    "enhanced-by-brain",
+    "guard/file-integrity-firewall",
+    "logic-backup-3g2d",
+    "logic-backup-7qhg",
+    "logic-backup-xtoq",
+    "main"
+  ],
+  "sovereign-v86": [
+    "Create",
+    "ai/heuristic-pipelines",
+    "engine/reducer-orchestration",
+    "enhanced-by-brain",
+    "feature/schema-governance",
+    "fix/utf8-resilience",
+    "logic-backup-0a15",
+    "logic-backup-2tuu",
+    "logic-backup-ej3b",
+    "logic-backup-wnub",
+    "main",
+    "resiliency/batch-backoff",
+    "resiliency/jitter-backoff",
+    "system/fallback"
+  ],
+  "spectest": [
+    "1",
+    "main"
+  ],
+  "Synthesis-Hub": [
+    "main"
+  ],
+  "T": [
+    "core/rock-calibration",
+    "data/lean-identity",
+    "engine/chaos-loop",
+    "enhanced-by-brain",
+    "logic-backup-7rkr",
+    "logic-backup-08n3",
+    "logic-backup-41b0",
+    "main",
+    "system/fallback"
+  ],
+  "Test": [
+    "emg-mutation-1769324527442",
+    "emg-mutation-stream",
+    "emg-stream-MBjytR",
+    "emg-stream-wLisF7",
+    "engine/memory-scrubber",
+    "enhanced-by-brain",
+    "governance/adaptive-sampling",
+    "logic-backup-cjwx",
+    "logic-backup-myvq",
+    "logic-backup-mzpw",
+    "main",
+    "setup/resilient-init"
+  ],
+  "Test-1222": [
+    "backup-jna8a",
+    "core/purity-gate",
+    "engine/discovery-loop",
+    "enhanced-by-brain",
+    "evolution/utf8-resilience",
+    "feature/schema-discipline",
+    "governance/triad-architecture",
+    "logic-backup-7adp",
+    "logic-backup-h0cs",
+    "logic-backup-piv5",
+    "logic-backup-snyl",
+    "main",
+    "system/fallback"
+  ],
+  "Test1": [
+    "arch/hexagonal-foundation",
+    "backup-fldlt",
+    "backup-l2ic9",
+    "backup-qbyf0",
+    "emg-mutation-stream",
+    "emg-stream-5Xzd4Z",
+    "emg-stream-017485",
+    "engine/synergy-hydration",
+    "enhanced-by-brain",
+    "logic-backup-3bos",
+    "logic-backup-kocw",
+    "logic-backup-lxop",
+    "logic-backup-ygth",
+    "main",
+    "safety/sentinel-gate",
+    "system/fallback"
+  ],
+  "Test2": [
+    "arch/binary-standardization",
+    "arch/schema-bound-synthesis",
+    "doc/content-mapping",
+    "enhanced-by-brain",
+    "feature/utf8-resilient-decoder",
+    "infra/multi-model-fallback",
+    "init/project-namespace",
+    "logic-backup-jhtk",
+    "logic-backup-jw2p",
+    "logic-bac

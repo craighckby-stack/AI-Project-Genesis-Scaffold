@@ -1,0 +1,363 @@
+# Cross-Repo Deduplication Report
+
+Generated: 2026-07-10T17:23:09.229Z
+
+**Total Shared File Signatures**: 18
+**Total Redundant Files (Potential Savings)**: 283
+
+## Exact Matches Across Repositories
+
+### Signature: `73_descripti...`
+Found in 18 locations across 18 repos:
+- **EMG-KERNEL-v0.2-.git**: `description`
+- **EMG-CORE.git**: `description`
+- **Emergent-Schema-Network-ESN-Monitoring-Dashboard.git**: `description`
+- **EMG-Core-Analysis-System.git**: `description`
+- **EMG-Core-Hierarchical-Indeterminacy.git**: `description`
+- **Walta.git**: `description`
+- **The-Academic-Development-Pipeline.git**: `description`
+- **random.git**: `description`
+- **web-dev-playground.git**: `description`
+- **Autonomous-Knowledge-System.git**: `description`
+- **Open-Repo-Generator-V2.git**: `description`
+- **Autonomous-Knowledge-System.wiki.git**: `description`
+- **AGI-Project-Compiler.git**: `description`
+- **Quantum-Truth-Analysis-System.git**: `description`
+- **HCM-Emergence-Validation-Framework.git**: `description`
+- **Brain-.git**: `description`
+- **ephemeral-mind-gem.git**: `description`
+- **Interactive-Learning-System.git**: `description`
+
+### Signature: `240_exclude...`
+Found in 18 locations across 18 repos:
+- **EMG-KERNEL-v0.2-.git**: `info/exclude`
+- **EMG-CORE.git**: `info/exclude`
+- **Emergent-Schema-Network-ESN-Monitoring-Dashboard.git**: `info/exclude`
+- **EMG-Core-Analysis-System.git**: `info/exclude`
+- **EMG-Core-Hierarchical-Indeterminacy.git**: `info/exclude`
+- **Walta.git**: `info/exclude`
+- **The-Academic-Development-Pipeline.git**: `info/exclude`
+- **random.git**: `info/exclude`
+- **web-dev-playground.git**: `info/exclude`
+- **Autonomous-Knowledge-System.git**: `info/exclude`
+- **Open-Repo-Generator-V2.git**: `info/exclude`
+- **Autonomous-Knowledge-System.wiki.git**: `info/exclude`
+- **AGI-Project-Compiler.git**: `info/exclude`
+- **Quantum-Truth-Analysis-System.git**: `info/exclude`
+- **HCM-Emergence-Validation-Framework.git**: `info/exclude`
+- **Brain-.git**: `info/exclude`
+- **ephemeral-mind-gem.git**: `info/exclude`
+- **Interactive-Learning-System.git**: `info/exclude`
+
+### Signature: `1348_pre-pus...`
+Found in 18 locations across 18 repos:
+- **EMG-KERNEL-v0.2-.git**: `hooks/pre-push.sample`
+- **EMG-CORE.git**: `hooks/pre-push.sample`
+- **Emergent-Schema-Network-ESN-Monitoring-Dashboard.git**: `hooks/pre-push.sample`
+- **EMG-Core-Analysis-System.git**: `hooks/pre-push.sample`
+- **EMG-Core-Hierarchical-Indeterminacy.git**: `hooks/pre-push.sample`
+- **Walta.git**: `hooks/pre-push.sample`
+- **The-Academic-Development-Pipeline.git**: `hooks/pre-push.sample`
+- **random.git**: `hooks/pre-push.sample`
+- **web-dev-playground.git**: `hooks/pre-push.sample`
+- **Autonomous-Knowledge-System.git**: `hooks/pre-push.sample`
+- **Open-Repo-Generator-V2.git**: `hooks/pre-push.sample`
+- **Autonomous-Knowledge-System.wiki.git**: `hooks/pre-push.sample`
+- **AGI-Project-Compiler.git**: `hooks/pre-push.sample`
+- **Quantum-Truth-Analysis-System.git**: `hooks/pre-push.sample`
+- **HCM-Emergence-Validation-Framework.git**: `hooks/pre-push.sample`
+- **Brain-.git**: `hooks/pre-push.sample`
+- **ephemeral-mind-gem.git**: `hooks/pre-push.sample`
+- **Interactive-Learning-System.git**: `hooks/pre-push.sample`
+
+### Signature: `424_pre-appl...`
+Found in 18 locations across 18 repos:
+- **EMG-KERNEL-v0.2-.git**: `hooks/pre-applypatch.sample`
+- **EMG-CORE.git**: `hooks/pre-applypatch.sample`
+- **Emergent-Schema-Network-ESN-Monitoring-Dashboard.git**: `hooks/pre-applypatch.sample`
+- **EMG-Core-Analysis-System.git**: `hooks/pre-applypatch.sample`
+- **EMG-Core-Hierarchical-Indeterminacy.git**: `hooks/pre-applypatch.sample`
+- **Walta.git**: `hooks/pre-applypatch.sample`
+- **The-Academic-Development-Pipeline.git**: `hooks/pre-applypatch.sample`
+- **random.git**: `hooks/pre-applypatch.sample`
+- **web-dev-playground.git**: `hooks/pre-applypatch.sample`
+- **Autonomous-Knowledge-System.git**: `hooks/pre-applypatch.sample`
+- **Open-Repo-Generator-V2.git**: `hooks/pre-applypatch.sample`
+- **Autonomous-Knowledge-System.wiki.git**: `hooks/pre-applypatch.sample`
+- **AGI-Project-Compiler.git**: `hooks/pre-applypatch.sample`
+- **Quantum-Truth-Analysis-System.git**: `hooks/pre-applypatch.sample`
+- **HCM-Emergence-Validation-Framework.git**: `hooks/pre-applypatch.sample`
+- **Brain-.git**: `hooks/pre-applypatch.sample`
+- **ephemeral-mind-gem.git**: `hooks/pre-applypatch.sample`
+- **Interactive-Learning-System.git**: `hooks/pre-applypatch.sample`
+
+### Signature: `3079_fsmonit...`
+Found in 18 locations across 18 repos:
+- **EMG-KERNEL-v0.2-.git**: `hooks/fsmonitor-watchman.sample`
+- **EMG-CORE.git**: `hooks/fsmonitor-watchman.sample`
+- **Emergent-Schema-Network-ESN-Monitoring-Dashboard.git**: `hooks/fsmonitor-watchman.sample`
+- **EMG-Core-Analysis-System.git**: `hooks/fsmonitor-watchman.sample`
+- **EMG-Core-Hierarchical-Indeterminacy.git**: `hooks/fsmonitor-watchman.sample`
+- **Walta.git**: `hooks/fsmonitor-watchman.sample`
+- **The-Academic-Development-Pipeline.git**: `hooks/fsmonitor-watchman.sample`
+- **random.git**: `hooks/fsmonitor-watchman.sample`
+- **web-dev-playground.git**: `hooks/fsmonitor-watchman.sample`
+- **Autonomous-Knowledge-System.git**: `hooks/fsmonitor-watchman.sample`
+- **Open-Repo-Generator-V2.git**: `hooks/fsmonitor-watchman.sample`
+- **Autonomous-Knowledge-System.wiki.git**: `hooks/fsmonitor-watchman.sample`
+- **AGI-Project-Compiler.git**: `hooks/fsmonitor-watchman.sample`
+- **Quantum-Truth-Analysis-System.git**: `hooks/fsmonitor-watchman.sample`
+- **HCM-Emergence-Validation-Framework.git**: `hooks/fsmonitor-watchman.sample`
+- **Brain-.git**: `hooks/fsmonitor-watchman.sample`
+- **ephemeral-mind-gem.git**: `hooks/fsmonitor-watchman.sample`
+- **Interactive-Learning-System.git**: `hooks/fsmonitor-watchman.sample`
+
+### Signature: `3610_update....`
+Found in 18 locations across 18 repos:
+- **EMG-KERNEL-v0.2-.git**: `hooks/update.sample`
+- **EMG-CORE.git**: `hooks/update.sample`
+- **Emergent-Schema-Network-ESN-Monitoring-Dashboard.git**: `hooks/update.sample`
+- **EMG-Core-Analysis-System.git**: `hooks/update.sample`
+- **EMG-Core-Hierarchical-Indeterminacy.git**: `hooks/update.sample`
+- **Walta.git**: `hooks/update.sample`
+- **The-Academic-Development-Pipeline.git**: `hooks/update.sample`
+- **random.git**: `hooks/update.sample`
+- **web-dev-playground.git**: `hooks/update.sample`
+- **Autonomous-Knowledge-System.git**: `hooks/update.sample`
+- **Open-Repo-Generator-V2.git**: `hooks/update.sample`
+- **Autonomous-Knowledge-System.wiki.git**: `hooks/update.sample`
+- **AGI-Project-Compiler.git**: `hooks/update.sample`
+- **Quantum-Truth-Analysis-System.git**: `hooks/update.sample`
+- **HCM-Emergence-Validation-Framework.git**: `hooks/update.sample`
+- **Brain-.git**: `hooks/update.sample`
+- **ephemeral-mind-gem.git**: `hooks/update.sample`
+- **Interactive-Learning-System.git**: `hooks/update.sample`
+
+### Signature: `4898_pre-reb...`
+Found in 18 locations across 18 repos:
+- **EMG-KERNEL-v0.2-.git**: `hooks/pre-rebase.sample`
+- **EMG-CORE.git**: `hooks/pre-rebase.sample`
+- **Emergent-Schema-Network-ESN-Monitoring-Dashboard.git**: `hooks/pre-rebase.sample`
+- **EMG-Core-Analysis-System.git**: `hooks/pre-rebase.sample`
+- **EMG-Core-Hierarchical-Indeterminacy.git**: `hooks/pre-rebase.sample`
+- **Walta.git**: `hooks/pre-rebase.sample`
+- **The-Academic-Development-Pipeline.git**: `hooks/pre-rebase.sample`
+- **random.git**: `hooks/pre-rebase.sample`
+- **web-dev-playground.git**: `hooks/pre-rebase.sample`
+- **Autonomous-Knowledge-System.git**: `hooks/pre-rebase.sample`
+- **Open-Repo-Generator-V2.git**: `hooks/pre-rebase.sample`
+- **Autonomous-Knowledge-System.wiki.git**: `hooks/pre-rebase.sample`
+- **AGI-Project-Compiler.git**: `hooks/pre-rebase.sample`
+- **Quantum-Truth-Analysis-System.git**: `hooks/pre-rebase.sample`
+- **HCM-Emergence-Validation-Framework.git**: `hooks/pre-rebase.sample`
+- **Brain-.git**: `hooks/pre-rebase.sample`
+- **ephemeral-mind-gem.git**: `hooks/pre-rebase.sample`
+- **Interactive-Learning-System.git**: `hooks/pre-rebase.sample`
+
+### Signature: `1492_prepare...`
+Found in 18 locations across 18 repos:
+- **EMG-KERNEL-v0.2-.git**: `hooks/prepare-commit-msg.sample`
+- **EMG-CORE.git**: `hooks/prepare-commit-msg.sample`
+- **Emergent-Schema-Network-ESN-Monitoring-Dashboard.git**: `hooks/prepare-commit-msg.sample`
+- **EMG-Core-Analysis-System.git**: `hooks/prepare-commit-msg.sample`
+- **EMG-Core-Hierarchical-Indeterminacy.git**: `hooks/prepare-commit-msg.sample`
+- **Walta.git**: `hooks/prepare-commit-msg.sample`
+- **The-Academic-Development-Pipeline.git**: `hooks/prepare-commit-msg.sample`
+- **random.git**: `hooks/prepare-commit-msg.sample`
+- **web-dev-playground.git**: `hooks/prepare-commit-msg.sample`
+- **Autonomous-Knowledge-System.git**: `hooks/prepare-commit-msg.sample`
+- **Open-Repo-Generator-V2.git**: `hooks/prepare-commit-msg.sample`
+- **Autonomous-Knowledge-System.wiki.git**: `hooks/prepare-commit-msg.sample`
+- **AGI-Project-Compiler.git**: `hooks/prepare-commit-msg.sample`
+- **Quantum-Truth-Analysis-System.git**: `hooks/prepare-commit-msg.sample`
+- **HCM-Emergence-Validation-Framework.git**: `hooks/prepare-commit-msg.sample`
+- **Brain-.git**: `hooks/prepare-commit-msg.sample`
+- **ephemeral-mind-gem.git**: `hooks/prepare-commit-msg.sample`
+- **Interactive-Learning-System.git**: `hooks/prepare-commit-msg.sample`
+
+### Signature: `1638_pre-com...`
+Found in 18 locations across 18 repos:
+- **EMG-KERNEL-v0.2-.git**: `hooks/pre-commit.sample`
+- **EMG-CORE.git**: `hooks/pre-commit.sample`
+- **Emergent-Schema-Network-ESN-Monitoring-Dashboard.git**: `hooks/pre-commit.sample`
+- **EMG-Core-Analysis-System.git**: `hooks/pre-commit.sample`
+- **EMG-Core-Hierarchical-Indeterminacy.git**: `hooks/pre-commit.sample`
+- **Walta.git**: `hooks/pre-commit.sample`
+- **The-Academic-Development-Pipeline.git**: `hooks/pre-commit.sample`
+- **random.git**: `hooks/pre-commit.sample`
+- **web-dev-playground.git**: `hooks/pre-commit.sample`
+- **Autonomous-Knowledge-System.git**: `hooks/pre-commit.sample`
+- **Open-Repo-Generator-V2.git**: `hooks/pre-commit.sample`
+- **Autonomous-Knowledge-System.wiki.git**: `hooks/pre-commit.sample`
+- **AGI-Project-Compiler.git**: `hooks/pre-commit.sample`
+- **Quantum-Truth-Analysis-System.git**: `hooks/pre-commit.sample`
+- **HCM-Emergence-Validation-Framework.git**: `hooks/pre-commit.sample`
+- **Brain-.git**: `hooks/pre-commit.sample`
+- **ephemeral-mind-gem.git**: `hooks/pre-commit.sample`
+- **Interactive-Learning-System.git**: `hooks/pre-commit.sample`
+
+### Signature: `416_pre-merg...`
+Found in 18 locations across 18 repos:
+- **EMG-KERNEL-v0.2-.git**: `hooks/pre-merge-commit.sample`
+- **EMG-CORE.git**: `hooks/pre-merge-commit.sample`
+- **Emergent-Schema-Network-ESN-Monitoring-Dashboard.git**: `hooks/pre-merge-commit.sample`
+- **EMG-Core-Analysis-System.git**: `hooks/pre-merge-commit.sample`
+- **EMG-Core-Hierarchical-Indeterminacy.git**: `hooks/pre-merge-commit.sample`
+- **Walta.git**: `hooks/pre-merge-commit.sample`
+- **The-Academic-Development-Pipeline.git**: `hooks/pre-merge-commit.sample`
+- **random.git**: `hooks/pre-merge-commit.sample`
+- **web-dev-playground.git**: `hooks/pre-merge-commit.sample`
+- **Autonomous-Knowledge-System.git**: `hooks/pre-merge-commit.sample`
+- **Open-Repo-Generator-V2.git**: `hooks/pre-merge-commit.sample`
+- **Autonomous-Knowledge-System.wiki.git**: `hooks/pre-merge-commit.sample`
+- **AGI-Project-Compiler.git**: `hooks/pre-merge-commit.sample`
+- **Quantum-Truth-Analysis-System.git**: `hooks/pre-merge-commit.sample`
+- **HCM-Emergence-Validation-Framework.git**: `hooks/pre-merge-commit.sample`
+- **Brain-.git**: `hooks/pre-merge-commit.sample`
+- **ephemeral-mind-gem.git**: `hooks/pre-merge-commit.sample`
+- **Interactive-Learning-System.git**: `hooks/pre-merge-commit.sample`
+
+### Signature: `189_post-upd...`
+Found in 18 locations across 18 repos:
+- **EMG-KERNEL-v0.2-.git**: `hooks/post-update.sample`
+- **EMG-CORE.git**: `hooks/post-update.sample`
+- **Emergent-Schema-Network-ESN-Monitoring-Dashboard.git**: `hooks/post-update.sample`
+- **EMG-Core-Analysis-System.git**: `hooks/post-update.sample`
+- **EMG-Core-Hierarchical-Indeterminacy.git**: `hooks/post-update.sample`
+- **Walta.git**: `hooks/post-update.sample`
+- **The-Academic-Development-Pipeline.git**: `hooks/post-update.sample`
+- **random.git**: `hooks/post-update.sample`
+- **web-dev-playground.git**: `hooks/post-update.sample`
+- **Autonomous-Knowledge-System.git**: `hooks/post-update.sample`
+- **Open-Repo-Generator-V2.git**: `hooks/post-update.sample`
+- **Autonomous-Knowledge-System.wiki.git**: `hooks/post-update.sample`
+- **AGI-Project-Compiler.git**: `hooks/post-update.sample`
+- **Quantum-Truth-Analysis-System.git**: `hooks/post-update.sample`
+- **HCM-Emergence-Validation-Framework.git**: `hooks/post-update.sample`
+- **Brain-.git**: `hooks/post-update.sample`
+- **ephemeral-mind-gem.git**: `hooks/post-update.sample`
+- **Interactive-Learning-System.git**: `hooks/post-update.sample`
+
+### Signature: `896_commit-m...`
+Found in 18 locations across 18 repos:
+- **EMG-KERNEL-v0.2-.git**: `hooks/commit-msg.sample`
+- **EMG-CORE.git**: `hooks/commit-msg.sample`
+- **Emergent-Schema-Network-ESN-Monitoring-Dashboard.git**: `hooks/commit-msg.sample`
+- **EMG-Core-Analysis-System.git**: `hooks/commit-msg.sample`
+- **EMG-Core-Hierarchical-Indeterminacy.git**: `hooks/commit-msg.sample`
+- **Walta.git**: `hooks/commit-msg.sample`
+- **The-Academic-Development-Pipeline.git**: `hooks/commit-msg.sample`
+- **random.git**: `hooks/commit-msg.sample`
+- **web-dev-playground.git**: `hooks/commit-msg.sample`
+- **Autonomous-Knowledge-System.git**: `hooks/commit-msg.sample`
+- **Open-Repo-Generator-V2.git**: `hooks/commit-msg.sample`
+- **Autonomous-Knowledge-System.wiki.git**: `hooks/commit-msg.sample`
+- **AGI-Project-Compiler.git**: `hooks/commit-msg.sample`
+- **Quantum-Truth-Analysis-System.git**: `hooks/commit-msg.sample`
+- **HCM-Emergence-Validation-Framework.git**: `hooks/commit-msg.sample`
+- **Brain-.git**: `hooks/commit-msg.sample`
+- **ephemeral-mind-gem.git**: `hooks/commit-msg.sample`
+- **Interactive-Learning-System.git**: `hooks/commit-msg.sample`
+
+### Signature: `544_pre-rece...`
+Found in 18 locations across 18 repos:
+- **EMG-KERNEL-v0.2-.git**: `hooks/pre-receive.sample`
+- **EMG-CORE.git**: `hooks/pre-receive.sample`
+- **Emergent-Schema-Network-ESN-Monitoring-Dashboard.git**: `hooks/pre-receive.sample`
+- **EMG-Core-Analysis-System.git**: `hooks/pre-receive.sample`
+- **EMG-Core-Hierarchical-Indeterminacy.git**: `hooks/pre-receive.sample`
+- **Walta.git**: `hooks/pre-receive.sample`
+- **The-Academic-Development-Pipeline.git**: `hooks/pre-receive.sample`
+- **random.git**: `hooks/pre-receive.sample`
+- **web-dev-playground.git**: `hooks/pre-receive.sample`
+- **Autonomous-Knowledge-System.git**: `hooks/pre-receive.sample`
+- **Open-Repo-Generator-V2.git**: `hooks/pre-receive.sample`
+- **Autonomous-Knowledge-System.wiki.git**: `hooks/pre-receive.sample`
+- **AGI-Project-Compiler.git**: `hooks/pre-receive.sample`
+- **Quantum-Truth-Analysis-System.git**: `hooks/pre-receive.sample`
+- **HCM-Emergence-Validation-Framework.git**: `hooks/pre-receive.sample`
+- **Brain-.git**: `hooks/pre-receive.sample`
+- **ephemeral-mind-gem.git**: `hooks/pre-receive.sample`
+- **Interactive-Learning-System.git**: `hooks/pre-receive.sample`
+
+### Signature: `478_applypat...`
+Found in 18 locations across 18 repos:
+- **EMG-KERNEL-v0.2-.git**: `hooks/applypatch-msg.sample`
+- **EMG-CORE.git**: `hooks/applypatch-msg.sample`
+- **Emergent-Schema-Network-ESN-Monitoring-Dashboard.git**: `hooks/applypatch-msg.sample`
+- **EMG-Core-Analysis-System.git**: `hooks/applypatch-msg.sample`
+- **EMG-Core-Hierarchical-Indeterminacy.git**: `hooks/applypatch-msg.sample`
+- **Walta.git**: `hooks/applypatch-msg.sample`
+- **The-Academic-Development-Pipeline.git**: `hooks/applypatch-msg.sample`
+- **random.git**: `hooks/applypatch-msg.sample`
+- **web-dev-playground.git**: `hooks/applypatch-msg.sample`
+- **Autonomous-Knowledge-System.git**: `hooks/applypatch-msg.sample`
+- **Open-Repo-Generator-V2.git**: `hooks/applypatch-msg.sample`
+- **Autonomous-Knowledge-System.wiki.git**: `hooks/applypatch-msg.sample`
+- **AGI-Project-Compiler.git**: `hooks/applypatch-msg.sample`
+- **Quantum-Truth-Analysis-System.git**: `hooks/applypatch-msg.sample`
+- **HCM-Emergence-Validation-Framework.git**: `hooks/applypatch-msg.sample`
+- **Brain-.git**: `hooks/applypatch-msg.sample`
+- **ephemeral-mind-gem.git**: `hooks/applypatch-msg.sample`
+- **Interactive-Learning-System.git**: `hooks/applypatch-msg.sample`
+
+### Signature: `21_HEAD...`
+Found in 17 locations across 17 repos:
+- **EMG-KERNEL-v0.2-.git**: `HEAD`
+- **EMG-CORE.git**: `HEAD`
+- **Emergent-Schema-Network-ESN-Monitoring-Dashboard.git**: `HEAD`
+- **EMG-Core-Analysis-System.git**: `HEAD`
+- **EMG-Core-Hierarchical-Indeterminacy.git**: `HEAD`
+- **Walta.git**: `HEAD`
+- **The-Academic-Development-Pipeline.git**: `HEAD`
+- **random.git**: `HEAD`
+- **web-dev-playground.git**: `HEAD`
+- **Autonomous-Knowledge-System.git**: `HEAD`
+- **Open-Repo-Generator-V2.git**: `HEAD`
+- **AGI-Project-Compiler.git**: `HEAD`
+- **Quantum-Truth-Analysis-System.git**: `HEAD`
+- **HCM-Emergence-Validation-Framework.git**: `HEAD`
+- **Brain-.git**: `HEAD`
+- **ephemeral-mind-gem.git**: `HEAD`
+- **Interactive-Learning-System.git**: `HEAD`
+
+### Signature: `103_packed-r...`
+Found in 15 locations across 15 repos:
+- **EMG-KERNEL-v0.2-.git**: `packed-refs`
+- **EMG-CORE.git**: `packed-refs`
+- **Emergent-Schema-Network-ESN-Monitoring-Dashboard.git**: `packed-refs`
+- **EMG-Core-Analysis-System.git**: `packed-refs`
+- **EMG-Core-Hierarchical-Indeterminacy.git**: `packed-refs`
+- **The-Academic-Development-Pipeline.git**: `packed-refs`
+- **random.git**: `packed-refs`
+- **web-dev-playground.git**: `packed-refs`
+- **Autonomous-Knowledge-System.git**: `packed-refs`
+- **Open-Repo-Generator-V2.git**: `packed-refs`
+- **AGI-Project-Compiler.git**: `packed-refs`
+- **Quantum-Truth-Analysis-System.git**: `packed-refs`
+- **HCM-Emergence-Validation-Framework.git**: `packed-refs`
+- **Brain-.git**: `packed-refs`
+- **Interactive-Learning-System.git**: `packed-refs`
+
+### Signature: `201_config...`
+Found in 13 locations across 13 repos:
+- **EMG-KERNEL-v0.2-.git**: `config`
+- **EMG-CORE.git**: `config`
+- **EMG-Core-Analysis-System.git**: `config`
+- **EMG-Core-Hierarchical-Indeterminacy.git**: `config`
+- **Walta.git**: `config`
+- **random.git**: `config`
+- **web-dev-playground.git**: `config`
+- **Autonomous-Knowledge-System.git**: `config`
+- **AGI-Project-Compiler.git**: `config`
+- **Quantum-Truth-Analysis-System.git**: `config`
+- **HCM-Emergence-Validation-Framework.git**: `config`
+- **Brain-.git**: `config`
+- **Interactive-Learning-System.git**: `config`
+
+### Signature: `200_config...`
+Found in 4 locations across 4 repos:
+- **Emergent-Schema-Network-ESN-Monitoring-Dashboard.git**: `config`
+- **The-Academic-Development-Pipeline.git**: `config`
+- **Open-Repo-Generator-V2.git**: `config`
+- **ephemeral-mind-gem.git**: `config`

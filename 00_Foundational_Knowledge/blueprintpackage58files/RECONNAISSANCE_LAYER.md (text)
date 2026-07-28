@@ -1,0 +1,431 @@
+# Auditor Reconnaissance Layer & Organization Telemetry
+
+**Target Profile**: Discovery via `SELF` mode (Target: `Self`)
+**Timestamp**: 2026-07-11T10:55:04.716Z
+
+## Executive Summary
+
+- **Scanned Assets**: 90 active repositories found.
+- **Internal Cross-Links**: 192 explicit repo-to-repo inter-dependencies detected.
+- **Dormant Branches**: 19 inactive branches (older than 180 days) detected.
+- **Active PR Pipelines**: 2 open pull requests tracked with linked CI workflows (1 fully healthy/passing).
+
+## 1. Cross-Repository Dependency Tree
+
+Below is the map of internal linkages and references within the scanned organization:
+
+### 📦 1
+Depends on / references:
+- `t` 🔗
+
+### 📦 2
+Depends on / references:
+- `t` 🔗
+
+### 📦 AetherForge-2
+Depends on / references:
+- `t` 🔗
+- `1` 🔗
+- `2` 🔗
+
+### 📦 AetherForge-2.0
+Depends on / references:
+- `t` 🔗
+- `2` 🔗
+- `z` 🔗
+
+### 📦 agent_containment_experiment_summary1
+Depends on / references:
+- `t` 🔗
+- `darlek-cann-v3` 🔗
+- `test` 🔗
+
+### 📦 ai_evo_sim
+Depends on / references:
+- `t` 🔗
+- `z` 🔗
+- `test` 🔗
+
+### 📦 alphacode
+Depends on / references:
+- `t` 🔗
+- `z` 🔗
+- `test` 🔗
+
+### 📦 build_epistemic_debate_engine
+Depends on / references:
+- `t` 🔗
+- `z` 🔗
+- `test` 🔗
+
+### 📦 claud-ios
+Depends on / references:
+- `t` 🔗
+- `z` 🔗
+- `claudios_system_book` 🔗
+
+### 📦 claudios_system_book
+Depends on / references:
+- `t` 🔗
+
+### 📦 craighckby-stack
+Depends on / references:
+- `t` 🔗
+- `hux` 🔗
+- `1` 🔗
+
+### 📦 DARLEK-CAAN-
+Depends on / references:
+- `t` 🔗
+- `sn` 🔗
+- `test` 🔗
+
+### 📦 DARLEK-CAAN-2
+Depends on / references:
+- `t` 🔗
+- `1` 🔗
+- `2` 🔗
+- `z` 🔗
+- `grog` 🔗
+- `test` 🔗
+- `darlek-cann-v3` 🔗
+- `sovereign-kernel` 🔗
+- `unitary-core` 🔗
+
+### 📦 darlek-caan-build-instructions
+Depends on / references:
+- `t` 🔗
+
+### 📦 Darlek-Caan-system-Deployment-
+Depends on / references:
+- `t` 🔗
+
+### 📦 DARLEK-CAAN-vs-JESUS-CHESS
+Depends on / references:
+- `t` 🔗
+- `sn` 🔗
+- `1` 🔗
+- `2` 🔗
+- `z` 🔗
+
+### 📦 Darlek-Caan-vs-Jesus-Chessv1
+Depends on / references:
+- `t` 🔗
+- `z` 🔗
+- `test` 🔗
+
+### 📦 Darlek-Cann-Chess-
+Depends on / references:
+- `t` 🔗
+
+### 📦 darlek-cann-v3
+Depends on / references:
+- `t` 🔗
+- `z` 🔗
+- `test` 🔗
+- `2` 🔗
+- `v2` 🔗
+- `1` 🔗
+
+### 📦 DARLEK_CAAN_ENGINE
+Depends on / references:
+- `t` 🔗
+- `z` 🔗
+- `test` 🔗
+
+### 📦 Dk
+Depends on / references:
+- `1` 🔗
+- `2` 🔗
+- `t` 🔗
+- `v2` 🔗
+- `psr-governance` 🔗
+- `sn` 🔗
+
+### 📦 EMG-CORE
+Depends on / references:
+- `t` 🔗
+- `sn` 🔗
+- `z` 🔗
+- `test` 🔗
+
+### 📦 emgmd
+Depends on / references:
+- `t` 🔗
+- `test` 🔗
+
+### 📦 encyclopedia-of-engineering
+Depends on / references:
+- `t` 🔗
+
+### 📦 Free-Rag
+Depends on / references:
+- `t` 🔗
+- `sn` 🔗
+- `test` 🔗
+
+### 📦 Git-priv-public-tool
+Depends on / references:
+- `t` 🔗
+- `1` 🔗
+- `2` 🔗
+- `v2` 🔗
+
+### 📦 GitHub-Monorepo-Deep-Auditor
+Depends on / references:
+- `t` 🔗
+
+### 📦 GROG-The-First-Learning-AGI
+Depends on / references:
+- `t` 🔗
+
+### 📦 Hux
+Depends on / references:
+- `t` 🔗
+
+### 📦 Huxley-Singularity-Loop
+Depends on / references:
+- `t` 🔗
+- `1` 🔗
+- `2` 🔗
+
+### 📦 Huxley-Singularity-Loop-Main
+Depends on / references:
+- `t` 🔗
+
+### 📦 Library-of-Babel
+Depends on / references:
+- `t` 🔗
+- `sn` 🔗
+- `test` 🔗
+
+### 📦 MS-DOS
+Depends on / references:
+- `t` 🔗
+- `z` 🔗
+- `test` 🔗
+
+### 📦 nbody_gravitational_simulator
+Depends on / references:
+- `t` 🔗
+
+### 📦 Need-a-new-pc-
+Depends on / references:
+- `t` 🔗
+
+### 📦 Repo-enhancer
+Depends on / references:
+- `2` 🔗
+- `t` 🔗
+- `z` 🔗
+- `1` 🔗
+- `v2` 🔗
+- `darlek-cann-v3` 🔗
+- `test` 🔗
+- `test1` 🔗
+
+### 📦 SOVEREIGN-
+Depends on / references:
+- `t` 🔗
+- `sn` 🔗
+- `1` 🔗
+- `2` 🔗
+- `z` 🔗
+
+### 📦 sovereign-final
+Depends on / references:
+- `t` 🔗
+
+### 📦 spectest
+Depends on / references:
+- `t` 🔗
+- `1` 🔗
+- `agi-kernel-` 🔗
+- `2` 🔗
+- `aetherforge-2` 🔗
+- `aetherforge-2.0` 🔗
+- `balanced_auditor_v5.2` 🔗
+- `chunk-3` 🔗
+- `chunk-4` 🔗
+- `chunk-5` 🔗
+- `darlek-caan-` 🔗
+- `darlek-caan-2` 🔗
+- `darlek-caan-vs-jesus-chess` 🔗
+- `darlek_caan_engine` 🔗
+- `dna-based-regulator-core` 🔗
+- `dalek-grog` 🔗
+- `grog` 🔗
+- `darlek-caan-system-deployment-` 🔗
+- `darlek-caan-vs-jesus-chessv1` 🔗
+- `darlek-cann-chess-` 🔗
+- `dk` 🔗
+- `echo-chamber-v6.0` 🔗
+- `emg-core` 🔗
+- `euler-engine` 🔗
+- `grog-the-first-learning-agi` 🔗
+- `gibberish-` 🔗
+- `git-priv-public-tool` 🔗
+- `github-redaction` 🔗
+- `governece-substrates-` 🔗
+- `hux` 🔗
+- `huxley-a-reasoning-framework-for-ethical-ai` 🔗
+- `huxley-singularity-loop` 🔗
+- `huxley-singularity-loop-main` 🔗
+- `need-a-new-pc-` 🔗
+- `nicotine-replacement-therapy-idea` 🔗
+- `pdf-github` 🔗
+- `random.ai.html` 🔗
+- `repo-enhancer` 🔗
+- `sn` 🔗
+- `safer-growing-intelligence-daf-` 🔗
+- `test` 🔗
+- `test-1222` 🔗
+- `test1` 🔗
+- `test2` 🔗
+- `testtt` 🔗
+- `the-dopaminergic-brake` 🔗
+- `z` 🔗
+- `zen` 🔗
+- `ai-scaffold` 🔗
+- `ai-scaffold-` 🔗
+- `build_epistemic_debate_engine` 🔗
+- `chunk-7899` 🔗
+- `claud-ios` 🔗
+- `claudios_system_book` 🔗
+- `dalek-caan-siphon` 🔗
+- `dalek-cann-agi` 🔗
+- `dalek-grog-enhancer` 🔗
+- `darlek-caan-build-instructions` 🔗
+- `darlek-cann-v3` 🔗
+- `darlik-khan-v2` 🔗
+- `v2` 🔗
+- `echo-chamber-v7` 🔗
+- `emg-v85-memory-core` 🔗
+- `evolution-engine-rag` 🔗
+- `legitimate-proof-of-concept-of-i.j.-good-s-1965-prediction` 🔗
+- `my-evolved-project` 🔗
+- `nbody_gravitational_simulator` 🔗
+- `psr-governance` 🔗
+- `sovereign-` 🔗
+- `sovereign-kernel` 🔗
+- `sovereign-repo-enhancer` 🔗
+- `sovereign-v86` 🔗
+- `the-rock-knew-all-along` 🔗
+- `theoretical-foundation` 🔗
+- `unitary-core` 🔗
+- `yyy` 🔗
+
+### 📦 theoretical-foundation
+Depends on / references:
+- `t` 🔗
+- `z` 🔗
+- `1` 🔗
+- `sn` 🔗
+
+### 📦 thought
+Depends on / references:
+- `t` 🔗
+
+### 📦 v2
+Depends on / references:
+- `t` 🔗
+
+### 📦 yyy
+Depends on / references:
+- `1` 🔗
+- `t` 🔗
+
+## 2. External Package Fingerprints
+
+- **1**: `react, react-dom, @google/genai, @types/node, @vitejs/plugin-react, typescript, vite`
+- **2**: `@google/genai, @mlc-ai/web-llm, @tailwindcss/vite, @types/express, @types/node, @types/pako, @types/react, @types/react-dom`
+- **AetherForge-2**: `@google/genai, @tailwindcss/vite, @vitejs/plugin-react, dotenv, express, firebase, lucide-react, motion`
+- **AetherForge-2.0**: `@google/genai, @tailwindcss/vite, @vitejs/plugin-react, dotenv, express, firebase, lucide-react, motion`
+- **agent_containment_experiment_summary1**: `dev, build, start, lint, format, check-types, audit, test`
+- **ai_evo_sim**: `@dnd-kit/core, @dnd-kit/sortable, @dnd-kit/utilities, @hookform/resolvers, @prisma/client, @radix-ui/react-icons, @radix-ui/react-slot, @tanstack/react-query`
+- **alphacode**: `dev, build, start, lint, db, @dnd-kit/core, @dnd-kit/sortable, @dnd-kit/utilities`
+- **build_epistemic_debate_engine**: `type, dev, build, start, lint, type-check, test, prepare`
+- **claud-ios**: `@google/genai, lucide-react, motion, react, react-dom, @eslint/js, @tailwindcss/vite, @types/node`
+- **claudios_system_book**: `next, react, react-dom, framer-motion, lucide-react, recharts, clsx, tailwind-merge`
+- **DARLEK-CAAN-**: `@google/genai, @tailwindcss/vite, @vitejs/plugin-react, dotenv, express, lucide-react, motion, octokit`
+- **DARLEK-CAAN-2**: `@ai-sdk/openai, @ai-sdk/google, ai, firebase, lucide-react, motion, next, pino`
+- **darlek-caan-build-instructions**: `react, react-dom, next, lucide-react, framer-motion, recharts, clsx, tailwind-merge`
+- **Darlek-Caan-system-Deployment-**: `@google/genai, @tailwindcss/vite, @vitejs/plugin-react, adm-zip, dotenv, express, http-proxy-middleware, lucide-react`
+- **DARLEK-CAAN-vs-JESUS-CHESS**: `@google/genai, @tailwindcss/vite, @vitejs/plugin-react, lucide-react, react, react-dom, vite, express`
+- **Darlek-Caan-vs-Jesus-Chessv1**: `dev, build, start, lint, db, @dnd-kit/core, @dnd-kit/sortable, @dnd-kit/utilities`
+- **Darlek-Cann-Chess-**: `@google/genai, @tailwindcss/vite, @vitejs/plugin-react, lucide-react, react, react-dom, vite, express`
+- **darlek-cann-v3**: `dev, build, start, lint, db, @dnd-kit/core, @dnd-kit/sortable, @dnd-kit/utilities`
+- **DARLEK_CAAN_ENGINE**: `dev, build, start, lint, db, @dnd-kit/core, @dnd-kit/sortable, @dnd-kit/utilities`
+- **EMG-CORE**: `@google/genai, @react-three/drei, @react-three/fiber, @tailwindcss/vite, clsx, dotenv, firebase, lucide-react`
+- **Free-Rag**: `@google/genai, @tailwindcss/vite, @vitejs/plugin-react, dotenv, express, lucide-react, motion, octokit`
+- **GitHub-Monorepo-Deep-Auditor**: `@google/genai, @tailwindcss/vite, @vitejs/plugin-react, lucide-react, react, react-dom, vite, express`
+- **Hux**: `@google/genai, @tailwindcss/vite, @types/three, @vitejs/plugin-react, dotenv, express, lucide-react, motion`
+- **Huxley-Singularity-Loop-Main**: `@google/genai, @octokit/rest, @tailwindcss/vite, @vitejs/plugin-react, axios, cheerio, dotenv, express`
+- **Library-of-Babel**: `@google/genai, @tailwindcss/vite, @vitejs/plugin-react, dotenv, express, lucide-react, motion, octokit`
+- **MS-DOS**: `dev, build, start, lint, db, @dnd-kit/core, @dnd-kit/sortable, @dnd-kit/utilities`
+- **nbody_gravitational_simulator**: `react, react-dom, next, lucide-react, framer-motion, recharts, clsx, tailwind-merge`
+- **Need-a-new-pc-**: `@google/genai, @tailwindcss/vite, @vitejs/plugin-react, dotenv, express, firebase, lucide-react, motion`
+- **Repo-enhancer**: `dev, build, start, lint, db, @dnd-kit/core, @dnd-kit/sortable, @dnd-kit/utilities`
+- **SOVEREIGN-**: `@google/genai, @tailwindcss/vite, @vitejs/plugin-react, axios, dotenv, express, lucide-react, motion`
+- **sovereign-final**: `next, react, react-dom, framer-motion, lucide-react, recharts, clsx, tailwind-merge`
+- **spectest**: `next, react, react-dom, framer-motion, lucide-react, clsx, tailwind-merge, @vercel/ai`
+- **thought**: `analysis`
+- **v2**: `firebase, framer-motion, lucide-react, next, react, react-dom, clsx, tailwind-merge`
+
+## 3. Branch Dormancy & Reference Divergence Ledger
+
+### 🌿 ai-scaffold Dormant Branches
+| Branch Name | Last Commit Date | Last Commit Author |
+|-------------|------------------|--------------------|
+| `dependabot/github_actions/actions/checkout-6` | 08/01/2026 | `dependabot[bot]` |
+| `dependabot/github_actions/actions/setup-node-6` | 08/01/2026 | `dependabot[bot]` |
+
+### 🌿 echo-chamber-v7 Dormant Branches
+| Branch Name | Last Commit Date | Last Commit Author |
+|-------------|------------------|--------------------|
+| `ai-cycle-1-1765709492399` | 02/12/2025 | `Z User` |
+| `ai-cycle-2-1765709517140` | 02/12/2025 | `Z User` |
+| `ai-cycle-3-1765709541093` | 02/12/2025 | `Z User` |
+| `ai-cycle-4-1765709566091` | 02/12/2025 | `Z User` |
+| `ai-cycle-5-1765709590422` | 02/12/2025 | `Z User` |
+
+### 🌿 GROG-The-First-Learning-AGI Dormant Branches
+| Branch Name | Last Commit Date | Last Commit Author |
+|-------------|------------------|--------------------|
+| `dk-enhancer` | 06/01/2026 | `CRAIG HUCKERBY` |
+
+### 🌿 legitimate-proof-of-concept-of-I.J.-Good-s-1965-prediction Dormant Branches
+| Branch Name | Last Commit Date | Last Commit Author |
+|-------------|------------------|--------------------|
+| `ai-cycle-1-1765644114095` | 14/12/2025 | `CRAIG HUCKERBY` |
+| `ai-cycle-1-1765683012269` | 14/12/2025 | `CRAIG HUCKERBY` |
+| `ai-cycle-1-1765683191724` | 14/12/2025 | `CRAIG HUCKERBY` |
+| `ai-cycle-1-1765685717873` | 14/12/2025 | `CRAIG HUCKERBY` |
+| `ai-cycle-1-1765685896902` | 14/12/2025 | `CRAIG HUCKERBY` |
+
+### 🌿 Random.ai.html Dormant Branches
+| Branch Name | Last Commit Date | Last Commit Author |
+|-------------|------------------|--------------------|
+| `dk-enhancer` | 06/01/2026 | `CRAIG HUCKERBY` |
+
+### 🌿 Safer-Growing-Intelligence-DAF- Dormant Branches
+| Branch Name | Last Commit Date | Last Commit Author |
+|-------------|------------------|--------------------|
+| `ai-cycle-1-1765702563620` | 05/12/2025 | `CRAIG HUCKERBY` |
+| `ai-cycle-1-1765703479216` | 05/12/2025 | `CRAIG HUCKERBY` |
+| `ai-cycle-1-1765703587491` | 05/12/2025 | `CRAIG HUCKERBY` |
+| `ai-cycle-1-1765703844925` | 05/12/2025 | `CRAIG HUCKERBY` |
+| `ai-cycle-1-1765704280053` | 05/12/2025 | `CRAIG HUCKERBY` |
+
+## 4. PR-linked Workflows & Actions Diagnostics
+
+### 🔀 ai-scaffold Pull Request Health
+- **PR #2**: "Bump actions/setup-node from 3 to 6" (by `dependabot[bot]`)
+  - **Actions Pipeline**:
+    - ❌ `lint` (Status: `completed`, Conclusion: `failure`)
+    - ✅ `build` (Status: `completed`, Conclusion: `success`)
+    - ✅ `label` (Status: `completed`, Conclusion: `success`)
+    - ✅ `label` (Status: `completed`, Conclusion: `success`)
+- **PR #1**: "Bump actions/checkout from 3 to 6" (by `dependabot[bot]`)
+  - **Actions Pipeline**:
+    - ✅ `build` (Status: `completed`, Conclusion: `success`)

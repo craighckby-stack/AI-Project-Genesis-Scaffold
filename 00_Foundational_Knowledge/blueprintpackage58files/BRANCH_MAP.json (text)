@@ -1,0 +1,56 @@
+{
+  "EMG-KERNEL-v0.2-.git": [
+    "local"
+  ],
+  "EMG-CORE.git": [
+    "local"
+  ],
+  "Emergent-Schema-Network-ESN-Monitoring-Dashboard.git": [
+    "local"
+  ],
+  "EMG-Core-Analysis-System.git": [
+    "local"
+  ],
+  "EMG-Core-Hierarchical-Indeterminacy.git": [
+    "local"
+  ],
+  "Walta.git": [
+    "local"
+  ],
+  "The-Academic-Development-Pipeline.git": [
+    "local"
+  ],
+  "random.git": [
+    "local"
+  ],
+  "web-dev-playground.git": [
+    "local"
+  ],
+  "Autonomous-Knowledge-System.git": [
+    "local"
+  ],
+  "Open-Repo-Generator-V2.git": [
+    "local"
+  ],
+  "Autonomous-Knowledge-System.wiki.git": [
+    "local"
+  ],
+  "AGI-Project-Compiler.git": [
+    "local"
+  ],
+  "Quantum-Truth-Analysis-System.git": [
+    "local"
+  ],
+  "HCM-Emergence-Validation-Framework.git": [
+    "local"
+  ],
+  "Brain-.git": [
+    "local"
+  ],
+  "ephemeral-mind-gem.git": [
+    "local"
+  ],
+  "Interactive-Learning-System.git": [
+    "local"
+  ]
+}

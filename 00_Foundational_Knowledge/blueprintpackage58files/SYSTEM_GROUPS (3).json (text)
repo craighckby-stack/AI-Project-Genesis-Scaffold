@@ -1,0 +1,106 @@
+{
+  "BOOKS/DOCS": [
+    {
+      "name": "Colab Notebooks",
+      "url": "#",
+      "branches": 1,
+      "stack": "Configuration / Scripts",
+      "isMultiSystem": false
+    }
+  ],
+  "TEST/ARCHIVE": [
+    {
+      "name": "test_snippets",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "1233",
+      "url": "#",
+      "branches": 1,
+      "stack": "Configuration / Scripts",
+      "isMultiSystem": false
+    }
+  ],
+  "UNCATEGORIZED / OTHER": [
+    {
+      "name": "Research",
+      "url": "#",
+      "branches": 1,
+      "stack": "Configuration / Scripts",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Quantum-Truth-Analysis-System-main",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Open-Repo-Generator-V2-main",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "nexus_repository",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Folder 2",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Folder 1",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "extracted_code",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Deepconvo",
+      "url": "#",
+      "branches": 1,
+      "stack": "Configuration / Scripts",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Chatgtpchat",
+      "url": "#",
+      "branches": 1,
+      "stack": "Configuration / Scripts",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Autonomous-Knowledge-System-main",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    },
+    {
+      "name": "Autonomous_Knowledge_System_Package",
+      "url": "#",
+      "branches": 1,
+      "stack": "Unknown",
+      "isMultiSystem": false
+    }
+  ]
+}
