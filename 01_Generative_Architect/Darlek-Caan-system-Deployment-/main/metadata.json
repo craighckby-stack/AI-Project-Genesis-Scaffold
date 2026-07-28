@@ -1,0 +1,6 @@
+{
+  "name": "Darlek Caan Deployer",
+  "description": "Upload a zipped repository to build and deploy your project instantly.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
