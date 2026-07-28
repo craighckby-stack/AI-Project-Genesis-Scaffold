@@ -1,0 +1,9 @@
+{
+  "name": "Darlek Cann Engine",
+  "description": "An interactive, fully accessible chess game with audio synthesis, keyboard and screen-reader assistance, local minimax computer engine, and deep-space aesthetic transformation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
+
+

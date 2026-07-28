@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  --color-chess-light: #f0d9b5;
+  --color-chess-dark: #b58863;
+  --color-chess-lightHC: #ffffff;
+  --color-chess-darkHC: #000000;
+  --color-chess-highlight: rgba(239, 68, 68, 0.4);
+  --color-chess-highlightHC: #00ff00;
+  --color-chess-selected: #ef4444;
+  --color-chess-target: #10b981;
+  --animate-stars: starsAnimation 120s linear infinite;
+}
+
+@layer base {
+  :root {
+    --board-size: clamp(240px, min(80vw, 50vh), 440px);
+    --square-size: calc(var(--board-size) / 8);
+  }
+
+  body {
+    @apply bg-zinc-950 text-gray-100 overflow-x-hidden transition-colors duration-500;
+  }
+
+  /* Unified background pattern */
+  .bg-starfield {
+    background-image: radial-gradient(1.5px 1.5px at 30px 40px, rgba(239, 68, 68, 0.15), transparent),
+                      radial-gradient(1.5px 1.5px at 70px 100px, rgba(255, 255, 255, 0.15), transparent);
+    background-size: 400px 400px;
+  }
+}
+
+@layer components {
+  .cyber-scroll {
+    @apply scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-black/60;
+  }
+
+  .high-density-header {
+    @apply bg-black border-b border-red-800/20;
+  }
+
+  .high-density-panel {
+    @apply bg-black/80 border border-red-900/15 shadow-[0_4px_30px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.03)];
+  }
+
+  .board-container {
+    width: var(--board-size);
+    height: var(--board-size);
+    @apply transition-all duration-300 ease-out shadow-[0_0_50px_rgba(220,38,38,0.15),inset_0_0_15px_rgba(239,68,68,0.03)];
+  }
+
+  .square-btn {
+    width: var(--square-size);
+    height: var(--square-size);
+    @apply transition-all duration-150 ease-in-out focus-visible:outline focus-visible:outline-4 focus-visible:outline-red-500 focus-visible:outline-offset-[-3px] focus-visible:z-20;
+  }
+
+  .frost-overlay {
+    @apply bg-black/75 backdrop-blur-md border-2 border-red-500;
+  }
+
+  .darlek-theme {
+    @apply bg-black relative overflow-hidden bg-starfield;
+  }
+
+  .darlek-theme::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    animation: var(--animate-stars);
+    background-image: radial-gradient(2px 2px at 20px 30px, rgba(239, 68, 68, 0.35), transparent);
+    background-size: 400px 400px;
+    pointer-events: none;
+  }
+
+  .text-shadow-red {
+    text-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+  }
+}
+
+@keyframes starsAnimation {
+  0% { background-position: 0 0; }
+  100% { background-position: -4000px 2000px; }
+}
