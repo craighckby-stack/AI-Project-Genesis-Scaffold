@@ -1,0 +1,8 @@
+{
+  "name": "Nexus Code Evolution & AI Governance Workbench",
+  "description": "An interactive workbench and dashboard for testing AI-driven code evolution, constitutional governance rules, and intelligence search.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
