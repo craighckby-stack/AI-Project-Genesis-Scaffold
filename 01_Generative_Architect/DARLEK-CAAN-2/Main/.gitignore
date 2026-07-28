@@ -1,0 +1,119 @@
+# =============================================================================
+# DARLEK CANN v3.0 - GLOBAL REPOSITORY EXCLUSION SCHEMA
+# =============================================================================
+# Architecture: Multi-Agent Orchestration & Quantum-Safe Deployment
+# Siphoned from: Microsoft, Vercel, Google, and DeepMind standards
+# Role: Defines the boundaries of the repository to prevent leakage of 
+#       sensitive agent states, build artifacts, and local environment secrets.
+# =============================================================================
+
+# --- 1. DEPENDENCIES & PACKAGE MANAGEMENT ---
+node_modules/
+.npm/
+.pnpm-store/
+.yarn/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# --- 2. BUILD, DISTRIBUTION & COMPILATION ---
+build/
+dist/
+out/
+target/
+bin/
+obj/
+*.tsbuildinfo
+.tscache/
+.next/
+.vercel/
+*.wasm
+*.bin
+*.img
+*.iso
+
+# --- 3. AI, ML & QUANTUM DATA (AGENTIC STATE PROTECTION) ---
+# Prevent leakage of sensitive model weights, vector indices, and agent memory
+.chroma/
+.pinecone/
+.faiss/
+.milvus/
+*.gguf
+*.safetensors
+*.pt
+*.pth
+*.onnx
+.cache/huggingface/
+.cache/torch/
+agent_states/
+debate_history/
+*.db
+*.sqlite
+*.sqlite3
+.agent_memory/
+quantum_state_dumps/
+*.log*
+*.log
+
+# --- 4. QA, DIAGNOSTICS & INSTRUMENTATION ---
+coverage/
+.nyc_output/
+.jest/
+.mocha/
+.cypress/
+__pycache__/
+*.py[cod]
+.eslintcache
+.stylelintcache
+.prettiercache
+
+# --- 5. SECURITY & CREDENTIALS (ABSOLUTE ZERO LEAKAGE) ---
+.env*
+!.env.example
+!.env.template
+*.pem
+*.key
+*.pub
+*.cert
+*.pfx
+*.p12
+*.vault
+*.secret
+secring.gpg
+pubring.kbx
+*.credentials
+
+# --- 6. IDE, SYSTEM & WORKSPACE CONFIGURATION ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# --- 7. TEMPORARY & ARTIFACTS ---
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.sass-cache/
+.history/
+.serverless/
+.terraform/
+
+# --- 8. PROJECT-SPECIFIC OVERRIDES ---
+# Ensure documentation blueprints are preserved for system evolution
+!docs/architecture/*.md
+!docs/blueprints/*.md
+!README.md
+
+
+
+

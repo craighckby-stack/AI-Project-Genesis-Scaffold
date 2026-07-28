@@ -1,0 +1,72 @@
+/**
+ * DARLEK CANN v3.0 - System State Orchestrator
+ * Architecture: Next.js/TypeScript Reactive State Engine
+ * Context: Global Siphon Integration (SN/OMEGA/Evolution-Engine)
+ */
+
+export interface SystemState {
+  readonly version: string;
+  readonly initialized: boolean;
+  readonly activeModels: string[];
+  readonly diagnosticMode: boolean;
+  readonly sessionTokens: Record<string, string | null>;
+}
+
+export const INITIAL_STATE: SystemState = {
+  version: '3.0.0',
+  initialized: true,
+  activeModels: ['gemini-2.0-flash', 'imagen-3.0-generate'],
+  diagnosticMode: false,
+  sessionTokens: {
+    auth: null,
+    context: null
+  }
+};
+
+export class StateOrchestrator {
+  private state: SystemState;
+  private listeners: Set<(state: SystemState) => void> = new Set();
+
+  constructor(initial: SystemState) {
+    this.state = { ...initial };
+  }
+
+  public getState(): SystemState {
+    return Object.freeze({ ...this.state });
+  }
+
+  public updateState(partial: Partial<SystemState>): void {
+    this.state = { ...this.state, ...partial };
+    this.notify();
+  }
+
+  public subscribe(listener: (state: SystemState) => void): () => void {
+    this.listeners.add(listener);
+    return () => this.listeners.delete(listener);
+  }
+
+  private notify(): void {
+    this.listeners.forEach((l) => l(this.getState()));
+  }
+}
+
+export const systemOrchestrator = new StateOrchestrator(INITIAL_STATE);
+
+/**
+ * Diagnostic Utility: Siphoned from 'evolution-engine-rag'
+ */
+export const runSystemDiagnostics = async (): Promise<boolean> => {
+  console.info('[DARLEK-CANN] Running integrity checks...');
+  try {
+    const state = systemOrchestrator.getState();
+    return state.initialized && state.activeModels.length > 0;
+  } catch (error) {
+    console.error('[DARLEK-CANN] Critical failure in diagnostic loop:', error);
+    return false;
+  }
+};
+
+export default systemOrchestrator;
+
+
+

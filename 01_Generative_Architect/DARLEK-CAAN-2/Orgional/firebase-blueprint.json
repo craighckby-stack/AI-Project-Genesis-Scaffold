@@ -1,0 +1,66 @@
+{
+  "entities": {
+    "Agent": {
+      "title": "Agent",
+      "description": "A single autonomous unit in the simulation.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "generation": { "type": "integer", "minimum": 0 },
+        "age": { "type": "number", "minimum": 0 },
+        "lifespan": { "type": "number", "minimum": 0 },
+        "rationalism": { "type": "number", "minimum": 0, "maximum": 1 },
+        "sanity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "archetype": { "type": "string", "enum": ["SAGE", "WARRIOR", "SCIENTIST", "ARTIST", "TYRANT", "GLITCH", "MESSIAH", "ANGEL", "DEMON", "PROPHET"] },
+        "memory": { "type": "array", "items": { "type": "string" } },
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "energy": { "type": "number", "minimum": 0, "maximum": 100 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "archetype", "x", "y", "createdAt"]
+    },
+    "WorldState": {
+      "title": "WorldState",
+      "description": "The global parameters of the AetherForge substrate.",
+      "type": "object",
+      "properties": {
+        "clock": { "type": "number" },
+        "complexity": { "type": "number", "minimum": 0 },
+        "integrity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "population": { "type": "integer", "minimum": 0 },
+        "epoch": { "type": "string" },
+        "entropy": { "type": "number", "minimum": 0, "maximum": 1 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Event": {
+      "title": "Event",
+      "description": "A temporal record of a significant occurrence.",
+      "type": "object",
+      "properties": {
+        "timestamp": { "type": "string", "format": "date-time" },
+        "message": { "type": "string" },
+        "type": { "type": "string", "enum": ["INFO", "WARNING", "CRITICAL", "ENLIGHTENMENT", "MIRACLE", "DIVINE_WRATH", "GOSPEL"] },
+        "metadata": { "type": "object" }
+      },
+      "required": ["timestamp", "message", "type"]
+    }
+  },
+  "firestore": {
+    "/worlds/{worldId}": {
+      "schema": "WorldState",
+      "description": "Global simulation state instances."
+    },
+    "/worlds/{worldId}/agents/{agentId}": {
+      "schema": "Agent",
+      "description": "Synchronized agents within a specific world."
+    },
+    "/worlds/{worldId}/events/{eventId}": {
+      "schema": "Event",
+      "description": "Temporal logs for the world."
+    }
+  }
+}

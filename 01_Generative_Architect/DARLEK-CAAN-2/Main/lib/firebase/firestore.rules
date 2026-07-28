@@ -1,0 +1,50 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // HELPER FUNCTIONS: Centralized security logic for reusability
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(data) {
+      return isAuthenticated() && data.ownerId == request.auth.uid;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // AGENT ORCHESTRATION LAYER: Controls access to autonomous agent entities
+    match /agents/{agentId} {
+      allow read: if isAuthenticated();
+      
+      allow create: if isAuthenticated() 
+                    && request.resource.data.ownerId == request.auth.uid
+                    && request.resource.data.version is int;
+
+      allow update: if isAuthenticated() 
+                    && (isOwner(resource.data) || isAdmin())
+                    && !resource.data.quantum_locked
+                    && request.resource.data.ownerId == resource.data.ownerId;
+
+      allow delete: if isAdmin();
+    }
+
+    // GOVERNANCE & SYSTEM LAYER: Siphoned from psr-governance architecture
+    match /system_config/{configId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // AUDIT LOGGING: Ensures traceability for all mutations
+    match /audit_logs/{logId} {
+      allow create: if isAuthenticated();
+      allow read: if isAdmin();
+    }
+  }
+}
+
+
+

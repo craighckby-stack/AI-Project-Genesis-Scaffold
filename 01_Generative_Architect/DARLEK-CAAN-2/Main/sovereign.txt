@@ -1,0 +1,156 @@
+import React, { useState, useEffect, useReducer, useRef, useCallback } from 'react';
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
+
+/**
+ * @file sovereign.txt
+ * @version 89.2
+ * @description Sovereign Evolution Engine Core. 
+ * Architectural Blueprint: Next.js + Firebase + GitHub API + Cerebras LLM.
+ * Integration: Siphons context from README.md to drive autonomous repository refactoring.
+ */
+
+const ENGINE_CONFIG = {
+  CYCLE_INTERVAL: 4000,
+  MAX_HISTORY: 500,
+  MODELS: [
+    { id: 'llama-3.3-70b', label: 'Llama 3.3 70B (Elite)' },
+    { id: 'llama-3.1-8b', label: 'Llama 3.1 8B (Fast)' }
+  ],
+  ALLOWED_EXT: /\.(js|jsx|ts|tsx|cjs|mjs|py|html|css|rs|go|json|md|c|cpp|h|hpp|java|rb|php|sh|yml|yaml|sql|dart|swift|kt)$/i,
+  IGNORED_PATHS: ['node_modules', 'dist', 'build', '.git', '.ico', 'package-lock.json', '.next', 'vendor', 'bin']
+};
+
+const app = initializeApp(typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {});
+const auth = getAuth(app);
+
+const initialState = {
+  isLive: false,
+  status: 'IDLE',
+  activePath: 'System Ready',
+  selectedModel: localStorage.getItem('emg_v88_model') || 'llama-3.3-70b',
+  targetRepo: localStorage.getItem('emg_v88_repo') || '',
+  cerebrasKey: localStorage.getItem('emg_v88_key') || '',
+  ghToken: '',
+  logs: [],
+  metrics: { mutations: 0, progress: 0, errors: 0 }
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'SET_VAL':
+      if (['targetRepo', 'selectedModel', 'cerebrasKey'].includes(action.key)) localStorage.setItem(`emg_v88_${action.key}`, action.value);
+      return { ...state, [action.key]: action.value };
+    case 'TOGGLE':
+      return { ...state, isLive: !state.isLive, status: !state.isLive ? 'INITIALIZING' : 'IDLE' };
+    case 'LOG':
+      return { ...state, logs: [...state.logs, { ...action.payload, id: Date.now() + Math.random() }].slice(-ENGINE_CONFIG.MAX_HISTORY) };
+    case 'UPDATE_METRICS':
+      return { ...state, metrics: { ...state.metrics, ...action.payload } };
+    case 'SET_STATUS':
+      return { ...state, status: action.value, activePath: action.path || state.activePath };
+    default: return state;
+  }
+}
+
+export default function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const [user, setUser] = useState(null);
+  const isProcessing = useRef(false);
+  const queue = useRef([]);
+  const projectContext = useRef("");
+  const cursor = useRef(parseInt(localStorage.getItem('emg_v88_cursor') || '0', 10));
+  const logEndRef = useRef(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (u) => {
+      if (u) setUser(u);
+      else signInAnonymously(auth).catch(console.error);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const pushLog = useCallback((msg, type = 'info') => {
+    dispatch({ type: 'LOG', payload: { msg, type, timestamp: new Date().toLocaleTimeString() } });
+  }, []);
+
+  const encode = (str) => btoa(unescape(encodeURIComponent(str)));
+  const decode = (str) => decodeURIComponent(escape(atob(str)));
+
+  const runCycle = useCallback(async () => {
+    if (!state.isLive || isProcessing.current || !user) return;
+    isProcessing.current = true;
+    const { targetRepo, ghToken, cerebrasKey, selectedModel } = state;
+    const headers = { 'Authorization': `token ${ghToken.trim()}`, 'Accept': 'application/vnd.github.v3+json' };
+
+    try {
+      if (queue.current.length === 0) {
+        dispatch({ type: 'SET_STATUS', value: 'INDEXING' });
+        const repo = targetRepo.trim().replace(/^https?:\/\/github\.com\//, '').replace(/\/$/, '');
+        const rData = await (await fetch(`https://api.github.com/repos/${repo}`, { headers })).json();
+        const tData = await (await fetch(`https://api.github.com/repos/${repo}/git/trees/${rData.default_branch}?recursive=1`, { headers })).json();
+        queue.current = (tData.tree || []).filter(f => f.type === 'blob' && !ENGINE_CONFIG.IGNORED_PATHS.some(p => f.path.includes(p)) && ENGINE_CONFIG.ALLOWED_EXT.test(f.path)).map(f => f.path).sort((a) => a.toLowerCase().includes('readme.md') ? -1 : 1);
+      }
+
+      const path = queue.current[cursor.current % queue.current.length];
+      dispatch({ type: 'SET_STATUS', value: 'EVOLVING', path });
+      const fData = await (await fetch(`https://api.github.com/repos/${targetRepo}/contents/${path}`, { headers })).json();
+      const raw = decode(fData.content);
+
+      if (path.toLowerCase().includes('readme.md')) projectContext.current = raw.substring(0, 3000);
+
+      const aiRes = await fetch('https://api.cerebras.ai/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${cerebrasKey.trim()}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: selectedModel,
+          messages: [{ role: 'system', content: `Refactor code. Context: ${projectContext.current}. Output ONLY code.` }, { role: 'user', content: raw }]
+        })
+      });
+
+      const aiText = (await aiRes.json()).choices[0].message.content;
+      if (aiText !== raw) {
+        await fetch(`https://api.github.com/repos/${targetRepo}/contents/${path}`, {
+          method: 'PUT',
+          headers, 
+          body: JSON.stringify({ message: 'Sovereign Evolution', content: encode(aiText), sha: fData.sha })
+        });
+        pushLog(`MUTATED: ${path}`, 'success');
+        dispatch({ type: 'UPDATE_METRICS', payload: { mutations: state.metrics.mutations + 1 } });
+      }
+    } catch (e) { pushLog(e.message, 'error'); }
+    finally {
+      cursor.current++;
+      localStorage.setItem('emg_v88_cursor', cursor.current.toString());
+      isProcessing.current = false;
+    }
+  }, [state, user, pushLog]);
+
+  useEffect(() => {
+    const timer = setInterval(runCycle, ENGINE_CONFIG.CYCLE_INTERVAL);
+    return () => clearInterval(timer);
+  }, [runCycle]);
+
+  return (
+    <div className="min-h-screen bg-[#060606] text-zinc-300 p-10">
+      <header className="flex justify-between items-center mb-10">
+        <h1 className="text-2xl font-black text-white italic">SOVEREIGN v89.2</h1>
+        <button onClick={() => dispatch({ type: 'TOGGLE' })} className="bg-emerald-600 px-6 py-2 rounded-lg text-white font-bold">{state.isLive ? 'STOP' : 'START'}</button>
+      </header>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-1 space-y-4">
+          <input className="w-full bg-zinc-900 p-4 rounded" placeholder="Target Repo" onChange={e => dispatch({ type: 'SET_VAL', key: 'targetRepo', value: e.target.value })} />
+          <input className="w-full bg-zinc-900 p-4 rounded" placeholder="Cerebras Key" type="password" onChange={e => dispatch({ type: 'SET_VAL', key: 'cerebrasKey', value: e.target.value })} />
+        </div>
+        <div className="lg:col-span-2 bg-black border border-zinc-800 p-6 rounded-xl h-[500px] overflow-y-auto">
+          {state.logs.map(l => <div key={l.id} className="text-xs font-mono mb-2">[{l.timestamp}] {l.msg}</div>)}
+          <div ref={logEndRef} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+

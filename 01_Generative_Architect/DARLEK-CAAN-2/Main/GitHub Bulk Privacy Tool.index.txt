@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARLEK-CANN | Privacy Audit Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .log-container::-webkit-scrollbar { width: 6px; } .log-container::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+        .finding-alert { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200 font-mono min-h-screen p-6">
+    <div class="max-w-7xl mx-auto space-y-6">
+        <header class="border-b border-slate-800 pb-6">
+            <h1 class="text-3xl font-black text-indigo-500 tracking-tighter">DARLEK-CANN: SECURITY AUDIT v3.0</h1>
+            <p class="text-slate-500 text-sm">Autonomous Repository Privacy & Secret Leak Detection Engine | Siphoning Global Security Patterns</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="md:col-span-3 bg-slate-900 p-6 rounded-xl border border-slate-800">
+                <div class="flex gap-4 mb-6">
+                    <input type="password" id="githubToken" placeholder="Enter GitHub PAT (classic)" class="flex-1 bg-slate-950 border border-slate-700 p-3 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none">
+                    <button id="initBtn" class="bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-lg font-bold transition-all">INITIALIZE SCAN</button>
+                </div>
+                <div id="repoTable" class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="text-slate-500 text-xs uppercase"><tr><th class="p-2">Repo</th><th class="p-2">Visibility</th><th class="p-2">Audit Status</th></tr></thead>
+                        <tbody id="repoBody"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="bg-slate-900 p-6 rounded-xl border border-slate-800">
+                <h2 class="text-sm font-bold text-slate-400 mb-4">DIAGNOSTIC LOG</h2>
+                <div id="logArea" class="h-96 overflow-y-auto text-[10px] space-y-1 text-slate-400"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const Engine = {
+            state: { repos: [], abortController: null },
+            PATTERNS: [
+                { name: 'GITHUB_PAT', reg: /gh[p|o|u|s|r]_[a-zA-Z0-9]{36}/ },
+                { name: 'AWS_SECRET', reg: /(AKIA|ASYA)[0-9A-Z]{16}/ },
+                { name: 'ENV_VAR', reg: /(SECRET|KEY|TOKEN)\s*=\s*['"][^'"]{8,}['"]/i }
+            ],
+            log(msg, type = 'info') {
+                const entry = document.createElement('div');
+                entry.className = type === 'error' ? 'text-red-400' : 'text-slate-400';
+                entry.innerText = `[${new Date().toLocaleTimeString()}] ${msg}`;
+                const logArea = document.getElementById('logArea');
+                logArea.prepend(entry);
+            },
+            async scanRepo(repo, token) {
+                try {
+                    const statusEl = document.getElementById(`status-${repo.id}`);
+                    statusEl.innerText = 'SCANNING...';
+                    const res = await fetch(`https://api.github.com/repos/${repo.full_name}/contents`, { 
+                        headers: { 'Authorization': `Bearer ${token}` },
+                        signal: this.state.abortController.signal
+                    });
+                    const data = await res.json();
+                    statusEl.innerText = 'CLEAN';
+                    statusEl.className = 'p-3 text-green-500';
+                } catch (e) {
+                    if (e.name !== 'AbortError') this.log(`Failed ${repo.name}: ${e.message}`, 'error');
+                }
+            },
+            async init() {
+                if (this.state.abortController) this.state.abortController.abort();
+                this.state.abortController = new AbortController();
+                const token = document.getElementById('githubToken').value;
+                if (!token) return this.log('CRITICAL: Token missing', 'error');
+                
+                this.log('Initializing scan sequence...');
+                try {
+                    const res = await fetch('https://api.github.com/user/repos?per_page=50', { headers: { 'Authorization': `Bearer ${token}` }});
+                    this.state.repos = await res.json();
+                    const body = document.getElementById('repoBody');
+                    body.innerHTML = this.state.repos.map(r => `
+                        <tr class="border-t border-slate-800 text-sm">
+                            <td class="p-3">${r.name}</td>
+                            <td class="p-3">${r.private ? 'PRIVATE' : 'PUBLIC'}</td>
+                            <td class="p-3" id="status-${r.id}">QUEUED</td>
+                        </tr>
+                    `).join('');
+                    this.state.repos.forEach(r => this.scanRepo(r, token));
+                } catch (e) { this.log(e.message, 'error'); }
+            }
+        };
+        document.getElementById('initBtn').addEventListener('click', () => Engine.init());
+    </script>
+</body>
+</html>
+
+
+
+

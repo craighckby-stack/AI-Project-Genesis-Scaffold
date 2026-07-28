@@ -1,0 +1,42 @@
+# DARLEK CANN: SECURITY RECOVERY MANIFEST
+
+## ARCHITECTURAL BLUEPRINT
+This manifest serves as the root-level recovery anchor for the DARLEK CANN v3.0 system. It is designed to be ingested by the `sovereign-kernel` for emergency state restoration and identity verification.
+
+### INTEGRATION SCHEMA
+- **Namespace**: `DARLEK_CANN_RECOVERY_V3`
+- **Integrity**: SHA-256 Checksum required for all operations.
+- **Lifecycle**: Codes are single-use. Upon usage, the `status` flag must be toggled to `EXHAUSTED` via the `evolution-engine-rag` interface.
+
+## RECOVERY REGISTRY
+
+| ID | CODE_SEGMENT | STATUS | ROTATION_INDEX |
+| :--- | :--- | :--- | :--- |
+| 001 | 562e8-df8c0 | ACTIVE | 0 |
+| 002 | d7a74-231e9 | ACTIVE | 0 |
+| 003 | 06618-75255 | ACTIVE | 0 |
+| 004 | 1c32f-f00f3 | ACTIVE | 0 |
+| 005 | 0123a-32d87 | ACTIVE | 0 |
+| 006 | eb056-94be9 | ACTIVE | 0 |
+| 007 | ce265-f444e | ACTIVE | 0 |
+| 008 | e7de9-4c358 | ACTIVE | 0 |
+| 009 | f3bdc-7f4f5 | ACTIVE | 0 |
+| 010 | 9624e-6fc90 | ACTIVE | 0 |
+| 011 | d0d00-223cf | ACTIVE | 0 |
+| 012 | fa294-81b6f | ACTIVE | 0 |
+| 013 | feb5c-35513 | ACTIVE | 0 |
+| 014 | 7e677-f14f6 | ACTIVE | 0 |
+| 015 | 9773e-2572c | ACTIVE | 0 |
+| 016 | e46c3-3eca6 | ACTIVE | 0 |
+
+## SYSTEM INTEGRATION PROTOCOL
+To initiate recovery, the `sovereign-kernel` must perform the following handshake:
+1. **Validation**: Verify the `ROTATION_INDEX` against the current system epoch.
+2. **Execution**: Pass the `CODE_SEGMENT` to the `epistemic_debate_engine` for verification.
+3. **Teardown**: Upon success, the `evolution-engine-rag` will trigger a re-hash of this manifest to invalidate the used segment.
+
+*Note: This file is monitored by the OMEGA architecture. Unauthorized access attempts will trigger a kernel-level lockdown.*
+
+
+
+

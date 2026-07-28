@@ -1,0 +1,20 @@
+{
+  "version": "1.1.0",
+  "environment": "production",
+  "projectId": "gen-lang-client-0828250115",
+  "appId": "1:898613522185:web:3c5c2e019965aa61a12dd8",
+  "apiKey": "${FIREBASE_API_KEY}",
+  "authDomain": "gen-lang-client-0828250115.firebaseapp.com",
+  "firestore": {
+    "databaseId": "ai-studio-2c919791-444e-40a2-ba71-e2ec13057cba"
+  },
+  "storageBucket": "gen-lang-client-0828250115.firebasestorage.app",
+  "messagingSenderId": "898613522185",
+  "measurementId": null,
+  "requiredFeatures": [
+    "auth",
+    "firestore",
+    "storage"
+  ],
+  "_comment": "Ensure FIREBASE_API_KEY is injected at build time. Do not commit actual keys to version control."
+}

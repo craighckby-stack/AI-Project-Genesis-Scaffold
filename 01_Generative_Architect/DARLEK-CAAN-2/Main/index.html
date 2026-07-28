@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta name="description" content="DARLEK CANN v3.0: OMEGA-class orchestration engine. Integrated Agent Orchestra and 3-tier LLM fallback." />
+    <meta name="theme-color" content="#020617" />
+    <meta name="application-name" content="DARLEK-CANN-KERNEL" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>DARLEK CANN | OMEGA KERNEL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <style>
+      :root { --bg: #020617; --accent: #3b82f6; --text: #f8fafc; --error: #ef4444; }
+      body { margin: 0; background-color: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; overflow: hidden; }
+      #kernel-boot-layer { position: fixed; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; background: var(--bg); z-index: 9999; transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+      .quantum-pulse { width: 64px; height: 64px; border: 2px solid var(--accent); border-radius: 50%; animation: pulse 2s infinite; box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+      @keyframes pulse { 0% { transform: scale(0.8); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(0.8); opacity: 0.5; } }
+      .boot-log { margin-top: 2rem; font-family: 'Courier New', monospace; font-size: 0.8rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; width: 300px; text-align: center; }
+      #root { opacity: 0; transition: opacity 1s ease-in; width: 100vw; height: 100vh; }
+    </style>
+  </head>
+  <body>
+    <div id="kernel-boot-layer" role="status" aria-live="polite">
+      <div class="quantum-pulse"></div>
+      <div class="boot-log" id="boot-log">INITIALIZING OMEGA-CORE...</div>
+    </div>
+    <div id="root"></div>
+    <script>
+      class KernelBootManager {
+        constructor() {
+          this.log = document.getElementById('boot-log');
+          this.layer = document.getElementById('kernel-boot-layer');
+          this.root = document.getElementById('root');
+          this.sequence = [
+            'SYNCING QUANTUM PIPELINES',
+            'CALIBRATING AGENT ORCHESTRA',
+            'ESTABLISHING LLM FALLBACKS',
+            'VERIFYING ENTROPY LEVELS',
+            'OMEGA KERNEL READY'
+          ];
+        }
+        async boot() {
+          try {
+            for (const step of this.sequence) {
+              this.log.innerText = step;
+              await new Promise(r => setTimeout(r, 600));
+            }
+            this.layer.style.opacity = '0';
+            setTimeout(() => {
+              this.layer.remove();
+              this.root.style.opacity = '1';
+            }, 800);
+          } catch (err) {
+            console.error('Kernel Boot Failure:', err);
+            this.log.innerText = 'CRITICAL SYSTEM FAULT';
+            this.log.style.color = 'var(--error)';
+          }
+        }
+      }
+      const kernel = new KernelBootManager();
+      window.addEventListener('load', () => kernel.boot());
+      window.addEventListener('error', (e) => console.error('Runtime Exception:', e.message));
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
+
+

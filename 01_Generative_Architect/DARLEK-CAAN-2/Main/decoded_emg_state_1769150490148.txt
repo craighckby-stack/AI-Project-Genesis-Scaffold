@@ -1,0 +1,90 @@
+/**
+ * EMG Core: Cognitive State Controller
+ * Architecture: Adaptive Contextualization & Systemic Interdependence
+ * Version: 3.0.0-Evolution
+ * 
+ * @description High-performance cognitive state orchestrator. 
+ * Integrates principles from Microsoft Semantic Kernel and Vercel AI SDK patterns.
+ */
+
+export interface CognitiveState {
+  readonly timestamp: string;
+  readonly identity: string;
+  readonly principles: readonly string[];
+  readonly operationalContext: Readonly<Record<string, any>>;
+}
+
+export type StateListener = (state: CognitiveState) => void;
+
+export class CognitiveEngine {
+  private state: CognitiveState;
+  private listeners: Set<StateListener> = new Set();
+
+  constructor(identity: string) {
+    this.state = {
+      timestamp: new Date().toISOString(),
+      identity,
+      principles: Object.freeze(['Adaptive Contextualization', 'Dynamic Integrity', 'Iterative Refinement', 'Systemic Interdependence']),
+      operationalContext: Object.freeze({})
+    };
+  }
+
+  /**
+   * Subscribes to state changes. Returns an unsubscribe function to prevent memory leaks.
+   */
+  public subscribe(listener: StateListener): () => void {
+    this.listeners.add(listener);
+    return () => this.listeners.delete(listener);
+  }
+
+  /**
+   * Reflects on input, updates state, and notifies observers.
+   * Implements atomic state updates for consistency.
+   */
+  public async reflect(input: string): Promise<void> {
+    const reflection = {
+      input,
+      timestamp: new Date().toISOString(),
+      valid: true,
+      operationalizedUtility: this.calculateUtility(input)
+    };
+
+    this.state = Object.freeze({
+      ...this.state,
+      timestamp: reflection.timestamp,
+      operationalContext: Object.freeze({
+        ...this.state.operationalContext,
+        lastReflection: reflection
+      })
+    });
+
+    this.notify();
+  }
+
+  private notify(): void {
+    this.listeners.forEach((listener) => listener(this.state));
+  }
+
+  private calculateUtility(data: string): number {
+    return data.trim().length > 0 ? 1 : 0;
+  }
+
+  public getState(): CognitiveState {
+    return this.state;
+  }
+
+  /**
+   * Teardown method to clear all listeners and prevent memory leaks.
+   */
+  public dispose(): void {
+    this.listeners.clear();
+  }
+}
+
+// Initialize core as a singleton instance
+export const EMG_CORE = new CognitiveEngine('EMG-Core-v3');
+
+
+
+
+

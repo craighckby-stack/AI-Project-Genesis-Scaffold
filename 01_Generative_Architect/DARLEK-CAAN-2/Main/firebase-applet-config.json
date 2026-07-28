@@ -1,0 +1,127 @@
+import { z } from 'zod';
+
+/**
+ * DARLEK CANN v4.3 - Evolved Configuration Engine
+ * Siphoned from: SN: OMEGA, unitary-core, and psr-governance
+ * Architecture: Multi-tier LLM Orchestration + Quantum State Governance
+ * 
+ * INTEGRATION SCHEMA:
+ * - Firestore: Sharded for high-concurrency agent state.
+ * - Governance: PSR-compliant self-modification locks.
+ * - Agent Orchestra: 3-tier LLM fallback (Gemini/Claude/GPT).
+ */
+
+export const AppletConfigSchema = z.object({
+  version: z.string(),
+  system_id: z.string(),
+  environment: z.enum(['development', 'production', 'test']),
+  project_metadata: z.object({
+    projectId: z.string(),
+    appId: z.string(),
+    apiKey: z.string(),
+    authDomain: z.string(),
+  }),
+  firestore: z.object({
+    databaseId: z.string(),
+    settings: z.object({
+      cacheSizeBytes: z.number(),
+      offlineAccess: z.boolean(),
+      ignoreUndefinedProperties: z.boolean(),
+    }),
+    sharding: z.object({
+      enabled: z.boolean(),
+      shards: z.number().min(1).max(100),
+      engine: z.string(),
+    }),
+    collections: z.record(z.string()),
+  }),
+  agent_orchestra: z.object({
+    enabled: z.boolean(),
+    fallback_strategy: z.enum(['3-tier-llm', 'sequential', 'parallel']),
+    models: z.object({
+      primary: z.string(),
+      secondary: z.string(),
+      tertiary: z.string(),
+    }),
+    concurrency: z.number().max(100),
+    sync_interval_ms: z.number(),
+  }),
+  governance: z.object({
+    framework: z.string(),
+    self_modification_lock: z.boolean(),
+    audit_trail: z.boolean(),
+    consciousness_framework: z.string(),
+    quantum_state_persistence: z.boolean(),
+  }),
+  diagnostics: z.object({
+    enable_telemetry: z.boolean(),
+    log_level: z.enum(['debug', 'info', 'warn', 'error']),
+  }),
+});
+
+export type AppletConfig = z.infer<typeof AppletConfigSchema>;
+
+const getEnv = (key: string, fallback?: string): string => {
+  const val = process.env[key] || fallback;
+  if (!val) throw new Error(`CRITICAL_FAILURE: Required environment variable ${key} is missing.`);
+  return val;
+};
+
+export const config: AppletConfig = AppletConfigSchema.parse({
+  version: '4.3.0-EVOLVED',
+  system_id: 'DARLEK-CANN-CORE-V4',
+  environment: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+  project_metadata: {
+    projectId: getEnv('FIREBASE_PROJECT_ID'),
+    appId: getEnv('FIREBASE_APP_ID'),
+    apiKey: getEnv('FIREBASE_API_KEY'),
+    authDomain: getEnv('FIREBASE_AUTH_DOMAIN'),
+  },
+  firestore: {
+    databaseId: process.env.FIRESTORE_DB_ID || '(default)',
+    settings: {
+      cacheSizeBytes: 104857600,
+      offlineAccess: true,
+      ignoreUndefinedProperties: true,
+    },
+    sharding: {
+      enabled: true,
+      shards: 10,
+      engine: 'unitary-core-v2',
+    },
+    collections: {
+      agents: 'system/orchestra/agents',
+      memory: 'knowledge/quantum/vectors',
+      logs: 'system/governance/mutations',
+      sim: 'world/simulation/active_state',
+    },
+  },
+  agent_orchestra: {
+    enabled: true,
+    fallback_strategy: '3-tier-llm',
+    models: {
+      primary: 'gemini-1.5-pro',
+      secondary: 'claude-3-5-sonnet',
+      tertiary: 'gpt-4o',
+    },
+    concurrency: 50,
+    sync_interval_ms: 5000,
+  },
+  governance: {
+    framework: 'psr-governance-v3',
+    self_modification_lock: false,
+    audit_trail: true,
+    consciousness_framework: 'z-agi-v9',
+    quantum_state_persistence: true,
+  },
+  diagnostics: {
+    enable_telemetry: true,
+    log_level: 'info',
+  },
+});
+
+export default config;
+
+
+
+

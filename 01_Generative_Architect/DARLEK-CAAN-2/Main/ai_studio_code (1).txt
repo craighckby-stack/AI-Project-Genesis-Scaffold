@@ -1,0 +1,102 @@
+/**
+ * @file GenomeEngine.ts
+ * @version 4.0.0
+ * @description DARLEK CANN Genome-to-Code Evolution Controller.
+ * Siphoned from: Microsoft AutoGen, Vercel AI SDK, and sovereign-kernel patterns.
+ */
+
+export interface Gene<T = any, R = any> {
+  id: string;
+  expression: boolean;
+  weight: number;
+  logic: (input: T) => R;
+  cleanup?: () => void;
+}
+
+export interface MutationEvent {
+  geneId: string;
+  timestamp: number;
+  success: boolean;
+  error?: Error;
+}
+
+export class GenomeEngine {
+  private registry: Map<string, Gene> = new Map();
+  private history: MutationEvent[] = [];
+  private readonly MAX_HISTORY = 100;
+
+  constructor(private config: { mutationRate: number; environment: 'production' | 'development' }) {}
+
+  /**
+   * Expresses a gene with full lifecycle management.
+   * Siphoned from Vercel AI SDK: Stream-like execution flow.
+   */
+  public express<T, R>(geneId: string, input: T): R | null {
+    const gene = this.registry.get(geneId);
+    if (!gene || !gene.expression) return null;
+
+    try {
+      const result = gene.logic(input);
+      this.logMutation(geneId, true);
+      return result as R;
+    } catch (err) {
+      this.handleMutationError(geneId, err as Error);
+      return null;
+    }
+  }
+
+  /**
+   * Registers a gene into the sovereign-kernel registry.
+   */
+  public register(gene: Gene): void {
+    if (this.registry.has(gene.id)) this.teardown(gene.id);
+    this.registry.set(gene.id, gene);
+  }
+
+  /**
+   * Safely removes a gene and executes cleanup routines.
+   */
+  public teardown(geneId: string): void {
+    const gene = this.registry.get(geneId);
+    if (gene?.cleanup) {
+      try {
+        gene.cleanup();
+      } catch (e) {
+        console.error(`[TEARDOWN_FAILURE] ${geneId}:`, e);
+      }
+    }
+    this.registry.delete(geneId);
+  }
+
+  private handleMutationError(id: string, error: Error) {
+    console.error(`[GENOME_ERROR] Mutation failure in ${id}:`, error);
+    this.logMutation(id, false, error);
+    this.teardown(id);
+  }
+
+  private logMutation(geneId: string, success: boolean, error?: Error) {
+    this.history.push({ geneId, timestamp: Date.now(), success, error });
+    if (this.history.length > this.MAX_HISTORY) this.history.shift();
+  }
+
+  public mutate<T, R>(geneId: string, newLogic: (input: T) => R) {
+    const gene = this.registry.get(geneId);
+    if (gene) {
+      gene.logic = newLogic as any;
+      gene.weight += Math.random() * this.config.mutationRate;
+    }
+  }
+
+  public getRegistrySnapshot(): string[] {
+    return Array.from(this.registry.keys());
+  }
+}
+
+export const DARLEK_CORE = new GenomeEngine({
+  mutationRate: 0.05,
+  environment: 'production'
+});
+
+
+
+

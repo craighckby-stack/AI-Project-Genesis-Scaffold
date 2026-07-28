@@ -1,0 +1,119 @@
+import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { Brain, RefreshCw, AlertTriangle, Zap, Terminal } from 'lucide-react';
+
+/**
+ * @interface SystemState
+ * @description Unified state schema for Grog-based evolution engines.
+ */
+interface SystemState {
+  isThinking: boolean;
+  isMutating: boolean;
+  lastMutationTimestamp: number | null;
+}
+
+interface GrogDashboardProps {
+  dnaSaturation: number;
+  mistakes: string[];
+  onMutate: (path: string) => Promise<void>;
+  onReboot: () => void;
+}
+
+export const GrogStrategicDashboard: React.FC<GrogDashboardProps> = ({ 
+  dnaSaturation, 
+  mistakes, 
+  onMutate, 
+  onReboot 
+}) => {
+  const [state, setState] = useState<SystemState>({
+    isThinking: false,
+    isMutating: false,
+    lastMutationTimestamp: null
+  });
+
+  const mounted = useRef(true);
+
+  useEffect(() => {
+    return () => { mounted.current = false; };
+  }, []);
+
+  const handleStrategicThought = useCallback(async () => {
+    setState(prev => ({ ...prev, isThinking: true }));
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    if (mounted.current) setState(prev => ({ ...prev, isThinking: false }));
+  }, []);
+
+  const handleMutation = useCallback(async () => {
+    setState(prev => ({ ...prev, isMutating: true }));
+    try {
+      await onMutate('src/evolutors/GrogBrain.ts');
+      setState(prev => ({ ...prev, lastMutationTimestamp: Date.now() }));
+    } finally {
+      if (mounted.current) setState(prev => ({ ...prev, isMutating: false }));
+    }
+  }, [onMutate]);
+
+  return (
+    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500 font-sans">
+      <div className="grid grid-cols-2 gap-4">
+        <MetricCard label="DNA Saturation" value={`${dnaSaturation}%`} color="text-indigo-500" sub="ARCHITECTURAL ALIGNMENT" />
+        <MetricCard label="System Deaths" value={mistakes.length.toString()} color="text-rose-500" sub="INDEXED FAILURES" />
+      </div>
+
+      <div className="bg-zinc-950 border border-zinc-900 p-4 rounded-lg space-y-4">
+        <div className="p-3 bg-black border border-zinc-800 rounded-md">
+          <div className="flex items-center gap-2 mb-3">
+            <Terminal className="w-3 h-3 text-emerald-500" />
+            <span className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest">Synaptic Log</span>
+          </div>
+          <div className="h-20 overflow-y-auto text-[11px] text-zinc-400 font-mono leading-relaxed">
+            {mistakes.length > 0 ? mistakes[mistakes.length - 1] : '>> Awaiting synaptic input...'}
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <ActionButton 
+            onClick={handleStrategicThought} 
+            loading={state.isThinking} 
+            label="INITIATE STRATEGIC THOUGHT" 
+            icon={<Brain size={12} />} 
+          />
+          <ActionButton 
+            onClick={handleMutation} 
+            loading={state.isMutating} 
+            label="SELF-MUTATE (REBOOT)" 
+            variant="danger" 
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const MetricCard: React.FC<{ label: string, value: string, color: string, sub: string }> = ({ label, value, color, sub }) => (
+  <div className="bg-zinc-950 border border-zinc-900 p-4 rounded-lg">
+    <span className="text-[9px] text-zinc-500 uppercase tracking-widest">{label}</span>
+    <div className="flex items-baseline gap-2 mt-1">
+      <span className={`text-xl font-black ${color}`}>{value}</span>
+      <span className="text-[8px] text-zinc-600">{sub}</span>
+    </div>
+  </div>
+);
+
+const ActionButton: React.FC<{ onClick: () => void, loading: boolean, label: string, icon?: React.ReactNode, variant?: 'primary' | 'danger' }> = ({ onClick, loading, label, icon, variant = 'primary' }) => (
+  <button 
+    onClick={onClick}
+    disabled={loading}
+    className={`w-full py-3 px-4 rounded-md text-[10px] font-bold transition-all flex items-center justify-center gap-2 border ${
+      variant === 'danger' 
+        ? 'bg-rose-950/20 text-rose-500 border-rose-900 hover:bg-rose-950/40' 
+        : 'bg-indigo-950/20 text-indigo-400 border-indigo-900 hover:bg-indigo-950/40'
+    }`}
+  >
+    {loading ? <RefreshCw size={12} className="animate-spin" /> : (icon || <Zap size={12} />)}
+    {loading ? 'EXECUTING...' : label}
+  </button>
+);
+
+
+
+
