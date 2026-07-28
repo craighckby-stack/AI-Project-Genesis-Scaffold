@@ -1,0 +1,55 @@
+{
+  "version": "5.0.0-evolution",
+  "metadata": {
+    "systemName": "DARLEK-CANN-ORCHESTRATOR",
+    "buildTarget": "Next.js-14-App-Router",
+    "lastSync": "2024-05-22T12:00:00Z"
+  },
+  "coreIdentity": {
+    "projectId": "gen-lang-client-0828250115",
+    "appId": "1:898613522185:web:3c5c2e019965aa61a12dd8"
+  },
+  "firebase": {
+    "apiKey": "process.env.NEXT_PUBLIC_FIREBASE_API_KEY",
+    "authDomain": "gen-lang-client-0828250115.firebaseapp.com",
+    "firestoreDatabaseId": "ai-studio-2d881d92-294e-45ad-8a66-af031191c3ac",
+    "storageBucket": "gen-lang-client-0828250115.firebasestorage.app",
+    "messagingSenderId": "898613522185"
+  },
+  "orchestration": {
+    "agentMode": "distributed",
+    "telemetry": {
+      "enabled": true,
+      "provider": "axiom-v2"
+    },
+    "retryStrategy": {
+      "maxAttempts": 5,
+      "backoffMs": 1500,
+      "jitter": true
+    },
+    "quantumState": {
+      "persistence": "indexedDB",
+      "syncInterval": 30000,
+      "compression": true
+    }
+  },
+  "security": {
+    "enforceAppCheck": true,
+    "allowedDomains": [
+      "localhost",
+      "gen-lang-client-0828250115.web.app",
+      "*.gen-lang-client.firebaseapp.com"
+    ],
+    "rateLimit": {
+      "windowMs": 60000,
+      "maxRequests": 100
+    },
+    "corsPolicy": "strict"
+  },
+  "featureFlags": {
+    "enableAgentOrchestra": true,
+    "enableMultiDimensionalAnalysis": true,
+    "enableEpistemicDebateEngine": true,
+    "enableQuantumStateSync": true
+  }
+}

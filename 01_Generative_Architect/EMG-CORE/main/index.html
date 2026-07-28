@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';" />
+    <meta name="description" content="DARLEK CANN v3.0 | EMG-CORE Substrate Orchestrator" />
+    <title>EMG-CORE | Quantum Substrate</title>
+    <style>
+      :root { --bg: #020617; --text: #f8fafc; --accent: #3b82f6; --font-mono: 'JetBrains Mono', 'Fira Code', monospace; }
+      body { margin: 0; background-color: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; overflow: hidden; }
+      #root { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+      .substrate-loader { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+      .pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+      @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+      .diagnostic-overlay { position: fixed; bottom: 1rem; left: 1rem; font-family: var(--font-mono); font-size: 0.65rem; color: #475569; pointer-events: none; z-index: 9999; }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="substrate-loader pulse">
+        <div style="font-size: 2.5rem; font-weight: 900; letter-spacing: -0.05em; text-transform: uppercase;">EMG-CORE</div>
+        <div id="substrate-status" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent);">INITIALIZING_QUANTUM_SUBSTRATE...</div>
+      </div>
+    </div>
+    <div class="diagnostic-overlay" id="telemetry-node">SYSTEM_READY: FALSE | MEMORY: 0MB</div>
+    <script>
+      const SubstrateOrchestrator = (() => {
+        const telemetry = {
+          report: (payload) => {
+            const data = JSON.stringify({ ...payload, ts: Date.now(), node: 'EMG-CORE-01' });
+            navigator.sendBeacon ? navigator.sendBeacon('/api/log-error', data) : fetch('/api/log-error', { method: 'POST', body: data });
+          }
+        };
+
+        const updateTelemetry = () => {
+          const node = document.getElementById('telemetry-node');
+          if (node) {
+            const mem = performance.memory ? Math.round(performance.memory.usedJSHeapSize / 1048576) + 'MB' : 'N/A';
+            node.innerText = `SYSTEM_READY: TRUE | LATENCY: ${Math.round(performance.now())}ms | MEMORY: ${mem}`;
+          }
+          requestAnimationFrame(updateTelemetry);
+        };
+
+        return {
+          init: () => {
+            window.addEventListener('error', (e) => telemetry.report({ type: 'CRITICAL', msg: e.message }));
+            window.addEventListener('unhandledrejection', (e) => telemetry.report({ type: 'ASYNC', msg: e.reason }));
+            document.getElementById('substrate-status').innerText = 'SUBSTRATE_LINK_ESTABLISHED';
+            updateTelemetry();
+          }
+        };
+      })();
+      SubstrateOrchestrator.init();
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

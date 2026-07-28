@@ -1,0 +1,70 @@
+{
+  "version": "6.0.0",
+  "system": "DARLEK_CANN_EVOLUTION_ENGINE_CORE",
+  "metadata": {
+    "architecture": "Quantum-Epistemic-Orchestration",
+    "compliance": "SOVEREIGN_FINAL_V4",
+    "environment": "production",
+    "telemetry_enabled": true
+  },
+  "entities": {
+    "CoreIdentity": {
+      "title": "Quantum Core Identity",
+      "description": "Persistent, evolving state of the EMG Core agent with multi-dimensional analysis capabilities.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "principles": { "type": "array", "items": { "type": "string" } },
+        "quantumState": {
+          "type": "object",
+          "properties": {
+            "entanglementLevel": { "type": "number", "minimum": 0, "maximum": 1 },
+            "coherence": { "type": "number", "minimum": 0, "maximum": 1 },
+            "lastObservation": { "type": "string", "format": "date-time" }
+          },
+          "required": ["coherence", "lastObservation"]
+        },
+        "operationalConstraints": {
+          "type": "object",
+          "properties": {
+            "rigidity": { "type": "number" },
+            "autonomy": { "type": "number" },
+            "epistemicThreshold": { "type": "number" }
+          }
+        },
+        "orchestrationLayer": {
+          "type": "object",
+          "properties": {
+            "activeAgents": { "type": "array", "items": { "type": "string" } },
+            "priorityQueue": { "type": "array", "items": { "type": "string" } },
+            "lastSync": { "type": "string", "format": "date-time" }
+          }
+        }
+      },
+      "required": ["name", "principles", "quantumState", "operationalConstraints"]
+    },
+    "DiagnosticTelemetry": {
+      "type": "object",
+      "properties": {
+        "latency": { "type": "number" },
+        "errorRate": { "type": "number" },
+        "nodeStatus": { "type": "string", "enum": ["STABLE", "DEGRADED", "CRITICAL"] }
+      }
+    }
+  },
+  "firestore": {
+    "collections": {
+      "artifacts/{appId}/users/{userId}/emg_core/core_identity": {
+        "schema": "CoreIdentity",
+        "indexes": ["quantumState.coherence", "orchestrationLayer.priorityQueue"],
+        "security": "strict-auth-read-write",
+        "ttl": "365d"
+      },
+      "artifacts/{appId}/telemetry": {
+        "schema": "DiagnosticTelemetry",
+        "security": "service-account-only",
+        "ttl": "7d"
+      }
+    }
+  }
+}

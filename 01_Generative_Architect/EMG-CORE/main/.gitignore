@@ -1,0 +1,120 @@
+# ==============================================================================
+# DARLEK CANN v3.0 — SUPREME EVOLVED SYSTEM CONFIGURATION
+# TARGET: .gitignore (Multi-Tier Next.js, TypeScript, Python AGI, Rust Core, Quantum Simulation)
+# ==============================================================================
+
+# 1. SYSTEM & OS ARTIFACTS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+Desktop.ini
+
+# 2. DEPENDENCY & PACKAGE MANAGER ARTIFACTS
+node_modules/
+.pnp*
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.npm/
+.bun/
+.venv/
+venv/
+
+# 3. BUILD, COMPILATION & DISTRIBUTION
+.next/
+*.tsbuildinfo
+build/
+dist/
+out/
+target/
+bin/
+obj/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 4. ENVIRONMENT VARIABLES & SECRETS (CRITICAL LEAK PREVENTION)
+.env*
+!.env.example
+!.env.template
+*.pem
+*.key
+*.cert
+*.pfx
+*.pkcs12
+*.json.secret
+credentials.json
+secrets.json
+
+# 5. IDE, EDITORS & WORKSPACES
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+.idea/
+*.suo
+*.sw?
+*~
+
+# 6. LOGS, DIAGNOSTICS & COVERAGE
+*.log
+*.trace
+*.dump
+coverage/
+.eslintcache
+.stylelintcache
+.prettiercache
+
+# 7. AGI, QUANTUM & SIMULATION ARTIFACTS (Siphoned from unitary-core/Huxley-Singularity-Loop)
+# Vector Stores & Local DBs
+*.db
+*.sqlite*
+.vectordb/
+.chroma/
+.pinecone/
+
+# ML/AGI Weights & Training
+.cache/
+.huggingface/
+models/weights/
+*.bin
+*.onnx
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.gguf
+mlruns/
+wandb/
+tensorboard/
+
+# Scientific/Quantum Data
+*.npy
+*.parquet
+*.arrow
+*.hdf5
+quantum_results/
+quantum_states/
+
+# 8. PROJECT-SPECIFIC ARCHITECTURAL OVERRIDES
+# Epistemic Debate & World Sim Outputs
+/logs/debate_*.json
+/logs/epistemic_*.log
+simulation_outputs/
+*.simdata
+*.worldstate
+
+# Documentation Drafts
+*.docx
+*.pdf
+*.tmp
+*.bak
+docs/build/
+site/
+
+# ==============================================================================
+# END OF DARLEK CANN v3.0 .gitignore CONFIGURATION
+# ==============================================================================

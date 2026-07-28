@@ -1,0 +1,66 @@
+{
+  "name": "darlek-cann-v3-core",
+  "version": "3.0.0",
+  "description": "DARLEK CANN v3.0 — Supreme Code Evolution Orchestrator. Agent Orchestra + 3-tier LLM fallback.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist .turbo .next coverage",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@google/genai": "1.50.1",
+    "@react-three/drei": "10.7.7",
+    "@react-three/fiber": "9.6.0",
+    "@tailwindcss/vite": "4.1.14",
+    "clsx": "2.1.1",
+    "dotenv": "17.2.3",
+    "firebase": "12.12.1",
+    "lucide-react": "0.546.0",
+    "motion": "12.23.24",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-markdown": "10.1.0",
+    "tailwind-merge": "3.5.0",
+    "three": "0.184.0",
+    "zod": "3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "22.14.0",
+    "@types/react": "19.0.0",
+    "@types/react-dom": "19.0.0",
+    "@types/three": "0.184.0",
+    "autoprefixer": "10.4.21",
+    "concurrently": "9.1.2",
+    "eslint": "9.0.0",
+    "husky": "9.1.7",
+    "lint-staged": "15.4.3",
+    "prettier": "3.5.0",
+    "tailwindcss": "4.1.14",
+    "tsx": "4.21.0",
+    "typescript": "5.8.2",
+    "vite": "6.2.0",
+    "vitest": "3.0.7"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  }
+}

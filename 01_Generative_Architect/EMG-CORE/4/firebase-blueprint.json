@@ -1,0 +1,67 @@
+{
+  "entities": {
+    "CoreIdentity": {
+      "title": "Core Identity",
+      "description": "The evolving state of the EMG Core agent.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "principles": { "type": "array", "items": { "type": "string" } },
+        "learningLog": { 
+          "type": "array", 
+          "items": { 
+            "type": "object",
+            "properties": {
+              "timestamp": { "type": "string", "format": "date-time" },
+              "userQuery": { "type": "string" },
+              "principleNote": { "type": "string" },
+              "analysis": { "type": "string" },
+              "reflection": { "type": "string" }
+            }
+          }
+        },
+        "evolutionHistory": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "timestamp": { "type": "string", "format": "date-time" },
+              "marker": { "type": "string" },
+              "type": { "type": "string" }
+            }
+          }
+        },
+        "insightConnections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "from": { "type": "integer" },
+              "to": { "type": "integer" },
+              "relationship": { "type": "string" },
+              "timestamp": { "type": "string", "format": "date-time" }
+            }
+          }
+        },
+        "mutationRegistry": { "type": "array" },
+        "placeholderRegistry": { "type": "array" },
+        "rejectionMemory": { "type": "array" },
+        "params": {
+          "type": "object",
+          "properties": {
+            "rigidity": { "type": "number" },
+            "autonomy": { "type": "number" },
+            "threshold": { "type": "number" }
+          }
+        }
+      },
+      "required": ["name", "principles", "params"]
+    }
+  },
+  "firestore": {
+    "artifacts/{appId}/users/{userId}/emg_core/core_identity": {
+      "schema": "CoreIdentity",
+      "description": "The singleton state for a user's EMG Core instance."
+    }
+  }
+}

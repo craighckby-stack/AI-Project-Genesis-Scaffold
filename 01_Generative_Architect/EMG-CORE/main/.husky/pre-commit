@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# DARLEK CANN v3.0 - PRE-COMMIT EVOLUTIONARY GATE
+# Purpose: Enforce architectural integrity and type-safety before commit.
+# Siphoned from: DARLEK-CAAN-2, unitary-core, and sovereign-final specifications.
+
+# 1. Environment Diagnostic
+if ! command -v npx &> /dev/null; then
+    echo "[DARLEK CANN] ERROR: Node/NPM environment not detected. Aborting commit."
+    exit 1
+fi
+
+# 2. Pre-flight Type Check (Strict Mode)
+# Ensures that the code adheres to the DARLEK-CAAN-v3 TypeScript standards
+echo "[DARLEK CANN] Executing pre-flight type-safety analysis..."
+npx tsc --noEmit --skipLibCheck
+if [ $? -ne 0 ]; then
+    echo "[DARLEK CANN] CRITICAL: Type-safety violation detected. Commit rejected."
+    exit 1
+fi
+
+# 3. Lint-Staged Execution
+# Pruning dead weight and enforcing style consistency
+echo "[DARLEK CANN] Running lint-staged orchestration..."
+npx lint-staged
+if [ $? -ne 0 ]; then
+    echo "[DARLEK CANN] CRITICAL: Linting/Formatting failure. Commit rejected."
+    exit 1
+fi
+
+# 4. Success Confirmation
+echo "[DARLEK CANN] Evolutionary gate passed. Commit authorized."
+exit 0

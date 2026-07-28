@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Google AI Studio App</title>
+  </head>
+  <body>
+    <div id="root">
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; background-color: #020617; color: #f8fafc; font-family: system-ui, -apple-system, sans-serif;">
+        <div style="font-size: 1.5rem; font-weight: 800; letter-spacing: -0.05em; font-style: italic; text-transform: uppercase; margin-bottom: 0.5rem;">EMG Core</div>
+        <div style="font-family: monospace; font-size: 0.75rem; color: #64748b; letter-spacing: 0.05em;">INITIALIZING SUBSTRATE LINK...</div>
+      </div>
+    </div>
+    <script>
+      function logError(error, stack, info) {
+        if (error && (error.includes('WebSocket') || error.includes('websocket'))) {
+          return; // Ignore websocket connection noise
+        }
+        fetch('/api/log-error', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            error: error || 'Unknown error',
+            stack: stack || 'No stack trace',
+            url: window.location.href,
+            info: info || {}
+          })
+        }).catch(err => console.error('Failed to report error:', err));
+      }
+      window.addEventListener('error', (event) => {
+        logError(event.message || event.error?.message, event.error?.stack, { filename: event.filename, lineno: event.lineno });
+      });
+      window.addEventListener('unhandledrejection', (event) => {
+        const error = event.reason instanceof Error ? event.reason.message : String(event.reason);
+        const stack = event.reason instanceof Error ? event.reason.stack : '';
+        logError(error, stack, { reason: String(event.reason) });
+      });
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

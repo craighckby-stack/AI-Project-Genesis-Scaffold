@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-quantum-blue: #0ea5e9;
+  --color-quantum-void: #020617;
+  --color-quantum-border: #1e293b;
+  --color-data-glow: rgba(14, 165, 233, 0.15);
+
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-glitch: glitch 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  --animate-scanline: scanline 8s linear infinite;
+  --animate-data-flow: flow 20s linear infinite;
+
+  @keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+  }
+
+  @keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+
+  @keyframes flow {
+    from { background-position: 0 0; }
+    to { background-position: 100% 100%; }
+  }
+}
+
+@layer base {
+  :root {
+    --background: var(--color-quantum-void);
+    --foreground: #f8fafc;
+    --accent: var(--color-quantum-blue);
+    --border: var(--color-quantum-border);
+  }
+
+  body {
+    @apply bg-[var(--background)] text-[var(--foreground)] font-sans antialiased selection:bg-sky-500/30 overflow-x-hidden min-h-screen;
+    background-image: radial-gradient(circle at 2px 2px, rgba(30, 41, 59, 0.3) 1px, transparent 0);
+    background-size: 40px 40px;
+  }
+
+  * {
+    @apply border-[var(--border)] box-border;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #020617;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-800 hover:bg-sky-900 transition-colors;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-slate-950/80 backdrop-blur-md border border-slate-800/60 shadow-[0_0_30px_-10px_rgba(14,165,233,0.1)];
+  }
+  
+  .terminal-text {
+    @apply font-mono text-[11px] tracking-wider text-slate-400 leading-relaxed;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 bg-sky-950/30 border border-sky-900/50 hover:bg-sky-900/50 hover:border-sky-700 text-sky-200 rounded-sm transition-all duration-300 active:scale-[0.98] font-medium text-sm uppercase tracking-widest;
+  }
+
+  .data-node {
+    @apply relative p-4 border border-slate-800 bg-slate-900/50 hover:border-sky-500/50 transition-all duration-500;
+  }
+
+  .cyber-border {
+    @apply relative before:absolute before:inset-0 before:border before:border-sky-500/20 before:pointer-events-none;
+  }
+}

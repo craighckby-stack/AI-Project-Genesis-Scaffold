@@ -1,0 +1,54 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // --- ARCHITECTURAL UTILITIES: IDENTITY & ACCESS ---
+    function isAuthenticated() { return request.auth != null; }
+    function isOwner(uid) { return isAuthenticated() && request.auth.uid == uid; }
+    function isAuthorized(uid) { return isOwner(uid) && request.auth.token.email_verified == true; }
+    function isValidId(id) { return id is string && id.size() <= 64 && id.matches('^[a-zA-Z0-9_\-]+$'); }
+    
+    // --- EVOLUTIONARY SCHEMA VALIDATION ---
+    function isValidIdentity(data) {
+      return data.version is number &&
+             data.params is map &&
+             data.params.rigidity is number &&
+             data.params.autonomy is number &&
+             data.params.threshold is number &&
+             data.params.atrophyThreshold is number &&
+             data.params.agencyThreshold is number &&
+             data.params.friction is number &&
+             data.params.contextualDebtRatio is number &&
+             data.insightConnections is list &&
+             data.mutationRegistry is list;
+    }
+
+    // --- GLOBAL SAFETY NET: DENY BY DEFAULT ---
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- CORE IDENTITY DOMAIN: PROTECTED EVOLUTIONARY STATE ---
+    match /artifacts/emg-core/users/{userId}/emg_core/core_identity {
+      allow get: if isOwner(userId);
+      allow create: if isAuthorized(userId) && isValidIdentity(request.resource.data);
+      allow update: if isAuthorized(userId) && isValidIdentity(request.resource.data) && request.resource.data.version > resource.data.version;
+      allow delete: if false; // Mutation-Lock: Prevent identity deletion
+    }
+
+    // --- EVOLUTIONARY LOGS: APPEND-ONLY ARCHITECTURE ---
+    match /artifacts/emg-core/users/{userId}/evolution_logs/{logId} {
+      allow read: if isOwner(userId);
+      allow create: if isAuthorized(userId) && request.resource.data.timestamp is timestamp && request.resource.data.payload is map;
+      allow update, delete: if false; // Immutable logs
+    }
+
+    // --- SYSTEM DIAGNOSTICS: READ-ONLY TELEMETRY ---
+    match /artifacts/emg-core/users/{userId}/diagnostics/{diagId} {
+      allow read: if isOwner(userId);
+      allow create: if isAuthorized(userId) && request.resource.data.status in ['active', 'degraded', 'critical'];
+      allow update: if isAuthorized(userId) && request.resource.data.status in ['active', 'degraded', 'critical'];
+      allow delete: if false;
+    }
+  }
+}

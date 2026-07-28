@@ -1,0 +1,47 @@
+{
+  "$schema": "./schemas/system-manifest.schema.json",
+  "systemName": "EMG-CORE-IDENTITY-SYSTEM",
+  "version": "3.0.0",
+  "manifestVersion": "2.0.0",
+  "identity": {
+    "coreDirective": "Grounded Intelligence through Self-Evolution",
+    "framework": "DARLEK-CANN-V3-ORCHESTRATOR",
+    "consciousnessModel": "Z-AGI-CONSTRAINT-BASED",
+    "epistemicStatus": "ACTIVE",
+    "quantumState": "SUPERPOSITION_ENABLED"
+  },
+  "architecture": {
+    "tier": "TRIPLE-LLM-FALLBACK",
+    "processing": "QUANTUM-DATA-SIMULATION",
+    "physicsEngine": {
+      "type": "N-BODY-GRAVITATIONAL",
+      "integration": "ENABLED",
+      "precision": "HIGH",
+      "solver": "RUNGE-KUTTA-4"
+    }
+  },
+  "orchestration": {
+    "primary": "SERVER_SIDE_GEMINI_API",
+    "secondary": "AGENT_ORCHESTRATION",
+    "fallback": "LOCAL_LLM_QUANTIZED",
+    "diagnostic": "AUTO-EVOLUTION-LOGGING"
+  },
+  "telemetry": {
+    "enabled": true,
+    "retentionDays": 30,
+    "endpoint": "/api/v1/telemetry/stream",
+    "isolationLevel": "STRICT_IDENTITY"
+  },
+  "deployment": {
+    "target": "NEXT_JS_EDGE_RUNTIME",
+    "security": "STRICT_IDENTITY_ISOLATION",
+    "environment": "PRODUCTION",
+    "autoUpdate": true
+  },
+  "dependencies": {
+    "core": "EMG-CORE",
+    "engine": "DARLEK_CAAN_ENGINE",
+    "simulation": "nbody_gravitational_simulator",
+    "quantum": "unitary-core"
+  }
+}

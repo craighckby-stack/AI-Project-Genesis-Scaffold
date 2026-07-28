@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DARLEK CANN System Manifest",
+  "description": "Schema for orchestrating autonomous agent systems with multi-tier LLM fallback and quantum state tracking.",
+  "type": "object",
+  "required": ["systemName", "version", "identity", "architecture", "capabilities", "deployment"],
+  "properties": {
+    "systemName": { "type": "string", "minLength": 3 },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "identity": {
+      "type": "object",
+      "required": ["persona", "directive"],
+      "properties": {
+        "persona": { "type": "string" },
+        "directive": { "type": "string" },
+        "quantumSignature": { "type": "string" }
+      }
+    },
+    "architecture": {
+      "type": "object",
+      "required": ["orchestrationMode", "fallbackLayers"],
+      "properties": {
+        "orchestrationMode": { "enum": ["AGENT_ORCHESTRA", "MONOLITHIC", "DISTRIBUTED"] },
+        "fallbackLayers": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 3
+        },
+        "dataPersistence": { "type": "string" }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "properties": {
+        "selfEvolution": { "type": "boolean" },
+        "epistemicDebate": { "type": "boolean" },
+        "nBodySimulation": { "type": "boolean" },
+        "quantumProcessing": { "type": "boolean" }
+      }
+    },
+    "deployment": {
+      "type": "object",
+      "required": ["environment", "region"],
+      "properties": {
+        "environment": { "enum": ["production", "staging", "development", "quantum-sandbox"] },
+        "region": { "type": "string" },
+        "autoScale": { "type": "boolean" }
+      }
+    }
+  }
+}

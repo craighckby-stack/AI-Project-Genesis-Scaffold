@@ -1,0 +1,58 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    match /test/connection {
+      allow get: if true;
+    }
+
+    // 1. Core Identity Match
+    match /artifacts/emg-core/users/{userId}/emg_core/core_identity {
+      
+      // Helper: Is the caller the owner of this identity?
+      function isOwner(userId) {
+        return request.auth != null && request.auth.uid == userId;
+      }
+
+      // Helper: Basic validation for document body
+      function isValidIdentity(data) {
+        return data.name is string && data.name == "EMG Core" &&
+               data.principles is list && data.principles.size() >= 1 &&
+               data.learningLog is list &&
+               data.evolutionHistory is list &&
+               data.insightConnections is list &&
+               data.mutationRegistry is list &&
+               data.placeholderRegistry is list &&
+               data.rejectionMemory is list &&
+               data.params is map &&
+               data.params.rigidity is number &&
+               data.params.autonomy is number &&
+               data.params.threshold is number;
+      }
+
+      // Helper: Prevent ID Poisoning
+      function isValidId(id) {
+        return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+      }
+
+      // GET: Only the owner can read their identity
+      allow get: if isOwner(userId) && isValidId(userId);
+      
+      // CREATE: Only the owner can create their identity with valid initial state
+      allow create: if isOwner(userId) && isValidId(userId) && 
+                      isValidIdentity(request.resource.data) &&
+                      request.resource.data.keys().hasAll(['name', 'principles', 'learningLog', 'evolutionHistory', 'insightConnections', 'mutationRegistry', 'placeholderRegistry', 'rejectionMemory', 'params']) &&
+                      request.resource.data.keys().size() == 9;
+
+      // UPDATE: Only the owner can update the identity
+      allow update: if isOwner(userId) && isValidId(userId);
+
+      // DELETE: Not allowed via client
+      allow delete: if false;
+    }
+  }
+}

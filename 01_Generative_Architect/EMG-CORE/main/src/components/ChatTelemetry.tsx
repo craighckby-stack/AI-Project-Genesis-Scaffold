@@ -1,0 +1,1 @@
+export const ChatTelemetry = () => <div className="fixed bottom-4 right-4 text-[8px] font-mono text-slate-600">CANN_CORE_SYNC_READY</div>;
