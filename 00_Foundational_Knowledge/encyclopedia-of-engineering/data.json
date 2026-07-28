@@ -1,0 +1,269 @@
+{
+  "volumes": [
+    {
+      "name": "Networking",
+      "chapters": [
+        {
+          "name": "Authentication",
+          "capabilities": [
+            "github-auth",
+            "firebase-auth"
+          ]
+        },
+        {
+          "name": "API Integration",
+          "capabilities": [
+            "repo-scanner"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AI",
+      "chapters": [
+        {
+          "name": "Embeddings",
+          "capabilities": [
+            "embedding-gen"
+          ]
+        },
+        {
+          "name": "Reasoning",
+          "capabilities": [
+            "context-builder",
+            "agent-orchestrator"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Storage",
+      "chapters": [
+        {
+          "name": "Database Connections",
+          "capabilities": [
+            "firebase-conn"
+          ]
+        },
+        {
+          "name": "Vector Databases",
+          "capabilities": [
+            "semantic-search"
+          ]
+        }
+      ]
+    }
+  ],
+  "capabilities": {
+    "github-auth": {
+      "id": "github-auth",
+      "name": "GitHub API Authentication",
+      "purpose": "Authenticates requests to GitHub.",
+      "whyItExists": "Needed for accessing private repositories and performing actions on behalf of a user.",
+      "evolution": "Moved from simple PATs to scoped OAuth applications and fine-grained tokens.",
+      "bestImplementationId": "v1",
+      "dependencies": [
+        "octokit",
+        "oauth-lib"
+      ],
+      "volume": "Networking",
+      "chapter": "Authentication",
+      "variants": [
+        {
+          "chunk": {
+            "id": "v1",
+            "repo": "core-utils",
+            "file": "auth/github.ts",
+            "name": "getGitHubClient",
+            "code": "export function getGitHubClient(token: string) {\n  return new Octokit({ auth: token });\n}",
+            "docstring": "Returns an authenticated Octokit client."
+          }
+        }
+      ]
+    },
+    "firebase-auth": {
+      "id": "firebase-auth",
+      "name": "Firebase Authentication and Session Verification",
+      "purpose": "Logs in users via Firebase Auth and secures application routes using state listeners.",
+      "whyItExists": "Secures client-side routing and authenticates remote database transactions.",
+      "evolution": "Evolved from legacy session cookies to OAuth-backed JWT tokens refreshed automatically by client SDKs.",
+      "bestImplementationId": "v1",
+      "dependencies": [
+        "firebase"
+      ],
+      "volume": "Networking",
+      "chapter": "Authentication",
+      "variants": [
+        {
+          "chunk": {
+            "id": "v1",
+            "repo": "web-app",
+            "file": "lib/auth.ts",
+            "name": "loginAndListen",
+            "code": "import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';\n\nconst auth = getAuth();\n\nexport function loginUser(email, password) {\n  return signInWithEmailAndPassword(auth, email, password);\n}\n\nexport function listenToAuth(onUser) {\n  return onAuthStateChanged(auth, onUser);\n}",
+            "docstring": "Signs in user and listens to state changes dynamically."
+          }
+        }
+      ]
+    },
+    "firebase-conn": {
+      "id": "firebase-conn",
+      "name": "Firebase Connection",
+      "purpose": "Connect browser applications to Firestore and Authentication.",
+      "whyItExists": "Standard entry point for all real-time and persistent data features.",
+      "evolution": "Iterated from v8 namespaced API to v9/v10 modular functional API.",
+      "bestImplementationId": "v1",
+      "dependencies": [
+        "firebase"
+      ],
+      "volume": "Storage",
+      "chapter": "Database Connections",
+      "variants": [
+        {
+          "chunk": {
+            "id": "v1",
+            "repo": "web-app",
+            "file": "lib/firebase.ts",
+            "name": "initFirebase",
+            "code": "import { initializeApp } from 'firebase/app';\nimport { getFirestore } from 'firebase/firestore';\n\nexport const app = initializeApp(config);\nexport const db = getFirestore(app);",
+            "docstring": "Initializes Firebase services."
+          }
+        }
+      ]
+    },
+    "repo-scanner": {
+      "id": "repo-scanner",
+      "name": "Repository Scanner",
+      "purpose": "Enumerates repositories and downloads source trees.",
+      "whyItExists": "Essential for bulk analysis, migration, or documentation tasks.",
+      "evolution": "Switched from shallow clones to tree-walking via API for performance.",
+      "bestImplementationId": "v1",
+      "dependencies": [
+        "axios",
+        "path"
+      ],
+      "volume": "Networking",
+      "chapter": "API Integration",
+      "variants": [
+        {
+          "chunk": {
+            "id": "v1",
+            "repo": "encyclopedia-tool",
+            "file": "scanner.py",
+            "name": "scan_input_dir",
+            "code": "def scan_input_dir(root: Path):\n    for p in root.rglob('*.py'):\n        # logic here\n        pass",
+            "docstring": "Scans a directory for Python files."
+          }
+        },
+        {
+          "chunk": {
+            "id": "17835633663069seomf",
+            "repo": "craighckby-stack/Free-Rag",
+            "file": "server.ts",
+            "name": "Express GitHub Repository Scanner API",
+            "code": "/**\n * @license\n * SPDX-License-Identifier: Apache-2.0\n */\n\nimport express from \"express\";\nimport path from \"path\";\nimport { createServer as createViteServer } from \"vite\";\nimport { GoogleGenAI } from \"@google/genai\";\nimport dotenv from \"dotenv\";\nimport { EncyclopediaData, Capability } from \"./src/types.ts\";\nimport { Octokit } from \"octokit\";\nimport fs from \"fs\";\nimport { loadSyncState, saveSyncState, syncLoopActive, setSyncLoopActive } from \"./syncManager.ts\";\n\ndotenv.config();\n\nconst app = express();\nconst PORT = 3000;\n\napp.use(express.json());\n\n// Lazy-init Gemini\nlet ai: GoogleGenAI | null = null;\nfunction getAI() {\n  if (!ai && process.env.GEMINI_API_KEY) {\n    ai = new GoogleGenAI({\n      apiKey: process.env.GEMINI_API_KEY,\n      httpOptions: {\n        headers: {\n          'User-Agent': 'aistudio-build',\n        }\n      }\n    });\n  }\n  return ai;\n}\n\nconst DATA_FILE = path.join(process.cwd(), \"data.json\");\n\nconst INITIAL_DATA: EncyclopediaData = {\n  volumes: [\n    {\n      name: \"Networking\",\n      chapters: [\n        { name: \"Authentication\", capabilities: [\"github-auth\", \"firebase-auth\"] },\n        { name: \"API Integration\", capabilities: [\"repo-scanner\"] }\n      ]\n    },\n    {\n      name: \"AI\",\n      chapters: [\n        { name: \"Embeddings\", capabilities: [\"embedding-gen\"] },\n        { name: \"Reasoning\", capabilities: [\"context-builder\", \"agent-orchestrator\"] }\n      ]\n    },\n    {\n      name: \"Storage\",\n      chapters: [\n        { name: \"Database Connections\", capabilities: [\"firebase-conn\"] },\n        { name: \"Vector Databases\", capabilities: [\"semantic-search\"] }\n      ]\n    }\n  ],\n  capabilities: {\n    \"github-auth\": {\n      id: \"github-auth\",\n      name: \"GitHub API Authentication\",\n      purpose: \"Authenticates requests to GitHub.\",\n      whyItExists: \"Needed for accessing private repositories and performing actions on behalf of a user.\",\n      evolution: \"Moved from simple PATs to scoped OAuth applications and fine-grained tokens.\",\n      bestImplementationId: \"v1\",\n      dependencies: [\"octokit\", \"oauth-lib\"],\n      volume: \"Networking\",\n      chapter: \"Authentication\",\n      variants: [\n        {\n          chunk: {\n            id: \"v1\",\n            repo: \"core-utils\",\n            file: \"auth/github.ts\",\n            name: \"getGitHubClient\",\n            code: \"export function getGitHubClient(token: string) {\\n  return new Octokit({ auth: token });\\n}\",\n            docstring: \"Returns an authenticated Octokit client.\"\n          }\n        }\n      ]\n    },\n    \"firebase-conn\": {\n      id: \"firebase-conn\",\n      name: \"Firebase Connection\",\n      purpose: \"Connect browser applications to Firestore and Authentication.\",\n      whyItExists: \"Standard entry point for all real-time and persistent data features.\",\n      evolution: \"Iterated from v8 namespaced API to v9/v10 modular functional API.\",\n      bestImplementationId: \"v1\",\n      dependencies: [\"firebase\"],\n      volume: \"Storage\",\n      chapter: \"Database Connections\",\n      variants: [\n        {\n          chunk: {\n            id: \"v1\",\n            repo: \"web-app\",\n            file: \"lib/firebase.ts\",\n            name: \"initFirebase\",\n            code: \"import { initializeApp } from 'firebase/app';\\nimport { getFirestore } from 'firebase/firestore';\\n\\nexport const app = initializeApp(config);\\nexport const db = getFirestore(app);\",\n            docstring: \"Initializes Firebase services.\"\n          }\n        }\n      ]\n    },\n    \"repo-scanner\": {\n      id: \"repo-scanner\",\n      name: \"Repository Scanner\",\n      purpose: \"Enumerates repositories and downloads source trees.\",\n      whyItExists: \"Essential for bulk analysis, migration, or documentation tasks.\",\n      evolution: \"Switched from shallow clones to tree-walking via API for performance.\",\n      bestImplementationId: \"v1\",\n      dependencies: [\"axios\", \"path\"],\n      volume: \"Networking\",\n      chapter: \"API Integration\",\n      variants: [\n        {\n          chunk: {\n            id: \"v1\",\n            repo: \"encyclopedia-tool\",\n            file: \"scanner.py\",\n            name: \"scan_input_dir\",\n            code: \"def scan_input_dir(root: Path):\\n    for p in root.rglob('*.py'):\\n        # logic here\\n        pass\",\n            docstring: \"Scans a directory for Python files.\"\n          }\n        }\n      ]\n    }\n  }\n};\n\nfunction loadData(): EncyclopediaData {\n  if (fs.existsSync(DATA_FILE)) {\n    return JSON.parse(fs.readFileSync(DATA_FILE, \"utf-8\"));\n  }\n  return INITIAL_DATA;\n}\n\nfunction saveData(data: EncyclopediaData) {\n  fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));\n}\n\n// API Routes\napp.get(\"/api/encyclopedia\", (req, res) => {\n  res.json(loadData());\n});\n\n// --- GitHub PAT Auth & API Integration ---\nlet userGithubPat = process.env.GITHUB_PAT || \"\";\n\nfunction getOctokit() {\n  const token = userGithubPat || process.env.GITHUB_PAT;\n  if (!token) throw new Error(\"GitHub PAT is not set. Please authenticate with a token first.\");\n  return new Octokit({ auth: token });\n}\n\napp.post(\"/api/github/token\", (req, res) => {\n  const { token } = req.body;\n  if (!token) return res.status(400).json({ error: \"Missing token\" });\n  userGithubPat = token;\n  res.json({ success: true });\n});\n\napp.get(\"/api/github/status\", (req, res) => {\n  res.json({ connected: !!(userGithubPat || process.env.GITHUB_PAT) });\n});\n\napp.get(\"/api/github/repos\", async (req, res) => {\n  try {\n    const octokit = getOctokit();\n    const query = req.query.q as string;\n    \n    let ownRepos: any[] = [];\n    try {\n      ownRepos = await octokit.paginate(octokit.rest.repos.listForAuthenticatedUser, {\n        sort: \"updated\",\n        per_page: 100\n      });\n    } catch (e) {\n      console.error(\"Failed to list authenticated user's repos:\", e);\n    }\n\n    let publicRepos: any[] = [];\n    try {\n      if (query && query.trim().length > 0) {\n        const searchRes = await octokit.rest.search.repos({\n          q: `${query} is:public`,\n          sort: \"stars\",\n          order: \"desc\",\n          per_page: 50\n        });\n        publicRepos = searchRes.data.items || [];\n      } else {\n        // Pre-fill with the top 100 biggest (highest-starred) repositories on GitHub\n        const searchRes = await octokit.rest.search.repos({\n          q: \"stars:>35000 fork:false\",\n          sort: \"stars\",\n          order: \"desc\",\n          per_page: 100\n        });\n        publicRepos = searchRes.data.items || [];\n      }\n    } catch (e) {\n      console.error(\"Failed to search public repos:\", e);\n    }\n\n    // Merge and deduplicate by full_name\n    const uniqueReposMap = new Map();\n    \n    for (const repo of ownRepos) {\n      if (repo && repo.full_name) {\n        uniqueReposMap.set(repo.full_name, {\n          id: repo.id,\n          name: repo.full_name,\n          full_name: repo.full_name,\n          private: repo.private,\n          stargazers_count: repo.stargazers_count,\n          isOwn: true\n        });\n      }\n    }\n    \n    for (const repo of publicRepos) {\n      if (repo && repo.full_name) {\n        uniqueReposMap.set(repo.full_name, {\n          id: repo.id,\n          name: repo.full_name,\n          full_name: repo.full_name,\n          private: repo.private,\n          stargazers_count: repo.stargazers_count,\n          isOwn: false\n        });\n      }\n    }\n\n    const reposList = Array.from(uniqueReposMap.values());\n    res.json(reposList);\n  } catch (error: any) {\n    res.status(500).json({ error: error.message });\n  }\n});\n\napp.post(\"/api/github/publish\", async (req, res) => {\n  const { repoName } = req.body;\n  if (!repoName) return res.status(400).json({ error: \"Missing repoName\" });\n\n  try {\n    const octokit = getOctokit();\n    \n    // Create new repo\n    await octokit.rest.repos.createForAuthenticatedUser({\n      name: repoName,\n      description: \"Encyclopedia of Engineering compiled via AI Studio\",\n      private: true,\n      auto_init: true\n    });\n\n    // Wait a brief moment for the repo to be available\n    await new Promise(r => setTimeout(r, 1500));\n\n    const db = loadData();\n    const content = Buffer.from(JSON.stringify(db, null, 2)).toString('base64');\n    \n    // Get the authenticated user's login\n    const userRes = await octokit.rest.users.getAuthenticated();\n    \n    // Create the file in the new repo\n    await octokit.rest.repos.createOrUpdateFileContents({\n      owner: userRes.data.login,\n      repo: repoName,\n      path: \"data.json\",\n      message: \"Initial commit of encyclopedia data\",\n      content: content\n    });\n\n    res.json({ success: true, url: `https://github.com/${userRes.data.login}/${repoName}` });\n  } catch (error: any) {\n    console.error(\"Publish error:\", error);\n    res.status(500).json({ error: error.message });\n  }\n});\n\napp.post(\"/api/github/scan\", async (req, res) => {\n  const { repoFullName } = req.body; // e.g. \"octocat/Hello-World\"\n  if (!repoFullName) return res.status(400).json({ error: \"Missing repoFullName\" });\n\n  try {\n    const octokit = getOctokit();\n    const [owner, repo] = repoFullName.split(\"/\");\n\n    const { data: repoData } = await octokit.rest.repos.get({ owner, repo });\n    const defaultBranch = repoData.default_branch;\n\n    // Fetch the entire tree recursively\n    const { data: treeData } = await octokit.rest.git.getTree({\n      owner,\n      repo,\n      tree_sha: defaultBranch,\n      recursive: \"true\"\n    });\n\n    const codeFiles = treeData.tree.filter(f => \n      f.type === \"blob\" && f.path &&\n      /\\.(ts|js|py|tsx|jsx|go|rs|java|c|cpp|rb)$/.test(f.path)\n    );\n\n    if (codeFiles.length === 0) {\n      return res.json({ success: true, message: \"No source files found in repo.\" });\n    }\n\n    const aiClient = getAI();\n    if (!aiClient) throw new Error(\"Gemini API not configured\");\n\n    let indexedCount = 0;\n    \n    // We process the files sequentially to prevent API timeouts or rate limits.\n    // For large repos, this might take a while, but it will read all matching code files.\n    for (const file of codeFiles) {\n      try {\n        const { data: fileData } = await octokit.rest.git.getBlob({\n          owner,\n          repo,\n          file_sha: file.sha!\n        });\n\n        const code = Buffer.from(fileData.content, \"base64\").toString(\"utf-8\");\n        if (code.length > 30000) continue; // Skip huge files to avoid Gemini token limits\n\n        // Reload data to ensure we capture newly created capabilities from previous loop iterations\n        const db = loadData();\n        const existingCapabilities = Object.values(db.capabilities).map(c => ({\n          id: c.id,\n          name: c.name,\n          purpose: c.purpose\n        }));\n\n        const prompt = `You are building an Encyclopedia of Engineering Knowledge.\nWe organize code snippets into \"Capabilities\".\n\nCurrent capabilities:\n${JSON.stringify(existingCapabilities, null, 2)}\n\nAnalyze this code from ${repoFullName} - ${file.path}:\n\\`\\`\\`\n${code.substring(0, 8000)} // Truncated for token limits\n\\`\\`\\`\n\nTask:\n1. Does this code implement one of the existing capabilities? \n2. If yes, return its capabilityId.\n3. If no, propose a new capabilityId (kebab-case), name, purpose, whyItExists, evolution, dependencies, volume name (e.g. \"Networking\", \"Storage\", \"UI\", \"AI\", \"Core\"), and chapter name.\n\nReturn ONLY JSON:\n{\n  \"isNewCapability\": boolean,\n  \"capabilityId\": \"existing-id or new-id\",\n  \"newCapabilityDetails\": {\n    \"name\": \"...\",\n    \"purpose\": \"...\",\n    \"whyItExists\": \"...\",\n    \"evolution\": \"...\",\n    \"dependencies\": [\"...\"],\n    \"volume\": \"...\",\n    \"chapter\": \"...\"\n  },\n  \"chunkName\": \"Short descriptive name\",\n  \"chunkSummary\": \"Brief summary\"\n}`;\n\n        const result = await aiClient.models.generateContent({\n          model: \"gemini-3.5-flash\",\n          contents: prompt,\n          config: {\n            responseMimeType: \"application/json\",\n          }\n        });\n        \n        \n    let responseText = result.text || \"{}\";\n    responseText = responseText.replace(/\\s*```json\\s*/gi, '').replace(/\\s*```\\s*/g, '').trim();\n    let responseJson: any = {};\n    try {\n      responseJson = JSON.parse(responseText);\n    } catch (e) {\n      console.error(\"Failed to parse JSON:\", responseText);\n      throw e;\n    }\n\n        const chunkId = Date.now().toString() + Math.random().toString(36).substring(7);\n        const newChunk = {\n          id: chunkId,\n          repo: repoFullName,\n          file: file.path || \"unknown\",\n          name: responseJson.chunkName || \"Snippet\",\n          code,\n          docstring: responseJson.chunkSummary\n        };\n\n        const capabilityId = responseJson.capabilityId;\n\n        if (responseJson.isNewCapability) {\n          const volName = responseJson.newCapabilityDetails?.volume || \"General\";\n          const chapName = responseJson.newCapabilityDetails?.chapter || \"Misc\";\n          \n          let vol = db.volumes.find(v => v.name === volName);\n          if (!vol) {\n            vol = { name: volName, chapters: [] };\n            db.volumes.push(vol);\n          }\n          let chap = vol.chapters.find(c => c.name === chapName);\n          if (!chap) {\n            chap = { name: chapName, capabilities: [] };\n            vol.chapters.push(chap);\n          }\n          if (!chap.capabilities.includes(capabilityId)) {\n            chap.capabilities.push(capabilityId);\n          }\n          \n          db.capabilities[capabilityId] = {\n            id: capabilityId,\n            name: responseJson.newCapabilityDetails?.name || capabilityId,\n            purpose: responseJson.newCapabilityDetails?.purpose || \"\",\n            whyItExists: responseJson.newCapabilityDetails?.whyItExists || \"\",\n            evolution: responseJson.newCapabilityDetails?.evolution || \"\",\n            dependencies: responseJson.newCapabilityDetails?.dependencies || [],\n            volume: volName,\n            chapter: chapName,\n            bestImplementationId: chunkId,\n            variants: [ { chunk: newChunk } ]\n          };\n        } else {\n          const cap = db.capabilities[capabilityId];\n          if (cap) {\n            cap.variants.push({ chunk: newChunk });\n          }\n        }\n        \n        saveData(db);\n        indexedCount++;\n      } catch (err) {\n        console.error(\"Error processing file\", file.path, err);\n      }\n    }\n\n    res.json({ success: true, indexedCount });\n  } catch (error: any) {\n    console.error(\"Scan error:\", error);\n    res.status(500).json({ error: error.message });\n  }\n});\n\n\nimport { runAutoSync } from \"./autoSyncLogic.ts\";\n\napp.get(\"/api/github/auto-sync/status\", (req, res) => {\n  const state = loadSyncState();\n  res.json({ ...state, isActuallyRunning: syncLoopActive });\n});\n\napp.post(\"/api/github/auto-sync/start\", (req, res) => {\n  if (!syncLoopActive) {\n    runAutoSync(getOctokit, getAI, loadData, saveData).catch(err => {\n       console.error(\"Auto sync failed\", err);\n    });\n  }\n  res.json({ success: true });\n});\n\napp.post(\"/api/github/auto-sync/reset\", (req, res) => {\n  if (syncLoopActive) {\n    return res.status(400).json({ error: \"Cannot reset while running\" });\n  }\n  const emptyState = {\n    isRunning: false,\n    statusMessage: \"Idle\",\n    processedRepos: [],\n    currentRepo: null,\n    processedFilesInCurrentRepo: [],\n    totalFilesInCurrentRepo: 0,\n    rateLimitPauseUntil: null,\n    error: null,\n    isFinished: false\n  };\n  saveSyncState(emptyState);\n  res.json({ success: true });\n});\n\n\napp.get(\"/api/github/build-markdown\", (req, res) => {\n  try {\n    const db = loadData();\n    let md = \"# Encyclopedia of Engineering Knowledge\\n\\n\";\n    \n    for (const volume of db.volumes) {\n      md += `## Volume: ${volume.name}\\n\\n`;\n      for (const chapter of volume.chapters) {\n        md += `### Chapter: ${chapter.name}\\n\\n`;\n        for (const capId of chapter.capabilities) {\n          const cap = db.capabilities[capId];\n          if (!cap) continue;\n          md += `#### Capability: ${cap.name}\\n\\n`;\n          md += `**Purpose:** ${cap.purpose}\\n\\n`;\n          if (cap.whyItExists) md += `**Why it exists:** ${cap.whyItExists}\\n\\n`;\n          if (cap.evolution) md += `**Evolution:** ${cap.evolution}\\n\\n`;\n          if (cap.dependencies && cap.dependencies.length > 0) md += `**Dependencies:** ${cap.dependencies.join(\", \")}\\n\\n`;\n          \n          md += `**Implementations:**\\n\\n`;\n          for (const variant of cap.variants) {\n            md += `<details>\\n<summary>${variant.chunk.repo} - ${variant.chunk.file}</summary>\\n\\n`;\n            md += `*${variant.chunk.docstring}*\\n\\n`;\n            md += `\\`\\`\\`\\n${variant.chunk.code}\\n\\`\\`\\`\\n\\n`;\n            md += `</details>\\n\\n`;\n          }\n        }\n      }\n    }\n    \n    res.setHeader('Content-disposition', 'attachment; filename=ENCYCLOPEDIA.md');\n    res.setHeader('Content-type', 'text/markdown');\n    res.send(md);\n  } catch (err) {\n    console.error(\"Markdown build error:\", err);\n    res.status(500).json({ error: err.message });\n  }\n});\n\napp.post(\"/api/analyze\", async (req, res) => {\n  const { code, filename, repo = \"unknown\" } = req.body;\n  const aiClient = getAI();\n  if (!aiClient) {\n    return res.status(500).json({ error: \"Gemini API key not configured\" });\n  }\n\n  try {\n    const db = loadData();\n    const existingCapabilities = Object.values(db.capabilities).map(c => ({\n      id: c.id,\n      name: c.name,\n      purpose: c.purpose\n    }));\n\n    const prompt = `You are building an Encyclopedia of Engineering Knowledge.\nWe organize code snippets into \"Capabilities\" (engineering concepts/problems).\n\nCurrent capabilities:\n${JSON.stringify(existingCapabilities, null, 2)}\n\nAnalyze the following code snippet from ${repo} - ${filename}:\n\\`\\`\\`\n${code}\n\\`\\`\\`\n\nTask:\n1. Does this code implement one of the existing capabilities listed above? \n2. If yes, return its existing capabilityId.\n3. If no, this is a new capability. Propose a new capabilityId (kebab-case), name, purpose, whyItExists, evolution (a guess), dependencies, volume name (e.g. \"Networking\", \"Storage\", \"UI\", \"AI\", \"Core\"), and chapter name.\n\nReturn ONLY JSON:\n{\n  \"isNewCapability\": boolean,\n  \"capabilityId\": \"existing-id or new-id\",\n  \"newCapabilityDetails\": {\n    \"name\": \"...\",\n    \"purpose\": \"...\",\n    \"whyItExists\": \"...\",\n    \"evolution\": \"...\",\n    \"dependencies\": [\"...\"],\n    \"volume\": \"...\",\n    \"chapter\": \"...\"\n  },\n  \"chunkName\": \"Short descriptive name for this specific snippet, e.g. 'fetchData'\",\n  \"chunkSummary\": \"Brief docstring/summary of what this specific chunk does.\"\n}\n`;\n\n    const result = await aiClient.models.generateContent({\n      model: \"gemini-3.5-flash\",\n      contents: prompt,\n      config: {\n        responseMimeType: \"application/json\",\n      }\n    });\n    \n    const responseJson = JSON.parse(result.text || \"{}\");\n    \n    const chunkId = Date.now().toString() + Math.random().toString(36).substring(7);\n    const newChunk = {\n      id: chunkId,\n      repo,\n      file: filename,\n      name: responseJson.chunkName || \"Snippet\",\n      code,\n      docstring: responseJson.chunkSummary\n    };\n\n    const capabilityId = responseJson.capabilityId;\n\n    if (responseJson.isNewCapability) {\n      const volName = responseJson.newCapabilityDetails.volume || \"General\";\n      const chapName = responseJson.newCapabilityDetails.chapter || \"Misc\";\n      \n      let vol = db.volumes.find(v => v.name === volName);\n      if (!vol) {\n        vol = { name: volName, chapters: [] };\n        db.volumes.push(vol);\n      }\n      let chap = vol.chapters.find(c => c.name === chapName);\n      if (!chap) {\n        chap = { name: chapName, capabilities: [] };\n        vol.chapters.push(chap);\n      }\n      if (!chap.capabilities.includes(capabilityId)) {\n        chap.capabilities.push(capabilityId);\n      }\n      \n      db.capabilities[capabilityId] = {\n        id: capabilityId,\n        name: responseJson.newCapabilityDetails.name,\n        purpose: responseJson.newCapabilityDetails.purpose,\n        whyItExists: responseJson.newCapabilityDetails.whyItExists,\n        evolution: responseJson.newCapabilityDetails.evolution,\n        dependencies: responseJson.newCapabilityDetails.dependencies || [],\n        volume: volName,\n        chapter: chapName,\n        bestImplementationId: chunkId,\n        variants: [ { chunk: newChunk } ]\n      };\n    } else {\n      const cap = db.capabilities[capabilityId];\n      if (cap) {\n        cap.variants.push({ chunk: newChunk });\n      } else {\n         // Fallback if AI hallucinates an ID\n         const volName = \"General\";\n         const chapName = \"Uncategorized\";\n         let vol = db.volumes.find(v => v.name === volName);\n          if (!vol) {\n            vol = { name: volName, chapters: [] };\n            db.volumes.push(vol);\n          }\n          let chap = vol.chapters.find(c => c.name === chapName);\n          if (!chap) {\n            chap = { name: chapName, capabilities: [] };\n            vol.chapters.push(chap);\n          }\n          chap.capabilities.push(capabilityId);\n          db.capabilities[capabilityId] = {\n            id: capabilityId,\n            name: capabilityId,\n            purpose: \"Auto-generated capability\",\n            whyItExists: \"Unknown\",\n            evolution: \"Unknown\",\n            dependencies: [],\n            volume: volName,\n            chapter: chapName,\n            bestImplementationId: chunkId,\n            variants: [ { chunk: newChunk } ]\n          };\n      }\n    }\n    \n    saveData(db);\n    res.json({ success: true, capabilityId });\n  } catch (error: any) {\n    res.status(500).json({ error: error.message });\n  }\n});\n\n// Vite middleware for development\nasync function startServer() {\n  if (process.env.NODE_ENV !== \"production\") {\n    const vite = await createViteServer({\n      server: { middlewareMode: true },\n      appType: \"spa\",\n    });\n    app.use(vite.middlewares);\n  } else {\n    const distPath = path.join(process.cwd(), \"dist\");\n    app.use(express.static(distPath));\n    app.get(\"*\", (req, res) => {\n      res.sendFile(path.join(distPath, \"index.html\"));\n    });\n  }\n\n  app.listen(PORT, \"0.0.0.0\", () => {\n    console.log(`Server running on http://localhost:${PORT}`);\n  });\n}\n\nstartServer();\n",
+            "docstring": "Implements Express router endpoints and helper functions to authenticate with a GitHub PAT and dynamically enumerate user and public repositories using Octokit."
+          }
+        }
+      ]
+    },
+    "embedding-gen": {
+      "id": "embedding-gen",
+      "name": "Vector Embedding Generation",
+      "purpose": "Generates high-dimensional semantic vector embeddings from code snippets or text using Gemini SDK.",
+      "whyItExists": "Serves as the foundation for modern semantic search and repository clustering.",
+      "evolution": "Transitioned from TF-IDF and bag-of-words keyword indexing to deep learning dense representations.",
+      "bestImplementationId": "v1",
+      "dependencies": [
+        "@google/genai"
+      ],
+      "volume": "AI",
+      "chapter": "Embeddings",
+      "variants": [
+        {
+          "chunk": {
+            "id": "v1",
+            "repo": "ai-service",
+            "file": "embeddings.ts",
+            "name": "generateEmbedding",
+            "code": "import { GoogleGenAI } from '@google/genai';\n\nconst ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });\n\nexport async function generateEmbedding(text: string) {\n  const result = await ai.models.embedContent({\n    model: 'text-embedding-004',\n    contents: text,\n  });\n  return result.embedding.values;\n}",
+            "docstring": "Generates high-density embedding vectors using Gemini API."
+          }
+        }
+      ]
+    },
+    "context-builder": {
+      "id": "context-builder",
+      "name": "AI Context Window Assembly",
+      "purpose": "Compresses raw source trees, metadata, and user prompts into a structured format that fits within LLM context windows.",
+      "whyItExists": "Large codebases exceed typical token budgets, necessitating intelligent relevance ranking and layout strategies.",
+      "evolution": "Moved from sliding character windows to AST-aware file-chunk extraction and semantic embeddings.",
+      "bestImplementationId": "v1",
+      "dependencies": [
+        "path"
+      ],
+      "volume": "AI",
+      "chapter": "Reasoning",
+      "variants": [
+        {
+          "chunk": {
+            "id": "v1",
+            "repo": "ai-orchestrator",
+            "file": "context.ts",
+            "name": "buildContextPrompt",
+            "code": "export function buildContextPrompt(files: { path: string; content: string }[], query: string) {\n  let context = 'You are analyzing the following codebase context:\\n\\n';\n  for (const file of files) {\n    context += `--- FILE: ${file.path} ---\\n`;\n    context += file.content.substring(0, 4000) + '\\n\\n';\n  }\n  context += `User Inquiry: ${query}\\n`;\n  return context;\n}",
+            "docstring": "Packs source files cleanly into a single unified context prompt."
+          }
+        }
+      ]
+    },
+    "agent-orchestrator": {
+      "id": "agent-orchestrator",
+      "name": "Multi-Agent Routing & Orchestration",
+      "purpose": "Coordinates multiple domain-specific agents to solve complex code refactoring and migration problems.",
+      "whyItExists": "Single-prompt models fail on complex multi-step reasoning, requiring sub-tasks to be delegated.",
+      "evolution": "Progressed from hardcoded linear state machines to autonomous, goal-directed ReAct planning loops.",
+      "bestImplementationId": "v1",
+      "dependencies": [
+        "events"
+      ],
+      "volume": "AI",
+      "chapter": "Reasoning",
+      "variants": [
+        {
+          "chunk": {
+            "id": "v1",
+            "repo": "agent-framework",
+            "file": "orchestrator.ts",
+            "name": "AgentOrchestrator",
+            "code": "import { EventEmitter } from 'events';\n\nexport class AgentOrchestrator extends EventEmitter {\n  async routeTask(taskDescription: string) {\n    this.emit('status', 'Analyzing task scope...');\n    if (taskDescription.includes('database')) {\n      return this.executeAgent('DB_Agent', taskDescription);\n    } \n    return this.executeAgent('Refactor_Agent', taskDescription);\n  }\n\n  private async executeAgent(agentName: string, task: string) {\n    this.emit('agent_start', { agentName, task });\n    // Agent execution routines\n    return { status: 'completed', agent: agentName };\n  }\n}",
+            "docstring": "Event-driven coordinator delegating sub-tasks dynamically."
+          }
+        }
+      ]
+    },
+    "semantic-search": {
+      "id": "semantic-search",
+      "name": "Cosine Similarity Vector Search",
+      "purpose": "Queries a list of embeddings and returns the most semantically relevant items using cosine similarity.",
+      "whyItExists": "Enables semantic search without requiring a heavy, external vector database server.",
+      "evolution": "Simple manual similarity calculations evolved into specialized vector indexing trees like HNSW.",
+      "bestImplementationId": "v1",
+      "dependencies": [],
+      "volume": "Storage",
+      "chapter": "Vector Databases",
+      "variants": [
+        {
+          "chunk": {
+            "id": "v1",
+            "repo": "local-vector-db",
+            "file": "similarity.ts",
+            "name": "cosineSimilarity",
+            "code": "export function cosineSimilarity(vecA: number[], vecB: number[]): number {\n  let dotProduct = 0.0;\n  let normA = 0.0;\n  let normB = 0.0;\n  for (let i = 0; i < vecA.length; i++) {\n    dotProduct += vecA[i] * vecB[i];\n    normA += vecA[i] * vecA[i];\n    normB += vecB[i] * vecB[i];\n  }\n  if (normA === 0 || normB === 0) return 0;\n  return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));\n}",
+            "docstring": "Performs low-level vector similarity search."
+          }
+        }
+      ]
+    }
+  }
+}
