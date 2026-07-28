@@ -1,0 +1,31 @@
+{
+  "isRunning": true,
+  "statusMessage": "Scanning file: src/components/ui/textarea.tsx in craighckby-stack/ai_evo_sim",
+  "processedRepos": [
+    "craighckby-stack/encyclopedia-of-engineering",
+    "craighckby-stack/Free-Rag",
+    "craighckby-stack/DARLEK-CAAN-",
+    "craighckby-stack/Library-of-Babel",
+    "craighckby-stack/2",
+    "craighckby-stack/alphacode",
+    "craighckby-stack/Synthesis-Hub",
+    "craighckby-stack/SOVEREIGN-",
+    "craighckby-stack/1",
+    "craighckby-stack/agent_containment_experiment_summary1",
+    "craighckby-stack/Repo-enhancer",
+    "craighckby-stack/AetherForge-2",
+    "craighckby-stack/AetherForge-2.0",
+    "craighckby-stack/DARLEK-CAAN-vs-JESUS-CHESS",
+    "craighckby-stack/theoretical-foundation",
+    "craighckby-stack/thought"
+  ],
+  "currentRepo": "craighckby-stack/ai_evo_sim",
+  "processedFilesInCurrentRepo": [
+    "src/app/page.tsx",
+    "src/components/AgentOrchestra.tsx"
+  ],
+  "totalFilesInCurrentRepo": 177,
+  "rateLimitPauseUntil": null,
+  "error": null,
+  "isFinished": false
+}
