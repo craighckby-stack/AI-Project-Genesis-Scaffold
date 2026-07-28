@@ -1,0 +1,5 @@
+{
+  "name": "DNA Packer - LLM Context Injector",
+  "description": "A high-performance utility to pack entire codebases into compressed, LLM-ready context strings using Brotli compression.",
+  "requestFramePermissions": []
+}

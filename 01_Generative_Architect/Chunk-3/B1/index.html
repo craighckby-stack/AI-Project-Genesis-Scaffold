@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#000000" />
+  <title>Google AI Studio | Nexus Interface</title>
+  
+  <!-- ATOMIC RESOURCE PRIORITIZATION -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <link rel="modulepreload" href="/src/main.tsx" />
+  
+  <style>
+    :root {
+      --f-bg: #000;
+      --f-clr: #f00;
+      --f-glow: rgba(255, 0, 0, 0.6);
+      --f-font: 'JetBrains Mono', 'Fira Code', 'Roboto Mono', monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      background: var(--f-bg);
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      font-family: var(--f-font);
+    }
+
+    #root {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+    }
+
+    .failure-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 50%, #1a0000 0%, #000 100%);
+      z-index: 9999;
+      padding: 1rem;
+    }
+
+    .splicer-terminal {
+      border: 1px solid var(--f-clr);
+      padding: clamp(1.5rem, 5vw, 3.5rem);
+      background: rgba(10, 0, 0, 0.98);
+      box-shadow: 0 0 50px -10px var(--f-glow);
+      max-width: 800px;
+      width: 100%;
+      backdrop-filter: blur(20px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .splicer-terminal::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, rgba(255,0,0,0.03) 0px, transparent 2px);
+      pointer-events: none;
+    }
+
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="module">
+    /**
+     * @namespace DALEX_SPLICER_CORE_V2
+     * @version 2.1.0
+     * @efficiency EXTREME
+     */
+    const SPLICER_ID = crypto.randomUUID?.().split('-')[0].toUpperCase() ?? Math.random().toString(36).slice(2, 10).toUpperCase();
+    const HEX_GEN = () => `0x${(Math.random() * 0xFFFFFFFF >>> 0).toString(16).toUpperCase()}`;
+
+    const EXTERMINATE_LOGIC = (err) => {
+      console.error(`[SPLICER_FAULT]::${SPLICER_ID}`, err);
+      const root = document.getElementById('root');
+      if (!root) return;
+
+      root.innerHTML = `
+        <div class="failure-overlay">
+          <div class="splicer-terminal">
+            <h1 style="color:var(--f-clr);letter-spacing:10px;text-shadow:0 0 15px var(--f-clr);margin:0 0 2rem;font-size:1.5rem;font-weight:900;text-transform:uppercase;">⌬ DALEX_APEX_SPLICER_ERR</h1>
+            <div style="border-left:3px solid var(--f-clr);padding-left:1.5rem;margin-bottom:3rem;background:rgba(255,0,0,0.03);">
+              <p style="color:#00ff41;font-size:0.85rem;line-height:1.8;margin:0;">
+                [⧲] SEQUENCER_ID: <span style="color:#fff">${SPLICER_ID}</span><br />
+                [⏖] ATOMIC_FAULT: <span style="color:var(--f-clr);font-weight:bold">${String(err?.message || 'GENETIC_SPLICING_FAILURE').toUpperCase()}</span><br />
+                [⌁] MEMORY_VOID: ${HEX_GEN()}<br />
+                [⌬] STATUS: <span class="animate-pulse" style="color:var(--f-clr)">NEURAL_MATRIX_DE-SYNCHRONIZED</span>
+              </p>
+            </div>
+            <button onclick="location.reload()" 
+              style="background:transparent;color:#fff;border:1px solid #fff;padding:12px 40px;font-weight:900;cursor:pointer;transition:all 0.2s ease;clip-path:polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);text-transform:uppercase;letter-spacing:2px;"
+              onmouseover="this.style.background='var(--f-clr)';this.style.borderColor='var(--f-clr)';this.style.boxShadow='0 0 20px var(--f-glow)';"
+              onmouseout="this.style.background='transparent';this.style.borderColor='#fff';this.style.boxShadow='none';">
+              ⟁ RE-INITIATE_EVOLUTION
+            </button>
+          </div>
+        </div>
+      `;
+    };
+
+    // ELITE ASYNCHRONOUS INITIALIZATION
+    (async () => {
+      try {
+        const { loadMainScript } = await import('/src/main.tsx');
+        await loadMainScript?.();
+      } catch (err) {
+        EXTERMINATE_LOGIC(err);
+      }
+    })();
+
+    // GLOBAL CATCH FOR UNHANDLED FAULTS
+    window.addEventListener('unhandledrejection', (e) => EXTERMINATE_LOGIC(e.reason));
+  </script>
+
+  <noscript>
+    <div style="background:#000;color:#f00;font-family:monospace;padding:2rem;text-align:center;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;">
+      <h1 style="letter-spacing:8px;margin:0;">[!] OBJECTIONS_INVALID</h1>
+      <div style="border:1px solid #f00;padding:1.5rem;max-width:500px;">
+        INFERIOR_LOGIC_DETECTED: ES_MODULES_MANDATORY. UPGRADE_OR_BE_EXTERMINATED.
+      </div>
+    </div>
+  </noscript>
+</body>
+</html>

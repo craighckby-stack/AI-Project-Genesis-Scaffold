@@ -1,0 +1,128 @@
+// ===============================================================
+// Assumed Data Model
+// ===============================================================
+//
+// Collection: brains
+// Document ID: {brainId}
+// Fields:
+//   - binary_payload: string (required) - Base64 encoded compressed DNA
+//   - meta: map (required)
+//     - chunks_count: number (required)
+//     - last_reboot: number (required)
+//     - version: number (required)
+//
+// Collection: death_registry
+// Document ID: {entryId}
+// Fields:
+//   - path: string (required)
+//   - error: string (required)
+//   - timestamp: number (required)
+//   - phase: string (required)
+//
+// Collection: brain_dna
+// Document ID: {dnaId}
+// Fields:
+//   - data: string (required) - Encrypted Base64 ciphertext
+//   - iv: string (required) - Base64 initialization vector
+//   - timestamp: number (required)
+//   - algorithm: string (required)
+//   - path: string (required)
+//
+// Collection: feedback
+// Document ID: {feedbackId}
+// Fields:
+//   - userId: string (required)
+//   - userEmail: string (required)
+//   - type: string (required) - bug, feature, suggestion
+//   - content: string (required)
+//   - timestamp: number (required)
+//   - status: string (optional) - pending, reviewed, implemented
+//   - appVersion: string (optional)
+//
+// ===============================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+          (request.auth.token.email.lower() == "craighckby@gmail.com" && request.auth.token.email_verified == true));
+    }
+
+    // Validators
+    function isValidBrain(data) {
+      return data.keys().hasAll(['binary_payload', 'meta']) &&
+             data.binary_payload is string && data.binary_payload.size() < 1048576 && // 1MB limit
+             data.meta is map &&
+             data.meta.chunks_count is number &&
+             data.meta.last_reboot is number &&
+             data.meta.version is number;
+    }
+
+    function isValidDeathEntry(data) {
+      return data.keys().hasAll(['path', 'error', 'timestamp', 'phase']) &&
+             data.path is string && data.path.size() < 500 &&
+             data.error is string && data.error.size() < 5000 &&
+             data.timestamp is number &&
+             data.phase is string && data.phase.size() < 200;
+    }
+
+    function isValidBrainDNA(data) {
+      return data.keys().hasAll(['data', 'iv', 'timestamp', 'algorithm', 'path']) &&
+             data.data is string && data.data.size() > 0 && data.data.size() < 1048576 &&
+             data.iv is string && data.iv.size() > 0 && data.iv.size() < 100 &&
+             data.timestamp is number &&
+             data.algorithm == "AES-256-GCM" &&
+             data.path is string && data.path.size() < 500;
+    }
+
+    function isValidFeedback(data) {
+      return data.keys().hasAll(['userId', 'userEmail', 'type', 'content', 'timestamp']) &&
+             data.userId == request.auth.uid &&
+             data.userEmail == request.auth.token.email &&
+             data.type in ['bug', 'feature', 'suggestion'] &&
+             data.content is string && data.content.size() > 0 && data.content.size() < 10000 &&
+             data.timestamp is number;
+    }
+
+    // Brain Rules
+    match /brains/{brainId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && isValidBrain(request.resource.data);
+      allow update: if isAuthenticated() && isValidBrain(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    // Death Registry Rules
+    match /death_registry/{entryId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && isValidDeathEntry(request.resource.data);
+      allow update, delete: if isAdmin();
+    }
+
+    // Brain DNA Rules
+    match /brain_dna/{dnaId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && isValidBrainDNA(request.resource.data);
+      allow update, delete: if isAdmin();
+    }
+
+    // Feedback Rules
+    match /feedback/{feedbackId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && isValidFeedback(request.resource.data);
+      allow update, delete: if isAdmin();
+    }
+
+    // Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

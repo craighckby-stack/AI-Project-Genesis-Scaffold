@@ -1,0 +1,70 @@
+// config/atm_risk_levels.json
+
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "ATM Risk Levels",
+  "type": "object",
+  "properties": {
+    "riskLevels": {
+      "type": "object",
+      "patternProperties": {
+        "^[A-Z_]+$": {
+          "$ref": "#/definitions/RiskLevel"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "definitions": {
+    "RiskLevel": {
+      "type": "object",
+      "required": ["level", "color", "description"],
+      "properties": {
+        "level": {
+          "type": "integer",
+          "description": "Risk level value (0-100)",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "color": {
+          "type": "string",
+          "description": "Hex color code (e.g., #RRGGBB)",
+          "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+        },
+        "description": {
+          "type": "string",
+          "description": "Risk description (max 256 characters)",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
+
+// Example Risk Levels
+{
+  "riskLevels": {
+    "CRITICAL": {
+      "level": 10,
+      "color": "#FF0000",
+      "description": "Lethal Mutation risk. Immediate Global Refactor required."
+    },
+    "HIGH": {
+      "level": 8,
+      "color": "#FF6600",
+      "description": "Significant architectural fragility. Prioritize stabilization."
+    },
+    "MEDIUM": {
+      "level": 5,
+      "color": "#FFCC00",
+      "description": "Standard evolution cycle. Monitor for entropy increase."
+    },
+    "LOW": {
+      "level": 2,
+      "color": "#00CC00",
+      "description": "Optimization target. Safe for autonomous mutation."
+    }
+  }
+}

@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-display: "Space Grotesk", sans-serif;
+  
+  --color-brand-bg: #E4E3E0;
+  --color-brand-ink: #141414;
+  --color-brand-line: #141414;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-brand-ink font-sans selection:bg-brand-ink selection:text-brand-bg overflow-hidden h-screen;
+  }
+}
+
+.data-row {
+  @apply grid border-b border-brand-line py-2 px-4 transition-all cursor-crosshair;
+}
+
+.data-row:hover {
+  @apply bg-brand-ink text-brand-bg;
+}
+
+.col-header {
+  @apply font-serif italic text-[10px] opacity-50 uppercase tracking-widest;
+}
+
+.data-value {
+  @apply font-mono text-sm tracking-tighter;
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.scan-line {
+  @apply absolute left-0 right-0 h-[100px] bg-gradient-to-b from-transparent via-brand-ink/10 to-transparent pointer-events-none;
+  animation: scan 10s linear infinite;
+}
+
+.technical-border {
+  @apply border border-brand-line;
+}

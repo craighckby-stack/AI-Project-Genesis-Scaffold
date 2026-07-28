@@ -1,0 +1,16 @@
+// metadata.json
+
+/**
+ * Metadata schema and configuration for the application.
+ * @see https://schema.semantic-ui.com/json-schema/
+ */
+const metadata = {
+  "$schema": "https://schema.semantic-ui.com/json-schema#",
+  "name": "Sentient Prime",
+  "description": "Autonomous GitHub Mutation Monitor and Multi-Exchange Arbitrage Scanner",
+  "permissions": [], // Add permissions as needed
+  "version": "5.0.0-alpha.0",
+  "tags": ["GitHub", "Mutation Monitor", "Arbitrage Scanner", "Autonomous System"],
+};
+
+module.exports = metadata;

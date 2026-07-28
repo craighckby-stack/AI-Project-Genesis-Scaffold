@@ -1,0 +1,136 @@
+{
+  "entities": {
+    "Brain": {
+      "title": "Brain",
+      "description": "The persistent state of the AI brain.",
+      "type": "object",
+      "properties": {
+        "binary_payload": {
+          "type": "string",
+          "description": "Base64 encoded compressed DNA string."
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "chunks_count": { "type": "integer" },
+            "last_reboot": { "type": "integer" },
+            "version": { "type": "number" }
+          },
+          "required": ["chunks_count", "last_reboot", "version"]
+        }
+      },
+      "required": ["binary_payload", "meta"]
+    },
+    "DeathRegistryEntry": {
+      "title": "DeathRegistryEntry",
+      "description": "A record of a failed DNA enhancement.",
+      "type": "object",
+      "properties": {
+        "path": { "type": "string" },
+        "error": { "type": "string" },
+        "timestamp": { "type": "integer" },
+        "phase": { "type": "string" }
+      },
+      "required": ["path", "error", "timestamp", "phase"]
+    },
+    "BrainDNA": {
+      "title": "BrainDNA",
+      "description": "An encrypted binary DNA packet (Zero-Text Policy).",
+      "type": "object",
+      "properties": {
+        "data": { "type": "string", "description": "Encrypted Base64 ciphertext." },
+        "iv": { "type": "string", "description": "Base64 initialization vector." },
+        "timestamp": { "type": "integer" },
+        "algorithm": { "type": "string" },
+        "path": { "type": "string" }
+      },
+      "required": ["data", "iv", "timestamp", "algorithm", "path"]
+    },
+    "Feedback": {
+      "title": "Feedback",
+      "description": "User feedback, bug reports, and feature suggestions.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "type": { "type": "string", "enum": ["bug", "feature", "suggestion"] },
+        "content": { "type": "string" },
+        "timestamp": { "type": "integer" },
+        "status": { "type": "string", "enum": ["pending", "reviewed", "implemented"] },
+        "appVersion": { "type": "string" }
+      },
+      "required": ["userId", "userEmail", "type", "content", "timestamp"]
+    },
+    "BrainIntention": {
+      "title": "BrainIntention",
+      "description": "A specific goal or task identified by the brain for self-enhancement.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "path": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "solved"] },
+        "timestamp": { "type": "integer" }
+      },
+      "required": ["id", "path", "description", "status", "timestamp"]
+    },
+    "User": {
+      "title": "User",
+      "description": "User profile and role information.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "user"] },
+        "createdAt": { "type": "integer" }
+      },
+      "required": ["uid", "email", "role", "createdAt"]
+    },
+    "GPUTask": {
+      "title": "GPUTask",
+      "description": "A task for a serverless GPU provider (e.g., DeepSeek on RunPod).",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "model": { "type": "string" },
+        "prompt": { "type": "string" },
+        "systemPrompt": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "processing", "completed", "failed"] },
+        "result": { "type": "string" },
+        "error": { "type": "string" },
+        "timestamp": { "type": "integer" }
+      },
+      "required": ["userId", "model", "prompt", "status", "timestamp"]
+    }
+  },
+  "firestore": {
+    "brains/{brainId}": {
+      "schema": "Brain",
+      "description": "Storage for brain DNA."
+    },
+    "death_registry/{entryId}": {
+      "schema": "DeathRegistryEntry",
+      "description": "Log of failed enhancements."
+    },
+    "brain_dna/{dnaId}": {
+      "schema": "BrainDNA",
+      "description": "Encrypted DNA packets for Zero-Text Policy."
+    },
+    "feedback/{feedbackId}": {
+      "schema": "Feedback",
+      "description": "User feedback and recommendations."
+    },
+    "brain_intentions/{intentionId}": {
+      "schema": "BrainIntention",
+      "description": "Self-identified goals for the brain's evolution."
+    },
+    "users/{userId}": {
+      "schema": "User",
+      "description": "User profiles and roles."
+    },
+    "gpu_tasks/{taskId}": {
+      "schema": "GPUTask",
+      "description": "Tasks for offloaded GPU processing."
+    }
+  }
+}

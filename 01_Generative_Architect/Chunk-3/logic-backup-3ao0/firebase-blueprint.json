@@ -1,0 +1,63 @@
+{
+  "entities": {
+    "Brain": {
+      "title": "Brain",
+      "description": "The persistent state of the AI brain.",
+      "type": "object",
+      "properties": {
+        "binary_payload": {
+          "type": "string",
+          "description": "Base64 encoded compressed DNA string."
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "chunks_count": { "type": "integer" },
+            "last_reboot": { "type": "integer" },
+            "version": { "type": "number" }
+          },
+          "required": ["chunks_count", "last_reboot", "version"]
+        }
+      },
+      "required": ["binary_payload", "meta"]
+    },
+    "DeathRegistryEntry": {
+      "title": "DeathRegistryEntry",
+      "description": "A record of a failed DNA enhancement.",
+      "type": "object",
+      "properties": {
+        "filePath": { "type": "string" },
+        "error": { "type": "string" },
+        "timestamp": { "type": "integer" }
+      },
+      "required": ["filePath", "error", "timestamp"]
+    },
+    "BrainDNA": {
+      "title": "BrainDNA",
+      "description": "An encrypted binary DNA packet (Zero-Text Policy).",
+      "type": "object",
+      "properties": {
+        "data": { "type": "string", "description": "Encrypted Base64 ciphertext." },
+        "iv": { "type": "string", "description": "Base64 initialization vector." },
+        "timestamp": { "type": "integer" },
+        "algorithm": { "type": "string" },
+        "path": { "type": "string" }
+      },
+      "required": ["data", "iv", "timestamp", "algorithm", "path"]
+    }
+  },
+  "firestore": {
+    "brains/{brainId}": {
+      "schema": "Brain",
+      "description": "Storage for brain DNA."
+    },
+    "death_registry/{entryId}": {
+      "schema": "DeathRegistryEntry",
+      "description": "Log of failed enhancements."
+    },
+    "brain_dna/{dnaId}": {
+      "schema": "BrainDNA",
+      "description": "Encrypted DNA packets for Zero-Text Policy."
+    }
+  }
+}

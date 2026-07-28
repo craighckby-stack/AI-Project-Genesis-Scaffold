@@ -1,0 +1,216 @@
+// ===============================================================
+// Assumed Data Model
+// ===============================================================
+//
+// Collection: brains
+// Document ID: {brainId}
+// Fields:
+//   - binary_payload: string (required) - Base64 encoded compressed DNA
+//   - meta: map (required)
+//     - chunks_count: number (required)
+//     - last_reboot: number (required)
+//     - version: number (required)
+//
+// Collection: death_registry
+// Document ID: {entryId}
+// Fields:
+//   - path: string (required)
+//   - error: string (required)
+//   - timestamp: number (required)
+//   - phase: string (required)
+//
+// Collection: brain_dna
+// Document ID: {dnaId}
+// Fields:
+//   - data: string (required) - Encrypted Base64 ciphertext
+//   - iv: string (required) - Base64 initialization vector
+//   - timestamp: number (required)
+//   - algorithm: string (required)
+//   - path: string (required)
+//
+// Collection: feedback
+// Document ID: {feedbackId}
+// Fields:
+//   - userId: string (required)
+//   - userEmail: string (required)
+//   - type: string (required) - bug, feature, suggestion
+//   - content: string (required)
+//   - timestamp: number (required)
+//   - status: string (optional) - pending, reviewed, implemented
+//   - appVersion: string (optional)
+//
+// Collection: brain_intentions
+// Document ID: {intentionId}
+// Fields:
+//   - id: string (required) - Unique hash
+//   - path: string (required) - File path
+//   - description: string (required) - Intention description
+//   - status: string (required) - pending, solved
+//   - timestamp: number (required)
+//
+// Collection: gpu_tasks
+// Document ID: {taskId}
+// Fields:
+//   - userId: string (required)
+//   - model: string (required)
+//   - provider: string (optional)
+//   - prompt: string (required)
+//   - status: string (required) - pending, processing, completed, failed
+//   - timestamp: number (required)
+//   - result: string (optional)
+//   - error: string (optional)
+//
+// ===============================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Brain Intentions Rules (Priority Match)
+    match /brain_intentions/{intentionId} {
+      allow read: if request.auth != null;
+      allow create, update: if request.auth != null && isValidIntention(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        (
+          (request.auth.token.get('email', '').lower() == "craighckby@gmail.com" && request.auth.token.get('email_verified', false) == true) ||
+          (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+           get(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('role', 'user') == 'admin')
+        );
+    }
+
+    // Validators
+    function isValidBrain(data) {
+      return data.keys().hasAny(['meta', 'binary_payload', 'storage_url']) &&
+             (!('binary_payload' in data) || (data.binary_payload is string && data.binary_payload.size() < 10485760)) &&
+             (!('storage_url' in data) || (data.storage_url is string && data.storage_url.size() < 2000)) &&
+             (!('meta' in data) || (
+               data.meta is map &&
+               (!('chunks_count' in data.meta) || data.meta.chunks_count is number) &&
+               (!('last_reboot' in data.meta) || data.meta.last_reboot is number) &&
+               (!('version' in data.meta) || data.meta.version is number)
+             ));
+    }
+
+    function isValidDeathEntry(data) {
+      return data.keys().hasAll(['path', 'error', 'timestamp', 'phase']) &&
+             data.path is string && data.path.size() < 1000 &&
+             data.error is string && data.error.size() < 100000 &&
+             data.timestamp is number &&
+             data.phase is string && data.phase.size() < 500;
+    }
+
+    function isValidBrainDNA(data) {
+      // Support for Zero-Text Policy (Encrypted) OR Standard Evolution (Plain Metadata)
+      return (data.keys().hasAll(['data', 'iv', 'timestamp', 'algorithm', 'path']) && 
+              data.data is string && data.data.size() > 0 && data.data.size() < 10485760 &&
+              data.iv is string && data.iv.size() > 0 && data.iv.size() < 200 &&
+              data.timestamp is number &&
+              data.algorithm is string &&
+              data.path is string && data.path.size() < 1000) ||
+             (data.keys().hasAll(['path', 'original_hash', 'enhanced_hash', 'timestamp', 'model']) &&
+              data.path is string && data.path.size() < 1000 &&
+              data.original_hash is string && data.original_hash.size() < 200 &&
+              data.enhanced_hash is string && data.enhanced_hash.size() < 200 &&
+              data.timestamp is number &&
+              data.model is string);
+    }
+
+    function isValidFeedback(data) {
+      return data.keys().hasAll(['userId', 'userEmail', 'type', 'content', 'timestamp']) &&
+             data.userId == request.auth.uid &&
+             data.userEmail == request.auth.token.email &&
+             data.type in ['bug', 'feature', 'suggestion'] &&
+             data.content is string && data.content.size() > 0 && data.content.size() < 10000 &&
+             data.timestamp is number;
+    }
+
+    function isValidIntention(data) {
+      return data.keys().hasAll(['id', 'path', 'description', 'status', 'timestamp']) &&
+             data.id is string && data.id.size() < 100 &&
+             data.path is string && data.path.size() < 500 &&
+             data.description is string && data.description.size() < 5000 &&
+             data.status in ['pending', 'solved'] &&
+             data.timestamp is number;
+    }
+
+    function isValidGPUTask(data) {
+      return data.keys().hasAll(['userId', 'model', 'prompt', 'status', 'timestamp']) &&
+             data.userId == request.auth.uid &&
+             data.model is string &&
+             data.prompt is string && data.prompt.size() < 50000 &&
+             data.status in ['pending', 'processing', 'completed', 'failed'] &&
+             data.timestamp is number &&
+             (!('provider' in data) || data.provider is string);
+    }
+
+    // Helper Functions
+    function isServer(data) {
+      return data.get('server_secret', '') == 'BRAIN_EVO_SECRET_2026';
+    }
+
+    // Brain Rules
+    match /brains/{brainId} {
+      allow read: if true;
+      allow write: if isServer(request.resource.data) || isAdmin();
+    }
+
+    // Death Registry Rules
+    match /death_registry/{entryId} {
+      allow read: if true;
+      allow create: if isServer(request.resource.data) || isAuthenticated() || isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    // Brain DNA Rules
+    match /brain_dna/{dnaId} {
+      allow read: if true;
+      allow create: if isServer(request.resource.data) || isAuthenticated() || isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    // Feedback Rules
+    match /feedback/{feedbackId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && isValidFeedback(request.resource.data);
+      allow update, delete: if isAdmin();
+    }
+
+    // User Rules
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (isOwner(userId) || isAdmin());
+      allow create: if isAuthenticated() && isOwner(userId) && request.resource.data.role == 'user';
+      allow update: if isAuthenticated() && (isOwner(userId) && request.resource.data.role == resource.data.role || isAdmin());
+      allow delete: if isAdmin();
+
+      match /evolution_status/{statusId} {
+        allow read: if isAuthenticated() && (isOwner(userId) || isAdmin());
+        allow write: if isServer(request.resource.data) || isOwner(userId) || isAdmin();
+      }
+    }
+
+    // GPU Task Rules
+    match /gpu_tasks/{taskId} {
+      allow read: if (isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin())) || true; // Relaxed read for bridge
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid && isValidGPUTask(request.resource.data);
+      // Allow update if admin OR if it's a server-side update (no auth) affecting only result fields
+      allow update: if isAdmin() || isServer(request.resource.data) || (request.auth == null && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'result', 'error', 'timestamp']));
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    // Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["ES2022", "dom", "dom.iterable"],
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "jsx": "react-jsx",
+    "moduleResolution": "bundler",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": { // Standardized property name
+      "@/*": ["."], // Simplified and unified path configuration
+    },
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "resolveOptions": {
+      "modulePaths": [ // Standardized naming convention
+        "."
+      ]
+    }
+  }
+}

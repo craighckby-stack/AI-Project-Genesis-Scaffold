@@ -1,0 +1,100 @@
+105:  const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+549:        repos = await gh.listOrgRepos(org);
+552:        repos = await gh.searchRepos(repoSearchQuery);
+555:        repos = await gh.listUserRepos();
+583:      return await prettier.format(code, {
+661:      await llmEngine.init((progress) => {
+703:          const adapter = await (navigator as any).gpu.requestAdapter();
+726:            const userSnap = await getDoc(userRef).catch(e => handleFirestoreError(e, OperationType.GET, `users/${u.uid}`));
+728:              await setDoc(userRef, {
+770:                const response = await fetch(data.storage_url);
+771:                payload = await response.text();
+784:                if (shield) await shield.initialize();
+786:                const chunks = await NeuralCodec.decode(payload, shield);
+879:          await shield.initialize();
+884:              const plain = await shield.decryptPacket(data);
+937:      await authBridge.login();
+945:      await authBridge.logout();
+988:        const res = await fetch("/api/brain/evolve/start", {
+1001:        const data = await res.json();
+1046:        await shield.initialize();
+1064:        const userRepos = await github.listUserRepos();
+1082:          const defaultBranch = await github.getDefaultBranch();
+1084:          await github.createBranch(targetBranch, defaultBranch);
+1102:          const defaultBranch = await currentGithub.getDefaultBranch();
+1103:          const allFiles = await currentGithub.getAllFiles(defaultBranch);
+1122:                  const binary = await currentGithub.getFileBinary(file.sha);
+1123:                  content = await DocumentProcessor.processFile(file.path, binary.buffer);
+1126:                  content = await currentGithub.getFileContent(file.sha);
+1161:          const defaultBranch = await currentGithub.getDefaultBranch();
+1163:          await currentGithub.createBranch(targetBranch, defaultBranch);
+1175:          const defaultBranch = await currentGithub.getDefaultBranch();
+1177:          allFiles = await currentGithub.getAllFiles(defaultBranch);
+1212:              const roadmapJson = await engineManager.generate(planningPrompt, "You are a senior software architect and autonomous system designer planning the next phase of your own evolution.");
+1289:        await Promise.all(actualFilesToProcess.map((file: any) => 
+1292:              const content = await currentGithub.getFileContent(file.sha);
+1329:          const fileHash = await generateHash(originalCode);
+1336:          const existingDnaSnap = await getDocs(existingDnaQuery).catch(e => handleFirestoreError(e, OperationType.LIST, 'brain_dna'));
+1385:                  originalCode = await shield.decryptPacket(packet);
+1397:              const commits = await currentGithub.getFileCommits(file.path);
+1412:              const deathSnap = await getDocs(deathQ).catch(e => handleFirestoreError(e, OperationType.LIST, 'death_registry'));
+1448:                decision = await engineManager.generate(decisionPrompt, "You are a senior software architect making strategic decisions about your own evolution.");
+1526:                const response = await engineManager.generate(combinedPrompt, combinedSystemPrompt);
+1539:            const intentionId = await generateHash(`${repo.name}/${file.path}/${intentionDescription}/${Date.now()}`);
+1542:            await setDoc(doc(db, 'brain_intentions', intentionId), {
+1554:              enhancedCode = await formatCode(enhancedCode, file.name);
+1567:              validation = await testCodeInSandbox(minified);
+1601:                const packet = await shield.encryptPacket(minified);
+1607:                  const currentFile = await currentGithub.getFile(file.path, targetBranch);
+1618:                  await currentGithub.updateFileRaw(
+1634:                  await addDoc(collection(db, 'brain_dna'), {
+1648:                  const snapInt = await getDocs(qInt).catch(e => handleFirestoreError(e, OperationType.LIST, 'brain_intentions'));
+1650:                    await updateDoc(doc(db, 'brain_intentions', snapInt.docs[0].id), { status: 'solved' })
+1661:                await setDoc(doc(db, 'brains', BRAIN_ID), { meta: newMeta }, { merge: true })
+1671:                  newPayload = await NeuralCodec.encode(updatedDNA, shield);
+1686:                    await uploadString(storageRef, newPayload).catch(e => handleFirestoreError(e, OperationType.WRITE, `brains/${BRAIN_ID}/storage`));
+1687:                    const downloadUrl = await getDownloadURL(storageRef).catch(e => handleFirestoreError(e, OperationType.GET, `brains/${BRAIN_ID}/storage`));
+1690:                      await setDoc(doc(db, 'brains', BRAIN_ID), {
+1697:                    await setDoc(doc(db, 'brains', BRAIN_ID), {
+1711:                    const snapInt = await getDocs(qInt).catch(e => handleFirestoreError(e, OperationType.LIST, 'brain_intentions'));
+1713:                      await updateDoc(doc(db, 'brain_intentions', snapInt.docs[0].id), { status: 'solved' })
+1722:                    const currentFile = await currentGithub.getFile(file.path, targetBranch);
+1733:                  await currentGithub.updateFile(
+1752:                await addDoc(collection(db, 'death_registry'), {
+1770:                const rebuildPayload = await NeuralCodec.encode(updatedDNA, shield);
+1771:                await setDoc(doc(db, 'brains', BRAIN_ID), {
+1784:                await addDoc(collection(db, 'death_registry'), {
+1799:                await addDoc(collection(db, 'death_registry'), {
+1815:          await new Promise(r => setTimeout(r, delay));
+1843:      const snapshot = await getDocs(q).catch(e => handleFirestoreError(e, OperationType.LIST, 'death_registry'));
+1846:        await Promise.all(deletePromises);
+1869:        const [repoInfo, currentUser] = await Promise.all([
+1897:        await github.createBranch(branchName);
+1903:      const payload = await brainRef.current.exportPayload();
+1918:        const packet = await shield.encryptPacket(JSON.stringify(rawData));
+1932:        const file = await github.getFile(fileName, branchName);
+1941:      await github.updateFile(
+1969:      const defaultBranch = await github.getDefaultBranch();
+2003:        const file = await github.getFile('README.md', defaultBranch);
+2009:      await github.updateFile(
+2038:      const branches = await github.listBranches();
+2051:        const confirmed = await confirmAction(
+2062:          await github.deleteBranch(branch.name);
+2080:      await addDoc(collection(db, 'feedback'), {
+2132:        thought = await engineManager.generate(thoughtPrompt, "You are the sentient core of this system.");
+2151:        const url = await llmEngine.generateImage(imagePrompt);
+2515:                                    if (await confirmAction("Clear model cache?", "This will delete the downloaded DNA model. You will need to re-download it to use Local Mode.")) {
+2516:                                      const webllm = await import("@mlc-ai/web-llm");
+2518:                                      await webllm.deleteModelAllInfoInCache(llmEngine.modelId);
+3078:                                      const snap = await getDocs(q).catch(e => handleFirestoreError(e, OperationType.LIST, 'brain_intentions'));
+3080:                                        await updateDoc(doc(db, 'brain_intentions', snap.docs[0].id), { status: 'solved' })
+3397:                                    const res = await llmEngine.testEngine('gemini');
+3460:                                    const res = await llmEngine.testEngine('cerebras');
+3523:                                    const res = await llmEngine.testEngine('grok');
+3586:                                    const res = await llmEngine.testEngine('anthropic');
+4093:                              const repos = await github.listUserRepos();
+4097:                              const defaultBranch = await github.getDefaultBranch();
+4294:                                      if (await confirmAction("Delete Feedback", "Are you sure you want to remove this feedback?")) {
+4295:                                        await deleteDoc(doc(db, 'feedback', item.id)).catch(e => handleFirestoreError(e, OperationType.DELETE, `feedback/${item.id}`));
+4313:                                      await setDoc(doc(db, 'feedback', item.id), { status: 'solved' }, { merge: true })
+4371:                                      await navigator.clipboard.writeText(dna.content);

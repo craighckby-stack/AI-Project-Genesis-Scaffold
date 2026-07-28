@@ -1,0 +1,229 @@
+firebase:
+  firestore:
+    entities:
+      Brain:
+        type: object
+        properties:
+          binaryPayload:
+            type: string
+            description: Base64 encoded, compressed DNA string
+          meta:
+            type: object
+            properties:
+              chunksCount:
+                type: integer
+                description: Number of chunks in the binary payload
+              lastReboot:
+                type: integer
+                description: Timestamp of the last reboot
+              version:
+                type: integer
+                description: Version of the brain's DNA
+            required:
+              - chunksCount
+              - lastReboot
+              - version
+        required:
+          - binaryPayload
+          - meta
+
+      DeathRegistryEntry:
+        type: object
+        properties:
+          path:
+            type: string
+            description: Path of the failed DNA enhancement
+          error:
+            type: string
+            description: Error message of the failed enhancement
+          timestamp:
+            type: integer
+            description: Timestamp of the failed enhancement
+          phase:
+            type: string
+            description: Phase of the failed enhancement
+        required:
+          - path
+          - error
+          - timestamp
+          - phase
+
+      BrainDNA:
+        type: object
+        properties:
+          data:
+            type: string
+            description: Encrypted Base64 ciphertext
+          iv:
+            type: string
+            description: Base64 initialization vector
+          timestamp:
+            type: integer
+            description: Timestamp of the encrypted DNA packet
+          algorithm:
+            type: string
+            description: Encryption algorithm used
+          path:
+            type: string
+            description: Path of the encrypted DNA packet
+        required:
+          - data
+          - iv
+          - timestamp
+          - algorithm
+          - path
+
+      Feedback:
+        type: object
+        properties:
+          userId:
+            type: string
+            description: ID of the user who submitted the feedback
+          userEmail:
+            type: string
+            description: Email of the user who submitted the feedback
+          type:
+            type: string
+            enum: [bug, feature, suggestion]
+            description: Type of feedback (bug, feature, or suggestion)
+          content:
+            type: string
+            description: Content of the feedback
+          timestamp:
+            type: integer
+            description: Timestamp of the feedback
+          status:
+            type: string
+            enum: [pending, reviewed, implemented]
+            description: Status of the feedback
+          appVersion:
+            type: string
+            description: Version of the application when the feedback was submitted
+        required:
+          - userId
+          - userEmail
+          - type
+          - content
+          - timestamp
+
+      BrainIntention:
+        type: object
+        properties:
+          id:
+            type: string
+            description: ID of the brain intention
+          path:
+            type: string
+            description: Path of the brain intention
+          description:
+            type: string
+            description: Description of the brain intention
+          status:
+            type: string
+            enum: [pending, solved]
+            description: Status of the brain intention
+          timestamp:
+            type: integer
+            description: Timestamp of the brain intention
+        required:
+          - id
+          - path
+          - description
+          - status
+          - timestamp
+
+      User:
+        type: object
+        properties:
+          uid:
+            type: string
+            description: ID of the user
+          email:
+            type: string
+            description: Email of the user
+          role:
+            type: string
+            enum: [admin, user]
+            description: Role of the user
+          createdAt:
+            type: integer
+            description: Timestamp of the user's account creation
+        required:
+          - uid
+          - email
+          - role
+          - createdAt
+
+      GPUTask:
+        type: object
+        properties:
+          userId:
+            type: string
+            description: ID of the user who submitted the task
+          model:
+            type: string
+            description: Model used for the task
+          prompt:
+            type: string
+            description: Prompt for the task
+          systemPrompt:
+            type: string
+            description: System prompt for the task
+          status:
+            type: string
+            enum: [pending, processing, completed, failed]
+            description: Status of the task
+          result:
+            type: string
+            description: Result of the task
+          error:
+            type: string
+            description: Error message of the task
+          timestamp:
+            type: integer
+            description: Timestamp of the task submission
+        required:
+          - userId
+          - model
+          - prompt
+          - status
+          - timestamp
+
+    collections:
+      brains/{brainId}:
+        schema: Brain
+        description: Storage for brain DNA
+        priority: 0
+
+      death_registry/{entryId}:
+        schema: DeathRegistryEntry
+        description: Log of failed enhancements
+        priority: 1
+
+      brain_dna/{dnaId}:
+        schema: BrainDNA
+        description: Encrypted DNA packets for Zero-Text Policy
+        priority: 2
+
+      feedback/{feedbackId}:
+        schema: Feedback
+        description: User feedback and recommendations
+        priority: 3
+
+      brain_intentions/{intentionId}:
+        schema: BrainIntention
+        description: Self-identified goals for the brain's evolution
+        priority: 4
+
+      users/{userId}:
+        schema: User
+        description: User profiles and roles
+        priority: 5
+
+      gpu_tasks/{taskId}:
+        schema: GPUTask
+        description: Tasks for offloaded GPU processing
+        priority: 6
+```
+
+**
