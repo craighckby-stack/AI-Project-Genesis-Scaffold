@@ -1,0 +1,5 @@
+{
+  "name": "Dalek-Grog",
+  "description": "An autonomous self-evolving application that enhances itself and learns using a Firebase-powered brain and Gemini AI.",
+  "requestFramePermissions": []
+}

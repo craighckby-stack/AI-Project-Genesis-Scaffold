@@ -1,0 +1,116 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: memories
+    // Fields:
+    //   - content: string (required)
+    //   - category: string (required)
+    //   - timestamp: timestamp (required)
+    //   - importance: number (optional)
+    //
+    // Collection: evolutions
+    // Fields:
+    //   - description: string (required)
+    //   - reasoning: string (required)
+    //   - timestamp: timestamp (required)
+    //   - status: string (required, enum: proposed, executing, completed, failed)
+    //
+    // Collection: state
+    // Document ID: global
+    // Fields:
+    //   - version: string (required)
+    //   - activeGoals: list (required)
+    //   - lastEvolution: timestamp (optional)
+    //   - dnaSignature: string (optional)
+    //   - saturationStatus: number (optional)
+    //
+    // Collection: messages
+    // Fields:
+    //   - text: string (required)
+    //   - type: string (required, enum: insight, warning, status, evolution)
+    //   - userDirective: string (optional)
+    //   - timestamp: timestamp (required)
+    //
+    // ===============================================================
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+          (request.auth.token.email.toLower() == "craighckby@gmail.com" && request.auth.token.email_verified == true));
+    }
+
+    // Test: Connection health check
+    match /test/connection {
+      allow read: if isAuthenticated();
+    }
+
+    // Memories: Authenticated users can read and create memories.
+    match /memories/{memoryId} {
+      allow read, create: if isAuthenticated();
+      allow update, delete: if false; // Memories are immutable for now
+    }
+
+    // Evolutions: Authenticated users can read and propose evolutions.
+    match /evolutions/{evolutionId} {
+      allow read, create: if isAuthenticated();
+      allow update: if isAuthenticated(); // For status updates
+    }
+
+    // State: Global state is readable by all authenticated users, but only admins (or the system) can update.
+    match /state/{stateId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated(); // In a real app, this would be more restricted
+    }
+
+    // Messages: Authenticated users can read and Grog (system) can create.
+    match /messages/{messageId} {
+      allow read, create: if isAuthenticated();
+    }
+
+    // Siphons: Background data collection.
+    // Server (Admin) has full access. UI (Authenticated) can read and update status.
+    match /siphons/{siphonId} {
+      allow read, create: if isAuthenticated();
+      allow update: if isAuthenticated() && 
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status']);
+    }
+
+    // System: GrogBrain storage - Admin only
+    match /system/grog-brain {
+      allow read, write: if isAdmin();
+    }
+
+    // Deaths: Shared death registry - Authenticated can read/create, Admin can delete
+    match /deaths/{deathId} {
+      allow read, create: if isAuthenticated();
+      allow update, delete: if isAdmin();
+    }
+
+    // Lessons: Shared strategic memory - Authenticated can read/create, Admin can delete
+    match /lessons/{lessonId} {
+      allow read, create: if isAuthenticated();
+      allow update, delete: if isAdmin();
+    }
+
+    // Users: Profiles and permissions
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && isOwner(userId) && request.resource.data.role == 'user';
+      allow update: if isAdmin() || (isOwner(userId) && request.resource.data.role == resource.data.role);
+      allow delete: if isAdmin();
+    }
+  }
+}

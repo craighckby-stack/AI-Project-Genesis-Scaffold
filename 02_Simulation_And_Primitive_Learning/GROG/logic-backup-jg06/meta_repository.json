@@ -1,0 +1,17 @@
+{
+  "name": "Meta-123",
+  "target": "craighckby-stack/GROG",
+  "status": "Instantiated",
+  "round": 5,
+  "lifecycle": "READY",
+  "config": {
+    "Core": {
+      "version": "1.0.5",
+      "mode": "Active"
+    }
+  },
+  "logs": [
+    "Round 5 sync completed at 2026-04-16T15:17:42.335Z"
+  ],
+  "license": "MTCL-V1 (Proprietary)"
+}
