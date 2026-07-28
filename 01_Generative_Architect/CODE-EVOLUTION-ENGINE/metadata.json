@@ -1,0 +1,6 @@
+{
+  "name": "Deep Thinking Lab",
+  "description": "A high-performance reasoning console leveraging Gemini 3.1 Pro's high-reasoning thinking level to analyze and break down complex queries, coding challenges, and logical proofs step-by-step.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
