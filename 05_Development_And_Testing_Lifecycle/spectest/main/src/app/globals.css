@@ -1,0 +1,137 @@
+/**
+ * @file src/app/globals.css
+ * @description System-Orchestration-Style-Manifest. Defines the global design tokens, 
+ * reset engine, and theme-aware variables for the DARLEK-CANN architectural ecosystem.
+ * 
+ * Integrates design patterns from Microsoft Fluent UI and Vercel Design Systems.
+ * Acts as the primary visual interface layer for the craighckby-stack.
+ * 
+ * @version 3.1.0
+ * @status PRODUCTION_READY
+ */
+
+@import "tailwindcss";
+
+@theme {
+  /* System-Wide Design Tokens - Siphoned from Fluent UI & Vercel Design */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Cascadia Code', 'Fira Code', monospace;
+
+  --color-darlek-primary: #00ff41;
+  --color-darlek-bg: #0a0a0a;
+  --color-darlek-surface: #171717;
+  --color-darlek-border: rgba(255, 255, 255, 0.1);
+
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-scan: scan 4s linear infinite;
+
+  @keyframes scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+}
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #0a0a0a;
+    --border: #e5e7eb;
+  }
+
+  .dark {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --border: #262626;
+  }
+
+  * {
+    @apply border-border box-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased selection:bg-darlek-primary/30;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* System-Integration: Scrollbar Optimization */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-darlek-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-darlek-surface);
+    border-radius: 4px;
+    border: 1px solid var(--color-darlek-border);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-darlek-primary);
+  }
+}
+
+@layer components {
+  /* DARLEK-CANN System UI Components - High-Density Interface Primitives */
+  .system-card {
+    @apply bg-darlek-surface border border-white/10 rounded-xl p-6 backdrop-blur-md transition-all duration-300 hover:border-darlek-primary/50;
+  }
+
+  .system-glow {
+    @apply shadow-[0_0_15px_rgba(0,255,65,0.15)];
+  }
+
+  .code-block {
+    @apply font-mono text-sm bg-black/50 p-4 rounded-lg border border-white/5 overflow-x-auto;
+  }
+
+  .status-indicator {
+    @apply relative flex items-center gap-2 px-3 py-1 rounded-full bg-darlek-surface border border-darlek-primary/20 text-darlek-primary text-xs font-bold uppercase tracking-widest;
+  }
+
+  .status-indicator::before {
+    @apply content-[''] w-2 h-2 rounded-full bg-darlek-primary animate-pulse;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

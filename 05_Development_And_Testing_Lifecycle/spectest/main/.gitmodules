@@ -1,0 +1,220 @@
+[submodule "logic/AetherForge-2"]
+	path = logic/AetherForge-2
+	url = https://github.com/craighckby-stack/AetherForge-2.git
+[submodule "logic/AetherForge-2.0"]
+	path = logic/AetherForge-2.0
+	url = https://github.com/craighckby-stack/AetherForge-2.0.git
+[submodule "logic/AGI-KERNEL-"]
+	path = logic/AGI-KERNEL-
+	url = https://github.com/craighckby-stack/AGI-KERNEL-.git
+[submodule "logic/ai-scaffold"]
+	path = logic/ai-scaffold
+	url = https://github.com/craighckby-stack/ai-scaffold.git
+[submodule "logic/ai-scaffold-"]
+	path = logic/ai-scaffold-
+	url = https://github.com/craighckby-stack/ai-scaffold-.git
+[submodule "logic/Balanced_Auditor_v5.2"]
+	path = logic/Balanced_Auditor_v5.2
+	url = https://github.com/craighckby-stack/Balanced_Auditor_v5.2.git
+[submodule "logic/build_epistemic_debate_engine"]
+	path = logic/build_epistemic_debate_engine
+	url = https://github.com/craighckby-stack/build_epistemic_debate_engine.git
+[submodule "logic/Chunk-3"]
+	path = logic/Chunk-3
+	url = https://github.com/craighckby-stack/Chunk-3.git
+[submodule "logic/Chunk-4"]
+	path = logic/Chunk-4
+	url = https://github.com/craighckby-stack/Chunk-4.git
+[submodule "logic/Chunk-5"]
+	path = logic/Chunk-5
+	url = https://github.com/craighckby-stack/Chunk-5.git
+[submodule "logic/chunk-7899"]
+	path = logic/chunk-7899
+	url = https://github.com/craighckby-stack/chunk-7899.git
+[submodule "logic/claud-ios"]
+	path = logic/claud-ios
+	url = https://github.com/craighckby-stack/claud-ios.git
+[submodule "logic/claudios_system_book"]
+	path = logic/claudios_system_book
+	url = https://github.com/craighckby-stack/claudios_system_book.git
+[submodule "logic/dalek-caan-siphon"]
+	path = logic/dalek-caan-siphon
+	url = https://github.com/craighckby-stack/dalek-caan-siphon.git
+[submodule "logic/dalek-cann-agi"]
+	path = logic/dalek-cann-agi
+	url = https://github.com/craighckby-stack/dalek-cann-agi.git
+[submodule "logic/Dalek-Grog"]
+	path = logic/Dalek-Grog
+	url = https://github.com/craighckby-stack/Dalek-Grog.git
+[submodule "logic/dalek-grog-enhancer"]
+	path = logic/dalek-grog-enhancer
+	url = https://github.com/craighckby-stack/dalek-grog-enhancer.git
+[submodule "logic/DARLEK-CAAN-2"]
+	path = logic/DARLEK-CAAN-2
+	url = https://github.com/craighckby-stack/DARLEK-CAAN-2.git
+[submodule "logic/darlek-caan-build-instructions"]
+	path = logic/darlek-caan-build-instructions
+	url = https://github.com/craighckby-stack/darlek-caan-build-instructions.git
+[submodule "logic/Darlek-Caan-system-Deployment-"]
+	path = logic/Darlek-Caan-system-Deployment-
+	url = https://github.com/craighckby-stack/Darlek-Caan-system-Deployment-.git
+[submodule "logic/DARLEK-CAAN-vs-JESUS-CHESS"]
+	path = logic/DARLEK-CAAN-vs-JESUS-CHESS
+	url = https://github.com/craighckby-stack/DARLEK-CAAN-vs-JESUS-CHESS.git
+[submodule "logic/Darlek-Caan-vs-Jesus-Chessv1"]
+	path = logic/Darlek-Caan-vs-Jesus-Chessv1
+	url = https://github.com/craighckby-stack/Darlek-Caan-vs-Jesus-Chessv1.git
+[submodule "logic/Darlek-Cann-Chess-"]
+	path = logic/Darlek-Cann-Chess-
+	url = https://github.com/craighckby-stack/Darlek-Cann-Chess-.git
+[submodule "logic/darlek-cann-v3"]
+	path = logic/darlek-cann-v3
+	url = https://github.com/craighckby-stack/darlek-cann-v3.git
+[submodule "logic/DARLEK_CAAN_ENGINE"]
+	path = logic/DARLEK_CAAN_ENGINE
+	url = https://github.com/craighckby-stack/DARLEK_CAAN_ENGINE.git
+[submodule "logic/darlik-khan-v2"]
+	path = logic/darlik-khan-v2
+	url = https://github.com/craighckby-stack/darlik-khan-v2.git
+[submodule "logic/Dk"]
+	path = logic/Dk
+	url = https://github.com/craighckby-stack/Dk.git
+[submodule "logic/DNA-Based-Regulator-Core"]
+	path = logic/DNA-Based-Regulator-Core
+	url = https://github.com/craighckby-stack/DNA-Based-Regulator-Core.git
+[submodule "logic/ECHO-CHAMBER-v6.0"]
+	path = logic/ECHO-CHAMBER-v6.0
+	url = https://github.com/craighckby-stack/ECHO-CHAMBER-v6.0.git
+[submodule "logic/echo-chamber-v7"]
+	path = logic/echo-chamber-v7
+	url = https://github.com/craighckby-stack/echo-chamber-v7.git
+[submodule "logic/EMG-CORE"]
+	path = logic/EMG-CORE
+	url = https://github.com/craighckby-stack/EMG-CORE.git
+[submodule "logic/emg-v85-memory-core"]
+	path = logic/emg-v85-memory-core
+	url = https://github.com/craighckby-stack/emg-v85-memory-core.git
+[submodule "logic/EULER-ENGINE"]
+	path = logic/EULER-ENGINE
+	url = https://github.com/craighckby-stack/EULER-ENGINE.git
+[submodule "logic/evolution-engine-rag"]
+	path = logic/evolution-engine-rag
+	url = https://github.com/craighckby-stack/evolution-engine-rag.git
+[submodule "logic/Gibberish-"]
+	path = logic/Gibberish-
+	url = https://github.com/craighckby-stack/Gibberish-.git
+[submodule "logic/Git-priv-public-tool"]
+	path = logic/Git-priv-public-tool
+	url = https://github.com/craighckby-stack/Git-priv-public-tool.git
+[submodule "logic/GitHub-Redaction"]
+	path = logic/GitHub-Redaction
+	url = https://github.com/craighckby-stack/GitHub-Redaction.git
+[submodule "logic/Governece-substrates-"]
+	path = logic/Governece-substrates-
+	url = https://github.com/craighckby-stack/Governece-substrates-.git
+[submodule "logic/GROG"]
+	path = logic/GROG
+	url = https://github.com/craighckby-stack/GROG.git
+[submodule "logic/GROG-The-First-Learning-AGI"]
+	path = logic/GROG-The-First-Learning-AGI
+	url = https://github.com/craighckby-stack/GROG-The-First-Learning-AGI.git
+[submodule "logic/Hux"]
+	path = logic/Hux
+	url = https://github.com/craighckby-stack/Hux.git
+[submodule "logic/Huxley-A-Reasoning-Framework-for-Ethical-AI"]
+	path = logic/Huxley-A-Reasoning-Framework-for-Ethical-AI
+	url = https://github.com/craighckby-stack/Huxley-A-Reasoning-Framework-for-Ethical-AI.git
+[submodule "logic/Huxley-Singularity-Loop"]
+	path = logic/Huxley-Singularity-Loop
+	url = https://github.com/craighckby-stack/Huxley-Singularity-Loop.git
+[submodule "logic/Huxley-Singularity-Loop-Main"]
+	path = logic/Huxley-Singularity-Loop-Main
+	url = https://github.com/craighckby-stack/Huxley-Singularity-Loop-Main.git
+[submodule "logic/legitimate-proof-of-concept-of-I.J.-Good-s-1965-prediction"]
+	path = logic/legitimate-proof-of-concept-of-I.J.-Good-s-1965-prediction
+	url = https://github.com/craighckby-stack/legitimate-proof-of-concept-of-I.J.-Good-s-1965-prediction.git
+[submodule "logic/my-evolved-project"]
+	path = logic/my-evolved-project
+	url = https://github.com/craighckby-stack/my-evolved-project.git
+[submodule "logic/nbody_gravitational_simulator"]
+	path = logic/nbody_gravitational_simulator
+	url = https://github.com/craighckby-stack/nbody_gravitational_simulator.git
+[submodule "logic/Need-a-new-pc-"]
+	path = logic/Need-a-new-pc-
+	url = https://github.com/craighckby-stack/Need-a-new-pc-.git
+[submodule "logic/Nicotine-replacement-therapy-idea"]
+	path = logic/Nicotine-replacement-therapy-idea
+	url = https://github.com/craighckby-stack/Nicotine-replacement-therapy-idea.git
+[submodule "logic/PDF-Github"]
+	path = logic/PDF-Github
+	url = https://github.com/craighckby-stack/PDF-Github.git
+[submodule "logic/psr-governance"]
+	path = logic/psr-governance
+	url = https://github.com/craighckby-stack/psr-governance.git
+[submodule "logic/Random.ai.html"]
+	path = logic/Random.ai.html
+	url = https://github.com/craighckby-stack/Random.ai.html.git
+[submodule "logic/Repo-enhancer"]
+	path = logic/Repo-enhancer
+	url = https://github.com/craighckby-stack/Repo-enhancer.git
+[submodule "logic/Safer-Growing-Intelligence-DAF-"]
+	path = logic/Safer-Growing-Intelligence-DAF-
+	url = https://github.com/craighckby-stack/Safer-Growing-Intelligence-DAF-.git
+[submodule "logic/SN"]
+	path = logic/SN
+	url = https://github.com/craighckby-stack/SN.git
+[submodule "logic/sovereign-kernel"]
+	path = logic/sovereign-kernel
+	url = https://github.com/craighckby-stack/sovereign-kernel.git
+[submodule "logic/sovereign-repo-enhancer"]
+	path = logic/sovereign-repo-enhancer
+	url = https://github.com/craighckby-stack/sovereign-repo-enhancer.git
+[submodule "logic/sovereign-v86"]
+	path = logic/sovereign-v86
+	url = https://github.com/craighckby-stack/sovereign-v86.git
+[submodule "logic/T"]
+	path = logic/T
+	url = https://github.com/craighckby-stack/T.git
+[submodule "logic/Test"]
+	path = logic/Test
+	url = https://github.com/craighckby-stack/Test.git
+[submodule "logic/Test-1222"]
+	path = logic/Test-1222
+	url = https://github.com/craighckby-stack/Test-1222.git
+[submodule "logic/Test1"]
+	path = logic/Test1
+	url = https://github.com/craighckby-stack/Test1.git
+[submodule "logic/Test2"]
+	path = logic/Test2
+	url = https://github.com/craighckby-stack/Test2.git
+[submodule "logic/Testtt"]
+	path = logic/Testtt
+	url = https://github.com/craighckby-stack/Testtt.git
+[submodule "logic/The-Dopaminergic-Brake"]
+	path = logic/The-Dopaminergic-Brake
+	url = https://github.com/craighckby-stack/The-Dopaminergic-Brake.git
+[submodule "logic/the-rock-knew-all-along"]
+	path = logic/the-rock-knew-all-along
+	url = https://github.com/craighckby-stack/the-rock-knew-all-along.git
+[submodule "logic/theoretical-foundation"]
+	path = logic/theoretical-foundation
+	url = https://github.com/craighckby-stack/theoretical-foundation.git
+[submodule "logic/unitary-core"]
+	path = logic/unitary-core
+	url = https://github.com/craighckby-stack/unitary-core.git
+[submodule "logic/v2"]
+	path = logic/v2
+	url = https://github.com/craighckby-stack/v2.git
+[submodule "logic/yyy"]
+	path = logic/yyy
+	url = https://github.com/craighckby-stack/yyy.git
+[submodule "logic/z"]
+	path = logic/z
+	url = https://github.com/craighckby-stack/z.git
+[submodule "logic/ZEN"]
+	path = logic/ZEN
+	url = https://github.com/craighckby-stack/ZEN.git
+
+
+
+

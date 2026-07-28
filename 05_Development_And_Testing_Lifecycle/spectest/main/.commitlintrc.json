@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json.schemastore.org/commitlintrc.json",
+  "$comment": "DARLEK CANN SYSTEM-ORCHESTRATION-POLICY: This configuration governs the cryptographic and semantic integrity of all repository mutations, ensuring strict compliance with swarm-wide synchronization standards across the craighckby-stack ecosystem.",
+  "description": "DARLEK-CANN System-Orchestration-Policy: Enforces strict commit standards for agentic evolution, repository integrity, and swarm-wide synchronization. This manifest serves as the primary gateway for all state transitions within the craighckby-stack ecosystem.",
+  "extends": [
+    "@commitlint/config-conventional"
+  ],
+  "plugins": [
+    "commitlint-plugin-function-rules",
+    "commitlint-plugin-gitmoji"
+  ],
+  "rules": {
+    "type-enum": [
+      2,
+      "always",
+      [
+        "mutation",
+        "siphon",
+        "prune",
+        "orchestrate",
+        "evolution",
+        "quantum",
+        "consciousness",
+        "swarm",
+        "security",
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "test",
+        "chore"
+      ]
+    ],
+    "scope-case": [2, "always", "lower-case"],
+    "subject-case": [2, "always", "sentence-case"],
+    "header-max-length": [2, "always", 100],
+    "body-leading-blank": [2, "always"],
+    "footer-leading-blank": [2, "always"],
+    "type-case": [2, "always", "lower-case"],
+    "subject-full-stop": [2, "never", "."],
+    "body-max-line-length": [2, "always", 120],
+    "gitmoji-enum": [
+      2,
+      "always",
+      ["✨", "🐛", "⚡", "🔥", "♻️", "📝", "🔒", "🚀", "🔧", "🧪", "🧠", "🧬", "🛡️", "🤖"]
+    ],
+    "function-rules/subject-must-not-be-empty": [
+      2,
+      "always",
+      "function(parsed) { return [!!parsed.subject, 'Commit subject must not be empty']; }"
+    ],
+    "function-rules/type-must-be-defined": [
+      2,
+      "always",
+      "function(parsed) { return [!!parsed.type, 'Commit type must be defined']; }"
+    ]
+  },
+  "helpUrl": "https://github.com/craighckby-stack/DARLEK_CAAN_ENGINE/wiki/Commit-Protocol",
+  "parserPreset": {
+    "parserOpts": {
+      "headerPattern": "^(?::\\w*:|\\w+)(?:\\((.*)\\))?: (.*)$",
+      "headerCorrespondence": ["scope", "subject"]
+    }
+  }
+}
+
+

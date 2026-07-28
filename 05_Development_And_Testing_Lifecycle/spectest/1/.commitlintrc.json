@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json.schemastore.org/commitlintrc.json",
+  "description": "DARLEK-CANN System-Orchestration-Policy: Enforces strict commit standards for agentic evolution, repository integrity, and swarm-wide synchronization. This manifest serves as the primary gateway for all state transitions within the craighckby-stack ecosystem.",
+  "extends": [
+    "@commitlint/config-conventional"
+  ],
+  "plugins": [
+    "commitlint-plugin-function-rules",
+    "commitlint-plugin-gitmoji"
+  ],
+  "rules": {
+    "type-enum": [
+      2,
+      "always",
+      [
+        "mutation",
+        "siphon",
+        "prune",
+        "orchestrate",
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "test",
+        "chore"
+      ]
+    ],
+    "scope-case": [2, "always", "lower-case"],
+    "subject-case": [2, "always", "sentence-case"],
+    "header-max-length": [2, "always", 100],
+    "body-leading-blank": [2, "always"],
+    "footer-leading-blank": [2, "always"],
+    "type-case": [2, "always", "lower-case"],
+    "subject-full-stop": [2, "never", "."],
+    "body-max-line-length": [2, "always", 120],
+    "gitmoji-enum": [2, "always", ["✨", "🐛", "⚡", "🔥", "♻️", "📝", "🔒", "🚀", "🔧", "🧪"]],
+    "function-rules": [
+      2,
+      "always",
+      {
+        "subject-must-not-be-empty": "function(parsed) { return !!parsed.subject; }",
+        "type-must-be-defined": "function(parsed) { return !!parsed.type; }"
+      }
+    ]
+  },
+  "helpUrl": "https://github.com/craighckby-stack/DARLEK_CAAN_ENGINE/wiki/Commit-Protocol",
+  "parserPreset": {
+    "parserOpts": {
+      "headerPattern": "^(?::\\w*:|\\w+)(?:\\((.*)\\))?: (.*)$",
+      "headerCorrespondence": ["scope", "subject"]
+    }
+  }
+}
+
+
+
+
+
