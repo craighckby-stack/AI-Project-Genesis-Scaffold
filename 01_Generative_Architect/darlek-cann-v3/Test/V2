@@ -1,0 +1,84 @@
+from __future__ import annotations
+
+import itertools
+from collections import defaultdict, deque
+from dataclasses import dataclass
+from typing import Any, Dict, FrozenSet, Iterable, List, Optional, Set, Tuple
+
+class GraphError(Exception): pass
+class ProofObligationError(NotImplementedError): pass
+
+@dataclass(frozen=True)
+class Sym2:
+    u: Any
+    v: Any
+    def __post_init__(self) -> None:
+        if self.u > self.v:
+            object.__setattr__(self, "u", self.v)
+            object.__setattr__(self, "v", self.u)
+    def __iter__(self): yield self.u; yield self.v
+    def __repr__(self) -> str: return f"⟨{self.u}, {self.v}⟩"
+
+class SimpleGraph:
+    def __init__(self, vertices: Iterable[Any], edges: Iterable[Tuple[Any, Any]]) -> None:
+        self._vertices = frozenset(vertices)
+        self._edges = {Sym2(u, v) for u, v in edges}
+        self._adj = defaultdict(set)
+        for e in self._edges:
+            self._adj[e.u].add(e.v)
+            self._adj[e.v].add(e.u)
+
+    @property
+    def vertex_set(self) -> FrozenSet[Any]: return self._vertices
+    def neighbors(self, v: Any) -> Set[Any]: return self._adj.get(v, set())
+    def has_edge(self, u: Any, v: Any) -> bool: return Sym2(u, v) in self._edges
+    def vertex_count(self) -> int: return len(self._vertices)
+
+def max_flow_edge_disjoint(G: SimpleGraph, s: Any, t: Any) -> int:
+    """Edmonds-Karp implementation for max edge-disjoint paths."""
+    capacity = defaultdict(int)
+    for e in G._edges:
+        capacity[(e.u, e.v)] = 1
+        capacity[(e.v, e.u)] = 1
+    
+    flow = 0
+    while True:
+        parent = {s: None}
+        queue = deque([s])
+        while queue:
+            u = queue.popleft()
+            for v in G.neighbors(u):
+                if v not in parent and capacity[(u, v)] > 0:
+                    parent[v] = u
+                    queue.append(v)
+        if t not in parent: break
+        flow += 1
+        curr = t
+        while curr != s:
+            prev = parent[curr]
+            capacity[(prev, curr)] -= 1
+            capacity[(curr, prev)] += 1
+            curr = prev
+    return flow
+
+def is_edge_reachable(G: SimpleGraph, k: int, u: Any, v: Any) -> bool:
+    if u == v: return True
+    if k <= 0: return True
+    return max_flow_edge_disjoint(G, u, v) >= k
+
+def is_edge_connected(G: SimpleGraph, k: int) -> bool:
+    verts = list(G.vertex_set)
+    if len(verts) < 2: return k == 0
+    for i, u in enumerate(verts):
+        for v in verts[i + 1:]:
+            if not is_edge_reachable(G, k, u, v): return False
+    return True
+
+class EdgeReachabilityLemmas:
+    @staticmethod
+    def rfl(G: SimpleGraph, k: int, u: Any) -> bool:
+        return True
+    @staticmethod
+    def trans(G: SimpleGraph, k: int, u: Any, v: Any, w: Any, huv: bool, hvw: bool) -> bool:
+        if not huv or not hvw: return False
+        return is_edge_reachable(G, k, u, w)
