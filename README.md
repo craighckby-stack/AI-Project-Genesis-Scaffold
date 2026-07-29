@@ -3,7 +3,7 @@
 ## Overview
 This repository serves as the primary synthesis scaffold for the `AI_Project_Genesis` ecosystem. It is a modular, thread-safe, and self-evolving architecture designed to support high-fidelity AGI simulation, primitive learning, and recursive intelligence growth.
 
-" if taken that way. each system can theoridcaly interconnect without llm calls.  starts emg to huxley huxley injects to the system it self and so on until the loop is finished then calls makes llm calls.  <thinking out loud.".
+" if taken that way. each system can theoridcaly interconnect without llm calls.  starts emg to huxley huxley injects to the system it self and so on until the loop is finished then calls makes llm calls.  <thinking out loud.". currently emg can inject huxley what is the colour of the sky, huxley output sky is blue. idea when last system reach takes each each system as a perspective and used as a debate for output.  yes the sky is blue that is dependent on the weather and day or night  
 
 
 project in short 106 repos condensed to one reposatory putting each system in there equipment folder .  all names are just made up bullshit.  
