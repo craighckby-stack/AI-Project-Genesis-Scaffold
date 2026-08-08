@@ -1,31 +1,26 @@
 """
-DIAGNOSTIC UTILITIES
+DIAGNOSTIC ENGINE UTILITIES
 Role: Helper utilities for diagnostic execution formatting, status telemetry, and metric computation.
 Integration: Imported by diagnostic_engine.py to compute diagnostic metrics cleanly.
-Architectural Note: Siphoned from AI_Agent_OS diagnostic patterns to ensure robust telemetry.
 """
 
 from __future__ import annotations
 import time
+import datetime
 import platform
 import os
-import datetime
-from typing import Dict, Any, Callable, Tuple
-from .diagnostic_types import DiagnosticCheckResult
+from typing import Dict, Any
 
 def format_timestamp() -> str:
     """Returns ISO 8601 formatted UTC timestamp with Z suffix."""
     return datetime.datetime.utcnow().isoformat() + 'Z'
 
-def summarize_diagnostic_results(checks: Dict[str, DiagnosticCheckResult]) -> Dict[str, Any]:
+def summarize_diagnostic_results(checks: Dict[str, Any]) -> Dict[str, Any]:
     """
     Computes summary metrics for diagnostic check results.
-    
-    :param checks: Dictionary mapping check names to DiagnosticCheckResult objects.
-    :return: Summary dictionary with check counts, pass rate, and health flag.
     """
     total_checks = len(checks)
-    passed_checks = sum(1 for data in checks.values() if data.passed)
+    passed_checks = sum(1 for data in checks.values() if data.get("passed", False))
     failed_checks = total_checks - passed_checks
     is_healthy = total_checks > 0 and failed_checks == 0
 
@@ -39,39 +34,12 @@ def summarize_diagnostic_results(checks: Dict[str, DiagnosticCheckResult]) -> Di
 
 def generate_system_telemetry() -> Dict[str, Any]:
     """
-    Generates standard telemetry metadata for diagnostic reports.
+    Generates standard system telemetry metadata.
     """
     return {
+        "timestamp": format_timestamp(),
         "platform": platform.platform(),
         "python_version": platform.python_version(),
         "process_id": os.getpid(),
-        "uptime": time.process_time(),
-        "node_arch": platform.machine()
+        "engine_version": "1.0.0-DIAGNOSTIC-AWARE"
     }
-
-def execute_check_with_telemetry(check_fn: Callable[[], Dict[str, Any]], check_name: str) -> DiagnosticCheckResult:
-    """
-    Executes a diagnostic check and measures execution duration in milliseconds.
-    
-    :param check_fn: Callable check function returning a dict with 'passed' and 'message'.
-    :param check_name: Identifier string for the check.
-    :return: DiagnosticCheckResult object.
-    """
-    start_time = time.perf_counter()
-    try:
-        result = check_fn()
-        duration_ms = (time.perf_counter() - start_time) * 1000.0
-        return DiagnosticCheckResult(
-            passed=bool(result.get('passed', False)),
-            duration_ms=round(duration_ms, 3),
-            message=result.get('message', 'Check completed'),
-            metadata=result.get('metadata', {})
-        )
-    except Exception as e:
-        duration_ms = (time.perf_counter() - start_time) * 1000.0
-        return DiagnosticCheckResult(
-            passed=False,
-            duration_ms=round(duration_ms, 3),
-            message=f"Execution error: {str(e)}",
-            metadata={'error': True}
-        )
