@@ -52,7 +52,11 @@ class ComplianceChecker:
         self._results = {
             "status": "COMPLIANT" if summary["is_compliant"] else "NON_COMPLIANT",
             "summary": summary,
-            "details": detailed_results
+            "details": detailed_results,
+            "telemetry": {
+                "generated_at": compliance_utils.format_timestamp(),
+                "engine_version": "1.0.0-GOVERNANCE-AWARE"
+            }
         }
         
         return self._results
@@ -60,7 +64,7 @@ class ComplianceChecker:
 # Global instance for system-wide compliance monitoring
 compliance_engine = ComplianceChecker()
 
-def verify_system_integrity():
+def verify_system_integrity() -> Dict[str, Any]:
     """
     Convenience function to trigger a full system compliance audit.
     """
