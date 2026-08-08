@@ -11,9 +11,11 @@ import time
 from typing import Dict, Any, Callable, NamedTuple
 from .diagnostic_utils import summarize_diagnostic_results, generate_system_telemetry
 
+# Configure logger for the diagnostic engine
 logger = logging.getLogger(__name__)
 
 class DiagnosticResult(NamedTuple):
+    """Container for individual diagnostic check outcomes."""
     passed: bool
     message: str
     metadata: Dict[str, Any]
@@ -23,11 +25,11 @@ class DiagnosticEngine:
     Core engine for executing system-wide diagnostic checks.
     Maintains a registry of checks and produces comprehensive telemetry reports.
     """
-    def __init__(self):
+    def __init__(self) -> None:
         self._registry: Dict[str, Callable[[], DiagnosticResult]] = {}
 
     def register(self, name: str, check_fn: Callable[[], DiagnosticResult]) -> None:
-        """Registers a diagnostic check function."""
+        """Registers a diagnostic check function into the engine registry."""
         if not callable(check_fn):
             raise TypeError(f"Check function for '{name}' must be callable.")
         self._registry[name] = check_fn
@@ -38,7 +40,7 @@ class DiagnosticEngine:
         Runs all registered diagnostic checks and returns a structured report 
         containing individual results, summary metrics, and system telemetry.
         """
-        report_data = {}
+        report_data: Dict[str, Any] = {}
         
         for name, check_fn in self._registry.items():
             start_time = time.perf_counter()
@@ -58,7 +60,7 @@ class DiagnosticEngine:
                     "passed": False,
                     "message": f"Exception raised: {str(e)}",
                     "duration_ms": round(duration_ms, 3),
-                    "metadata": {}
+                    "metadata": {"error": str(e)}
                 }
 
         # Construct final report with summary and telemetry
