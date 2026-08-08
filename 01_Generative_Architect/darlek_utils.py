@@ -6,8 +6,9 @@ Integration: Connects to the ArchitectRegistry and AI_Evo_Sim modules for
 audit-ready system evolution.
 """
 
+from __future__ import annotations
 import time
-from typing import Any, Dict, Callable, Tuple
+from typing import Any, Dict, Callable, Tuple, Optional
 from .darlek_telemetry_utils import (
     MutationResult, 
     validate_mutation_function, 
@@ -38,6 +39,20 @@ def execute_mutation_step(step_name: str, mutation_fn: Callable[[], bool]) -> Tu
         metadata["error"] = str(e)
         return False, round(duration, 3), metadata
 
+def execute_guarded_mutation(step_name: str, mutation_fn: Callable[[], bool]) -> Dict[str, Any]:
+    """
+    Executes a mutation step and returns a structured MutationReport, 
+    ensuring consistent audit trails for the evolution engine.
+    """
+    success, duration, meta = execute_mutation_step(step_name, mutation_fn)
+    return {
+        "step": step_name,
+        "success": success,
+        "duration_ms": duration,
+        "metadata": meta,
+        "timestamp": time.time()
+    }
+
 def get_system_metadata() -> Dict[str, Any]:
     """
     Returns comprehensive metadata for the current evolution cycle, 
@@ -48,7 +63,8 @@ def get_system_metadata() -> Dict[str, Any]:
         **base_meta,
         "engine": "DARLEK_CANN_V3",
         "status": "ACTIVE",
-        "system_load_factor": 1.0
+        "system_load_factor": 1.0,
+        "operational_mode": "EVOLUTIONARY_SYNTHESIS"
     }
 
 def summarize_mutation_results(results: Dict[str, bool]) -> Dict[str, Any]:
@@ -65,5 +81,6 @@ def summarize_mutation_results(results: Dict[str, bool]) -> Dict[str, Any]:
         "passed": passed,
         "failed": total - passed,
         "pass_rate": round((passed / total * 100), 2) if total > 0 else 0.0,
-        "is_stable": total > 0 and passed == total
+        "is_stable": total > 0 and passed == total,
+        "generated_at": time.time()
     }
