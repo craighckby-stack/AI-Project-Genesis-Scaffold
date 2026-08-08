@@ -1,27 +1,36 @@
 """
 DIAGNOSTIC ENGINE UTILITIES
-Role: Helper utilities for diagnostic execution formatting, status telemetry, and metric computation.
-Integration: Imported by diagnostic_engine.py to compute diagnostic metrics cleanly.
+Role: Helper utilities for diagnostic execution, telemetry generation, and metric computation.
+Integration: Imported by diagnostic_engine.py to maintain modularity and provide standardized diagnostic reporting.
 """
 
 from __future__ import annotations
 import time
 import datetime
-from typing import Dict, Any, Tuple, Callable
+from typing import Dict, Any, Tuple, Callable, Optional
+from .diagnostic_types import DiagnosticResult
 
 def format_timestamp() -> str:
     """Returns ISO 8601 formatted UTC timestamp with Z suffix."""
     return datetime.datetime.utcnow().isoformat() + 'Z'
 
-def summarize_diagnostic_results(checks: Dict[str, bool]) -> Dict[str, Any]:
+def generate_telemetry_metadata() -> Dict[str, Any]:
+    """Generates standard telemetry metadata for diagnostic results."""
+    return {
+        "timestamp": time.time(),
+        "version": "1.0.0-DIAGNOSTIC-AWARE",
+        "runtime": "python-standard-lib"
+    }
+
+def summarize_diagnostic_results(checks: Dict[str, DiagnosticResult]) -> Dict[str, Any]:
     """
     Computes summary metrics for diagnostic check results.
     
-    :param checks: Dictionary mapping check names to boolean results.
+    :param checks: Dictionary mapping check names to DiagnosticResult objects.
     :return: Summary dictionary with check counts, pass rate, and health flag.
     """
     total_checks = len(checks)
-    passed_checks = sum(1 for status in checks.values() if status)
+    passed_checks = sum(1 for res in checks.values() if res.passed)
     failed_checks = total_checks - passed_checks
     is_healthy = total_checks > 0 and failed_checks == 0
 
@@ -33,19 +42,32 @@ def summarize_diagnostic_results(checks: Dict[str, bool]) -> Dict[str, Any]:
         'pass_rate': round((passed_checks / total_checks * 100), 2) if total_checks > 0 else 0.0
     }
 
-def execute_check_with_telemetry(check_fn: Callable[[], bool], check_type: str) -> Tuple[bool, float]:
+def execute_check_with_telemetry(
+    check_fn: Callable[[], Tuple[bool, str, Optional[Dict[str, Any]]]], 
+    check_type: str
+) -> DiagnosticResult:
     """
     Executes a diagnostic check and measures execution duration in milliseconds.
     
-    :param check_fn: Callable check function.
+    :param check_fn: Callable check function returning (passed, message, metadata).
     :param check_type: Identifier string for the check.
-    :return: Tuple of (check_passed, duration_ms).
+    :return: DiagnosticResult object containing execution metrics.
     """
     start_time = time.perf_counter()
     try:
-        passed = bool(check_fn())
+        passed, message, metadata = check_fn()
         duration_ms = (time.perf_counter() - start_time) * 1000.0
-        return passed, round(duration_ms, 3)
-    except Exception:
+        return DiagnosticResult(
+            passed=passed,
+            message=message,
+            metadata=metadata or {},
+            duration_ms=round(duration_ms, 3)
+        )
+    except Exception as e:
         duration_ms = (time.perf_counter() - start_time) * 1000.0
-        return False, round(duration_ms, 3)
+        return DiagnosticResult(
+            passed=False,
+            message=f"Execution failed: {str(e)}",
+            metadata={"error": str(e)},
+            duration_ms=round(duration_ms, 3)
+        )
