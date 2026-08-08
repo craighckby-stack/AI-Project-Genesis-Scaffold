@@ -6,7 +6,7 @@ Dependencies: sovereign_utils.py
 """
 
 from __future__ import annotations
-from typing import Dict, Any, Callable, List
+from typing import Dict, Any, Callable, List, Optional
 import logging
 from .sovereign_utils import (
     generate_sovereign_id, 
@@ -26,7 +26,7 @@ class SovereignEngine:
     
     def __init__(self):
         self._policies: Dict[str, Any] = {}
-        self._registry: Dict[str, Callable] = {}
+        self._registry: Dict[str, Callable[[Any], bool]] = {}
         self._audit_trail: List[Dict[str, Any]] = []
         logger.info("Sovereign Engine Initialized.")
 
@@ -47,22 +47,36 @@ class SovereignEngine:
         try:
             is_compliant = self._registry[policy_name](context)
             
-            # Audit the enforcement action
+            # Audit the enforcement action with telemetry
             telemetry = format_sovereign_telemetry(
                 action=f"ENFORCE_{policy_name}",
                 status="COMPLIANT" if is_compliant else "VIOLATION",
-                metadata={"integrity_hash": compute_policy_integrity_hash({"context": str(context)})}
+                metadata={
+                    "integrity_hash": compute_policy_integrity_hash({"context": str(context)}),
+                    "policy_name": policy_name
+                }
             )
             self._audit_trail.append(telemetry)
             
             return is_compliant
         except Exception as e:
             logger.error(f"Policy enforcement error in {policy_name}: {str(e)}")
+            # Log the failure in audit trail
+            self._audit_trail.append(format_sovereign_telemetry(
+                action=f"ENFORCE_{policy_name}",
+                status="ERROR",
+                metadata={"error": str(e)}
+            ))
             return False
 
     def get_audit_log(self) -> List[Dict[str, Any]]:
         """Returns the current audit trail of sovereign operations."""
         return self._audit_trail
+
+    def clear_audit_trail(self) -> None:
+        """Resets the audit log."""
+        self._audit_trail = []
+        logger.info("Sovereign audit trail cleared.")
 
 # Singleton instance for system-wide access
 sovereign_controller = SovereignEngine()
