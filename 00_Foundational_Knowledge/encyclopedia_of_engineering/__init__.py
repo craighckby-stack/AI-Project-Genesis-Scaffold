@@ -13,15 +13,14 @@ schemas, and equations are fully loaded and compliant before consumption by the 
 from __future__ import annotations
 import logging
 import time
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 
 # Importing internal diagnostic engine and knowledge base components
-# These modules are assumed to be present in the local repository tree
+# These modules are provided as part of the architectural evolution
 try:
     from .diagnostic_engine import engine, DiagnosticResult
     from .knowledge_base import PHYSICAL_CONSTANTS, ENGINEERING_DOMAINS, verify_schemas
 except ImportError as e:
-    # Fallback for environment safety
     logging.error(f"Critical dependency missing: {e}")
     raise
 
@@ -84,7 +83,6 @@ def initialize_encyclopedia() -> bool:
     
     all_passed = True
     for name, result in report.items():
-        # Handle dictionary-based results from the engine
         passed = result.get('passed', False)
         message = result.get('message', 'No message provided')
         duration = result.get('duration_ms', 0.0)
