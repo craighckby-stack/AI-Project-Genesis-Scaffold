@@ -1,7 +1,7 @@
 """
 DIAGNOSTIC UTILITIES CORE
 Role: Core logic for diagnostic validation, telemetry generation, and type definitions.
-Integration: Delegated from diagnostic_registry_utils.py to maintain modularity.
+Integration: Delegated from diagnostic_engine_utils.py to maintain modularity.
 """
 
 from __future__ import annotations
