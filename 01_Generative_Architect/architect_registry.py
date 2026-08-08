@@ -11,7 +11,8 @@ from typing import Dict, Any, Callable, Optional
 from .architect_registry_utils import (
     format_timestamp, 
     summarize_diagnostic_results, 
-    execute_check_with_telemetry
+    execute_check_with_telemetry,
+    DiagnosticResult
 )
 
 class ArchitectRegistry:
@@ -20,11 +21,11 @@ class ArchitectRegistry:
     diagnostic telemetry and health reporting.
     """
     def __init__(self) -> None:
-        self._registry: Dict[str, Callable[[], bool]] = {}
+        self._registry: Dict[str, Callable[[], DiagnosticResult]] = {}
         self._lock = threading.RLock()
         self._last_report: Optional[Dict[str, Any]] = None
 
-    def register_component(self, name: str, validator: Callable[[], bool]) -> None:
+    def register_component(self, name: str, validator: Callable[[], DiagnosticResult]) -> None:
         """Registers a component validator with the registry."""
         with self._lock:
             self._registry[name] = validator
@@ -37,10 +38,12 @@ class ArchitectRegistry:
         with self._lock:
             results = {}
             for name, validator in self._registry.items():
-                passed, duration = execute_check_with_telemetry(validator)
+                passed, duration, message, metadata = execute_check_with_telemetry(validator)
                 results[name] = {
                     "passed": passed, 
-                    "duration_ms": duration
+                    "duration_ms": duration,
+                    "message": message,
+                    "metadata": metadata
                 }
             
             summary = summarize_diagnostic_results(results)
