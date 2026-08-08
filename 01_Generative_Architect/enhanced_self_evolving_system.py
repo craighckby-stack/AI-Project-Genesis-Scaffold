@@ -18,7 +18,7 @@ INTEGRATION:
 from __future__ import annotations
 import threading
 import logging
-from typing import Dict, Any, Callable, Optional
+from typing import Dict, Any, Callable, List, Optional
 from .evolution_diagnostics import EvolutionTelemetry
 
 # Configure logging for evolution events
@@ -33,7 +33,7 @@ class SelfEvolvingSystem:
     def __init__(self):
         self._lock = threading.Lock()
         self._registry: Dict[str, Callable[[], bool]] = {}
-        self._evolution_history: list[Dict[str, Any]] = []
+        self._evolution_history: List[Dict[str, Any]] = []
         self._is_active = True
 
     def register_evolution_hook(self, name: str, hook: Callable[[], bool]) -> None:
