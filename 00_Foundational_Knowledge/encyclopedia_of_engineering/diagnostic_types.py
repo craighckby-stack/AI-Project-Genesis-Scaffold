@@ -1,13 +1,61 @@
 """
 DIAGNOSTIC TYPES DEFINITION
-Role: Provides foundational, type-safe structures for the AI_Agent_OS diagnostic engine.
+Role: Provides foundational, type-safe structures, enums, and exceptions for the AI_Agent_OS diagnostic engine.
 Integration: Used by diagnostic_engine.py and diagnostic_utils to enforce schema consistency across the engineering knowledge base.
 
 This file acts as the single source of truth for diagnostic data contracts.
 """
 
 from __future__ import annotations
+import json
+from enum import Enum
 from typing import NamedTuple, Any, Dict, List, Optional, Callable, Awaitable, Union
+
+
+class DiagnosticStatus(str, Enum):
+    """Overall status of the system or an individual check."""
+    HEALTHY = "HEALTHY"
+    DEGRADED = "DEGRADED"
+    CRITICAL_FAILURE = "CRITICAL_FAILURE"
+    ERROR = "ERROR"
+    UNKNOWN = "UNKNOWN"
+
+
+class DiagnosticCategory(str, Enum):
+    """Categories of diagnostic checks."""
+    SYSTEM = "SYSTEM"
+    ENVIRONMENT = "ENVIRONMENT"
+    MEMORY = "MEMORY"
+    PERSISTENCE = "PERSISTENCE"
+    SANDBOX = "SANDBOX"
+    CONSENSUS = "CONSENSUS"
+    SECURITY = "SECURITY"
+    NETWORK = "NETWORK"
+    CUSTOM = "CUSTOM"
+
+
+class DiagnosticSeverity(str, Enum):
+    """Severity levels for diagnostic failures or warnings."""
+    INFO = "INFO"
+    WARNING = "WARNING"
+    ERROR = "ERROR"
+    CRITICAL = "CRITICAL"
+
+
+class DiagnosticError(Exception):
+    """Base exception for all diagnostic-related errors."""
+    pass
+
+
+class DiagnosticRegistrationError(DiagnosticError):
+    """Raised when a diagnostic check fails to register properly."""
+    pass
+
+
+class DiagnosticExecutionError(DiagnosticError):
+    """Raised when a diagnostic check execution encounters an unhandled failure."""
+    pass
+
 
 class DiagnosticCheckResult(NamedTuple):
     """
@@ -18,11 +66,36 @@ class DiagnosticCheckResult(NamedTuple):
         duration_ms: Execution time in milliseconds.
         message: Descriptive status message.
         metadata: Additional context or diagnostic data.
+        severity: Severity level associated with a failure.
     """
     passed: bool
     duration_ms: float
     message: str
     metadata: Dict[str, Any]
+    severity: DiagnosticSeverity = DiagnosticSeverity.ERROR
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Converts the diagnostic check result to a serializable dictionary."""
+        return {
+            "passed": self.passed,
+            "duration_ms": self.duration_ms,
+            "message": self.message,
+            "metadata": self._sanitize_metadata(self.metadata),
+            "severity": self.severity.value if isinstance(self.severity, Enum) else str(self.severity)
+        }
+
+    @staticmethod
+    def _sanitize_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
+        """Ensures metadata is JSON-serializable, falling back to string representation if not."""
+        sanitized = {}
+        for k, v in metadata.items():
+            try:
+                json.dumps(v)
+                sanitized[k] = v
+            except (TypeError, OverflowError):
+                sanitized[k] = str(v)
+        return sanitized
+
 
 class DiagnosticSummary(NamedTuple):
     """
@@ -34,6 +107,11 @@ class DiagnosticSummary(NamedTuple):
     is_healthy: bool
     pass_rate: float
 
+    def to_dict(self) -> Dict[str, Any]:
+        """Converts the summary to a dictionary."""
+        return self._asdict()
+
+
 class DiagnosticTelemetry(NamedTuple):
     """
     System-level telemetry captured during diagnostic execution.
@@ -43,6 +121,12 @@ class DiagnosticTelemetry(NamedTuple):
     node_id: str
     environment: str
     uptime_seconds: float
+    memory_usage_mb: float = 0.0
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Converts the telemetry to a dictionary."""
+        return self._asdict()
+
 
 class DiagnosticReport(NamedTuple):
     """
@@ -61,10 +145,26 @@ class DiagnosticReport(NamedTuple):
     summary: DiagnosticSummary
     telemetry: DiagnosticTelemetry
 
+    def to_dict(self) -> Dict[str, Any]:
+        """Converts the entire report to a deeply nested serializable dictionary."""
+        return {
+            "status": self.status.value if isinstance(self.status, Enum) else str(self.status),
+            "timestamp": self.timestamp,
+            "checks": {name: result.to_dict() for name, result in self.checks.items()},
+            "summary": self.summary.to_dict(),
+            "telemetry": self.telemetry.to_dict()
+        }
+
+    def to_json(self, indent: Optional[int] = None) -> str:
+        """Serializes the report to a JSON string."""
+        return json.dumps(self.to_dict(), indent=indent)
+
+
 # Protocol for diagnostic check functions
 # A check function returns a partial result (passed, message, metadata)
 # The engine wraps this with duration and system telemetry.
 DiagnosticCheckFn = Callable[[], Union[Dict[str, Any], Awaitable[Dict[str, Any]]]]
+
 
 class DiagnosticRegistryEntry(NamedTuple):
     """
@@ -73,4 +173,12 @@ class DiagnosticRegistryEntry(NamedTuple):
     name: str
     check_fn: DiagnosticCheckFn
     priority: int
-    category: str
+    category: DiagnosticCategory
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Converts the registry entry to a dictionary (excluding the callable function)."""
+        return {
+            "name": self.name,
+            "priority": self.priority,
+            "category": self.category.value if isinstance(self.category, Enum) else str(self.category)
+        }
