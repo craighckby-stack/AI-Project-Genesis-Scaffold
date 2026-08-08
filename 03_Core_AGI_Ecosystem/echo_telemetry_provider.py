@@ -1,36 +1,26 @@
 """
 ECHO TELEMETRY PROVIDER
-Role: Tracks performance metrics and execution health for signal propagation.
-Integration: Siphons 'Tessera' diagnostic patterns for high-precision monitoring.
+Role: High-precision execution tracking and diagnostic reporting for Echo operations.
+Integration: Siphons 'Zero-Leak' patterns from AI_Agent_OS for robust observability.
 """
 
 from __future__ import annotations
 import time
-from typing import Dict, Any, List
+import datetime
+from typing import Dict, Any, Optional
 
 class EchoTelemetryProvider:
-    def __init__(self):
-        self._metrics: List[Dict[str, Any]] = []
+    @staticmethod
+    def get_timestamp() -> str:
+        """Returns high-precision ISO 8601 UTC timestamp."""
+        return datetime.datetime.utcnow().isoformat() + 'Z'
 
-    def start_trace(self, signal_type: str) -> float:
-        """Starts a performance trace for a signal."""
-        return time.perf_counter()
-
-    def end_trace(self, start_time: float, signal_type: str, status: str) -> None:
-        """Finalizes a performance trace and records the duration."""
-        duration = (time.perf_counter() - start_time) * 1000.0
-        self._metrics.append({
-            "signal": signal_type,
-            "duration_ms": round(duration, 3),
-            "status": status,
-            "timestamp": time.time()
-        })
-        if len(self._metrics) > 500:
-            self._metrics.pop(0)
-
-    def get_average_latency(self) -> float:
-        """Computes average propagation latency across the metric window."""
-        if not self._metrics:
-            return 0.0
-        total = sum(m["duration_ms"] for m in self._metrics)
-        return round(total / len(self._metrics), 3)
+    @staticmethod
+    def create_telemetry_snapshot(duration_ms: float, success: bool, metadata: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Generates a standardized telemetry report for a signal propagation event."""
+        return {
+            "timestamp": EchoTelemetryProvider.get_timestamp(),
+            "duration_ms": round(duration_ms, 3),
+            "status": "HEALTHY" if success else "DEGRADED",
+            "metadata": metadata or {}
+        }
