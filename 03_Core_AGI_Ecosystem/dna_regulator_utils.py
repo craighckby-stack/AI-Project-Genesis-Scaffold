@@ -1,64 +1,55 @@
 """
 DNA REGULATOR UTILITIES
-Role: Helper utilities for genetic expression state management, validation, and telemetry.
-Integration: Imported by dna_regulator.py to compute regulatory metrics and validate DNA sequences.
-Architectural Note: Now integrated with DNA Regulator Diagnostics for audit-ready telemetry.
+Role: Provides validation, telemetry execution, and basic scoring for DNA sequences.
+Integration: Imported by DnaRegulator to handle low-level sequence operations.
 """
 
 from __future__ import annotations
+import re
 import time
-from typing import Dict, Any, Callable, Tuple, NamedTuple
-from .dna_regulator_diagnostics import (
-    format_timestamp,
-    summarize_regulatory_results,
-    execute_regulatory_check_with_telemetry
-)
-
-class RegulatoryResult(NamedTuple):
-    passed: bool
-    message: str
-    metadata: Dict[str, Any]
-    duration_ms: float
+from typing import Callable, Tuple, Dict, Any
 
 def validate_dna_sequence(sequence: str) -> bool:
-    """Validates that a DNA sequence contains only valid base pairs (A, C, G, T)."""
-    if not isinstance(sequence, str):
+    """
+    Validates a DNA sequence string.
+    Must only contain A, C, G, T and meet minimum complexity requirements.
+    """
+    if not sequence or len(sequence) < 8:
         return False
-    valid_bases = {'A', 'C', 'G', 'T'}
-    return all(base in valid_bases for base in sequence.upper())
+    
+    # Ensure only valid nucleotides
+    if not re.fullmatch(r'[ACGT]+', sequence.upper()):
+        return False
+    
+    # Basic entropy check: ensure it's not just a single repeated character
+    if len(set(sequence.upper())) < 2:
+        return False
+        
+    return True
 
 def compute_expression_score(sequence: str) -> float:
-    """Computes a hypothetical expression score based on GC content."""
-    if not sequence: 
-        return 0.0
+    """
+    Computes a heuristic expression score based on GC content and sequence length.
+    Siphoned from basic genetic modeling patterns.
+    """
     seq = sequence.upper()
     gc_count = seq.count('G') + seq.count('C')
-    return round((gc_count / len(seq)) * 100, 2)
-
-def execute_regulation_step(step_fn: Callable[[], bool], step_name: str) -> RegulatoryResult:
-    """
-    Executes a regulatory step and measures execution duration with telemetry.
-    Returns a structured RegulatoryResult.
-    """
-    passed, duration_ms = execute_regulatory_check_with_telemetry(step_fn, step_name)
+    gc_content = gc_count / len(seq)
     
-    return RegulatoryResult(
-        passed=passed,
-        message=f"Step '{step_name}' completed with status: {'SUCCESS' if passed else 'FAILURE'}",
-        metadata={
-            "step_name": step_name,
-            "timestamp": format_timestamp(),
-            "version": "1.0.0-DNA-REGULATOR-AWARE"
-        },
-        duration_ms=duration_ms
-    )
+    # Expression is favored by balanced GC content (approx 0.5)
+    score = 1.0 - abs(0.5 - gc_content) * 2
+    return round(max(0.1, score), 4)
 
-def generate_regulatory_report(results: Dict[str, bool]) -> Dict[str, Any]:
-    """Generates a comprehensive regulatory report summary."""
-    summary = summarize_regulatory_results(results)
-    return {
-        "report_id": f"REG-{int(time.time())}",
-        "timestamp": format_timestamp(),
-        "summary": summary,
-        "details": results
-    }
+def execute_regulation_step(logic_fn: Callable[[], bool]) -> Tuple[bool, float]:
+    """
+    Executes a regulation logic function and measures duration in milliseconds.
+    Siphoned from Tessera diagnostic execution patterns.
+    """
+    start_time = time.perf_counter()
+    try:
+        result = bool(logic_fn())
+        duration_ms = (time.perf_counter() - start_time) * 1000.0
+        return result, round(duration_ms, 4)
+    except Exception:
+        duration_ms = (time.perf_counter() - start_time) * 1000.0
+        return False, round(duration_ms, 4)
