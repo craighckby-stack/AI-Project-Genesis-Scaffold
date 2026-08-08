@@ -1,18 +1,21 @@
+"""
+DIAGNOSTIC UTILITIES
+Role: Helper utilities for diagnostic execution formatting, status telemetry, and metric computation.
+Integration: Imported by diagnostic_engine.py to compute diagnostic metrics cleanly.
+"""
+
 from __future__ import annotations
 import time
-import datetime
-from typing import Dict, Any, Tuple
+import platform
+import os
+from typing import Dict, Any
 
-def format_timestamp() -> str:
-    """Returns ISO 8601 formatted UTC timestamp with Z suffix."""
-    return datetime.datetime.utcnow().isoformat() + 'Z'
-
-def summarize_diagnostic_results(report: Dict[str, Any]) -> Dict[str, Any]:
+def summarize_diagnostic_results(checks: Dict[str, Any]) -> Dict[str, Any]:
     """
     Computes summary metrics for diagnostic check results.
     """
-    total_checks = len(report)
-    passed_checks = sum(1 for check in report.values() if check.get('passed', False))
+    total_checks = len(checks)
+    passed_checks = sum(1 for data in checks.values() if data.get('passed', False))
     failed_checks = total_checks - passed_checks
     is_healthy = total_checks > 0 and failed_checks == 0
 
@@ -25,9 +28,13 @@ def summarize_diagnostic_results(report: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 def generate_system_telemetry() -> Dict[str, Any]:
-    """Generates standard system telemetry metadata."""
+    """
+    Generates standard telemetry metadata for diagnostic reports.
+    """
     return {
-        "version": "1.0.0-ENGINEERING-DIAGNOSTIC",
-        "timestamp": format_timestamp(),
-        "engine_uptime": time.perf_counter()
+        "timestamp": time.time(),
+        "platform": platform.platform(),
+        "python_version": platform.python_version(),
+        "process_id": os.getpid(),
+        "uptime": time.process_time()
     }
