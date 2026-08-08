@@ -1,51 +1,28 @@
 """
-DIAGNOSTIC REGISTRY FOR THEORETICAL FOUNDATIONS
-Role: Manages diagnostic check registration and execution for the foundation namespace.
-Integration: Used by __init__.py to ensure module integrity and system health.
-Delegates complex telemetry to diagnostic_registry_utils.py.
+DIAGNOSTIC REGISTRY
+Role: Manages the registration and execution of integrity checks for the theoretical foundations module.
+Integration: Used by __init__.py to ensure system health.
 """
 
-from __future__ import annotations
-from typing import Dict, Callable, Any, NamedTuple
-from .diagnostic_registry_utils import (
-    execute_with_telemetry, 
-    summarize_foundation_results, 
-    format_timestamp
-)
+from typing import Callable, Dict, Any, List
+import time
 
-class FoundationCheckResult(NamedTuple):
-    passed: bool
-    message: str
-    duration_ms: float
-    metadata: Dict[str, Any]
-
-_REGISTRY: Dict[str, Callable[[], bool]] = {}
+# Registry for foundation-specific diagnostic checks
+_FOUNDATION_CHECKS: Dict[str, Callable[[], bool]] = {}
 
 def register_foundation_check(name: str, check_fn: Callable[[], bool]) -> None:
-    """Registers a diagnostic check function."""
-    _REGISTRY[name] = check_fn
+    """Registers a new diagnostic check for the foundations module."""
+    _FOUNDATION_CHECKS[name] = check_fn
 
 def run_foundation_diagnostics() -> Dict[str, Any]:
-    """
-    Executes all registered foundation checks with telemetry.
-    Returns a comprehensive diagnostic report including summary metrics.
-    """
-    results: Dict[str, FoundationCheckResult] = {}
-    
-    for name, check_fn in _REGISTRY.items():
-        passed, duration = execute_with_telemetry(check_fn)
-        results[name] = FoundationCheckResult(
-            passed=passed,
-            message="Success" if passed else "Diagnostic check failed",
-            duration_ms=duration,
-            metadata={"timestamp": format_timestamp()}
-        )
-    
-    summary = summarize_foundation_results(results)
-    
-    return {
-        "status": "HEALTHY" if summary["is_healthy"] else "DEGRADED",
-        "timestamp": format_timestamp(),
-        "summary": summary,
-        "checks": {k: v._asdict() for k, v in results.items()}
-    }
+    """Executes all registered foundation checks and returns a status report."""
+    results = {}
+    for name, check in _FOUNDATION_CHECKS.items():
+        start = time.perf_counter()
+        try:
+            passed = check()
+            duration = (time.perf_counter() - start) * 1000
+            results[name] = {"passed": passed, "duration_ms": round(duration, 3)}
+        except Exception as e:
+            results[name] = {"passed": False, "error": str(e)}
+    return results
