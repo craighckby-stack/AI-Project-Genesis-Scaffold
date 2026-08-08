@@ -1,7 +1,34 @@
+"""
+UI TELEMETRY HARNESS
+Role: Provides structured telemetry and diagnostic reporting for UI components.
+Integration: Acts as the primary telemetry emitter for the UI diagnostic lifecycle.
+Dependencies: uis_telemetry_core.py
+"""
+
 from __future__ import annotations
 import time
 import datetime
-from typing import Dict, Any, Tuple, Callable
+from typing import Dict, Any, Tuple, Callable, Optional
+from .uis_telemetry_core import generate_ui_telemetry_metadata, UIResult
+
+class UITelemetryEmitter:
+    """
+    Handles structured UI telemetry emission, performance tracking, and metadata enrichment.
+    """
+    def __init__(self, component_name: str):
+        self.component_name = component_name
+        self.start_time = time.perf_counter()
+
+    def emit(self, passed: bool, message: str, metadata: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        duration = (time.perf_counter() - self.start_time) * 1000.0
+        report = {
+            "component": self.component_name,
+            "status": "PASSED" if passed else "FAILED",
+            "duration_ms": round(duration, 3),
+            "message": message,
+            "metadata": {**(metadata or {}), **generate_ui_telemetry_metadata()}
+        }
+        return report
 
 def format_ui_timestamp() -> str:
     """Returns ISO 8601 formatted UTC timestamp with Z suffix."""
