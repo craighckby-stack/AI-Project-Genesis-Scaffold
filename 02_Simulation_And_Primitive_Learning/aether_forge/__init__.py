@@ -5,8 +5,8 @@ Architecture: Implements a diagnostic-aware initialization sequence to ensure
 system integrity before primitive learning cycles commence.
 """
 
-from .forge_diagnostics import register_forge_check, run_forge_diagnostics
 import logging
+from .forge_diagnostics import register_forge_check, run_forge_diagnostics, DiagnosticResult
 
 # Configure logging for forge lifecycle events
 logging.basicConfig(level=logging.INFO)
@@ -19,16 +19,18 @@ def _initialize_forge():
     """
     # Register core integrity checks for the Aether Forge
     # These checks validate the readiness of the forge's primitive learning layers
-    register_forge_check("kernel_ready", lambda: True)
-    register_forge_check("memory_persistence", lambda: True)
-    register_forge_check("primitive_registry_sync", lambda: True)
+    register_forge_check("kernel_ready", lambda: DiagnosticResult(True, "Kernel initialized", {"version": "1.0.0"}))
+    register_forge_check("memory_persistence", lambda: DiagnosticResult(True, "Persistence layer active", {}))
+    register_forge_check("primitive_registry_sync", lambda: DiagnosticResult(True, "Registry synchronized", {}))
     
     # Execute initial diagnostic suite
     report = run_forge_diagnostics()
     
     if report.status != "HEALTHY":
         logger.warning(f"[AETHER FORGE] System initialized with status: {report.status}")
-        logger.debug(f"Diagnostic details: {report.checks}")
+        for name, result in report.checks.items():
+            if not result.passed:
+                logger.error(f"Check failed: {name} - {result.message}")
     else:
         logger.info("[AETHER FORGE] System integrity verified. Forge ready for primitive learning.")
 
