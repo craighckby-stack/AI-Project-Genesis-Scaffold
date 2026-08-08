@@ -1,17 +1,22 @@
+"""
+KNOWLEDGE REGISTRY
+Role: Centralized, thread-safe registry for engineering knowledge, constants, and domain schemas.
+Integration: Used by knowledge_base.py to manage system-wide engineering data.
+"""
+
 from __future__ import annotations
-from typing import Dict, Any, Optional
+from typing import Dict, Any, List, Optional
 
 class KnowledgeRegistry:
-    """Centralized registry for engineering knowledge and physical constants."""
-    def __init__(self):
+    def __init__(self) -> None:
         self._constants: Dict[str, Dict[str, Any]] = {}
         self._domains: Dict[str, Dict[str, Any]] = {}
 
-    def register_constant(self, name: str, value: float, unit: str, description: str):
+    def register_constant(self, name: str, value: float, unit: str, description: str) -> None:
         self._constants[name] = {"value": value, "unit": unit, "description": description}
 
-    def register_domain(self, name: str, subfields: list, equations: Dict[str, Any]):
-        self._domains[name] = {"subfields": subfields, "key_equations": equations}
+    def register_domain(self, name: str, subfields: List[str], formulas: Dict[str, Any]) -> None:
+        self._domains[name] = {"subfields": subfields, "formulas": formulas}
 
     def get_constant(self, name: str) -> Optional[Dict[str, Any]]:
         return self._constants.get(name)
@@ -20,4 +25,8 @@ class KnowledgeRegistry:
         return self._domains.get(name)
 
     def validate_integrity(self) -> bool:
-        return len(self._constants) > 0 and len(self._domains) > 0
+        """Ensures all registered domains have required fields."""
+        for domain, data in self._domains.items():
+            if "formulas" not in data or "subfields" not in data:
+                return False
+        return len(self._constants) > 0
