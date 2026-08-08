@@ -1,30 +1,24 @@
-"""
-SOVEREIGN UTILITIES
-Role: Helper utilities for sovereign state validation, policy enforcement telemetry, and registry management.
-Integration: Imported by sovereign.py to maintain modularity.
-"""
-
 from __future__ import annotations
-import time
+import hashlib
 import uuid
-from typing import Dict, Any, Callable, List
+import datetime
+from typing import Any, Dict
 
 def generate_sovereign_id() -> str:
-    """Generates a unique identifier for sovereign state transitions."""
-    return f"SOV-{uuid.uuid4().hex[:8].upper()}"
+    """Generates a unique identifier for sovereign operations."""
+    return str(uuid.uuid4())
 
-def compute_policy_integrity_hash(policy_data: Dict[str, Any]) -> str:
-    """Computes a pseudo-integrity hash for policy state validation."""
-    import hashlib
-    import json
-    content = json.dumps(policy_data, sort_keys=True)
-    return hashlib.sha256(content.encode()).hexdigest()[:16]
+def compute_policy_integrity_hash(data: Dict[str, Any]) -> str:
+    """Computes a SHA-256 integrity hash for policy context."""
+    serialized = str(sorted(data.items()))
+    return hashlib.sha256(serialized.encode()).hexdigest()
 
 def format_sovereign_telemetry(action: str, status: str, metadata: Dict[str, Any]) -> Dict[str, Any]:
-    """Formats telemetry for sovereign actions."""
+    """Formats sovereign telemetry for audit trails."""
     return {
+        "id": generate_sovereign_id(),
+        "timestamp": datetime.datetime.utcnow().isoformat() + 'Z',
         "action": action,
         "status": status,
-        "timestamp": time.time(),
         "metadata": metadata
     }
