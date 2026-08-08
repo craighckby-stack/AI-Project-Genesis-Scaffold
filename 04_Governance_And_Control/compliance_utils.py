@@ -1,6 +1,6 @@
 """
 COMPLIANCE UTILITIES
-Role: Helper utilities for compliance verification, policy enforcement, and telemetry.
+Role: Helper utilities for compliance execution formatting, status telemetry, and metric computation.
 Integration: Imported by compliance_checker.py to compute compliance metrics cleanly.
 """
 
@@ -40,4 +40,5 @@ def execute_compliance_check(check_fn: Callable[[], bool]) -> Tuple[bool, float]
         duration_ms = (time.perf_counter() - start_time) * 1000.0
         return passed, round(duration_ms, 3)
     except Exception:
-        return False, round((time.perf_counter() - start_time) * 1000.0, 3)
+        duration_ms = (time.perf_counter() - start_time) * 1000.0
+        return False, round(duration_ms, 3)
