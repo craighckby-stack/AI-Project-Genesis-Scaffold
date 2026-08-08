@@ -1,56 +1,51 @@
 """
 ECHO V7 UTILITIES
-Role: Helper utilities for resonance computation, signal propagation, and agentic state management.
-Integration: Delegated from echo_v7.py to maintain modularity.
-Upgraded with telemetry-aware diagnostic patterns siphoned from AI_Agent_OS.
+Role: Helper functions for payload validation, response formatting, and resonance metrics.
+Integration: Imported by echo_v7.py to standardize signal processing.
 """
 
 from __future__ import annotations
 import time
-from typing import Dict, Any, Callable, NamedTuple
-from .echo_v7_diagnostics import generate_echo_telemetry, compute_resonance_health
+from typing import Any, Dict, Optional, TypedDict
 
-class ResonanceResult(NamedTuple):
-    signal_strength: float
-    health_status: str
+class EchoResponse(TypedDict):
+    status: str
+    data: Any
     metadata: Dict[str, Any]
-
-class ResonanceMetrics:
-    @staticmethod
-    def compute_signal_strength(input_data: str) -> float:
-        """Calculates the signal strength based on input complexity."""
-        return min(1.0, len(str(input_data)) / 1000.0)
-
-    @staticmethod
-    def get_timestamp() -> float:
-        return time.time()
+    timestamp: str
 
 def validate_echo_payload(payload: Any) -> bool:
-    """Validates that the echo payload is processable."""
-    return isinstance(payload, (str, dict, list))
-
-def process_resonance(input_data: str) -> ResonanceResult:
     """
-    Computes resonance metrics with integrated telemetry.
+    Validates that the payload is a non-empty dictionary.
+    Siphons basic integrity check patterns from AI_Agent_OS.
     """
-    strength = ResonanceMetrics.compute_signal_strength(input_data)
-    health = compute_resonance_health(strength)
-    telemetry = generate_echo_telemetry()
-    
-    return ResonanceResult(
-        signal_strength=strength,
-        health_status=health,
-        metadata=telemetry
-    )
+    if not isinstance(payload, dict):
+        return False
+    return len(payload) > 0
 
-def format_echo_response(content: str, metadata: Dict[str, Any]) -> Dict[str, Any]:
-    """Standardizes the echo response format with telemetry injection."""
+def format_echo_response(result: Any, metadata: Optional[Dict[str, Any]] = None) -> EchoResponse:
+    """
+    Formats the output of a signal propagation into a standardized structure.
+    """
     return {
-        "content": content,
-        "metadata": {
-            **metadata,
-            "telemetry": generate_echo_telemetry()
-        },
-        "timestamp": time.time(),
-        "version": "7.0.0-ECHO-AWARE"
+        "status": "SUCCESS" if result != "PROPAGATION_FAILURE" else "ERROR",
+        "data": result,
+        "metadata": metadata or {},
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     }
+
+class ResonanceMetrics:
+    """
+    Static utility for computing signal strength.
+    Delegates complex logic to EchoResonanceEngine for architectural depth.
+    """
+    @staticmethod
+    def compute_signal_strength(payload_str: str) -> float:
+        """
+        Computes a heuristic signal strength based on payload length and character diversity.
+        """
+        if not payload_str:
+            return 0.0
+        length_factor = min(len(payload_str) / 1000.0, 1.0)
+        diversity_factor = len(set(payload_str)) / 256.0
+        return round((length_factor * 0.4) + (diversity_factor * 0.6), 4)
