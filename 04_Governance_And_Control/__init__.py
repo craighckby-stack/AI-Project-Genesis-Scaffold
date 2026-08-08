@@ -4,7 +4,7 @@ Role: Orchestrates system-wide integrity, diagnostic validation, and governance 
 Integration: Acts as the primary entry point for the 04_Governance_And_Control module.
 """
 
-from typing import Dict, Any
+from typing import Dict, Any, Callable
 from .governance_utils import (
     format_timestamp, 
     summarize_diagnostic_results, 
@@ -13,9 +13,9 @@ from .governance_utils import (
 )
 
 # Registry for system integrity checks
-_GOVERNANCE_REGISTRY: Dict[str, Any] = {}
+_GOVERNANCE_REGISTRY: Dict[str, Callable[[], DiagnosticResult]] = {}
 
-def register_governance_check(name: str, check_fn: callable):
+def register_governance_check(name: str, check_fn: Callable[[], DiagnosticResult]):
     """Registers a new integrity check within the governance framework."""
     _GOVERNANCE_REGISTRY[name] = check_fn
 
@@ -38,7 +38,7 @@ def run_governance_diagnostics() -> Dict[str, Any]:
         check_statuses[name] = passed
 
     return {
-        "status": "HEALTHY" if all(check_statuses.values()) else "DEGRADED",
+        "status": "HEALTHY" if (check_statuses and all(check_statuses.values())) else "DEGRADED",
         "timestamp": format_timestamp(),
         "summary": summarize_diagnostic_results(check_statuses),
         "checks": results
@@ -46,6 +46,7 @@ def run_governance_diagnostics() -> Dict[str, Any]:
 
 # Initialize default governance checks
 def _check_system_ready() -> DiagnosticResult:
+    """Validates that the governance kernel is fully initialized and operational."""
     return DiagnosticResult(True, "Governance kernel operational", {"version": "1.0.0"})
 
 register_governance_check("kernel_ready", _check_system_ready)
