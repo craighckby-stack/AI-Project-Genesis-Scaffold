@@ -1,6 +1,6 @@
 """
 DARLEK TELEMETRY UTILITIES
-Role: Core logic for diagnostic validation, telemetry generation, and type definitions.
+Role: Core logic for mutation validation, telemetry generation, and type definitions.
 Integration: Delegated from darlek_utils.py to maintain modularity.
 """
 
@@ -18,9 +18,9 @@ def validate_mutation_function(func: Callable) -> bool:
     return callable(func)
 
 def generate_telemetry_metadata() -> Dict[str, Any]:
-    """Generates standard telemetry metadata for evolution cycles."""
+    """Generates standard telemetry metadata for mutation results."""
     return {
         "timestamp": time.time(),
-        "engine_version": "3.0.0-EVOLUTION-AWARE",
-        "node_id": "DARLEK_CANN_CORE"
+        "thread_id": id(time.time()),
+        "version": "3.0.0-EVOLUTION-AWARE"
     }
