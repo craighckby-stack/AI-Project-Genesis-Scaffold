@@ -1,73 +1,123 @@
 """
-KNOWLEDGE BASE: ENGINEERING FOUNDATIONS
-Role: Central repository for physical constants, engineering domain definitions, 
-      and schema validation logic. Connects to the diagnostic engine for 
-      integrity verification.
-
-Architecture:
-- Implements diagnostic-aware schema validation.
-- Provides immutable constants for system-wide engineering calculations.
-- Integrates with diagnostic_engine.py for system health telemetry.
+KNOWLEDGE BASE - PHYSICAL CONSTANTS & ENGINEERING DOMAINS
+Role: Stores structured engineering knowledge, constants, and equations.
 """
-
 from __future__ import annotations
-from typing import Dict, Any, Final
-from .diagnostic_types import DiagnosticResult
+from typing import Dict, Any
 
-# Immutable physical constants for engineering calculations
-PHYSICAL_CONSTANTS: Final[Dict[str, float]] = {
-    'c': 299792458.0,      # Speed of light in vacuum (m/s)
-    'G': 6.67430e-11,      # Gravitational constant (m^3 kg^-1 s^-2)
-    'h': 6.62607015e-34,   # Planck constant (J s)
-    'k_B': 1.380649e-23,   # Boltzmann constant (J/K)
-    'e': 1.60217663e-19    # Elementary charge (C)
+# Core physical constants with high precision
+PHYSICAL_CONSTANTS: Dict[str, Dict[str, Any]] = {
+    "SPEED_OF_LIGHT": {
+        "value": 299792458,
+        "unit": "m/s",
+        "symbol": "c",
+        "description": "Speed of light in vacuum"
+    },
+    "PLANCK_CONSTANT": {
+        "value": 6.62607015e-34,
+        "unit": "J*s",
+        "symbol": "h",
+        "description": "Planck constant"
+    },
+    "GRAVITATIONAL_CONSTANT": {
+        "value": 6.67430e-11,
+        "unit": "m^3/(kg*s^2)",
+        "symbol": "G",
+        "description": "Newtonian constant of gravitation"
+    },
+    "BOLTZMANN_CONSTANT": {
+        "value": 1.380649e-23,
+        "unit": "J/K",
+        "symbol": "k_B",
+        "description": "Boltzmann constant"
+    },
+    "AVOGADRO_CONSTANT": {
+        "value": 6.02214076e23,
+        "unit": "mol^-1",
+        "symbol": "N_A",
+        "description": "Avogadro constant"
+    },
+    "STANDARD_GRAVITY": {
+        "value": 9.80665,
+        "unit": "m/s^2",
+        "symbol": "g",
+        "description": "Standard acceleration of gravity"
+    },
+    "GAS_CONSTANT": {
+        "value": 8.314462618,
+        "unit": "J/(mol*K)",
+        "symbol": "R",
+        "description": "Molar gas constant"
+    }
 }
 
-# Engineering domain definitions
-ENGINEERING_DOMAINS: Final[Dict[str, str]] = {
-    'structural': 'static',
-    'thermal': 'dynamic',
-    'fluid': 'flow',
-    'electromagnetic': 'field',
-    'quantum': 'probabilistic'
+# Engineering domains with equations and schemas
+ENGINEERING_DOMAINS: Dict[str, Dict[str, Any]] = {
+    "MECHANICAL": {
+        "description": "Study of physical systems, forces, motion, and energy.",
+        "equations": {
+            "NEWTON_SECOND_LAW": {
+                "formula": "F = m * a",
+                "variables": {"F": "Force (N)", "m": "Mass (kg)", "a": "Acceleration (m/s^2)"}
+            },
+            "HOOKE_LAW": {
+                "formula": "F = -k * x",
+                "variables": {"F": "Force (N)", "k": "Spring constant (N/m)", "x": "Displacement (m)"}
+            }
+        }
+    },
+    "ELECTRICAL": {
+        "description": "Study of electromagnetism, circuits, and electrical systems.",
+        "equations": {
+            "OHM_LAW": {
+                "formula": "V = I * R",
+                "variables": {"V": "Voltage (V)", "I": "Current (A)", "R": "Resistance (Ohm)"}
+            },
+            "POWER_LAW": {
+                "formula": "P = V * I",
+                "variables": {"P": "Power (W)", "V": "Voltage (V)", "I": "Current (A)"}
+            }
+        }
+    },
+    "THERMODYNAMICS": {
+        "description": "Study of heat, work, temperature, and energy transfer.",
+        "equations": {
+            "IDEAL_GAS_LAW": {
+                "formula": "P * V = n * R * T",
+                "variables": {
+                    "P": "Pressure (Pa)",
+                    "V": "Volume (m^3)",
+                    "n": "Amount of substance (mol)",
+                    "R": "Gas constant (J/(mol*K))",
+                    "T": "Temperature (K)"
+                }
+            }
+        }
+    }
 }
 
-def verify_schemas() -> DiagnosticResult:
+def verify_schemas() -> bool: 
     """
-    Performs a diagnostic integrity check on the knowledge base schemas.
-    
-    Returns:
-        DiagnosticResult: A structured report containing pass status,
-                          validation message, and metadata.
+    Validates that physical constants and engineering domains conform to expected schemas.
     """
     try:
-        # Validate existence and integrity of constants
-        constants_valid = all(isinstance(v, (int, float)) for v in PHYSICAL_CONSTANTS.values())
-        domains_valid = all(isinstance(k, str) and isinstance(v, str) for k, v in ENGINEERING_DOMAINS.items())
-        
-        passed = constants_valid and domains_valid
-        
-        return DiagnosticResult(
-            passed=passed,
-            message="Knowledge base schema validation successful" if passed else "Schema integrity failure detected",
-            metadata={
-                "constants_count": len(PHYSICAL_CONSTANTS),
-                "domains_count": len(ENGINEERING_DOMAINS),
-                "constants_valid": constants_valid,
-                "domains_valid": domains_valid
-            }
-        )
-    except Exception as e:
-        return DiagnosticResult(
-            passed=False,
-            message=f"Critical error during schema verification: {str(e)}",
-            metadata={"error_type": type(e).__name__}
-        )
+        # Verify physical constants schema
+        for name, data in PHYSICAL_CONSTANTS.items():
+            if not isinstance(data, dict):
+                return False
+            for field in ["value", "unit", "symbol", "description"]:
+                if field not in data:
+                    return False
 
-def get_constant(key: str) -> float:
-    """Retrieves a physical constant by key."""
-    return PHYSICAL_CONSTANTS.get(key, 0.0)
-
-def get_domain_type(domain: str) -> str:
-    """Retrieves the operational type for a given engineering domain."""
-    return ENGINEERING_DOMAINS.get(domain, 'unknown')
+        # Verify engineering domains schema
+        for name, data in ENGINEERING_DOMAINS.items():
+            if not isinstance(data, dict):
+                return False
+            if "description" not in data or "equations" not in data:
+                return False
+            for eq_name, eq_data in data["equations"].items():
+                if "formula" not in eq_data or "variables" not in eq_data:
+                    return False
+        return True
+    except Exception:
+        return False
