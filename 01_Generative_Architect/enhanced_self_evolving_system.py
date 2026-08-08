@@ -12,6 +12,7 @@ ROLE:
 
 INTEGRATION:
     Imports: evolution_diagnostics.py for telemetry and metric computation.
+    Dependencies: evolution_diagnostics.py (newly generated)
 """
 
 from __future__ import annotations
@@ -27,6 +28,7 @@ logger = logging.getLogger("SelfEvolvingSystem")
 class SelfEvolvingSystem:
     """
     Orchestrates system evolution cycles with integrated diagnostic validation.
+    Implements thread-safe registry management and telemetry-driven reporting.
     """
     def __init__(self):
         self._lock = threading.Lock()
@@ -38,10 +40,12 @@ class SelfEvolvingSystem:
         """Registers a diagnostic hook for evolution validation."""
         with self._lock:
             self._registry[name] = hook
+            logger.info(f"Registered evolution hook: {name}")
 
     def run_evolution_cycle(self) -> Dict[str, Any]:
         """
         Executes a full evolution cycle, validating system state via registered hooks.
+        Computes metrics using the EvolutionTelemetry engine.
         """
         with self._lock:
             results: Dict[str, bool] = {}
@@ -55,9 +59,10 @@ class SelfEvolvingSystem:
             metrics = EvolutionTelemetry.compute_metrics(results)
             report = {
                 "timestamp": EvolutionTelemetry.get_timestamp(),
-                "status": "HEALTHY" if metrics['failed'] == 0 else "DEGRADED",
+                "status": "HEALTHY" if metrics['is_healthy'] else "DEGRADED",
                 "results": results,
-                "metrics": metrics
+                "metrics": metrics,
+                "metadata": EvolutionTelemetry.generate_report_metadata()
             }
             
             self._evolution_history.append(report)
@@ -66,9 +71,10 @@ class SelfEvolvingSystem:
 
     def get_system_health(self) -> Dict[str, Any]:
         """Returns the latest evolution health report."""
-        if not self._evolution_history:
-            return {"status": "INITIALIZING"}
-        return self._evolution_history[-1]
+        with self._lock:
+            if not self._evolution_history:
+                return {"status": "INITIALIZING"}
+            return self._evolution_history[-1]
 
 # Global instance for system-wide evolution control
 evolution_controller = SelfEvolvingSystem()
