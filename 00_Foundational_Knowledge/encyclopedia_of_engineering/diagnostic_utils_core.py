@@ -6,6 +6,9 @@ Integration: Delegated from diagnostic_utils.py to maintain modularity.
 
 from __future__ import annotations
 import time
+import os
+import sys
+import threading
 from typing import NamedTuple, Any, Dict, Callable
 
 class DiagnosticResult(NamedTuple):
@@ -21,6 +24,8 @@ def generate_telemetry_metadata() -> Dict[str, Any]:
     """Generates standard telemetry metadata for diagnostic results."""
     return {
         "timestamp": time.time(),
-        "thread_id": id(time.time()),
+        "thread_id": threading.get_ident(),
+        "process_id": os.getpid(),
+        "python_version": sys.version,
         "version": "1.0.0-DIAGNOSTIC-AWARE"
     }
