@@ -12,22 +12,38 @@ schemas, and equations are fully loaded and compliant before consumption by the 
 
 from __future__ import annotations
 import logging
-from .diagnostic_engine import engine, DiagnosticResult
-from .knowledge_base import PHYSICAL_CONSTANTS, ENGINEERING_DOMAINS, verify_schemas
+import time
+from typing import Dict, Any, Optional
+
+# Importing internal diagnostic engine and knowledge base components
+# These modules are assumed to be present in the local repository tree
+try:
+    from .diagnostic_engine import engine, DiagnosticResult
+    from .knowledge_base import PHYSICAL_CONSTANTS, ENGINEERING_DOMAINS, verify_schemas
+except ImportError as e:
+    # Fallback for environment safety
+    logging.error(f"Critical dependency missing: {e}")
+    raise
 
 # Configure logging for the engineering module
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def _validate_knowledge_integrity() -> DiagnosticResult:
-    """Internal check to verify the presence of core engineering schemas."""
+    """
+    Internal check to verify the presence and consistency of core engineering schemas.
+    Performs a deep-dive validation of the knowledge registry.
+    """
     try:
+        start_time = time.perf_counter()
         is_valid = verify_schemas()
+        duration_ms = (time.perf_counter() - start_time) * 1000.0
+        
         if not is_valid:
             return DiagnosticResult(
                 passed=False,
                 message="Engineering knowledge schemas failed validation check.",
-                metadata={"status": "SCHEMA_CORRUPT"}
+                metadata={"status": "SCHEMA_CORRUPT", "duration_ms": duration_ms}
             )
         
         metadata = {
@@ -35,7 +51,8 @@ def _validate_knowledge_integrity() -> DiagnosticResult:
             "status": "READY",
             "constants_count": len(PHYSICAL_CONSTANTS),
             "domains_count": len(ENGINEERING_DOMAINS),
-            "domains": list(ENGINEERING_DOMAINS.keys())
+            "domains": list(ENGINEERING_DOMAINS.keys()),
+            "duration_ms": duration_ms
         }
         return DiagnosticResult(
             passed=True, 
@@ -49,32 +66,39 @@ def _validate_knowledge_integrity() -> DiagnosticResult:
             metadata={"error": str(e)}
         )
 
-# Register diagnostic hooks
+# Register diagnostic hooks into the global engine
 engine.register("integrity_check", _validate_knowledge_integrity)
 
 def initialize_encyclopedia() -> bool:
     """
-    Initializes the encyclopedia and runs self-diagnostic suite.
-    Ensures the module is ready for consumption by the AI Agent OS.
+    Initializes the encyclopedia and runs the self-diagnostic suite.
+    Ensures the module is ready for consumption by the AI Agent OS kernel.
     
     Returns:
         bool: True if all diagnostics passed, False otherwise.
     """
     logger.info("Initializing Encyclopedia of Engineering...")
+    
+    # Run the diagnostic suite via the registered engine
     report = engine.run_all()
     
     all_passed = True
     for name, result in report.items():
-        if not result.get('passed'):
+        # Handle dictionary-based results from the engine
+        passed = result.get('passed', False)
+        message = result.get('message', 'No message provided')
+        duration = result.get('duration_ms', 0.0)
+        
+        if not passed:
             logger.error(
-                f"Diagnostic Failure in '{name}': {result.get('message')} "
-                f"(Duration: {result.get('duration_ms')}ms)"
+                f"Diagnostic Failure in '{name}': {message} "
+                f"(Duration: {duration}ms)"
             )
             all_passed = False
         else:
             logger.info(
                 f"Diagnostic Passed: '{name}' "
-                f"(Duration: {result.get('duration_ms')}ms)"
+                f"(Duration: {duration}ms)"
             )
             
     if all_passed:
@@ -84,8 +108,9 @@ def initialize_encyclopedia() -> bool:
         
     return all_passed
 
-# Execute initialization on import
-initialize_encyclopedia()
+# Execute initialization on module import to ensure readiness
+if __name__ != "__main__":
+    initialize_encyclopedia()
 
 __all__ = [
     'initialize_encyclopedia',
