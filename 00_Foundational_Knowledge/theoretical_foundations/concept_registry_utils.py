@@ -1,31 +1,36 @@
 """
 CONCEPT REGISTRY UTILITIES
-Role: Helper utilities for managing theoretical concept definitions, validation, and registry state.
-Integration: Imported by core_concepts.py to manage the lifecycle of theoretical knowledge.
+Role: Provides thread-safe, type-safe registry management for theoretical concepts.
+Integration: Used by core_concepts.py to maintain system-wide knowledge integrity.
 """
 
 from __future__ import annotations
-from typing import Dict, Any, Callable, Optional
+from typing import Dict, Any, List, Optional
+import threading
 
 class ConceptRegistry:
-    """Registry for managing core theoretical concepts with schema validation."""
     def __init__(self) -> None:
-        self._registry: Dict[str, Dict[str, Any]] = {}
+        self._concepts: Dict[str, Dict[str, Any]] = {}
+        self._lock = threading.RLock()
 
     def register(self, name: str, definition: str, metadata: Optional[Dict[str, Any]] = None) -> None:
-        self._registry[name] = {
-            "definition": definition,
-            "metadata": metadata or {},
-            "version": "1.0.0"
-        }
+        with self._lock:
+            self._concepts[name] = {
+                "name": name,
+                "definition": definition,
+                "metadata": metadata or {},
+                "version": "1.0.0"
+            }
 
     def get(self, name: str) -> Optional[Dict[str, Any]]:
-        return self._registry.get(name)
+        with self._lock:
+            return self._concepts.get(name)
 
-    def list_concepts(self) -> list[str]:
-        return list(self._registry.keys())
+    def list_concepts(self) -> List[str]:
+        with self._lock:
+            return list(self._concepts.keys())
 
-def validate_concept_schema(data: Dict[str, Any]) -> bool:
-    """Validates that a concept entry contains required fields."""
-    required = ["definition", "version"]
-    return all(key in data for key in required)
+def validate_concept_schema(concept: Dict[str, Any]) -> bool:
+    """Validates that a concept dictionary contains required fields."""
+    required = {"name", "definition", "metadata"}
+    return all(key in concept for key in required)
