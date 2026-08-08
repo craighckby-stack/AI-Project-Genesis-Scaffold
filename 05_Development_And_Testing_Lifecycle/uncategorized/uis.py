@@ -16,9 +16,13 @@ INTEGRATION:
 """
 
 from __future__ import annotations
-from typing import Dict, Any, Callable, List
-from .uis_core import UIComponentResult, validate_ui_component, generate_ui_telemetry
-from .uis_telemetry import format_ui_timestamp, summarize_ui_results, execute_ui_check_with_telemetry
+from typing import Dict, Any, Callable
+from .uis_core import validate_ui_component, generate_ui_telemetry
+from .uis_telemetry import (
+    format_ui_timestamp, 
+    summarize_ui_results, 
+    execute_ui_check_with_telemetry
+)
 
 # Registry for UI diagnostic checks
 _UI_REGISTRY: Dict[str, Callable[[], bool]] = {}
