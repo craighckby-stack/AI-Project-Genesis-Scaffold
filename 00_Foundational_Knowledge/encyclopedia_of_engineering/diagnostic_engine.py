@@ -1,31 +1,55 @@
+"""
+DIAGNOSTIC ENGINE FOR ENCYCLOPEDIA OF ENGINEERING
+Role: Validates knowledge base integrity, schema compliance, and performance metrics.
+Integration: Imported by __init__.py to run self-diagnostics on initialization.
+"""
+
 from __future__ import annotations
 import time
 import logging
 from typing import Dict, Any, Callable, NamedTuple
+
+logger = logging.getLogger(__name__)
 
 class DiagnosticResult(NamedTuple):
     passed: bool
     message: str
     metadata: Dict[str, Any]
 
-class EncyclopediaDiagnosticEngine:
+class DiagnosticEngine:
     def __init__(self):
         self._registry: Dict[str, Callable[[], DiagnosticResult]] = {}
-        self.logger = logging.getLogger('EncyclopediaEngine')
 
-    def register(self, name: str, func: Callable[[], DiagnosticResult]):
-        self._registry[name] = func
+    def register(self, name: str, check_fn: Callable[[], DiagnosticResult]) -> None:
+        """Registers a diagnostic check function."""
+        if not callable(check_fn):
+            raise TypeError(f"Check function for '{name}' must be callable.")
+        self._registry[name] = check_fn
+        logger.debug(f"Registered diagnostic check: {name}")
 
-    def run_all(self) -> Dict[str, Any]:
-        results = {}
-        for name, func in self._registry.items():
-            start = time.perf_counter()
+    def run_all(self) -> Dict[str, Dict[str, Any]]:
+        """Runs all registered diagnostic checks and returns a detailed report."""
+        report = {}
+        for name, check_fn in self._registry.items():
+            start_time = time.perf_counter()
             try:
-                res = func()
-                duration = (time.perf_counter() - start) * 1000
-                results[name] = {**res._asdict(), 'duration_ms': round(duration, 3)}
+                result = check_fn()
+                duration_ms = (time.perf_counter() - start_time) * 1000.0
+                report[name] = {
+                    "passed": result.passed,
+                    "message": result.message,
+                    "duration_ms": round(duration_ms, 3),
+                    "metadata": result.metadata
+                }
             except Exception as e:
-                results[name] = {'passed': False, 'message': str(e), 'duration_ms': 0}
-        return results
+                duration_ms = (time.perf_counter() - start_time) * 1000.0
+                logger.exception(f"Error executing diagnostic check '{name}'")
+                report[name] = {
+                    "passed": False,
+                    "message": f"Exception raised: {str(e)}",
+                    "duration_ms": round(duration_ms, 3),
+                    "metadata": {}
+                }
+        return report
 
-engine = EncyclopediaDiagnosticEngine()
+engine = DiagnosticEngine()
