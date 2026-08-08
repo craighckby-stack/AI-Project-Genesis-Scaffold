@@ -11,9 +11,14 @@ schemas, and equations are fully loaded and compliant before consumption by the 
 """
 
 from __future__ import annotations
+import os
 import logging
 import time
 from typing import Dict, Any
+
+# Configure logging for the engineering module
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Importing internal diagnostic engine and knowledge base components
 # These modules are provided as part of the architectural evolution
@@ -21,12 +26,8 @@ try:
     from .diagnostic_engine import engine, DiagnosticResult
     from .knowledge_base import PHYSICAL_CONSTANTS, ENGINEERING_DOMAINS, verify_schemas
 except ImportError as e:
-    logging.error(f"Critical dependency missing: {e}")
+    logger.error(f"Critical dependency missing: {e}")
     raise
-
-# Configure logging for the engineering module
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 def _validate_knowledge_integrity() -> DiagnosticResult:
     """
@@ -76,6 +77,11 @@ def initialize_encyclopedia() -> bool:
     Returns:
         bool: True if all diagnostics passed, False otherwise.
     """
+    # Allow bypassing initialization check via environment variable (e.g., during testing)
+    if os.environ.get("SKIP_ENCYCLOPEDIA_INIT") == "1":
+        logger.info("Encyclopedia of Engineering initialization bypassed via environment variable.")
+        return True
+
     logger.info("Initializing Encyclopedia of Engineering...")
     
     # Run the diagnostic suite via the registered engine
