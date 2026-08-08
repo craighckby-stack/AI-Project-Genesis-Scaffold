@@ -6,7 +6,7 @@ Architectural Note: Now utilizes KnowledgeRegistry for modular state management.
 """
 
 from __future__ import annotations
-from typing import Dict, Any
+from typing import Any, Optional
 from .knowledge_registry import KnowledgeRegistry
 
 # Initialize the central knowledge registry
@@ -42,10 +42,10 @@ def verify_schemas() -> bool:
     """
     return registry.validate_integrity()
 
-def get_physical_constant(name: str) -> Any:
+def get_physical_constant(name: str) -> Optional[Any]:
     """Helper to retrieve constants from the registry."""
     return registry.get_constant(name)
 
-def get_engineering_domain(name: str) -> Any:
+def get_engineering_domain(name: str) -> Optional[Any]:
     """Helper to retrieve domain schemas from the registry."""
     return registry.get_domain(name)
