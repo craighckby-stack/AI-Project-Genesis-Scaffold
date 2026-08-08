@@ -8,8 +8,16 @@ Upgraded to support diagnostic-aware telemetry and audit-ready execution trackin
 from __future__ import annotations
 import time
 import uuid
-from typing import Dict, Any, Tuple, Callable
+from typing import Dict, Any, Tuple, Callable, NamedTuple, Optional
 from .sim_diagnostic_core import generate_telemetry_metadata, SimulationResult
+
+class SimulationReport(NamedTuple):
+    """Structured report for simulation health and performance."""
+    session_id: str
+    status: str
+    timestamp: str
+    metrics: Dict[str, Any]
+    telemetry: Dict[str, Any]
 
 def generate_simulation_id() -> str:
     """Generates a unique simulation session identifier."""
@@ -36,7 +44,7 @@ def execute_step_with_telemetry(step_fn: Callable[[], Any]) -> Tuple[bool, float
         duration_ms = (time.perf_counter() - start_time) * 1000.0
         return False, round(duration_ms, 3), str(e), metadata
 
-def create_simulation_report(step_name: str, success: bool, duration: float, error: str | None = None) -> SimulationResult:
+def create_simulation_report(step_name: str, success: bool, duration: float, error: Optional[str] = None) -> SimulationResult:
     """
     Constructs a structured simulation result for audit logging.
     """
@@ -48,4 +56,16 @@ def create_simulation_report(step_name: str, success: bool, duration: float, err
             "duration_ms": duration,
             "timestamp": time.time()
         }
+    )
+
+def generate_full_simulation_report(session_id: str, metrics: Dict[str, Any]) -> SimulationReport:
+    """
+    Generates a comprehensive audit-ready simulation report.
+    """
+    return SimulationReport(
+        session_id=session_id,
+        status="HEALTHY" if compute_simulation_health(metrics) else "DEGRADED",
+        timestamp=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        metrics=metrics,
+        telemetry=generate_telemetry_metadata()
     )
