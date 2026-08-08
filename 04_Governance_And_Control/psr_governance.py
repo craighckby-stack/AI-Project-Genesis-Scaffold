@@ -25,6 +25,7 @@ from .psr_governance_utils import (
 class PsrGovernanceEngine:
     """
     Core engine for managing governance policies and self-modification constraints.
+    Maintains an internal history of all governance cycles for auditability.
     """
     def __init__(self):
         self._policies: Dict[str, Callable[[], bool]] = {}
@@ -37,7 +38,7 @@ class PsrGovernanceEngine:
     async def run_governance_cycle(self) -> Dict[str, Any]:
         """
         Executes all registered policies and generates a comprehensive 
-        governance report.
+        governance report with execution telemetry.
         """
         results = {}
         telemetry = {}
@@ -45,18 +46,26 @@ class PsrGovernanceEngine:
         for name, policy_fn in self._policies.items():
             passed, duration = execute_policy_check(policy_fn)
             results[name] = passed
-            telemetry[name] = {"passed": passed, "duration_ms": duration}
+            telemetry[name] = {
+                "passed": passed, 
+                "duration_ms": duration,
+                "check_id": name
+            }
 
         summary = compute_governance_health(results)
         report = {
             "timestamp": format_governance_timestamp(),
             "summary": summary,
             "details": telemetry,
-            "status": "COMPLIANT" if summary["compliance_rate"] == 100.0 else "VIOLATION_DETECTED"
+            "status": "COMPLIANT" if summary["is_compliant"] else "VIOLATION_DETECTED"
         }
 
         self._history.append(report)
         return report
+
+    def get_history(self) -> List[Dict[str, Any]]:
+        """Returns the full audit history of governance cycles."""
+        return self._history
 
 # Global Governance Singleton
 psr_governance = PsrGovernanceEngine()
