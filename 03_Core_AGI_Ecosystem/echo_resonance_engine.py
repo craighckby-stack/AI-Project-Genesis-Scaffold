@@ -1,30 +1,46 @@
 """
 ECHO RESONANCE ENGINE
-Role: Sophisticated signal analysis and resonance depth calculation.
-Integration: Siphons 'Consensus Weighting' logic to determine signal impact.
+Role: Advanced signal analysis and entropy computation for Echo V7.
+Integration: Delegated from echo_v7_utils.py to provide deep resonance metrics.
 """
 
 from __future__ import annotations
 import math
-from typing import Any, Dict
+from typing import Dict, Any
 
 class EchoResonanceEngine:
-    def compute_resonance_depth(self, payload: Dict[str, Any]) -> float:
-        """
-        Calculates the resonance depth based on payload complexity and entropy.
-        """
-        payload_str = str(payload)
-        if not payload_str:
+    @staticmethod
+    def compute_shannon_entropy(data: str) -> float:
+        """Computes the Shannon entropy of a signal payload to determine information density."""
+        if not data:
             return 0.0
-
-        # Shannon Entropy calculation for signal complexity
-        prob = [float(payload_str.count(c)) / len(payload_str) for c in dict.fromkeys(list(payload_str))]
-        entropy = - sum([p * math.log(p) / math.log(2.0) for p in prob])
         
-        # Normalize entropy (max for 256 chars is 8)
-        normalized_entropy = min(entropy / 8.0, 1.0)
+        frequencies = {}
+        for char in data:
+            frequencies[char] = frequencies.get(char, 0) + 1
         
-        # Key count factor
-        key_factor = min(len(payload.keys()) / 10.0, 1.0)
+        entropy = 0.0
+        length = len(data)
+        for count in frequencies.values():
+            p_x = count / length
+            entropy -= p_x * math.log2(p_x)
+            
+        return round(entropy, 4)
 
-        return round((normalized_entropy * 0.7) + (key_factor * 0.3), 4)
+    @staticmethod
+    def calculate_resonance_depth(payload: Dict[str, Any]) -> float:
+        """Calculates the depth of resonance based on nested complexity and key distribution."""
+        if not payload:
+            return 0.0
+        
+        depth = 0
+        stack = [(payload, 1)]
+        while stack:
+            curr, d = stack.pop()
+            depth = max(depth, d)
+            if isinstance(curr, dict):
+                for v in curr.values():
+                    if isinstance(v, (dict, list)):
+                        stack.append((v, d + 1))
+        
+        return float(depth)
