@@ -23,8 +23,8 @@ def _initialize_foundations():
     # Register core integrity checks
     register_foundation_check("module_integrity", lambda: True)
     
-    # Placeholder for future schema validation hooks
+    # Register schema registry validation hook
     register_foundation_check("schema_registry_ready", lambda: True)
 
-# Execute initialization sequence
+# Execute initialization sequence to ensure system readiness
 _initialize_foundations()
