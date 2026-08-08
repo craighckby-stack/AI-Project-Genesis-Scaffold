@@ -20,6 +20,7 @@ from typing import Dict, Any, Optional
 from .concept_registry_utils import ConceptRegistry, validate_concept_schema
 
 # Initialize the global registry for core concepts
+# This registry is thread-safe and acts as the single source of truth
 _registry = ConceptRegistry()
 
 def initialize_core_concepts() -> None:
@@ -37,6 +38,11 @@ def initialize_core_concepts() -> None:
         definition="Real-time measurement of system health and performance metrics.",
         metadata={"critical": True, "domain": "Telemetry"}
     )
+    _registry.register(
+        name="Knowledge_Persistence",
+        definition="The mechanism by which theoretical concepts are stored and retrieved across sessions.",
+        metadata={"critical": True, "domain": "Persistence"}
+    )
 
 def get_concept(name: str) -> Optional[Dict[str, Any]]:
     """Retrieves a concept definition from the registry."""
@@ -47,12 +53,15 @@ def register_new_concept(name: str, definition: str, metadata: Optional[Dict[str
     _registry.register(name, definition, metadata)
 
 def verify_registry_integrity() -> bool:
-    """Validates the integrity of all registered concepts."""
+    """
+    Validates the integrity of all registered concepts.
+    Ensures that every entry conforms to the expected schema.
+    """
     for name in _registry.list_concepts():
         concept = _registry.get(name)
         if not concept or not validate_concept_schema(concept):
             return False
     return True
 
-# Perform initial registration
+# Perform initial registration upon module load
 initialize_core_concepts()
