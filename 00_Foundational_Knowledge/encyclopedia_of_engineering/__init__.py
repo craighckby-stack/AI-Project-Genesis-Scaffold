@@ -76,7 +76,6 @@ def initialize_encyclopedia() -> bool:
                 f"Diagnostic Passed: '{name}' "
                 f"(Duration: {result.get('duration_ms')}ms)"
             )
-            logger.debug(f"Metadata for '{name}': {result.get('metadata')}")
             
     if all_passed:
         logger.info("Encyclopedia of Engineering successfully initialized and verified.")
