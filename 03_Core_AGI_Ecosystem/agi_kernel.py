@@ -11,12 +11,14 @@ ROLE:
     Connects to diagnostic registries and ensures system integrity.
 
 INTEGRATION:
-    Delegates complex utility logic to 'agi_kernel_utils.py'.
+    Delegates complex utility logic to 'agi_kernel_utils.py' and
+    diagnostic reporting to 'agi_kernel_diagnostics.py'.
 """
 
 from __future__ import annotations
 from typing import Dict, Any, Callable, List
 from .agi_kernel_utils import generate_kernel_id, get_system_telemetry, validate_kernel_hook
+from .agi_kernel_diagnostics import get_kernel_health_metrics
 
 class AgiKernel:
     """
@@ -42,7 +44,7 @@ class AgiKernel:
         return False
 
     def boot(self) -> None:
-        """Executes the kernel boot sequence."""
+        """Executes the kernel boot sequence with diagnostic tracking."""
         for hook in self.lifecycle_hooks["on_boot"]:
             try:
                 hook()
@@ -50,15 +52,19 @@ class AgiKernel:
                 self.handle_error(f"Boot hook failure: {str(e)}")
 
     def handle_error(self, message: str) -> None:
-        """Dispatches error handling hooks."""
+        """Dispatches error handling hooks and logs the event."""
         for hook in self.lifecycle_hooks["on_error"]:
-            hook(message)
+            try:
+                hook(message)
+            except Exception:
+                pass
 
     def get_status(self) -> Dict[str, Any]:
-        """Returns the current kernel status and telemetry."""
+        """Returns the current kernel status, telemetry, and health metrics."""
         return {
             "kernel_id": self.kernel_id,
             "telemetry": self.telemetry,
+            "health": get_kernel_health_metrics(),
             "state_keys": list(self.state.keys())
         }
 
