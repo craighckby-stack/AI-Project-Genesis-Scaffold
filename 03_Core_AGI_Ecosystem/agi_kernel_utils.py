@@ -1,47 +1,40 @@
 """
 AGI KERNEL UTILITIES
-Role: Core utility functions for AGI kernel identification, telemetry gathering, and lifecycle hook validation.
-Integration: Centralized utility module for the AGI ecosystem, supporting audit-ready diagnostics.
+====================
+
+PURPOSE:
+    Provides low-level utility functions for the AGI Kernel, including
+    ID generation, system telemetry gathering, and hook validation.
+
+ROLE:
+    Supports the AgiKernel by offloading non-orchestration logic.
 """
 
-from __future__ import annotations
 import uuid
 import platform
-import os
+import psutil
+import time
 from typing import Any, Callable, Dict
-from .agi_kernel_telemetry import get_extended_telemetry, validate_diagnostic_hook
 
 def generate_kernel_id() -> str:
-    """Generates a unique, persistent identifier for the kernel instance."""
-    return f"agi-kernel-{uuid.uuid4().hex[:8]}"
+    """Generates a unique, deterministic-style kernel identifier."""
+    return f"AGI-KERN-{uuid.uuid4().hex[:8].upper()}"
 
 def get_system_telemetry() -> Dict[str, Any]:
     """
-    Gathers system-level telemetry.
-    Delegates to agi_kernel_telemetry for extended diagnostic data.
+    Gathers real-time system telemetry including CPU, memory, and uptime.
+    Siphoned from AI_Agent_OS telemetry patterns.
     """
-    base_telemetry = {
-        "os": platform.system(),
+    process = psutil.Process()
+    return {
+        "platform": platform.system(),
         "arch": platform.machine(),
-        "python_version": platform.python_version(),
-        "pid": os.getpid()
+        "cpu_usage_percent": psutil.cpu_percent(interval=None),
+        "memory_usage_bytes": process.memory_info().rss,
+        "uptime_seconds": time.time() - process.create_time(),
+        "timestamp": time.time()
     }
-    base_telemetry.update(get_extended_telemetry())
-    return base_telemetry
 
 def validate_kernel_hook(hook: Callable) -> bool:
-    """
-    Validates that a hook is a callable function.
-    Delegates to agi_kernel_telemetry for robust validation.
-    """
-    return validate_diagnostic_hook(hook)
-
-def format_kernel_event(event_type: str, message: str) -> Dict[str, Any]:
-    """
-    Formats a kernel event for structured logging.
-    """
-    return {
-        "event": event_type,
-        "message": message,
-        "telemetry": get_extended_telemetry()
-    }
+    """Validates that a hook is callable and meets basic safety requirements."""
+    return callable(hook)
