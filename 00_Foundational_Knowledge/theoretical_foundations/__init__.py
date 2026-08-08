@@ -8,10 +8,12 @@ Architecture:
 - Implements a self-registering diagnostic pattern to ensure module integrity.
 - Exports core interfaces for knowledge graph traversal and validation.
 - Utilizes delegated diagnostic registry for modularity and performance.
+- Thread-safe initialization sequence with state-locking.
 """
 
 import logging
 import threading
+from typing import Dict, Any
 from .diagnostic_registry import register_foundation_check, run_foundation_diagnostics, DiagnosticResult
 
 # Configure logging for the foundation layer
@@ -33,6 +35,7 @@ def _initialize_foundations():
     """
     Internal initialization hook for the theoretical foundations package.
     Ensures all sub-modules are ready for high-fidelity knowledge retrieval.
+    Implements a strict diagnostic gate before marking the module as initialized.
     """
     global _INITIALIZED
     
@@ -41,11 +44,11 @@ def _initialize_foundations():
             return
 
         try:
-            # Register core integrity checks
+            # Register core integrity checks for the foundation layer
             register_foundation_check("module_integrity", lambda: DiagnosticResult(
                 passed=True, 
                 message="Foundation module integrity verified", 
-                metadata={"version": __version__}
+                metadata={"version": __version__, "thread_safe": True}
             ))
             
             # Register schema registry validation hook
@@ -58,8 +61,15 @@ def _initialize_foundations():
             # Perform initial diagnostic sweep
             report = run_foundation_diagnostics()
             
-            # Verify all checks passed
-            all_passed = all(check.get("passed", False) for check in report.values())
+            # Verify all checks passed (report is expected to be a Dict of check names to DiagnosticResult)
+            # We assume the registry returns a dict where values have a 'passed' attribute or key
+            all_passed = True
+            for check_name, result in report.items():
+                # Handle both object-like and dict-like result access
+                passed = getattr(result, 'passed', False) if not isinstance(result, dict) else result.get('passed', False)
+                if not passed:
+                    all_passed = False
+                    logger.warning(f"Diagnostic check '{check_name}' failed during initialization.")
             
             if all_passed:
                 _INITIALIZED = True
@@ -68,7 +78,7 @@ def _initialize_foundations():
                 logger.error(f"Theoretical Foundations initialization failed: {report}")
                 
         except Exception as e:
-            logger.critical(f"Critical failure during foundation initialization: {e}")
+            logger.critical(f"Critical failure during foundation initialization: {str(e)}")
             _INITIALIZED = False
 
 # Execute initialization sequence to ensure system readiness
