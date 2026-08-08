@@ -1,36 +1,32 @@
 """
 DIAGNOSTIC REGISTRY UTILITIES
-Role: Helper utilities for diagnostic execution, telemetry formatting, and result summarization.
-Integration: Imported by diagnostic_registry.py to compute diagnostic metrics and handle metadata.
+Role: Helper utilities for concept registry telemetry, validation, and diagnostic reporting.
+Integration: Imported by concept_registry_utils.py to provide audit-ready diagnostic hooks.
 """
 
 from __future__ import annotations
 import time
-from typing import Dict, Any, Callable, Tuple
+from typing import Dict, Any, Tuple, Callable
 
 def format_timestamp() -> str:
     """Returns ISO 8601 formatted UTC timestamp."""
     import datetime
     return datetime.datetime.utcnow().isoformat() + 'Z'
 
-def summarize_foundation_results(results: Dict[str, Any]) -> Dict[str, Any]:
-    """Computes summary metrics for diagnostic results."""
-    total = len(results)
-    passed = sum(1 for r in results.values() if r.passed)
-    return {
-        'total': total,
-        'passed': passed,
-        'failed': total - passed,
-        'is_healthy': total > 0 and passed == total,
-        'pass_rate': round((passed / total * 100), 2) if total > 0 else 0.0
-    }
-
-def execute_with_telemetry(check_fn: Callable[[], bool]) -> Tuple[bool, float]:
-    """Executes a check and measures duration in ms."""
-    start = time.perf_counter()
+def execute_diagnostic_check(check_fn: Callable[[], bool]) -> Tuple[bool, float]:
+    """Executes a diagnostic check and measures execution duration in milliseconds."""
+    start_time = time.perf_counter()
     try:
         passed = bool(check_fn())
+        duration_ms = (time.perf_counter() - start_time) * 1000.0
+        return passed, round(duration_ms, 3)
     except Exception:
-        passed = False
-    duration = (time.perf_counter() - start) * 1000.0
-    return passed, round(duration, 3)
+        return False, 0.0
+
+def generate_registry_telemetry(total: int) -> Dict[str, Any]:
+    """Generates standard telemetry metadata for registry operations."""
+    return {
+        "timestamp": format_timestamp(),
+        "total_concepts": total,
+        "version": "1.1.0-DIAGNOSTIC-AWARE"
+    }
