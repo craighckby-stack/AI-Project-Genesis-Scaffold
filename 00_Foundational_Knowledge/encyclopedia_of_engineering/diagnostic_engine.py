@@ -1,13 +1,14 @@
 """
 DIAGNOSTIC ENGINE
-Role: Validates kernel integrity, engineering schemas, and system health.
-Integration: Core component of the encyclopedia_of_engineering module.
-Dependencies: diagnostic_utils.py
+Role: Manages registration and execution of self-validating diagnostic checks.
+Siphoned from: craighckby-stack/AI_Agent_OS diagnostic engine patterns.
 """
-
-from typing import Dict, Callable, Any, NamedTuple
+from __future__ import annotations
 import time
-from .diagnostic_utils import format_timestamp, summarize_diagnostic_results, execute_check_with_telemetry
+import logging
+from typing import Dict, Any, Callable, NamedTuple
+
+logger = logging.getLogger(__name__)
 
 class DiagnosticResult(NamedTuple):
     passed: bool
@@ -15,48 +16,41 @@ class DiagnosticResult(NamedTuple):
     metadata: Dict[str, Any]
 
 class DiagnosticEngine:
-    """
-    Advanced Diagnostic Engine for system-wide health monitoring.
-    Implements telemetry-aware execution and registry-based health checks.
-    """
-    def __init__(self):
+    def __init__(self) -> None:
         self._registry: Dict[str, Callable[[], DiagnosticResult]] = {}
 
-    def register(self, name: str, func: Callable[[], DiagnosticResult]):
+    def register(self, name: str, check_fn: Callable[[], DiagnosticResult]) -> None:
         """Registers a diagnostic check function."""
-        self._registry[name] = func
+        self._registry[name] = check_fn
+        logger.debug(f"Registered diagnostic check: '{name}'")
 
-    def run_all(self) -> Dict[str, Any]:
-        """
-        Executes all registered diagnostics and returns a comprehensive report.
-        """
-        report_checks = {}
-        
-        for name, func in self._registry.items():
-            # Execute with telemetry wrapping
-            res, duration = execute_check_with_telemetry(func, name)
-            
-            if res:
-                report_checks[name] = {
-                    'passed': res.passed,
-                    'message': res.message,
-                    'metadata': {**res.metadata, 'duration_ms': duration}
+    def run_all(self) -> Dict[str, Dict[str, Any]]:
+        """Runs all registered diagnostic checks and returns telemetry."""
+        report: Dict[str, Dict[str, Any]] = {}
+        for name, check_fn in self._registry.items():
+            start_time = time.perf_counter()
+            try:
+                result = check_fn()
+                duration_ms = (time.perf_counter() - start_time) * 1000.0
+                
+                meta = dict(result.metadata) if result.metadata else {}
+                meta["duration_ms"] = round(duration_ms, 3)
+                
+                report[name] = {
+                    "passed": result.passed,
+                    "message": result.message,
+                    "duration_ms": round(duration_ms, 3),
+                    "metadata": meta
                 }
-            else:
-                report_checks[name] = {
-                    'passed': False,
-                    'message': 'Execution failed or returned invalid result',
-                    'metadata': {'duration_ms': duration}
+            except Exception as e:
+                duration_ms = (time.perf_counter() - start_time) * 1000.0
+                logger.exception(f"Error executing diagnostic check '{name}'")
+                report[name] = {
+                    "passed": False,
+                    "message": f"Unhandled exception: {str(e)}",
+                    "duration_ms": round(duration_ms, 3),
+                    "metadata": {"error": str(e)}
                 }
+        return report
 
-        summary = summarize_diagnostic_results(report_checks)
-        
-        return {
-            'status': 'HEALTHY' if summary['is_healthy'] else 'DEGRADED',
-            'timestamp': format_timestamp(),
-            'summary': summary,
-            'checks': report_checks
-        }
-
-# Global engine instance for module-level access
 engine = DiagnosticEngine()
