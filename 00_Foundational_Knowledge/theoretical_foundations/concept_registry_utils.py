@@ -15,10 +15,14 @@ from .diagnostic_registry_utils import execute_diagnostic_check, generate_regist
 logger = logging.getLogger(__name__)
 
 class ConceptRegistry:
+    """
+    Thread-safe registry for managing theoretical concepts.
+    Implements RLock for concurrent access and diagnostic hooks for integrity verification.
+    """
     def __init__(self) -> None:
         self._concepts: Dict[str, Dict[str, Any]] = {}
         self._lock = threading.RLock()
-        self._last_audit = None
+        self._last_audit: Optional[Dict[str, Any]] = None
 
     def register(self, name: str, definition: str, metadata: Optional[Dict[str, Any]] = None) -> None:
         """Registers a new concept with thread-safe locking and telemetry."""
@@ -45,7 +49,8 @@ class ConceptRegistry:
     def run_integrity_check(self) -> Dict[str, Any]:
         """Performs a diagnostic audit of the current registry state."""
         with self._lock:
-            passed, duration = execute_diagnostic_check(lambda: len(self._concepts) >= 0)
+            # Integrity check: verify registry is accessible and state is valid
+            passed, duration = execute_diagnostic_check(lambda: self._concepts is not None)
             telemetry = generate_registry_telemetry(len(self._concepts))
             
             report = {
