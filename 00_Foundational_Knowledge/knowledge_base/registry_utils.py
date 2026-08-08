@@ -1,28 +1,27 @@
-from __future__ import annotations
-from typing import Any, Dict, Callable, Optional
+from typing import Dict, Any, Callable, List
+import logging
 
 class KnowledgeRegistry:
-    """Centralized registry for domain knowledge and schema definitions."""
     def __init__(self):
-        self._registry: Dict[str, Any] = {}
+        self._data: Dict[str, Any] = {}
         self._validators: Dict[str, Callable[[Any], bool]] = {}
+        self.logger = logging.getLogger('KnowledgeRegistry')
 
-    def register(self, key: str, data: Any, validator: Optional[Callable[[Any], bool]] = None):
-        self._registry[key] = data
-        if validator:
-            self._validators[key] = validator
+    def register(self, key: str, value: Any, validator: Callable[[Any], bool]):
+        if not validator(value):
+            raise ValueError(f"Validation failed for key: {key}")
+        self._data[key] = value
+        self._validators[key] = validator
 
     def get(self, key: str) -> Any:
-        return self._registry.get(key)
+        return self._data.get(key)
 
     def validate(self, key: str) -> bool:
-        if key not in self._registry:
+        if key not in self._data:
             return False
-        if key in self._validators:
-            return self._validators[key](self._registry[key])
-        return True
+        return self._validators[key](self._data[key])
 
-    def list_keys(self) -> list[str]:
-        return list(self._registry.keys())
+    def list_keys(self) -> List[str]:
+        return list(self._data.keys())
 
 registry = KnowledgeRegistry()
