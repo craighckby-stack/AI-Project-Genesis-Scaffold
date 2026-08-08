@@ -1,11 +1,13 @@
 """
 DIAGNOSTIC TYPES DEFINITION
-Role: Provides foundational type-safe structures for the AI_Agent_OS diagnostic engine.
-Integration: Used by diagnostic_engine.py and diagnostic_utils to enforce schema consistency.
+Role: Provides foundational, type-safe structures for the AI_Agent_OS diagnostic engine.
+Integration: Used by diagnostic_engine.py and diagnostic_utils to enforce schema consistency across the engineering knowledge base.
+
+This file acts as the single source of truth for diagnostic data contracts.
 """
 
 from __future__ import annotations
-from typing import NamedTuple, Any, Dict, List, Optional
+from typing import NamedTuple, Any, Dict, List, Optional, Callable, Awaitable, Union
 
 class DiagnosticCheckResult(NamedTuple):
     """
@@ -59,7 +61,16 @@ class DiagnosticReport(NamedTuple):
     summary: DiagnosticSummary
     telemetry: DiagnosticTelemetry
 
-# Type alias for registry functions
+# Protocol for diagnostic check functions
 # A check function returns a partial result (passed, message, metadata)
-# The engine wraps this with duration and telemetry.
-DiagnosticCheckFn = Any # Callable[[], Dict[str, Any]]
+# The engine wraps this with duration and system telemetry.
+DiagnosticCheckFn = Callable[[], Union[Dict[str, Any], Awaitable[Dict[str, Any]]]]
+
+class DiagnosticRegistryEntry(NamedTuple):
+    """
+    Represents an entry in the diagnostic registry.
+    """
+    name: str
+    check_fn: DiagnosticCheckFn
+    priority: int
+    category: str
